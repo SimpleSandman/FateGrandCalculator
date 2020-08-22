@@ -7,9 +7,15 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademyJson
 {
     public class EquipNiceJson
     {
+        /// <summary>
+        /// Unique database ID
+        /// </summary>
         [JsonProperty("id")]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Equipment ID
+        /// </summary>
         [JsonProperty("collectionNo")]
         public int CollectionNo { get; set; }
 
@@ -31,24 +37,42 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademyJson
         [JsonProperty("extraAssets")]
         public ExtraAssets ExtraAssets { get; set; }
 
+        /// <summary>
+        /// Level 1 attack
+        /// </summary>
         [JsonProperty("atkBase")]
         public int AtkBase { get; set; }
 
+        /// <summary>
+        /// Equipment max level attack
+        /// </summary>
         [JsonProperty("atkMax")]
         public int AtkMax { get; set; }
 
+        /// <summary>
+        /// Level 1 health
+        /// </summary>
         [JsonProperty("hpBase")]
         public int HpBase { get; set; }
 
+        /// <summary>
+        /// Equipment max level health
+        /// </summary>
         [JsonProperty("hpMax")]
         public int HpMax { get; set; }
 
         [JsonProperty("growthCurve")]
         public int GrowthCurve { get; set; }
 
+        /// <summary>
+        /// Attack numbers from level 0 to max rarity level (base 0)
+        /// </summary>
         [JsonProperty("atkGrowth")]
         public List<int> AtkGrowth { get; set; }
 
+        /// <summary>
+        /// Health numbers from level 0 to max rarity level (base 0)
+        /// </summary>
         [JsonProperty("hpGrowth")]
         public List<int> HpGrowth { get; set; }
 
@@ -61,8 +85,11 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademyJson
 
     public class Equip
     {
+        /// <summary>
+        /// Display the asset link using .GetValue(Id)
+        /// </summary>
         [JsonExtensionData]
-        public JObject EquipLink { get; set; }
+        public JObject AssetLink { get; set; }
     }
 
     public class CharaGraph
