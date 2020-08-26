@@ -4,9 +4,9 @@ using FateGrandOrderPOC.Shared.AtlasAcademyJson;
 
 namespace FateGrandOrderPOC.Shared
 {
-    public class ClassAttackRate : BaseRelation
+    public class ClassAttackRate : IBaseRelation
     {
-        public override float GetAttackMultiplier(string className)
+        public float GetAttackMultiplier(string className)
         {
             ClassAttackRateNiceJson classAttackRate = AtlasAcademyRequest.GetClassAttackRateInfo();
 
@@ -23,7 +23,7 @@ namespace FateGrandOrderPOC.Shared
             return 0.0f;
         }
 
-        public override float GetAttackMultiplier(string attack, string defend)
+        public float GetAttackMultiplier(string attack, string defend)
         {
             throw new NotImplementedException();
         }

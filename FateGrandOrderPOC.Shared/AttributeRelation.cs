@@ -5,14 +5,14 @@ using FateGrandOrderPOC.Shared.Enums;
 
 namespace FateGrandOrderPOC.Shared
 {
-    public class AttributeRelation : BaseRelation
+    public class AttributeRelation : IBaseRelation
     {
-        public override float GetAttackMultiplier(string attack)
+        public float GetAttackMultiplier(string attack)
         {
             throw new NotImplementedException();
         }
 
-        public override float GetAttackMultiplier(string atkAttribute, string defAttribute)
+        public float GetAttackMultiplier(string atkAttribute, string defAttribute)
         {
             AttributeRelationNiceJson attributeRelations = ApiRequest.GetDesearlizeObjectAsync<AttributeRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceAttributeRelation.json").Result;
 

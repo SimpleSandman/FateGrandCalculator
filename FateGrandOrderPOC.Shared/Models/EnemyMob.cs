@@ -1,5 +1,6 @@
-﻿using FateGrandOrderPOC.Shared.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
+using FateGrandOrderPOC.Shared.Enums;
 
 namespace FateGrandOrderPOC.Shared.Models
 {

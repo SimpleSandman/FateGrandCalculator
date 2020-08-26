@@ -5,14 +5,14 @@ using FateGrandOrderPOC.Shared.Enums;
 
 namespace FateGrandOrderPOC.Shared
 {
-    public class ClassRelation : BaseRelation
+    public class ClassRelation : IBaseRelation
     {
-        public override float GetAttackMultiplier(string attack)
+        public float GetAttackMultiplier(string attack)
         {
             throw new NotImplementedException();
         }
 
-        public override float GetAttackMultiplier(string atkClassName, string defClassName)
+        public float GetAttackMultiplier(string atkClassName, string defClassName)
         {
             float[,] damageMultiplier = GetListDamageMultiplier();
 
