@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FateGrandOrderPOC.Shared.AtlasAcademyJson;
 
 namespace FateGrandOrderPOC.Shared.Models
 {
-    public class EnemyServant
+    public sealed class EnemyServant : EnemyMob
     {
-
+        public ServantNiceJson ServantInfo { get; private set; }
     }
 }

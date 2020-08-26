@@ -4,7 +4,7 @@ namespace FateGrandOrderPOC.Shared.Models
 {
     public class ChaldeaCraftEssence
     {
-        public int Level { get; set; }
+        public int CraftEssenceLevel { get; set; }
         public bool Mlb { get; set; }
         public EquipNiceJson CraftEssenceInfo { get; set; }
     }

@@ -41,34 +41,5 @@ namespace FateGrandOrderPOC.Shared
 
             return default;
         }
-
-        public static async Task<IRestResponse> GetResponseAsync(string basicUrl)
-        {
-            try
-            {
-                RestClient client = new RestClient(basicUrl);
-                RestRequest request = new RestRequest(Method.GET);
-                request.AddHeader("Cache-Control", "no-cache");
-                request.AddHeader("Content-Type", "application/json");
-                request.AddHeader("Accept", "application/json");
-
-                var cancellationToken = new CancellationTokenSource();
-
-                try
-                {
-                    return await client.ExecuteAsync(request, cancellationToken.Token);
-                }
-                catch (WebException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
-            catch (WebException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-
-            return default;
-        }
     }
 }
