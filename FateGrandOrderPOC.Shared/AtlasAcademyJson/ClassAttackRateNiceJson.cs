@@ -71,6 +71,6 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademyJson
         public int Unknown { get; set; }
 
         [JsonProperty("ALL")]
-        public int ALL { get; set; }
+        public int All { get; set; }
     }
 }

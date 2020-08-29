@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 using FateGrandOrderPOC.Shared;
@@ -19,6 +20,7 @@ namespace FateGrandOrderPOC
         const string KIARA_ALTER_EGO = "1000300";
         const string ABBY_FOREIGNER = "2500100";
         const string MHXX_FOREIGNER = "2500300";
+        const string LANCELOT_BERSERKER = "700200";
 
         /* Craft Essences */
         const string KSCOPE_CE = "9400340";
@@ -27,30 +29,25 @@ namespace FateGrandOrderPOC
 
         static void Main()
         {
-            #region Commented Code
-            //Console.WriteLine(">>>>>>>> Defending Servant <<<<<<<<");
-            //ServantNiceJson defendingServant = PrintRelevantServantInfo(MHXX_FOREIGNER);
-            #endregion
-
             Console.WriteLine(">>>>>>>> Craft Essence <<<<<<<<");
             ChaldeaCraftEssence chaldeaBlackGrail = new ChaldeaCraftEssence
             {
                 CraftEssenceLevel = 100,
                 Mlb = true,
-                CraftEssenceInfo = PrintRelevantCraftEssenceInfo(BLACK_GRAIL_CE, 100)
+                CraftEssenceInfo = PrintRelevantCraftEssenceInfo(KSCOPE_CE, 100)
             };
 
             Console.WriteLine(">>>>>>>> Attacking Servant <<<<<<<<");
             ChaldeaServant chaldeaAttackServant = new ChaldeaServant
             {
-                ServantLevel = 100,
+                ServantLevel = 80,
                 NpLevel = 5,
                 FouHealth = 1000,
                 FouAttack = 1000,
                 SkillLevel1 = 10,
                 SkillLevel2 = 10,
                 SkillLevel3 = 10,
-                ServantInfo = PrintRelevantServantInfo(TOMOE_GOZEN_ARCHER, 100)
+                ServantInfo = PrintRelevantServantInfo(LANCELOT_BERSERKER, 80)
             };
 
             PartyMember partyMember = PrintRelevantPartyMemberInfo(chaldeaAttackServant, chaldeaBlackGrail);
@@ -72,12 +69,25 @@ namespace FateGrandOrderPOC
             AttributeRelation attributeRelation = new AttributeRelation();
             ClassRelation classRelation = new ClassRelation();
             ClassAttackRate classAttackRate = new ClassAttackRate();
+            ConstantRate constantRate = new ConstantRate();
+
+            NoblePhantasm highestPriority = partyMember.Servant.ServantInfo.NoblePhantasms
+                .Aggregate((agg, next) => 
+                    next.Priority >= agg.Priority ? next : agg);
+            int highestPriorityIndex = partyMember.Servant.ServantInfo.NoblePhantasms.IndexOf(highestPriority);
+
+            int npValue = partyMember
+                .Servant
+                .ServantInfo
+                .NoblePhantasms[highestPriorityIndex]
+                .Functions.Find(f => f.FuncType.Contains("damageNp"))
+                .Svals[partyMember.Servant.NpLevel - 1].Value;
 
             Console.WriteLine(">>>>>>>> Stats <<<<<<<<");
             Console.WriteLine($"Attribute Multiplier: {attributeRelation.GetAttackMultiplier(partyMember.Servant.ServantInfo.Attribute, normalArcherPirate.AttributeName.ToString())}x");
             Console.WriteLine($"Class Advantage Multiplier: {classRelation.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName, normalArcherPirate.ClassName.ToString())}x");
 
-            partyMember.NpCharge = 100;
+            partyMember.NpCharge = 100; // ToDo: Make this based on skills/CEs/etc
 
             if (partyMember.NpCharge < 100)
             {
@@ -87,13 +97,19 @@ namespace FateGrandOrderPOC
                 return;
             }
 
+            Console.WriteLine();
+            Console.WriteLine($"Total attack: {partyMember.TotalAttack}");
+            Console.WriteLine($"Class modifier: {classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName)}");
+            Console.WriteLine($"NP type modifier: {constantRate.GetAttackMultiplier("attackrate" + highestPriority.Card)}");
+            Console.WriteLine($"NP value: {(npValue / 1000.0f)}");
+
             // Base NP damage = Servant total attack * Class modifier * NP type modifier * NP damage
-            float baseNpDamage = partyMember.Attack 
+            float baseNpDamage = partyMember.TotalAttack
                 * classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName)
-                * 0.8f // NP type --> partyMember.Servant.ServantInfo.NoblePhantasms[^1].Type
-                       // Use --> https://api.atlasacademy.io/export/NA/NiceConstant.json
-                           // and grab "ENEMY_ATTACK_RATE_" constant according to NP type
-                * partyMember.Servant.ServantInfo.NoblePhantasms[^1].Functions.Find(f => f.FuncType.Contains("np")).Svals[partyMember.Servant.NpLevel - 1].Value / 10.0f;
+                * constantRate.GetAttackMultiplier("attackrate" + highestPriority.Card)
+                * (npValue / 1000.0f);
+
+            Console.WriteLine($"{partyMember.Servant.ServantInfo.Name}'s base NP damage: {baseNpDamage}");
 
             Console.ReadKey(); // end program
         }
@@ -111,14 +127,15 @@ namespace FateGrandOrderPOC
 
             Console.WriteLine($"Servant ATK w/ CE: {servantTotalAtk}");
             Console.WriteLine($"Servant HP w/ CE: {servantTotalHp}");
+            Console.WriteLine($"NP Level: {chaldeaServant.NpLevel}");
             Console.WriteLine();
 
             return new PartyMember
             {
                 Servant = chaldeaServant,
                 EquippedCraftEssence = chaldeaCraftEssence,
-                Attack = servantTotalAtk,
-                Health = servantTotalHp
+                TotalAttack = servantTotalAtk,
+                TotalHealth = servantTotalHp
             };
         }
 
@@ -149,7 +166,7 @@ namespace FateGrandOrderPOC
             Console.WriteLine($"Servant Level: {level}");
             Console.WriteLine($"Attribute: {servant.Attribute}");
             Console.WriteLine($"Class: {servant.ClassName}");
-            //Console.WriteLine($"NP Name: {np.Name} {np.Rank}");
+            Console.WriteLine($"NP Name: {np.Name} {np.Rank}");
             //Console.WriteLine($"NP Card Type: {np.Card}");
             //if (level > 0 && level <= 100)
             //{

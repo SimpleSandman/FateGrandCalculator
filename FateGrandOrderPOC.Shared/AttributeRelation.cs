@@ -7,6 +7,8 @@ namespace FateGrandOrderPOC.Shared
 {
     public class AttributeRelation : IBaseRelation
     {
+        private const float ATTRIBUTE_DENOMINATOR = 1000.0f;
+
         public float GetAttackMultiplier(string attack)
         {
             throw new NotImplementedException();
@@ -16,14 +18,14 @@ namespace FateGrandOrderPOC.Shared
         {
             AttributeRelationNiceJson attributeRelations = ApiRequest.GetDesearlizeObjectAsync<AttributeRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceAttributeRelation.json").Result;
 
-            // Reference: https://fategrandorder.fandom.com/wiki/Attributes
+             // Reference: https://fategrandorder.fandom.com/wiki/Attributes
             float[,] damageMultiplier =
             {
-                { attributeRelations.Human.HumanMultiplier/1000f, attributeRelations.Human.SkyMultiplier/1000f, attributeRelations.Human.EarthMultiplier/1000f, attributeRelations.Human.StarMultiplier/1000f, attributeRelations.Human.BeastMultiplier/1000f },
-                { attributeRelations.Sky.HumanMultiplier/1000f, attributeRelations.Sky.SkyMultiplier/1000f, attributeRelations.Sky.EarthMultiplier/1000f, attributeRelations.Sky.StarMultiplier/1000f, attributeRelations.Sky.BeastMultiplier/1000f },
-                { attributeRelations.Earth.HumanMultiplier/1000f, attributeRelations.Earth.SkyMultiplier/1000f, attributeRelations.Earth.EarthMultiplier/1000f, attributeRelations.Earth.StarMultiplier/1000f, attributeRelations.Earth.BeastMultiplier/1000f },
-                { attributeRelations.Star.HumanMultiplier/1000f, attributeRelations.Star.SkyMultiplier/1000f, attributeRelations.Star.EarthMultiplier/1000f, attributeRelations.Star.StarMultiplier/1000f, attributeRelations.Star.BeastMultiplier/1000f },
-                { attributeRelations.Beast.HumanMultiplier/1000f, attributeRelations.Beast.SkyMultiplier/1000f, attributeRelations.Beast.EarthMultiplier/1000f, attributeRelations.Beast.StarMultiplier/1000f, attributeRelations.Beast.BeastMultiplier/1000f }
+                { attributeRelations.Human.HumanMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Human.SkyMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Human.EarthMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Human.StarMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Human.BeastMultiplier / ATTRIBUTE_DENOMINATOR },
+                { attributeRelations.Sky.HumanMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Sky.SkyMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Sky.EarthMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Sky.StarMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Sky.BeastMultiplier / ATTRIBUTE_DENOMINATOR },
+                { attributeRelations.Earth.HumanMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Earth.SkyMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Earth.EarthMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Earth.StarMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Earth.BeastMultiplier / ATTRIBUTE_DENOMINATOR },
+                { attributeRelations.Star.HumanMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Star.SkyMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Star.EarthMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Star.StarMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Star.BeastMultiplier / ATTRIBUTE_DENOMINATOR },
+                { attributeRelations.Beast.HumanMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Beast.SkyMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Beast.EarthMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Beast.StarMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Beast.BeastMultiplier / ATTRIBUTE_DENOMINATOR }
             };
 
             bool validAtkAttribute = Enum.TryParse(atkAttribute, true, out AttributeRelationEnum atkServantAttribute);
@@ -31,7 +33,7 @@ namespace FateGrandOrderPOC.Shared
 
             if (!validAtkAttribute || !validDefAttribute)
             {
-                return 0.0f; // invalid attribute found
+                return 0.0f;  // invalid attribute found
             }
 
             return damageMultiplier[(int)atkServantAttribute, (int)defServantAttribute];

@@ -7,6 +7,8 @@ namespace FateGrandOrderPOC.Shared
 {
     public class ClassRelation : IBaseRelation
     {
+        private const float CLASS_DENOMINATOR = 1000.0f;
+
         public float GetAttackMultiplier(string attack)
         {
             throw new NotImplementedException();
@@ -38,148 +40,148 @@ namespace FateGrandOrderPOC.Shared
             return new float[,]
             {
                 {
-                    classRelations.Saber.SaberMultiplier/1000f, classRelations.Saber.ArcherMultiplier/1000f, classRelations.Saber.LancerMultiplier/1000f,
-                    classRelations.Saber.RiderMultiplier/1000f, classRelations.Saber.CasterMultiplier/1000f, classRelations.Saber.AssassinMultiplier/1000f,
-                    classRelations.Saber.BerserkerMultiplier/1000f, classRelations.Saber.ShielderMultiplier/1000f, classRelations.Saber.RulerMultiplier/1000f,
-                    classRelations.Saber.AvengerMultiplier/1000f, classRelations.Saber.DemonGodPillarMultiplier/1000f, classRelations.Saber.BeastIIMultiplier/1000f,
-                    classRelations.Saber.BeastIMultiplier/1000f, classRelations.Saber.MoonCancerMultiplier/1000f, classRelations.Saber.BeastIIIRMultiplier/1000f,
-                    classRelations.Saber.ForeignerMultiplier/1000f, classRelations.Saber?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.Saber?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.Saber.SaberMultiplier / CLASS_DENOMINATOR, classRelations.Saber.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.Saber.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Saber.RiderMultiplier / CLASS_DENOMINATOR, classRelations.Saber.CasterMultiplier / CLASS_DENOMINATOR, classRelations.Saber.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Saber.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.Saber.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.Saber.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Saber.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.Saber.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.Saber.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Saber.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.Saber.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.Saber.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Saber.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.Saber?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.Saber?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.Archer.SaberMultiplier/1000f, classRelations.Archer.ArcherMultiplier/1000f, classRelations.Archer.LancerMultiplier/1000f,
-                    classRelations.Archer.RiderMultiplier/1000f, classRelations.Archer.CasterMultiplier/1000f, classRelations.Archer.AssassinMultiplier/1000f,
-                    classRelations.Archer.BerserkerMultiplier/1000f, classRelations.Archer.ShielderMultiplier/1000f, classRelations.Archer.RulerMultiplier/1000f,
-                    classRelations.Archer.AvengerMultiplier/1000f, classRelations.Archer.DemonGodPillarMultiplier/1000f, classRelations.Archer.BeastIIMultiplier/1000f,
-                    classRelations.Archer.BeastIMultiplier/1000f, classRelations.Archer.MoonCancerMultiplier/1000f, classRelations.Archer.BeastIIIRMultiplier/1000f,
-                    classRelations.Archer.ForeignerMultiplier/1000f, classRelations.Archer?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.Archer?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.Archer.SaberMultiplier / CLASS_DENOMINATOR, classRelations.Archer.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.Archer.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Archer.RiderMultiplier / CLASS_DENOMINATOR, classRelations.Archer.CasterMultiplier / CLASS_DENOMINATOR, classRelations.Archer.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Archer.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.Archer.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.Archer.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Archer.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.Archer.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.Archer.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Archer.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.Archer.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.Archer.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Archer.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.Archer?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.Archer?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.Lancer.SaberMultiplier/1000f, classRelations.Lancer.ArcherMultiplier/1000f, classRelations.Lancer.LancerMultiplier/1000f,
-                    classRelations.Lancer.RiderMultiplier/1000f, classRelations.Lancer.CasterMultiplier/1000f, classRelations.Lancer.AssassinMultiplier/1000f,
-                    classRelations.Lancer.BerserkerMultiplier/1000f, classRelations.Lancer.ShielderMultiplier/1000f, classRelations.Lancer.RulerMultiplier/1000f,
-                    classRelations.Lancer.AvengerMultiplier/1000f, classRelations.Lancer.DemonGodPillarMultiplier/1000f, classRelations.Lancer.BeastIIMultiplier/1000f,
-                    classRelations.Lancer.BeastIMultiplier/1000f, classRelations.Lancer.MoonCancerMultiplier/1000f, classRelations.Lancer.BeastIIIRMultiplier/1000f,
-                    classRelations.Lancer.ForeignerMultiplier/1000f, classRelations.Lancer?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.Lancer?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.Lancer.SaberMultiplier / CLASS_DENOMINATOR, classRelations.Lancer.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.Lancer.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Lancer.RiderMultiplier / CLASS_DENOMINATOR, classRelations.Lancer.CasterMultiplier / CLASS_DENOMINATOR, classRelations.Lancer.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Lancer.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.Lancer.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.Lancer.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Lancer.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.Lancer.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.Lancer.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Lancer.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.Lancer.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.Lancer.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Lancer.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.Lancer?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.Lancer?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.Rider.SaberMultiplier/1000f, classRelations.Rider.ArcherMultiplier/1000f, classRelations.Rider.LancerMultiplier/1000f,
-                    classRelations.Rider.RiderMultiplier/1000f, classRelations.Rider.CasterMultiplier/1000f, classRelations.Rider.AssassinMultiplier/1000f,
-                    classRelations.Rider.BerserkerMultiplier/1000f, classRelations.Rider.ShielderMultiplier/1000f, classRelations.Rider.RulerMultiplier/1000f,
-                    classRelations.Rider.AvengerMultiplier/1000f, classRelations.Rider.DemonGodPillarMultiplier/1000f, classRelations.Rider.BeastIIMultiplier/1000f,
-                    classRelations.Rider.BeastIMultiplier/1000f, classRelations.Rider.MoonCancerMultiplier/1000f, classRelations.Rider.BeastIIIRMultiplier/1000f,
-                    classRelations.Rider.ForeignerMultiplier/1000f, classRelations.Rider?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.Rider?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.Rider.SaberMultiplier / CLASS_DENOMINATOR, classRelations.Rider.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.Rider.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Rider.RiderMultiplier / CLASS_DENOMINATOR, classRelations.Rider.CasterMultiplier / CLASS_DENOMINATOR, classRelations.Rider.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Rider.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.Rider.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.Rider.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Rider.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.Rider.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.Rider.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Rider.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.Rider.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.Rider.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Rider.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.Rider?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.Rider?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.Caster.SaberMultiplier/1000f, classRelations.Caster.ArcherMultiplier/1000f, classRelations.Caster.LancerMultiplier/1000f,
-                    classRelations.Caster.RiderMultiplier/1000f, classRelations.Caster.CasterMultiplier/1000f, classRelations.Caster.AssassinMultiplier/1000f,
-                    classRelations.Caster.BerserkerMultiplier/1000f, classRelations.Caster.ShielderMultiplier/1000f, classRelations.Caster.RulerMultiplier/1000f,
-                    classRelations.Caster.AvengerMultiplier/1000f, classRelations.Caster.DemonGodPillarMultiplier/1000f, classRelations.Caster.BeastIIMultiplier/1000f,
-                    classRelations.Caster.BeastIMultiplier/1000f, classRelations.Caster.MoonCancerMultiplier/1000f, classRelations.Caster.BeastIIIRMultiplier/1000f,
-                    classRelations.Caster.ForeignerMultiplier/1000f, classRelations.Caster?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.Caster?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.Caster.SaberMultiplier / CLASS_DENOMINATOR, classRelations.Caster.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.Caster.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Caster.RiderMultiplier / CLASS_DENOMINATOR, classRelations.Caster.CasterMultiplier / CLASS_DENOMINATOR, classRelations.Caster.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Caster.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.Caster.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.Caster.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Caster.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.Caster.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.Caster.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Caster.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.Caster.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.Caster.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Caster.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.Caster?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.Caster?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.Assassin.SaberMultiplier/1000f, classRelations.Assassin.ArcherMultiplier/1000f, classRelations.Assassin.LancerMultiplier/1000f,
-                    classRelations.Assassin.RiderMultiplier/1000f, classRelations.Assassin.CasterMultiplier/1000f, classRelations.Assassin.AssassinMultiplier/1000f,
-                    classRelations.Assassin.BerserkerMultiplier/1000f, classRelations.Assassin.ShielderMultiplier/1000f, classRelations.Assassin.RulerMultiplier/1000f,
-                    classRelations.Assassin.AvengerMultiplier/1000f, classRelations.Assassin.DemonGodPillarMultiplier/1000f, classRelations.Assassin.BeastIIMultiplier/1000f,
-                    classRelations.Assassin.BeastIMultiplier/1000f, classRelations.Assassin.MoonCancerMultiplier/1000f, classRelations.Assassin.BeastIIIRMultiplier/1000f,
-                    classRelations.Assassin.ForeignerMultiplier/1000f, classRelations.Assassin?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.Assassin?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.Assassin.SaberMultiplier / CLASS_DENOMINATOR, classRelations.Assassin.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.Assassin.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Assassin.RiderMultiplier / CLASS_DENOMINATOR, classRelations.Assassin.CasterMultiplier / CLASS_DENOMINATOR, classRelations.Assassin.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Assassin.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.Assassin.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.Assassin.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Assassin.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.Assassin.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.Assassin.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Assassin.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.Assassin.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.Assassin.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Assassin.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.Assassin?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.Assassin?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.Berserker.SaberMultiplier/1000f, classRelations.Berserker.ArcherMultiplier/1000f, classRelations.Berserker.LancerMultiplier/1000f,
-                    classRelations.Berserker.RiderMultiplier/1000f, classRelations.Berserker.CasterMultiplier/1000f, classRelations.Berserker.AssassinMultiplier/1000f,
-                    classRelations.Berserker.BerserkerMultiplier/1000f, classRelations.Berserker.ShielderMultiplier/1000f, classRelations.Berserker.RulerMultiplier/1000f,
-                    classRelations.Berserker.AvengerMultiplier/1000f, classRelations.Berserker.DemonGodPillarMultiplier/1000f, classRelations.Berserker.BeastIIMultiplier/1000f,
-                    classRelations.Berserker.BeastIMultiplier/1000f, classRelations.Berserker.MoonCancerMultiplier/1000f, classRelations.Berserker.BeastIIIRMultiplier/1000f,
-                    classRelations.Berserker.ForeignerMultiplier/1000f, classRelations.Berserker?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.Berserker?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.Berserker.SaberMultiplier / CLASS_DENOMINATOR, classRelations.Berserker.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.Berserker.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Berserker.RiderMultiplier / CLASS_DENOMINATOR, classRelations.Berserker.CasterMultiplier / CLASS_DENOMINATOR, classRelations.Berserker.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Berserker.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.Berserker.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.Berserker.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Berserker.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.Berserker.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.Berserker.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Berserker.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.Berserker.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.Berserker.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Berserker.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.Berserker?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.Berserker?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.Shielder.SaberMultiplier/1000f, classRelations.Shielder.ArcherMultiplier/1000f, classRelations.Shielder.LancerMultiplier/1000f,
-                    classRelations.Shielder.RiderMultiplier/1000f, classRelations.Shielder.CasterMultiplier/1000f, classRelations.Shielder.AssassinMultiplier/1000f,
-                    classRelations.Shielder.BerserkerMultiplier/1000f, classRelations.Shielder.ShielderMultiplier/1000f, classRelations.Shielder.RulerMultiplier/1000f,
-                    classRelations.Shielder.AvengerMultiplier/1000f, classRelations.Shielder.DemonGodPillarMultiplier/1000f, classRelations.Shielder.BeastIIMultiplier/1000f,
-                    classRelations.Shielder.BeastIMultiplier/1000f, classRelations.Shielder.MoonCancerMultiplier/1000f, classRelations.Shielder.BeastIIIRMultiplier/1000f,
-                    classRelations.Shielder.ForeignerMultiplier/1000f, classRelations.Shielder?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.Shielder?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.Shielder.SaberMultiplier / CLASS_DENOMINATOR, classRelations.Shielder.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.Shielder.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Shielder.RiderMultiplier / CLASS_DENOMINATOR, classRelations.Shielder.CasterMultiplier / CLASS_DENOMINATOR, classRelations.Shielder.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Shielder.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.Shielder.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.Shielder.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Shielder.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.Shielder.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.Shielder.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Shielder.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.Shielder.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.Shielder.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Shielder.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.Shielder?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.Shielder?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.Ruler.SaberMultiplier/1000f, classRelations.Ruler.ArcherMultiplier/1000f, classRelations.Ruler.LancerMultiplier/1000f,
-                    classRelations.Ruler.RiderMultiplier/1000f, classRelations.Ruler.CasterMultiplier/1000f, classRelations.Ruler.AssassinMultiplier/1000f,
-                    classRelations.Ruler.BerserkerMultiplier/1000f, classRelations.Ruler.ShielderMultiplier/1000f, classRelations.Ruler.RulerMultiplier/1000f,
-                    classRelations.Ruler.AvengerMultiplier/1000f, classRelations.Ruler.DemonGodPillarMultiplier/1000f, classRelations.Ruler.BeastIIMultiplier/1000f,
-                    classRelations.Ruler.BeastIMultiplier/1000f, classRelations.Ruler.MoonCancerMultiplier/1000f, classRelations.Ruler.BeastIIIRMultiplier/1000f,
-                    classRelations.Ruler.ForeignerMultiplier/1000f, classRelations.Ruler?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.Ruler?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.Ruler.SaberMultiplier / CLASS_DENOMINATOR, classRelations.Ruler.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.Ruler.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Ruler.RiderMultiplier / CLASS_DENOMINATOR, classRelations.Ruler.CasterMultiplier / CLASS_DENOMINATOR, classRelations.Ruler.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Ruler.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.Ruler.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.Ruler.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Ruler.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.Ruler.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.Ruler.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Ruler.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.Ruler.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.Ruler.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Ruler.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.Ruler?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.Ruler?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.Avenger.SaberMultiplier/1000f, classRelations.Avenger.ArcherMultiplier/1000f, classRelations.Avenger.LancerMultiplier/1000f,
-                    classRelations.Avenger.RiderMultiplier/1000f, classRelations.Avenger.CasterMultiplier/1000f, classRelations.Avenger.AssassinMultiplier/1000f,
-                    classRelations.Avenger.BerserkerMultiplier/1000f, classRelations.Avenger.ShielderMultiplier/1000f, classRelations.Avenger.RulerMultiplier/1000f,
-                    classRelations.Avenger.AvengerMultiplier/1000f, classRelations.Avenger.DemonGodPillarMultiplier/1000f, classRelations.Avenger.BeastIIMultiplier/1000f,
-                    classRelations.Avenger.BeastIMultiplier/1000f, classRelations.Avenger.MoonCancerMultiplier/1000f, classRelations.Avenger.BeastIIIRMultiplier/1000f,
-                    classRelations.Avenger.ForeignerMultiplier/1000f, classRelations.Avenger?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.Avenger?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.Avenger.SaberMultiplier / CLASS_DENOMINATOR, classRelations.Avenger.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.Avenger.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Avenger.RiderMultiplier / CLASS_DENOMINATOR, classRelations.Avenger.CasterMultiplier / CLASS_DENOMINATOR, classRelations.Avenger.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Avenger.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.Avenger.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.Avenger.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Avenger.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.Avenger.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.Avenger.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Avenger.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.Avenger.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.Avenger.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Avenger.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.Avenger?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.Avenger?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.DemonGodPillar.SaberMultiplier/1000f, classRelations.DemonGodPillar.ArcherMultiplier/1000f, classRelations.DemonGodPillar.LancerMultiplier/1000f,
-                    classRelations.DemonGodPillar.RiderMultiplier/1000f, classRelations.DemonGodPillar.CasterMultiplier/1000f, classRelations.DemonGodPillar.AssassinMultiplier/1000f,
-                    classRelations.DemonGodPillar.BerserkerMultiplier/1000f, classRelations.DemonGodPillar.ShielderMultiplier/1000f, classRelations.DemonGodPillar.RulerMultiplier/1000f,
-                    classRelations.DemonGodPillar.AvengerMultiplier/1000f, classRelations.DemonGodPillar.DemonGodPillarMultiplier/1000f, classRelations.DemonGodPillar.BeastIIMultiplier/1000f,
-                    classRelations.DemonGodPillar.BeastIMultiplier/1000f, classRelations.DemonGodPillar.MoonCancerMultiplier/1000f, classRelations.DemonGodPillar.BeastIIIRMultiplier/1000f,
-                    classRelations.DemonGodPillar.ForeignerMultiplier/1000f, classRelations.DemonGodPillar?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.DemonGodPillar?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.DemonGodPillar.SaberMultiplier / CLASS_DENOMINATOR, classRelations.DemonGodPillar.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.DemonGodPillar.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.DemonGodPillar.RiderMultiplier / CLASS_DENOMINATOR, classRelations.DemonGodPillar.CasterMultiplier / CLASS_DENOMINATOR, classRelations.DemonGodPillar.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.DemonGodPillar.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.DemonGodPillar.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.DemonGodPillar.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.DemonGodPillar.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.DemonGodPillar.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.DemonGodPillar.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.DemonGodPillar.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.DemonGodPillar.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.DemonGodPillar.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.DemonGodPillar.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.DemonGodPillar?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.DemonGodPillar?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.BeastII.SaberMultiplier/1000f, classRelations.BeastII.ArcherMultiplier/1000f, classRelations.BeastII.LancerMultiplier/1000f,
-                    classRelations.BeastII.RiderMultiplier/1000f, classRelations.BeastII.CasterMultiplier/1000f, classRelations.BeastII.AssassinMultiplier/1000f,
-                    classRelations.BeastII.BerserkerMultiplier/1000f, classRelations.BeastII.ShielderMultiplier/1000f, classRelations.BeastII.RulerMultiplier/1000f,
-                    classRelations.BeastII.AvengerMultiplier/1000f, classRelations.BeastII.DemonGodPillarMultiplier/1000f, classRelations.BeastII.BeastIIMultiplier/1000f,
-                    classRelations.BeastII.BeastIMultiplier/1000f, classRelations.BeastII.MoonCancerMultiplier/1000f, classRelations.BeastII.BeastIIIRMultiplier/1000f,
-                    classRelations.BeastII.ForeignerMultiplier/1000f, classRelations.BeastII?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.BeastII?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.BeastII.SaberMultiplier / CLASS_DENOMINATOR, classRelations.BeastII.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.BeastII.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastII.RiderMultiplier / CLASS_DENOMINATOR, classRelations.BeastII.CasterMultiplier / CLASS_DENOMINATOR, classRelations.BeastII.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastII.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.BeastII.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.BeastII.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastII.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.BeastII.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.BeastII.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastII.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.BeastII.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.BeastII.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastII.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.BeastII?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.BeastII?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.BeastI.SaberMultiplier/1000f, classRelations.BeastI.ArcherMultiplier/1000f, classRelations.BeastI.LancerMultiplier/1000f,
-                    classRelations.BeastI.RiderMultiplier/1000f, classRelations.BeastI.CasterMultiplier/1000f, classRelations.BeastI.AssassinMultiplier/1000f,
-                    classRelations.BeastI.BerserkerMultiplier/1000f, classRelations.BeastI.ShielderMultiplier/1000f, classRelations.BeastI.RulerMultiplier/1000f,
-                    classRelations.BeastI.AvengerMultiplier/1000f, classRelations.BeastI.DemonGodPillarMultiplier/1000f, classRelations.BeastI.BeastIIMultiplier/1000f,
-                    classRelations.BeastI.BeastIMultiplier/1000f, classRelations.BeastI.MoonCancerMultiplier/1000f, classRelations.BeastI.BeastIIIRMultiplier/1000f,
-                    classRelations.BeastI.ForeignerMultiplier/1000f, classRelations.BeastI?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.BeastI?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.BeastI.SaberMultiplier / CLASS_DENOMINATOR, classRelations.BeastI.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.BeastI.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastI.RiderMultiplier / CLASS_DENOMINATOR, classRelations.BeastI.CasterMultiplier / CLASS_DENOMINATOR, classRelations.BeastI.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastI.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.BeastI.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.BeastI.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastI.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.BeastI.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.BeastI.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastI.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.BeastI.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.BeastI.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastI.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.BeastI?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.BeastI?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.MoonCancer.SaberMultiplier/1000f, classRelations.MoonCancer.ArcherMultiplier/1000f, classRelations.MoonCancer.LancerMultiplier/1000f,
-                    classRelations.MoonCancer.RiderMultiplier/1000f, classRelations.MoonCancer.CasterMultiplier/1000f, classRelations.MoonCancer.AssassinMultiplier/1000f,
-                    classRelations.MoonCancer.BerserkerMultiplier/1000f, classRelations.MoonCancer.ShielderMultiplier/1000f, classRelations.MoonCancer.RulerMultiplier/1000f,
-                    classRelations.MoonCancer.AvengerMultiplier/1000f, classRelations.MoonCancer.DemonGodPillarMultiplier/1000f, classRelations.MoonCancer.BeastIIMultiplier/1000f,
-                    classRelations.MoonCancer.BeastIMultiplier/1000f, classRelations.MoonCancer.MoonCancerMultiplier/1000f, classRelations.MoonCancer.BeastIIIRMultiplier/1000f,
-                    classRelations.MoonCancer.ForeignerMultiplier/1000f, classRelations.MoonCancer?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.MoonCancer?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.MoonCancer.SaberMultiplier / CLASS_DENOMINATOR, classRelations.MoonCancer.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.MoonCancer.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.MoonCancer.RiderMultiplier / CLASS_DENOMINATOR, classRelations.MoonCancer.CasterMultiplier / CLASS_DENOMINATOR, classRelations.MoonCancer.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.MoonCancer.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.MoonCancer.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.MoonCancer.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.MoonCancer.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.MoonCancer.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.MoonCancer.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.MoonCancer.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.MoonCancer.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.MoonCancer.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.MoonCancer.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.MoonCancer?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.MoonCancer?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.BeastIIIR.SaberMultiplier/1000f, classRelations.BeastIIIR.ArcherMultiplier/1000f, classRelations.BeastIIIR.LancerMultiplier/1000f,
-                    classRelations.BeastIIIR.RiderMultiplier/1000f, classRelations.BeastIIIR.CasterMultiplier/1000f, classRelations.BeastIIIR.AssassinMultiplier/1000f,
-                    classRelations.BeastIIIR.BerserkerMultiplier/1000f, classRelations.BeastIIIR.ShielderMultiplier/1000f, classRelations.BeastIIIR.RulerMultiplier/1000f,
-                    classRelations.BeastIIIR.AvengerMultiplier/1000f, classRelations.BeastIIIR.DemonGodPillarMultiplier/1000f, classRelations.BeastIIIR.BeastIIMultiplier/1000f,
-                    classRelations.BeastIIIR.BeastIMultiplier/1000f, classRelations.BeastIIIR.MoonCancerMultiplier/1000f, classRelations.BeastIIIR.BeastIIIRMultiplier/1000f,
-                    classRelations.BeastIIIR.ForeignerMultiplier/1000f, classRelations.BeastIIIR?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIR?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.BeastIIIR.SaberMultiplier / CLASS_DENOMINATOR, classRelations.BeastIIIR.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.BeastIIIR.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastIIIR.RiderMultiplier / CLASS_DENOMINATOR, classRelations.BeastIIIR.CasterMultiplier / CLASS_DENOMINATOR, classRelations.BeastIIIR.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastIIIR.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.BeastIIIR.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.BeastIIIR.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastIIIR.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.BeastIIIR.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.BeastIIIR.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastIIIR.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.BeastIIIR.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.BeastIIIR.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.BeastIIIR.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.BeastIIIR?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIR?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations.Foreigner.SaberMultiplier/1000f, classRelations.Foreigner.ArcherMultiplier/1000f, classRelations.Foreigner.LancerMultiplier/1000f,
-                    classRelations.Foreigner.RiderMultiplier/1000f, classRelations.Foreigner.CasterMultiplier/1000f, classRelations.Foreigner.AssassinMultiplier/1000f,
-                    classRelations.Foreigner.BerserkerMultiplier/1000f, classRelations.Foreigner.ShielderMultiplier/1000f, classRelations.Foreigner.RulerMultiplier/1000f,
-                    classRelations.Foreigner.AvengerMultiplier/1000f, classRelations.Foreigner.DemonGodPillarMultiplier/1000f, classRelations.Foreigner.BeastIIMultiplier/1000f,
-                    classRelations.Foreigner.BeastIMultiplier/1000f, classRelations.Foreigner.MoonCancerMultiplier/1000f, classRelations.Foreigner.BeastIIIRMultiplier/1000f,
-                    classRelations.Foreigner.ForeignerMultiplier/1000f, classRelations.Foreigner?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations.Foreigner?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations.Foreigner.SaberMultiplier / CLASS_DENOMINATOR, classRelations.Foreigner.ArcherMultiplier / CLASS_DENOMINATOR, classRelations.Foreigner.LancerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Foreigner.RiderMultiplier / CLASS_DENOMINATOR, classRelations.Foreigner.CasterMultiplier / CLASS_DENOMINATOR, classRelations.Foreigner.AssassinMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Foreigner.BerserkerMultiplier / CLASS_DENOMINATOR, classRelations.Foreigner.ShielderMultiplier / CLASS_DENOMINATOR, classRelations.Foreigner.RulerMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Foreigner.AvengerMultiplier / CLASS_DENOMINATOR, classRelations.Foreigner.DemonGodPillarMultiplier / CLASS_DENOMINATOR, classRelations.Foreigner.BeastIIMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Foreigner.BeastIMultiplier / CLASS_DENOMINATOR, classRelations.Foreigner.MoonCancerMultiplier / CLASS_DENOMINATOR, classRelations.Foreigner.BeastIIIRMultiplier / CLASS_DENOMINATOR,
+                    classRelations.Foreigner.ForeignerMultiplier / CLASS_DENOMINATOR, classRelations.Foreigner?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations.Foreigner?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations?.BeastIIIL?.SaberMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIL?.ArcherMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIL?.LancerMultiplier/1000f ?? 0.0f,
-                    classRelations?.BeastIIIL?.RiderMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIL?.CasterMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIL?.AssassinMultiplier/1000f ?? 0.0f,
-                    classRelations?.BeastIIIL?.BerserkerMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIL?.ShielderMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIL?.RulerMultiplier/1000f ?? 0.0f,
-                    classRelations?.BeastIIIL?.AvengerMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIL?.DemonGodPillarMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIL?.BeastIIMultiplier/1000f ?? 0.0f,
-                    classRelations?.BeastIIIL?.BeastIMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIL?.MoonCancerMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIL?.BeastIIIRMultiplier/1000f ?? 0.0f,
-                    classRelations?.BeastIIIL?.ForeignerMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIL?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations?.BeastIIIL?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations?.BeastIIIL?.SaberMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIL?.ArcherMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIL?.LancerMultiplier / CLASS_DENOMINATOR ?? 0.0f,
+                    classRelations?.BeastIIIL?.RiderMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIL?.CasterMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIL?.AssassinMultiplier / CLASS_DENOMINATOR ?? 0.0f,
+                    classRelations?.BeastIIIL?.BerserkerMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIL?.ShielderMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIL?.RulerMultiplier / CLASS_DENOMINATOR ?? 0.0f,
+                    classRelations?.BeastIIIL?.AvengerMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIL?.DemonGodPillarMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIL?.BeastIIMultiplier / CLASS_DENOMINATOR ?? 0.0f,
+                    classRelations?.BeastIIIL?.BeastIMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIL?.MoonCancerMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIL?.BeastIIIRMultiplier / CLASS_DENOMINATOR ?? 0.0f,
+                    classRelations?.BeastIIIL?.ForeignerMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIL?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastIIIL?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 },
                 {
-                    classRelations?.BeastUnknown?.SaberMultiplier/1000f ?? 0.0f, classRelations?.BeastUnknown?.ArcherMultiplier/1000f ?? 0.0f, classRelations?.BeastUnknown?.LancerMultiplier/1000f ?? 0.0f,
-                    classRelations?.BeastUnknown?.RiderMultiplier/1000f ?? 0.0f, classRelations?.BeastUnknown?.CasterMultiplier/1000f ?? 0.0f, classRelations?.BeastUnknown?.AssassinMultiplier/1000f ?? 0.0f,
-                    classRelations?.BeastUnknown?.BerserkerMultiplier/1000f ?? 0.0f, classRelations?.BeastUnknown?.ShielderMultiplier/1000f ?? 0.0f, classRelations?.BeastUnknown?.RulerMultiplier/1000f ?? 0.0f,
-                    classRelations?.BeastUnknown?.AvengerMultiplier/1000f ?? 0.0f, classRelations?.BeastUnknown?.DemonGodPillarMultiplier/1000f ?? 0.0f, classRelations?.BeastUnknown?.BeastIIMultiplier/1000f ?? 0.0f,
-                    classRelations?.BeastUnknown?.BeastIMultiplier/1000f ?? 0.0f, classRelations?.BeastUnknown?.MoonCancerMultiplier/1000f ?? 0.0f, classRelations?.BeastUnknown?.BeastIIIRMultiplier/1000f ?? 0.0f,
-                    classRelations?.BeastUnknown?.ForeignerMultiplier/1000f ?? 0.0f, classRelations?.BeastUnknown?.BeastIIILMultiplier/1000f ?? 0.0f, classRelations?.BeastUnknown?.BeastUnknownMultiplier/1000f ?? 0.0f
+                    classRelations?.BeastUnknown?.SaberMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastUnknown?.ArcherMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastUnknown?.LancerMultiplier / CLASS_DENOMINATOR ?? 0.0f,
+                    classRelations?.BeastUnknown?.RiderMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastUnknown?.CasterMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastUnknown?.AssassinMultiplier / CLASS_DENOMINATOR ?? 0.0f,
+                    classRelations?.BeastUnknown?.BerserkerMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastUnknown?.ShielderMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastUnknown?.RulerMultiplier / CLASS_DENOMINATOR ?? 0.0f,
+                    classRelations?.BeastUnknown?.AvengerMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastUnknown?.DemonGodPillarMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastUnknown?.BeastIIMultiplier / CLASS_DENOMINATOR ?? 0.0f,
+                    classRelations?.BeastUnknown?.BeastIMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastUnknown?.MoonCancerMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastUnknown?.BeastIIIRMultiplier / CLASS_DENOMINATOR ?? 0.0f,
+                    classRelations?.BeastUnknown?.ForeignerMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastUnknown?.BeastIIILMultiplier / CLASS_DENOMINATOR ?? 0.0f, classRelations?.BeastUnknown?.BeastUnknownMultiplier / CLASS_DENOMINATOR ?? 0.0f
                 }
             };
         }

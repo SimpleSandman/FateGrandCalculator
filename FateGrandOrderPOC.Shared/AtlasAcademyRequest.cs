@@ -21,6 +21,11 @@ namespace FateGrandOrderPOC.Shared
             return ApiRequest.GetDesearlizeObjectAsync<ClassAttackRateNiceJson>("https://api.atlasacademy.io/export/NA/NiceClassAttackRate.json").Result;
         }
 
+        public static ConstantNiceJson GetConstantGameInfo()
+        {
+            return ApiRequest.GetDesearlizeObjectAsync<ConstantNiceJson>("https://api.atlasacademy.io/export/NA/NiceConstant.json").Result;
+        }
+
         public static List<ServantBasicJson> GetListBasicServantInfo()
         {
             return ApiRequest.GetDesearlizeObjectAsync<List<ServantBasicJson>>("https://api.atlasacademy.io/export/NA/basic_servant.json").Result;
