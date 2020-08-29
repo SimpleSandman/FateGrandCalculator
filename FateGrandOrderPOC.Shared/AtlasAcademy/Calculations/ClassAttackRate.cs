@@ -1,8 +1,8 @@
 ﻿using System;
 
-using FateGrandOrderPOC.Shared.AtlasAcademyJson;
+using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 
-namespace FateGrandOrderPOC.Shared
+namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
 {
     public class ClassAttackRate : IBaseRelation
     {

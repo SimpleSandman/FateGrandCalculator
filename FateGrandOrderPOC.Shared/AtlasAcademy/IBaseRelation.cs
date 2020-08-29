@@ -1,4 +1,4 @@
-﻿namespace FateGrandOrderPOC.Shared
+﻿namespace FateGrandOrderPOC.Shared.AtlasAcademy
 {
     public interface IBaseRelation
     {

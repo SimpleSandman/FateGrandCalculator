@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace FateGrandOrderPOC.Shared.AtlasAcademyJson
+namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
 {
     /// <summary>
     /// Damage class modifier

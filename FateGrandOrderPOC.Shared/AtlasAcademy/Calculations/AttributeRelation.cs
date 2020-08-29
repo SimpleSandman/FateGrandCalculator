@@ -1,9 +1,9 @@
 ﻿using System;
 
-using FateGrandOrderPOC.Shared.AtlasAcademyJson;
+using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Enums;
 
-namespace FateGrandOrderPOC.Shared
+namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
 {
     public class AttributeRelation : IBaseRelation
     {

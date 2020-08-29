@@ -3,7 +3,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace FateGrandOrderPOC.Shared.AtlasAcademyJson
+namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
 {
     public class EquipNiceJson
     {

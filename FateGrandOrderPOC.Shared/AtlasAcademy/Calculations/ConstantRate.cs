@@ -1,8 +1,8 @@
 ﻿using System;
 
-using FateGrandOrderPOC.Shared.AtlasAcademyJson;
+using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 
-namespace FateGrandOrderPOC.Shared
+namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
 {
     public class ConstantRate : IBaseRelation
     {
@@ -12,13 +12,15 @@ namespace FateGrandOrderPOC.Shared
         {
             ConstantNiceJson constantGameInfo = AtlasAcademyRequest.GetConstantGameInfo();
 
-            switch (constantName.ToLower())
+            switch (constantName.ToUpper())
             {
-                case "attackratequick":
+                case "ATTACK_RATE":
+                    return constantGameInfo.ATTACK_RATE / CLASS_ATTACK_RATE_DENOMINATOR;
+                case "ENEMY_ATTACK_RATE_QUICK":
                     return constantGameInfo.ENEMY_ATTACK_RATE_QUICK / CLASS_ATTACK_RATE_DENOMINATOR;
-                case "attackratearts":
+                case "ENEMY_ATTACK_RATE_ARTS":
                     return constantGameInfo.ENEMY_ATTACK_RATE_ARTS / CLASS_ATTACK_RATE_DENOMINATOR;
-                case "attackratebuster":
+                case "ENEMY_ATTACK_RATE_BUSTER":
                     return constantGameInfo.ENEMY_ATTACK_RATE_BUSTER / CLASS_ATTACK_RATE_DENOMINATOR;
                 default:
                     break;

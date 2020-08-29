@@ -1,4 +1,4 @@
-﻿using FateGrandOrderPOC.Shared.AtlasAcademyJson;
+﻿using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 
 namespace FateGrandOrderPOC.Shared.Models
 {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-using FateGrandOrderPOC.Shared.AtlasAcademyJson;
+using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 
-namespace FateGrandOrderPOC.Shared
+namespace FateGrandOrderPOC.Shared.AtlasAcademy
 {
     public static class AtlasAcademyRequest
     {

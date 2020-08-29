@@ -1,4 +1,4 @@
-﻿namespace FateGrandOrderPOC.Shared.AtlasAcademyJson
+﻿namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
 {
     public class ConstantNiceJson
     {
