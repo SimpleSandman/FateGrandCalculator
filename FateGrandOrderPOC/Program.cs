@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 
 using FateGrandOrderPOC.Shared;
@@ -158,7 +159,10 @@ namespace FateGrandOrderPOC
             Console.WriteLine($"Chance to kill {enemyMob2.Name}: {ChanceToKill(partyMember, enemyMob2, modifiedNpDamage)}%");
             Console.WriteLine($"Chance to kill {enemyMob3.Name}: {ChanceToKill(partyMember, enemyMob3, modifiedNpDamage)}%");
 
-            Console.ReadKey(); // end program
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Console.ReadKey(); // end program
+            }
         }
 
         #region Calculation Methods
