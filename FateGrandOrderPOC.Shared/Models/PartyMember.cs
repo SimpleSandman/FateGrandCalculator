@@ -11,6 +11,7 @@ namespace FateGrandOrderPOC.Shared.Models
         public int TotalAttack { get; set; }
         public int TotalHealth { get; set; }
         public int NpCharge { get; set; }
+        public NoblePhantasm NoblePhantasm { get; set; }
         public float AttackUp { get; set; }
         /// <summary>
         /// How much NP we can generate in general

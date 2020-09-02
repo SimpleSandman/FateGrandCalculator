@@ -9,7 +9,6 @@ namespace FateGrandOrderPOC.Shared.Models
         public int SkillLevel2 { get; set; }
         public int SkillLevel3 { get; set; }
         public int NpLevel { get; set; }
-        public NoblePhantasm NoblePhantasm { get; set; }
         public int FouAttack { get; set; }
         public int FouHealth { get; set; }
         public ServantNiceJson ServantInfo { get; set; }

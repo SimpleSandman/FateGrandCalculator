@@ -41,6 +41,9 @@ namespace FateGrandOrderPOC
             program.Calculations();
         }
 
+        /// <summary>
+        /// Main calculations
+        /// </summary>
         private void Calculations()
         {
             #region Party Member
@@ -69,7 +72,7 @@ namespace FateGrandOrderPOC
             #endregion
 
             #region Enemy Mob
-            EnemyMob enemyMob1 = new EnemyMob
+            EnemyMob enemyMob = new EnemyMob
             {
                 Name = "Roman Soldier 1",
                 ClassName = ClassRelationEnum.Berserker,
@@ -83,7 +86,7 @@ namespace FateGrandOrderPOC
                 }
             };
 
-            EnemyMob enemyMob2 = new EnemyMob
+            EnemyMob enemyMob1 = new EnemyMob
             {
                 Name = "Roman Soldier 2",
                 ClassName = ClassRelationEnum.Lancer,
@@ -97,7 +100,7 @@ namespace FateGrandOrderPOC
                 }
             };
 
-            EnemyMob enemyMob3 = new EnemyMob
+            EnemyMob enemyMob2 = new EnemyMob
             {
                 Name = "Vesuvias Dragon",
                 ClassName = ClassRelationEnum.Lancer,
@@ -110,15 +113,6 @@ namespace FateGrandOrderPOC
                     "Dragon", "Super Large"
                 }
             };
-
-            Console.WriteLine(">>>>>>>> Stats <<<<<<<<");
-            Console.WriteLine($"Attribute Multiplier ({enemyMob1.Name}): {AttributeModifier(partyMember, enemyMob1)}x");
-            Console.WriteLine($"Attribute Multiplier ({enemyMob2.Name}): {AttributeModifier(partyMember, enemyMob2)}x");
-            Console.WriteLine($"Attribute Multiplier ({enemyMob3.Name}): {AttributeModifier(partyMember, enemyMob3)}x");
-            Console.WriteLine($"Class Advantage Multiplier ({enemyMob1.Name}): {ClassModifier(partyMember, enemyMob1)}x");
-            Console.WriteLine($"Class Advantage Multiplier ({enemyMob2.Name}): {ClassModifier(partyMember, enemyMob2)}x");
-            Console.WriteLine($"Class Advantage Multiplier ({enemyMob3.Name}): {ClassModifier(partyMember, enemyMob3)}x");
-            Console.WriteLine();
             #endregion
 
             #region NP Charge
@@ -133,31 +127,24 @@ namespace FateGrandOrderPOC
             }
             #endregion
 
-            float baseNpDamage = BaseNpDamage(partyMember);
-
-            Console.WriteLine($"{partyMember.Servant.ServantInfo.Name}'s base NP damage: {baseNpDamage}");
+            // Set NP for party member at start of fight
+            partyMember.NoblePhantasm = partyMember
+                .Servant
+                .ServantInfo
+                .NoblePhantasms
+                .Aggregate((agg, next) =>
+                    next.Priority >= agg.Priority ? next : agg);
 
             // Servant power modifiers
             float npGainUp = 0.0f, attackUp = 0.0f, cardNpTypeUp = 0.0f, powerModifier = 0.0f;
 
             npGainUp += 0.50f; // 2004 3rd skill
-            attackUp += 0.20f; // Lancelot's NP effect (activates first)
+            attackUp += 0.20f; // Lancelot's NP effect (+10%) [activates first]
             cardNpTypeUp += 0.50f; // Skadi's quick effectiveness
             cardNpTypeUp += 0.50f; // Skadi's quick effectiveness
-            powerModifier += 0.0f;
+            powerModifier += 0.0f; // Misc power add-ons
 
-            float totalPowerDamageModifier = (1.0f + attackUp) * (1.0f + cardNpTypeUp) * (1.0f + powerModifier);
-            Console.WriteLine($"Total power damage modifier: {totalPowerDamageModifier}");
-            float modifiedNpDamage = baseNpDamage * totalPowerDamageModifier;
-            Console.WriteLine($"Modified NP damage: {modifiedNpDamage}\n");
-
-            Console.WriteLine($"Average NP damage towards {enemyMob1.Name}: {AverageNpDamage(partyMember, enemyMob1, modifiedNpDamage)}");
-            Console.WriteLine($"Average NP damage towards {enemyMob2.Name}: {AverageNpDamage(partyMember, enemyMob2, modifiedNpDamage)}");
-            Console.WriteLine($"Average NP damage towards {enemyMob3.Name}: {AverageNpDamage(partyMember, enemyMob3, modifiedNpDamage)}\n");
-
-            Console.WriteLine($"Chance to kill {enemyMob1.Name}: {ChanceToKill(partyMember, enemyMob1, modifiedNpDamage)}%");
-            Console.WriteLine($"Chance to kill {enemyMob2.Name}: {ChanceToKill(partyMember, enemyMob2, modifiedNpDamage)}%");
-            Console.WriteLine($"Chance to kill {enemyMob3.Name}: {ChanceToKill(partyMember, enemyMob3, modifiedNpDamage)}%");
+            WaveBattleSimulator(partyMember, attackUp, cardNpTypeUp, powerModifier, enemyMob, enemyMob1, enemyMob2);
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -166,26 +153,126 @@ namespace FateGrandOrderPOC
         }
 
         #region Calculation Methods
+        /// <summary>
+        /// Simulate a wave inside of a node
+        /// </summary>
+        /// <param name="partyMember"></param>
+        /// <param name="attackUp"></param>
+        /// <param name="cardNpTypeUp"></param>
+        /// <param name="powerModifier"></param>
+        /// <param name="enemyMob"></param>
+        /// <param name="enemyMob1"></param>
+        /// <param name="enemyMob2"></param>
+        private void WaveBattleSimulator(PartyMember partyMember, float attackUp, float cardNpTypeUp, float powerModifier,
+            EnemyMob enemyMob, EnemyMob enemyMob1 = null, EnemyMob enemyMob2 = null)
+        {
+            Console.WriteLine(">>>>>>>> Stats <<<<<<<<");
+            Console.WriteLine($"Attribute Multiplier ({enemyMob.Name}): {AttributeModifier(partyMember, enemyMob)}x");
+            Console.WriteLine($"Attribute Multiplier ({enemyMob1.Name}): {AttributeModifier(partyMember, enemyMob1)}x");
+            Console.WriteLine($"Attribute Multiplier ({enemyMob2.Name}): {AttributeModifier(partyMember, enemyMob2)}x");
+            Console.WriteLine($"Class Advantage Multiplier ({enemyMob.Name}): {ClassModifier(partyMember, enemyMob)}x");
+            Console.WriteLine($"Class Advantage Multiplier ({enemyMob1.Name}): {ClassModifier(partyMember, enemyMob1)}x");
+            Console.WriteLine($"Class Advantage Multiplier ({enemyMob2.Name}): {ClassModifier(partyMember, enemyMob2)}x");
+            Console.WriteLine();
+
+            float baseNpDamage = BaseNpDamage(partyMember);
+            Console.WriteLine($"{partyMember.Servant.ServantInfo.Name}'s base NP damage: {baseNpDamage}");
+
+            float totalPowerDamageModifier = (1.0f + attackUp) * (1.0f + cardNpTypeUp) * (1.0f + powerModifier);
+            Console.WriteLine($"Total power damage modifier: {totalPowerDamageModifier}");
+            float modifiedNpDamage = baseNpDamage * totalPowerDamageModifier;
+            Console.WriteLine($"Modified NP damage: {modifiedNpDamage}\n");
+
+            float npDamageForEnemyMob = AverageNpDamage(partyMember, enemyMob, modifiedNpDamage);
+            float npDamageForEnemyMob1 = AverageNpDamage(partyMember, enemyMob1, modifiedNpDamage);
+            float npDamageForEnemyMob2 = AverageNpDamage(partyMember, enemyMob2, modifiedNpDamage);
+
+            Console.WriteLine($"Average NP damage towards {enemyMob.Name}: {npDamageForEnemyMob}");
+            Console.WriteLine($"Average NP damage towards {enemyMob1.Name}: {npDamageForEnemyMob1}");
+            Console.WriteLine($"Average NP damage towards {enemyMob2.Name}: {npDamageForEnemyMob2}\n");
+
+            float chanceToKillEnemyMob = ChanceToKill(partyMember, enemyMob, modifiedNpDamage);
+            float chanceToKillEnemyMob1 = ChanceToKill(partyMember, enemyMob1, modifiedNpDamage);
+            float chanceToKillEnemyMob2 = ChanceToKill(partyMember, enemyMob2, modifiedNpDamage);
+
+            Console.WriteLine($"Chance to kill {enemyMob.Name}: {chanceToKillEnemyMob}%");
+            Console.WriteLine($"Chance to kill {enemyMob1.Name}: {chanceToKillEnemyMob1}%");
+            Console.WriteLine($"Chance to kill {enemyMob2.Name}: {chanceToKillEnemyMob2}%\n");
+
+            Console.WriteLine($"Health remaining: {HealthRemaining(enemyMob, npDamageForEnemyMob)}");
+            Console.WriteLine($"Health remaining: {HealthRemaining(enemyMob1, npDamageForEnemyMob1)}");
+            Console.WriteLine($"Health remaining: {HealthRemaining(enemyMob2, npDamageForEnemyMob2)}\n");
+
+            List<float> npDistributionPercentages = NpDistributionPercentages(partyMember);
+            float effectiveHits = 0.0f;
+
+            foreach (float npHitPerc in npDistributionPercentages)
+            {
+                string message = $"NP Hit Perc: {npHitPerc * 100.0f}%";
+
+                if (0.9f * npDamageForEnemyMob * npHitPerc > enemyMob.Health)
+                {
+                    effectiveHits += 1.5f; // overkill (includes killing blow)
+                    message += $" || Effective hit: 1.5";
+                }
+                else
+                {
+                    effectiveHits += 1.0f; // regular hit
+                    message += $" || Effective hit: 1";
+                }
+
+                Console.WriteLine(message);
+            }
+
+            Console.WriteLine($"Total Effective Hits: {effectiveHits}");
+        }
+
+        private List<float> NpDistributionPercentages(PartyMember partyMember)
+        {
+            float perc, lastNpHitPerc = 0.0f;
+            List<float> percNpHitDistribution = new List<float>();
+
+            /* Get NP distribution values and percentages */
+            foreach (int npHit in partyMember.NoblePhantasm.NpDistribution)
+            {
+                perc = (npHit / 100.0f) + lastNpHitPerc;
+
+                Console.WriteLine($"NP Hit: {npHit}, Perc: {perc}%");
+                percNpHitDistribution.Add(perc);
+
+                lastNpHitPerc = perc;
+            }
+
+            return percNpHitDistribution;
+        }
+
+        private float HealthRemaining(EnemyMob enemyMob, float npDamageForEnemyMob)
+        {
+            float healthRemaining = enemyMob.Health - (npDamageForEnemyMob * 0.9f);
+            if (healthRemaining < 0.0f)
+            {
+                healthRemaining = 0.0f;
+            }
+
+            return healthRemaining;
+        }
+
         private float BaseNpDamage(PartyMember partyMember)
         {
-            NoblePhantasm highestPriorityNp = partyMember.Servant.ServantInfo.NoblePhantasms
-                .Aggregate((agg, next) =>
-                    next.Priority >= agg.Priority ? next : agg);
-
-            int npValue = highestPriorityNp
+            int npValue = partyMember.NoblePhantasm
                 .Functions.Find(f => f.FuncType.Contains("damageNp"))
                 .Svals[partyMember.Servant.NpLevel - 1].Value;
 
             Console.WriteLine($"Total attack: {partyMember.TotalAttack}");
             Console.WriteLine($"Class modifier: {_classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName)}");
-            Console.WriteLine($"NP type modifier: {_constantRate.GetAttackMultiplier("attackrate" + highestPriorityNp.Card)}");
-            Console.WriteLine($"NP value: {(npValue / 1000.0f)}");
+            Console.WriteLine($"NP type modifier: {_constantRate.GetAttackMultiplier("enemy_attack_rate_" + partyMember.NoblePhantasm.Card)}");
+            Console.WriteLine($"NP value: {npValue / 1000.0f}");
 
             // Base NP damage = ATTACK_RATE * Servant total attack * Class modifier * NP type modifier * NP damage
             return _constantRate.GetAttackMultiplier("ATTACK_RATE")
                 * partyMember.TotalAttack
                 * _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName)
-                * _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{highestPriorityNp.Card}")
+                * _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}")
                 * (npValue / 1000.0f);
         }
 
@@ -198,13 +285,13 @@ namespace FateGrandOrderPOC
         {
             if (0.9f * AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) > enemyMob.Health)
             {
-                return 100.0f;
+                return 100.0f; // perfect clear
             }
             else if (1.1f * AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) < enemyMob.Health)
             {
-                return 0.0f;
+                return 0.0f; // never clear
             }
-            else
+            else // show chance of success
             {
                 return (1.0f - ((enemyMob.Health / AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) - 0.9f) / 0.2f)) * 100.0f;
             }
@@ -307,7 +394,7 @@ namespace FateGrandOrderPOC
         private void ServantStats(string servantId)
         {
             ServantNiceJson servantJson = AtlasAcademyRequest.GetServantInfo(servantId);
-            
+
             // retry if no result
             if (servantJson == null)
             {
@@ -332,14 +419,14 @@ namespace FateGrandOrderPOC
             Console.WriteLine($"Attribute: {servantJson.Attribute}");
             //Console.WriteLine($"Cards: {string.Join(", ", servantJson.Cards)}");
             //Console.WriteLine($"First Ascension 1st Item Name: {servantJson.AscensionMaterials?.FirstAsc?.Items[0].Amount.ToString() ?? "N/A"} {servantJson.AscensionMaterials?.FirstAsc?.Items[0].ItemObject.Name ?? ""}");
-            
+
             //if (servantJson.AscensionMaterials?.SecondAsc?.Items.Count > 1)
             //    Console.WriteLine($"Second Ascension 2nd Item Name: {servantJson.AscensionMaterials?.SecondAsc?.Items[1].Amount.ToString() ?? "N/A"} {servantJson.AscensionMaterials?.SecondAsc?.Items[1].ItemObject.Name ?? ""}");
             //else
             //    Console.WriteLine($"Second Ascension Only Item Name: {servantJson.AscensionMaterials?.SecondAsc?.Items[0].Amount.ToString() ?? "N/A"} {servantJson.AscensionMaterials?.SecondAsc?.Items[0].ItemObject.Name ?? ""}");
-            
+
             //Console.WriteLine($"Eigth Skill Level 1st Item Name: {servantJson.SkillMaterials?.EigthSkill?.Items[0].Amount.ToString() ?? "N/A"} {servantJson.SkillMaterials?.EigthSkill?.Items[0].ItemObject.Name ?? ""}");
-            
+
             if (servantJson?.NoblePhantasms.Count > 0)
                 Console.WriteLine($"Latest NP Name and Rank: {servantJson?.NoblePhantasms[^1].Name ?? "N/A"} {servantJson?.NoblePhantasms[^1].Rank ?? ""}");
             else
