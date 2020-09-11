@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy.Calculations;
+using FateGrandOrderPOC.Shared.Enums;
 using FateGrandOrderPOC.Shared.Models;
 
 namespace FateGrandOrderPOC.Shared
@@ -14,64 +16,72 @@ namespace FateGrandOrderPOC.Shared
         private readonly ConstantRate _constantRate = new ConstantRate();
 
         /// <summary>
-        /// Simulate a wave inside of a node
+        /// Simulate noble phantasms against a wave of enemies
         /// </summary>
-        /// <param name="partyMember"></param>
+        /// <param name="party"></param>
+        /// <param name="enemyMobs"></param>
+        /// <param name="waveNumber"></param>
+        /// <param name="npGainUp"></param>
         /// <param name="attackUp"></param>
         /// <param name="cardNpTypeUp"></param>
         /// <param name="powerModifier"></param>
-        /// <param name="enemyMob"></param>
-        /// <param name="enemyMob1"></param>
-        /// <param name="enemyMob2"></param>
-        public void WaveBattleSimulator(PartyMember partyMember, float npGainUp, float attackUp, float cardNpTypeUp, float powerModifier,
-            EnemyMob enemyMob, EnemyMob enemyMob1 = null, EnemyMob enemyMob2 = null)
+        public void NoblePhantasmSimulator(ref List<PartyMember> party, ref List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, 
+            float npGainUp, float attackUp, float cardNpTypeUp, float powerModifier)
         {
-            //Console.WriteLine(">>>>>>>> Stats <<<<<<<<");
-            //Console.WriteLine($"Attribute Multiplier ({enemyMob.Name}): {AttributeModifier(partyMember, enemyMob)}x");
-            //Console.WriteLine($"Attribute Multiplier ({enemyMob1.Name}): {AttributeModifier(partyMember, enemyMob1)}x");
-            //Console.WriteLine($"Attribute Multiplier ({enemyMob2.Name}): {AttributeModifier(partyMember, enemyMob2)}x");
-            //Console.WriteLine($"Class Advantage Multiplier ({enemyMob.Name}): {ClassModifier(partyMember, enemyMob)}x");
-            //Console.WriteLine($"Class Advantage Multiplier ({enemyMob1.Name}): {ClassModifier(partyMember, enemyMob1)}x");
-            //Console.WriteLine($"Class Advantage Multiplier ({enemyMob2.Name}): {ClassModifier(partyMember, enemyMob2)}x\n");
+            // Go through each party member's NP attack in the order of the NP chain provided
+            foreach (PartyMember partyMember in party.FindAll(p => p.NpChainOrder != NpChainOrderEnum.None).OrderBy(p => p.NpChainOrder).ToList())
+            {
+                // Check if any enemies are alive
+                if (enemyMobs.Count == 0)
+                {
+                    Console.WriteLine("Node cleared!!");
+                    return;
+                }
 
-            float baseNpDamage = BaseNpDamage(partyMember);
-            //Console.WriteLine($"{partyMember.Servant.ServantInfo.Name}'s base NP damage: {baseNpDamage}");
+                float totalNpRefund = 0.0f;
 
-            float totalPowerDamageModifier = (1.0f + attackUp) * (1.0f + cardNpTypeUp) * (1.0f + powerModifier);
-            //Console.WriteLine($"Total power damage modifier: {totalPowerDamageModifier}");
+                // Go through each enemy mob grouped by their wave number
+                for (int i = 0; i < enemyMobs.FindAll(e => e.WaveNumber == waveNumber).Count; i++)
+                {
+                    EnemyMob enemyMob = enemyMobs[i];
 
-            float modifiedNpDamage = baseNpDamage * totalPowerDamageModifier;
-            //Console.WriteLine($"Modified NP damage: {modifiedNpDamage}\n");
+                    //Console.WriteLine(">>>>>>>> Stats <<<<<<<<");
+                    //Console.WriteLine($"Attribute Multiplier ({enemyMob.Name}): {AttributeModifier(partyMember, enemyMob)}x");
+                    //Console.WriteLine($"Class Advantage Multiplier ({enemyMob.Name}): {ClassModifier(partyMember, enemyMob)}x");
 
-            float npDamageForEnemyMob = AverageNpDamage(partyMember, enemyMob, modifiedNpDamage);
-            float npDamageForEnemyMob1 = AverageNpDamage(partyMember, enemyMob1, modifiedNpDamage);
-            float npDamageForEnemyMob2 = AverageNpDamage(partyMember, enemyMob2, modifiedNpDamage);
+                    float baseNpDamage = BaseNpDamage(partyMember);
+                    //Console.WriteLine($"{partyMember.Servant.ServantInfo.Name}'s base NP damage: {baseNpDamage}");
 
-            //Console.WriteLine($"Average NP damage towards {enemyMob.Name}: {npDamageForEnemyMob}");
-            //Console.WriteLine($"Average NP damage towards {enemyMob1.Name}: {npDamageForEnemyMob1}");
-            //Console.WriteLine($"Average NP damage towards {enemyMob2.Name}: {npDamageForEnemyMob2}\n");
+                    float totalPowerDamageModifier = (1.0f + attackUp) * (1.0f + cardNpTypeUp) * (1.0f + powerModifier);
+                    //Console.WriteLine($"Total power damage modifier: {totalPowerDamageModifier}");
 
-            float chanceToKillEnemyMob = ChanceToKill(partyMember, enemyMob, modifiedNpDamage);
-            float chanceToKillEnemyMob1 = ChanceToKill(partyMember, enemyMob1, modifiedNpDamage);
-            float chanceToKillEnemyMob2 = ChanceToKill(partyMember, enemyMob2, modifiedNpDamage);
+                    float modifiedNpDamage = baseNpDamage * totalPowerDamageModifier;
+                    //Console.WriteLine($"Modified NP damage: {modifiedNpDamage}\n");
 
-            Console.WriteLine($"Chance to kill {enemyMob.Name}: {chanceToKillEnemyMob}%");
-            Console.WriteLine($"Chance to kill {enemyMob1.Name}: {chanceToKillEnemyMob1}%");
-            Console.WriteLine($"Chance to kill {enemyMob2.Name}: {chanceToKillEnemyMob2}%\n");
+                    float npDamageForEnemyMob = AverageNpDamage(partyMember, enemyMob, modifiedNpDamage);
+                    //Console.WriteLine($"Average NP damage towards {enemyMob.Name}: {npDamageForEnemyMob}");
 
-            Console.WriteLine($"Health remaining: {HealthRemaining(enemyMob, npDamageForEnemyMob)}");
-            Console.WriteLine($"Health remaining: {HealthRemaining(enemyMob1, npDamageForEnemyMob1)}");
-            Console.WriteLine($"Health remaining: {HealthRemaining(enemyMob2, npDamageForEnemyMob2)}\n");
+                    List<float> npDistributionPercentages = NpDistributionPercentages(partyMember);
 
-            List<float> npDistributionPercentages = NpDistributionPercentages(partyMember);
+                    // Grab NP refund from current enemy
+                    totalNpRefund += NpGainedFromEnemy(partyMember, enemyMob, npGainUp, cardNpTypeUp, npDamageForEnemyMob, npDistributionPercentages);
 
-            float totalNpRefund = NpGainedFromEnemy(partyMember, enemyMob, npGainUp, cardNpTypeUp, npDamageForEnemyMob, npDistributionPercentages)
-                + NpGainedFromEnemy(partyMember, enemyMob1, npGainUp, cardNpTypeUp, npDamageForEnemyMob1, npDistributionPercentages)
-                + NpGainedFromEnemy(partyMember, enemyMob2, npGainUp, cardNpTypeUp, npDamageForEnemyMob2, npDistributionPercentages);
+                    // Check health of enemy
+                    float chanceToKillEnemyMob = ChanceToKill(partyMember, enemyMob, modifiedNpDamage);
+                    enemyMob.Health = HealthRemaining(enemyMob, npDamageForEnemyMob);
 
-            totalNpRefund /= 100.0f;
+                    Console.WriteLine($"Chance to kill {enemyMob.Name}: {chanceToKillEnemyMob}%\n");
+                    Console.WriteLine($"Health remaining: {enemyMob.Health}\n");
+                }
 
-            Console.WriteLine($"Total NP refund: {totalNpRefund}%\n");
+                // Replace old charge with newly refunded NP
+                totalNpRefund /= 100.0f;
+                partyMember.NpCharge = totalNpRefund;
+
+                enemyMobs.RemoveAll(e => e.Health <= 0.0f); // remove dead enemies in preparation for next NP
+
+                Console.WriteLine($"Total NP refund for {partyMember.Servant.ServantInfo.Name}: {totalNpRefund}%\n");
+            }
         }
 
         #region Private Methods
@@ -125,10 +135,10 @@ namespace FateGrandOrderPOC.Shared
 
                 npRefund += (float)Math.Floor(effectiveHitModifier * CalculatedNpPerHit(partyMember, enemyMob, cardNpTypeUp, npGainUp));
 
-                Console.WriteLine($"NP Hit Perc: {npHitPerc}% || Effective hit: {effectiveHitModifier} || Accumulated NP refund: {npRefund / 100.0f}");
+                //Console.WriteLine($"NP Hit Perc: {npHitPerc}% || Effective hit: {effectiveHitModifier} || Accumulated NP refund: {npRefund / 100.0f}");
             }
 
-            Console.WriteLine($"\nTotal NP refund from {enemyMob.Name}: {npRefund / 100.0f}%\n");
+            Console.WriteLine($"Total NP refund from {enemyMob.Name}: {npRefund / 100.0f}%");
             return npRefund;
         }
 

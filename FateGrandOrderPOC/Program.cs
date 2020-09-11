@@ -13,6 +13,7 @@ namespace FateGrandOrderPOC
     public class Program
     {
         private readonly CombatFormula _combatFormula = new CombatFormula();
+        private List<PartyMember> _party = new List<PartyMember>();
 
         /* Servants */
         const string ARTORIA_PENDRAGON_SABER = "100100";
@@ -41,15 +42,16 @@ namespace FateGrandOrderPOC
         /// </summary>
         private void Calculations()
         {
+            /* Party data */
             #region Party Member
-            ChaldeaCraftEssence chaldeaKscope = new ChaldeaCraftEssence
+            CraftEssence chaldeaKscope = new CraftEssence
             {
                 CraftEssenceLevel = 100,
                 Mlb = true,
                 CraftEssenceInfo = AtlasAcademyRequest.GetCraftEssenceInfo(KSCOPE_CE)
             };
 
-            ChaldeaServant chaldeaAttackServant = new ChaldeaServant
+            Servant chaldeaAttackServant = new Servant
             {
                 ServantLevel = 90,
                 NpLevel = 1,
@@ -58,35 +60,25 @@ namespace FateGrandOrderPOC
                 SkillLevel1 = 10,
                 SkillLevel2 = 10,
                 SkillLevel3 = 10,
+                IsSupportServant = false,
                 ServantInfo = AtlasAcademyRequest.GetServantInfo(DANTES_AVENGER)
             };
 
             PartyMember partyMember = AddPartyMember(chaldeaAttackServant, chaldeaKscope);
+
+            _party.Add(partyMember);
             #endregion
 
-            /* Node */
+            /* Enemy node data */
             #region First Wave
-            EnemyMob enemyMob = new EnemyMob
-            {
-                Name = "Walkure",
-                ClassName = ClassRelationEnum.Rider,
-                AttributeName = AttributeRelationEnum.Sky,
-                Gender = GenderRelationEnum.Female,
-                Health = 13933,
-                IsSpecial = false,
-                Traits = new List<string>
-                {
-                    "Divine", "Humanoid", "Female"
-                }
-            };
-
             EnemyMob enemyMob1 = new EnemyMob
             {
                 Name = "Walkure",
                 ClassName = ClassRelationEnum.Rider,
                 AttributeName = AttributeRelationEnum.Sky,
                 Gender = GenderRelationEnum.Female,
-                Health = 14786,
+                WaveNumber = WaveNumberEnum.First,
+                Health = 13933.0f,
                 IsSpecial = false,
                 Traits = new List<string>
                 {
@@ -96,11 +88,27 @@ namespace FateGrandOrderPOC
 
             EnemyMob enemyMob2 = new EnemyMob
             {
+                Name = "Walkure",
+                ClassName = ClassRelationEnum.Rider,
+                AttributeName = AttributeRelationEnum.Sky,
+                Gender = GenderRelationEnum.Female,
+                WaveNumber = WaveNumberEnum.First,
+                Health = 14786.0f,
+                IsSpecial = false,
+                Traits = new List<string>
+                {
+                    "Divine", "Humanoid", "Female"
+                }
+            };
+
+            EnemyMob enemyMob3 = new EnemyMob
+            {
                 Name = "Muspell",
                 ClassName = ClassRelationEnum.Berserker,
                 AttributeName = AttributeRelationEnum.Earth,
                 Gender = GenderRelationEnum.Male,
-                Health = 23456,
+                WaveNumber = WaveNumberEnum.First,
+                Health = 23456.0f,
                 IsSpecial = false,
                 Traits = new List<string>
                 {
@@ -110,13 +118,14 @@ namespace FateGrandOrderPOC
             #endregion
 
             #region Second Wave
-            EnemyMob enemyMob3 = new EnemyMob
+            EnemyMob enemyMob4 = new EnemyMob
             {
                 Name = "Muspell",
                 ClassName = ClassRelationEnum.Berserker,
                 AttributeName = AttributeRelationEnum.Earth,
                 Gender = GenderRelationEnum.Male,
-                Health = 25554,
+                WaveNumber = WaveNumberEnum.Second,
+                Health = 25554.0f,
                 IsSpecial = false,
                 Traits = new List<string>
                 {
@@ -124,13 +133,14 @@ namespace FateGrandOrderPOC
                 }
             };
 
-            EnemyMob enemyMob4 = new EnemyMob
+            EnemyMob enemyMob5 = new EnemyMob
             {
                 Name = "Walkure",
                 ClassName = ClassRelationEnum.Rider,
                 AttributeName = AttributeRelationEnum.Sky,
                 Gender = GenderRelationEnum.Female,
-                Health = 19047,
+                WaveNumber = WaveNumberEnum.Second,
+                Health = 19047.0f,
                 IsSpecial = false,
                 Traits = new List<string>
                 {
@@ -138,13 +148,14 @@ namespace FateGrandOrderPOC
                 }
             };
 
-            EnemyMob enemyMob5 = new EnemyMob
+            EnemyMob enemyMob6 = new EnemyMob
             {
                 Name = "Muspell",
                 ClassName = ClassRelationEnum.Berserker,
                 AttributeName = AttributeRelationEnum.Earth,
                 Gender = GenderRelationEnum.Male,
-                Health = 26204,
+                WaveNumber = WaveNumberEnum.Second,
+                Health = 26204.0f,
                 IsSpecial = false,
                 Traits = new List<string>
                 {
@@ -154,27 +165,14 @@ namespace FateGrandOrderPOC
             #endregion
 
             #region Third Wave
-            EnemyMob enemyMob6 = new EnemyMob
-            {
-                Name = "Walkure",
-                ClassName = ClassRelationEnum.Rider,
-                AttributeName = AttributeRelationEnum.Sky,
-                Gender = GenderRelationEnum.Female,
-                Health = 42926,
-                IsSpecial = false,
-                Traits = new List<string>
-                {
-                    "Divine", "Humanoid", "Female"
-                }
-            };
-
             EnemyMob enemyMob7 = new EnemyMob
             {
                 Name = "Walkure",
                 ClassName = ClassRelationEnum.Rider,
                 AttributeName = AttributeRelationEnum.Sky,
                 Gender = GenderRelationEnum.Female,
-                Health = 180753,
+                WaveNumber = WaveNumberEnum.Third,
+                Health = 42926.0f,
                 IsSpecial = false,
                 Traits = new List<string>
                 {
@@ -184,11 +182,27 @@ namespace FateGrandOrderPOC
 
             EnemyMob enemyMob8 = new EnemyMob
             {
+                Name = "Walkure",
+                ClassName = ClassRelationEnum.Rider,
+                AttributeName = AttributeRelationEnum.Sky,
+                Gender = GenderRelationEnum.Female,
+                WaveNumber = WaveNumberEnum.Third,
+                Health = 180753.0f,
+                IsSpecial = false,
+                Traits = new List<string>
+                {
+                    "Divine", "Humanoid", "Female"
+                }
+            };
+
+            EnemyMob enemyMob9 = new EnemyMob
+            {
                 Name = "Muspell",
                 ClassName = ClassRelationEnum.Berserker,
                 AttributeName = AttributeRelationEnum.Earth,
                 Gender = GenderRelationEnum.Male,
-                Health = 61289,
+                WaveNumber = WaveNumberEnum.Third,
+                Health = 61289.0f,
                 IsSpecial = false,
                 Traits = new List<string>
                 {
@@ -197,17 +211,12 @@ namespace FateGrandOrderPOC
             };
             #endregion
 
-            #region NP Charge
-            partyMember.NpCharge = 100; // ToDo: Make this based on skills/CEs/etc
-
-            if (partyMember.NpCharge < 100)
-            {
-                Console.WriteLine($"{partyMember.Servant.ServantInfo.Name} only has {partyMember.NpCharge}% charge");
-
-                Console.ReadKey(); // end program
-                return;
-            }
-            #endregion
+            List<EnemyMob> enemyMobs = new List<EnemyMob> 
+            { 
+                enemyMob1, enemyMob2, enemyMob3, 
+                enemyMob4, enemyMob5, enemyMob6,
+                enemyMob7, enemyMob8, enemyMob9
+            };
 
             // Set NP for party member at start of fight (assume highest upgraded NP by priority)
             partyMember.NoblePhantasm = partyMember
@@ -217,17 +226,26 @@ namespace FateGrandOrderPOC
                 .Aggregate((agg, next) =>
                     next.Priority >= agg.Priority ? next : agg);
 
+            partyMember.NpCharge = 100.0f; // ToDo: Make this based on skills/CEs/etc
+
             /* Simulate node combat */
             // TODO: Specify defense down buffs to specific enemy mobs instead of always assuming AOE.
             //       Possibly add a debuff list property for the EnemyMob object
+            NpChargeCheck(partyMember);
             Console.WriteLine(">>>>>> Fight 1/3 <<<<<<\n");
-            _combatFormula.WaveBattleSimulator(partyMember, 0.50f, 0.00f, 1.00f, 0.00f, enemyMob, enemyMob1, enemyMob2);
+            _combatFormula.NoblePhantasmSimulator(ref _party, ref enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f, 1.00f, 0.00f);
 
+            partyMember.NpCharge += 50.0f; // ToDo: Make this based on skills/CEs/etc
+
+            NpChargeCheck(partyMember);
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
-            _combatFormula.WaveBattleSimulator(partyMember, 0.50f, 0.00f, 1.00f, 0.00f, enemyMob3, enemyMob4, enemyMob5);
+            _combatFormula.NoblePhantasmSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f, 1.00f, 0.00f);
 
+            partyMember.NpCharge += 50.0f; // ToDo: Make this based on skills/CEs/etc
+
+            NpChargeCheck(partyMember);
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
-            _combatFormula.WaveBattleSimulator(partyMember, 0.50f, 1.36f, 1.00f, 0.13f, enemyMob6, enemyMob7, enemyMob8);
+            _combatFormula.NoblePhantasmSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Third, 0.50f, 1.36f, 1.00f, 0.13f);
 
             Console.WriteLine("Battle ended! ^.^");
 
@@ -239,7 +257,39 @@ namespace FateGrandOrderPOC
         }
 
         #region Private Methods
-        private PartyMember AddPartyMember(ChaldeaServant chaldeaServant, ChaldeaCraftEssence chaldeaCraftEssence)
+        /// <summary>
+        /// Check if party member has enough NP charge for an attack. If so, add them to the queue
+        /// </summary>
+        /// <param name="partyMember"></param>
+        private void NpChargeCheck(PartyMember partyMember)
+        {
+            if (partyMember.NpCharge < 100.0f)
+            {
+                Console.WriteLine($"{partyMember.Servant.ServantInfo.Name} only has {partyMember.NpCharge}% charge");
+            }
+            else
+            {
+                if (!_party.Exists(p => p.NpChainOrder == NpChainOrderEnum.First))
+                {
+                    partyMember.NpChainOrder = NpChainOrderEnum.First;
+                }
+                else if (!_party.Exists(p => p.NpChainOrder == NpChainOrderEnum.Second))
+                {
+                    partyMember.NpChainOrder = NpChainOrderEnum.Second;
+                }
+                else if (!_party.Exists(p => p.NpChainOrder == NpChainOrderEnum.Third))
+                {
+                    partyMember.NpChainOrder = NpChainOrderEnum.Third;
+                }
+                else
+                {
+                    Console.WriteLine("Error: Max NP chain limit is 3");
+                    return;
+                }
+            }
+        }
+
+        private PartyMember AddPartyMember(Servant chaldeaServant, CraftEssence chaldeaCraftEssence)
         {
             int servantTotalAtk = chaldeaServant.ServantInfo.AtkGrowth[chaldeaServant.ServantLevel - 1]
                 + chaldeaCraftEssence.CraftEssenceInfo.AtkGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1]
@@ -251,6 +301,7 @@ namespace FateGrandOrderPOC
 
             return new PartyMember
             {
+                Id = _party.Count,
                 Servant = chaldeaServant,
                 EquippedCraftEssence = chaldeaCraftEssence,
                 TotalAttack = servantTotalAtk,

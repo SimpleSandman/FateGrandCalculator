@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
+using FateGrandOrderPOC.Shared.Enums;
 
 namespace FateGrandOrderPOC.Shared.Models
 {
     public class PartyMember
     {
-        public ChaldeaServant Servant { get; set; }
-        public ChaldeaCraftEssence EquippedCraftEssence { get; set; }
+        public int Id { get; set; }
+        public Servant Servant { get; set; }
+        public CraftEssence EquippedCraftEssence { get; set; }
         public int TotalAttack { get; set; }
         public int TotalHealth { get; set; }
-        public int NpCharge { get; set; }
+        public float NpCharge { get; set; }
+        public NpChainOrderEnum NpChainOrder { get; set; } = NpChainOrderEnum.None;
         public NoblePhantasm NoblePhantasm { get; set; }
         public float AttackUp { get; set; }
         /// <summary>

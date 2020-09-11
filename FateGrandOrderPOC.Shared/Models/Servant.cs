@@ -2,7 +2,7 @@
 
 namespace FateGrandOrderPOC.Shared.Models
 {
-    public class ChaldeaServant
+    public class Servant
     {
         public int ServantLevel { get; set; }
         public int SkillLevel1 { get; set; }
@@ -11,6 +11,7 @@ namespace FateGrandOrderPOC.Shared.Models
         public int NpLevel { get; set; }
         public int FouAttack { get; set; }
         public int FouHealth { get; set; }
+        public bool IsSupportServant { get; set; }
         public ServantNiceJson ServantInfo { get; set; }
     }
 }
