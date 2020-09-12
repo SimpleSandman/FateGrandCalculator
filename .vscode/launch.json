@@ -15,13 +15,13 @@
             "cwd": "${workspaceFolder}/FateGrandOrderPOC",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
-            "stopAtEntry": false,
-            "pipeTransport": {
-                "pipeCwd": "${workspaceFolder}",
-                "pipeProgram": "/usr/bin/bash",
-                "pipeArgs": ["-c"],
-                "debuggerPath": "/usr/bin/netcoredbg"
-            }
+            //"pipeTransport": {
+            //    "pipeCwd": "${workspaceFolder}",
+            //    "pipeProgram": "/usr/bin/bash",
+            //    "pipeArgs": ["-c"],
+            //    "debuggerPath": "/usr/bin/netcoredbg"
+            //},
+            "stopAtEntry": false
         },
         {
             "name": ".NET Core Attach",
