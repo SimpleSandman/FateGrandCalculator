@@ -16,7 +16,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
 
         public float GetAttackMultiplier(string atkAttribute, string defAttribute)
         {
-            AttributeRelationNiceJson attributeRelations = ApiRequest.GetDesearlizeObjectAsync<AttributeRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceAttributeRelation.json").Result;
+            AttributeRelationNiceJson attributeRelations = ApiRequest.GetDeserializeObjectAsync<AttributeRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceAttributeRelation.json").Result;
 
              // Reference: https://fategrandorder.fandom.com/wiki/Attributes
             float[,] damageMultiplier =

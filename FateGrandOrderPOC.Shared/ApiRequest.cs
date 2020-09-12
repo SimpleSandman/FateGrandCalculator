@@ -11,7 +11,7 @@ namespace FateGrandOrderPOC.Shared
 {
     public class ApiRequest
     {
-        public static async Task<T> GetDesearlizeObjectAsync<T>(string basicUrl)
+        public static async Task<T> GetDeserializeObjectAsync<T>(string basicUrl)
         {
             try
             {

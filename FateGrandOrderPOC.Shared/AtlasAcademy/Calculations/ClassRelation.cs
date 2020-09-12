@@ -35,7 +35,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
         /// <returns></returns>
         private static float[,] GetListDamageMultiplier()
         {
-            ClassRelationNiceJson classRelations = ApiRequest.GetDesearlizeObjectAsync<ClassRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceClassRelation.json").Result;
+            ClassRelationNiceJson classRelations = ApiRequest.GetDeserializeObjectAsync<ClassRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceClassRelation.json").Result;
 
             return new float[,]
             {
