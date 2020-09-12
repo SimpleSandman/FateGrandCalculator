@@ -9,6 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
+            "justMyCode": false,
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/FateGrandOrderPOC/bin/Debug/netcoreapp3.1/FateGrandOrderPOC.dll",
             "args": [],
@@ -21,7 +22,10 @@
             //    "pipeArgs": ["-c"],
             //    "debuggerPath": "/usr/bin/netcoredbg"
             //},
-            "stopAtEntry": false
+            "stopAtEntry": false,
+            "logging": {
+                "moduleLoad": false
+            }
         },
         {
             "name": ".NET Core Attach",
