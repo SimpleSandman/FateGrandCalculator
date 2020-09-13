@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 
 using FateGrandOrderPOC.Shared;
 using FateGrandOrderPOC.Shared.AtlasAcademy;
+using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Enums;
 using FateGrandOrderPOC.Shared.Models;
 
@@ -65,6 +66,9 @@ namespace FateGrandOrderPOC
             };
 
             PartyMember partyMember = AddPartyMember(chaldeaAttackServant, chaldeaKscope);
+
+            // TODO: Get more funcTypes and apply them to party member properties
+            partyMember.NpCharge = GetCraftEssenceValue(partyMember, "gainNp") / 100.0f;
 
             _party.Add(partyMember);
             #endregion
@@ -226,8 +230,6 @@ namespace FateGrandOrderPOC
                 .Aggregate((agg, next) =>
                     next.Priority >= agg.Priority ? next : agg);
 
-            partyMember.NpCharge = 100.0f; // ToDo: Make this based on skills/CEs/etc
-
             /* Simulate node combat */
             // TODO: Specify defense down buffs to specific enemy mobs instead of always assuming AOE.
             //       Possibly add a debuff list property for the EnemyMob object
@@ -235,13 +237,13 @@ namespace FateGrandOrderPOC
             Console.WriteLine(">>>>>> Fight 1/3 <<<<<<\n");
             _combatFormula.NoblePhantasmSimulator(ref _party, ref enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f, 1.00f, 0.00f);
 
-            partyMember.NpCharge += 50.0f; // ToDo: Make this based on skills/CEs/etc
+            partyMember.NpCharge += 50.0f; // ToDo: Make this based on skills
 
             NpChargeCheck(partyMember);
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
             _combatFormula.NoblePhantasmSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f, 1.00f, 0.00f);
 
-            partyMember.NpCharge += 50.0f; // ToDo: Make this based on skills/CEs/etc
+            partyMember.NpCharge += 50.0f; // ToDo: Make this based on skills
 
             NpChargeCheck(partyMember);
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
@@ -307,6 +309,33 @@ namespace FateGrandOrderPOC
                 TotalAttack = servantTotalAtk,
                 TotalHealth = servantTotalHp
             };
+        }
+
+        private float GetCraftEssenceValue(PartyMember partyMember, string funcType) 
+        {
+            List<Skill> skills = new List<Skill>();
+
+            if (!partyMember.EquippedCraftEssence.Mlb)
+            {
+                skills = partyMember.EquippedCraftEssence.CraftEssenceInfo.Skills.FindAll(s => s.Priority == 1);
+            }
+            else 
+            {
+                skills = partyMember.EquippedCraftEssence.CraftEssenceInfo.Skills.FindAll(s => s.Priority == 2);
+            }
+
+            Function function = new Function();
+
+            foreach (Skill skill in skills) 
+            {
+                function = skill.Functions.Find(n => n.FuncType == funcType);
+                if (function != null)
+                {
+                    break;
+                }
+            }
+
+            return (float)function.Svals[0].Value;
         }
         #endregion
     }
