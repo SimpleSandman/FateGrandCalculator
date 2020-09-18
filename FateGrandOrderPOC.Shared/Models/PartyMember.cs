@@ -12,12 +12,15 @@ namespace FateGrandOrderPOC.Shared.Models
         public CraftEssence EquippedCraftEssence { get; set; }
         public int TotalAttack { get; set; }
         public int TotalHealth { get; set; }
+        /// <summary>
+        /// Current noble phantasm bar's charge with a range from 0% to 500%. Needs a minimum of 100% in order to execute the NP
+        /// </summary>
         public float NpCharge { get; set; }
         public NpChainOrderEnum NpChainOrder { get; set; } = NpChainOrderEnum.None;
         public NoblePhantasm NoblePhantasm { get; set; }
         public float AttackUp { get; set; }
         /// <summary>
-        /// How much NP we can generate in general
+        /// How much NP we can generate per hit
         /// </summary>
         public float NpGainUp { get; set; }
         /// <summary>

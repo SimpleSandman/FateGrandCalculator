@@ -26,6 +26,8 @@ namespace FateGrandOrderPOC
         const string MHXX_FOREIGNER = "2500300";
         const string LANCELOT_BERSERKER = "700200";
         const string DANTES_AVENGER = "1100200";
+        const string SKADI_CASTER = "503900";
+        const string PARACELSUS_CASTER = "501000";
 
         /* Craft Essences */
         const string KSCOPE_CE = "9400340";
@@ -58,19 +60,51 @@ namespace FateGrandOrderPOC
                 NpLevel = 1,
                 FouHealth = 1000,
                 FouAttack = 1000,
-                SkillLevel1 = 10,
-                SkillLevel2 = 10,
-                SkillLevel3 = 10,
+                SkillLevels = new int[3] { 10, 10, 10 },
                 IsSupportServant = false,
                 ServantInfo = AtlasAcademyRequest.GetServantInfo(DANTES_AVENGER)
             };
 
-            PartyMember partyMember = AddPartyMember(chaldeaAttackServant, chaldeaKscope);
+            PartyMember partyMemberAttacker = AddPartyMember(chaldeaAttackServant, chaldeaKscope);
 
             // TODO: Get more funcTypes and apply them to party member properties
-            partyMember.NpCharge = GetCraftEssenceValue(partyMember, "gainNp") / 100.0f;
+            partyMemberAttacker.NpCharge = GetCraftEssenceValue(partyMemberAttacker, "gainNp");
 
-            _party.Add(partyMember);
+            _party.Add(partyMemberAttacker);
+            #endregion
+
+            #region Party Member 2
+            Servant chaldeaCaster = new Servant
+            {
+                ServantLevel = 90,
+                NpLevel = 1,
+                FouHealth = 1000,
+                FouAttack = 1000,
+                SkillLevels = new int[3] { 10, 10, 10 },
+                IsSupportServant = false,
+                ServantInfo = AtlasAcademyRequest.GetServantInfo(SKADI_CASTER)
+            };
+
+            PartyMember partyMemberCaster = AddPartyMember(chaldeaCaster);
+
+            _party.Add(partyMemberCaster);
+            #endregion
+
+            #region Party Member 3
+            Servant supportCaster = new Servant
+            {
+                ServantLevel = 90,
+                NpLevel = 1,
+                FouHealth = 1000,
+                FouAttack = 1000,
+                SkillLevels = new int[3] { 10, 10, 10 },
+                IsSupportServant = true,
+                ServantInfo = AtlasAcademyRequest.GetServantInfo(SKADI_CASTER)
+            };
+
+            PartyMember partyMemberSupportCaster = AddPartyMember(supportCaster);
+
+            _party.Add(partyMemberSupportCaster);
             #endregion
 
             /* Enemy node data */
@@ -223,7 +257,7 @@ namespace FateGrandOrderPOC
             };
 
             // Set NP for party member at start of fight (assume highest upgraded NP by priority)
-            partyMember.NoblePhantasm = partyMember
+            partyMemberAttacker.NoblePhantasm = partyMemberAttacker
                 .Servant
                 .ServantInfo
                 .NoblePhantasms
@@ -233,21 +267,21 @@ namespace FateGrandOrderPOC
             /* Simulate node combat */
             // TODO: Specify defense down buffs to specific enemy mobs instead of always assuming AOE.
             //       Possibly add a debuff list property for the EnemyMob object
-            NpChargeCheck(partyMember);
+            NpChargeCheck(partyMemberAttacker);
             Console.WriteLine(">>>>>> Fight 1/3 <<<<<<\n");
-            _combatFormula.NoblePhantasmSimulator(ref _party, ref enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f, 1.00f, 0.00f);
+            _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f, 1.00f, 0.00f);
 
-            partyMember.NpCharge += 50.0f; // ToDo: Make this based on skills
+            BuffPartyMember(partyMemberCaster, 3, partyMemberAttacker);
 
-            NpChargeCheck(partyMember);
+            NpChargeCheck(partyMemberAttacker);
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
-            _combatFormula.NoblePhantasmSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f, 1.00f, 0.00f);
+            _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f, 1.00f, 0.00f);
 
-            partyMember.NpCharge += 50.0f; // ToDo: Make this based on skills
+            BuffPartyMember(partyMemberSupportCaster, 3, partyMemberAttacker);
 
-            NpChargeCheck(partyMember);
+            NpChargeCheck(partyMemberAttacker);
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
-            _combatFormula.NoblePhantasmSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Third, 0.50f, 1.36f, 1.00f, 0.13f);
+            _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Third, 0.50f, 1.36f, 1.00f, 0.13f);
 
             Console.WriteLine("Battle ended! ^.^");
 
@@ -291,15 +325,16 @@ namespace FateGrandOrderPOC
             }
         }
 
-        private PartyMember AddPartyMember(Servant chaldeaServant, CraftEssence chaldeaCraftEssence)
+        private PartyMember AddPartyMember(Servant chaldeaServant, CraftEssence chaldeaCraftEssence = null)
         {
-            int servantTotalAtk = chaldeaServant.ServantInfo.AtkGrowth[chaldeaServant.ServantLevel - 1]
-                + chaldeaCraftEssence.CraftEssenceInfo.AtkGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1]
-                + chaldeaServant.FouAttack;
+            int servantTotalAtk = chaldeaServant.ServantInfo.AtkGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouAttack;
+            int servantTotalHp = chaldeaServant.ServantInfo.HpGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouHealth;
 
-            int servantTotalHp = chaldeaServant.ServantInfo.HpGrowth[chaldeaServant.ServantLevel - 1]
-                + chaldeaCraftEssence.CraftEssenceInfo.HpGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1]
-                + chaldeaServant.FouHealth;
+            if (chaldeaCraftEssence != null)
+            {
+                servantTotalAtk += chaldeaCraftEssence.CraftEssenceInfo.AtkGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
+                servantTotalHp += chaldeaCraftEssence.CraftEssenceInfo.HpGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
+            }
 
             return new PartyMember
             {
@@ -311,8 +346,70 @@ namespace FateGrandOrderPOC
             };
         }
 
+        /// <summary>
+        /// Buff a party member with the desired skill based on the actor's list of available skills
+        /// </summary>
+        /// <param name="partyMemberActor"></param>
+        /// <param name="actorSkillNumber">Skill position number (one based)</param>
+        /// <param name="partyMemberTarget"></param>
+        private void BuffPartyMember(PartyMember partyMemberActor, int actorSkillNumber, PartyMember partyMemberTarget)
+        {
+            // TODO: Check if cooldown exists for selected skill
+            // Get highest priority skill
+            SkillServant skill = partyMemberActor
+                .Servant
+                .ServantInfo
+                .Skills
+                .FindAll(s => s.Num == actorSkillNumber)
+                .Aggregate((agg, next) =>
+                    next.Priority >= agg.Priority ? next : agg);
+
+            List<FunctionServant> servantFunctions = (from f in skill.Functions
+                where (f.FuncTargetType == "ptOne"        // party member
+                    || f.FuncTargetType == "ptAll"        // party
+                    || f.FuncTargetType == "ptFull"       // party (including reserve)
+                    || f.FuncTargetType == "ptOther"      // party except self
+                    || f.FuncTargetType == "ptOtherFull"  // party except self (including reserve)
+                    || f.FuncTargetType == "ptselectSub") // reserve party member
+                    && f.FuncTargetTeam != "enemy"
+                select f).ToList();
+
+            if (servantFunctions == null || servantFunctions.Count == 0)
+            {
+                return; // didn't find any buffs that apply to other members
+            }
+
+            int currentSkillLevel = partyMemberActor.Servant.SkillLevels[actorSkillNumber - 1];
+            string support = "";
+            if (partyMemberActor.Servant.IsSupportServant)
+            {
+                support = "(Support) ";
+            }
+
+            // TODO: Add more buffs here
+            foreach (FunctionServant servantFunction in servantFunctions)
+            {
+                switch (servantFunction.FuncType)
+                {
+                    case "gainNp":
+                        partyMemberTarget.NpCharge += servantFunction.Svals[currentSkillLevel - 1].Value / 100.0f;
+                        Console.WriteLine($"{partyMemberActor.Servant.ServantInfo.Name} {support}" + "has buffed " +
+                            $"{partyMemberTarget.Servant.ServantInfo.Name}'s NP charge by " +
+                            $"{servantFunction.Svals[currentSkillLevel - 1].Value / 100.0f}% and is now at {partyMemberTarget.NpCharge}%");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
         private float GetCraftEssenceValue(PartyMember partyMember, string funcType) 
         {
+            if (partyMember.EquippedCraftEssence == null)
+            {
+                throw new NotSupportedException();
+            }
+
             List<Skill> skills = new List<Skill>();
 
             if (!partyMember.EquippedCraftEssence.Mlb)
@@ -335,7 +432,7 @@ namespace FateGrandOrderPOC
                 }
             }
 
-            return (float)function.Svals[0].Value;
+            return (float)function.Svals[0].Value / 100.0f;
         }
         #endregion
     }

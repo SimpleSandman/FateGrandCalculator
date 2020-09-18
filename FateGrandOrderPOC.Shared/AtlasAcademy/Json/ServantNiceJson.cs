@@ -406,9 +406,17 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         [JsonProperty("funcType")]
         public string FuncType { get; set; }
 
+        /// <summary>
+        /// Targeted party or enemy member from the (player or enemy-controlled) servant's perspective
+        /// (self, ptOne, ptAll, enemy, enemyAll, etc.)
+        /// </summary>
         [JsonProperty("funcTargetType")]
         public string FuncTargetType { get; set; }
 
+        /// <summary>
+        /// Player-controlled or enemy-controlled servant or both
+        /// (player, enemy, playerAndEnemy)
+        /// </summary>
         [JsonProperty("funcTargetTeam")]
         public string FuncTargetTeam { get; set; }
 
@@ -436,6 +444,9 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         [JsonProperty("id")]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Skill position number (one-based)
+        /// </summary>
         [JsonProperty("num")]
         public int Num { get; set; }
 

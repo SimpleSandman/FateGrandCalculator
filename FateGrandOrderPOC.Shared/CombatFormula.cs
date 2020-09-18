@@ -4,6 +4,7 @@ using System.Linq;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy.Calculations;
 using FateGrandOrderPOC.Shared.Enums;
+using FateGrandOrderPOC.Shared.Extensions;
 using FateGrandOrderPOC.Shared.Models;
 
 namespace FateGrandOrderPOC.Shared
@@ -25,11 +26,13 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="attackUp"></param>
         /// <param name="cardNpTypeUp"></param>
         /// <param name="powerModifier"></param>
-        public void NoblePhantasmSimulator(ref List<PartyMember> party, ref List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, 
+        public void NoblePhantasmChainSimulator(ref List<PartyMember> party, ref List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, 
             float npGainUp, float attackUp, float cardNpTypeUp, float powerModifier)
         {
+            List<PartyMember> npChainList = party.FindAll(p => p.NpChainOrder != NpChainOrderEnum.None).OrderBy(p => p.NpChainOrder).ToList();
+
             // Go through each party member's NP attack in the order of the NP chain provided
-            foreach (PartyMember partyMember in party.FindAll(p => p.NpChainOrder != NpChainOrderEnum.None).OrderBy(p => p.NpChainOrder).ToList())
+            foreach (PartyMember partyMember in npChainList)
             {
                 // Check if any enemies are alive
                 if (enemyMobs.Count == 0)
@@ -77,6 +80,7 @@ namespace FateGrandOrderPOC.Shared
                 // Replace old charge with newly refunded NP
                 totalNpRefund /= 100.0f;
                 partyMember.NpCharge = totalNpRefund;
+                partyMember.NpChainOrder = NpChainOrderEnum.None;
 
                 enemyMobs.RemoveAll(e => e.Health <= 0.0f); // remove dead enemies in preparation for next NP
 
