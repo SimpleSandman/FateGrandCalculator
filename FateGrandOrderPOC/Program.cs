@@ -90,7 +90,7 @@ namespace FateGrandOrderPOC
             _party.Add(partyMemberCaster);
             #endregion
 
-            #region Party Member 3
+            #region Party Member Support
             Servant supportCaster = new Servant
             {
                 ServantLevel = 90,
@@ -256,19 +256,20 @@ namespace FateGrandOrderPOC
                 enemyMob7, enemyMob8, enemyMob9
             };
 
-            // Set NP for party member at start of fight (assume highest upgraded NP by priority)
-            partyMemberAttacker.NoblePhantasm = partyMemberAttacker
-                .Servant
-                .ServantInfo
-                .NoblePhantasms
-                .Aggregate((agg, next) =>
-                    next.Priority >= agg.Priority ? next : agg);
-
             /* Simulate node combat */
             // TODO: Specify defense down buffs to specific enemy mobs instead of always assuming AOE.
             //       Possibly add a debuff list property for the EnemyMob object
             NpChargeCheck(partyMemberAttacker);
             Console.WriteLine(">>>>>> Fight 1/3 <<<<<<\n");
+
+            // TODO: Reduce cooldown counters for all front-line party members
+            // TODO: Pop any skill cooldowns == 0 out of the list for all front-line party members
+            // TODO: Reduce skill effect counter by 1 per turn
+            if (!partyMemberCaster.SkillCooldowns.Exists(s => s.SkillId == 3))
+            {
+                // Do cool stuffs here
+            }
+
             _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f, 1.00f, 0.00f);
 
             BuffPartyMember(partyMemberCaster, 3, partyMemberAttacker);
@@ -342,19 +343,31 @@ namespace FateGrandOrderPOC
                 Servant = chaldeaServant,
                 EquippedCraftEssence = chaldeaCraftEssence,
                 TotalAttack = servantTotalAtk,
-                TotalHealth = servantTotalHp
+                TotalHealth = servantTotalHp,
+                ActiveStatuses = new List<ActiveStatus>(),
+                SkillCooldowns = new List<SkillCooldown>(),
+                NoblePhantasm = chaldeaServant  // Set NP for party member at start of fight
+                    .ServantInfo                // (assume highest upgraded NP by priority)
+                    .NoblePhantasms
+                    .Aggregate((agg, next) =>
+                        next.Priority >= agg.Priority ? next : agg)
             };
         }
 
         /// <summary>
         /// Buff a party member with the desired skill based on the actor's list of available skills
         /// </summary>
-        /// <param name="partyMemberActor"></param>
-        /// <param name="actorSkillNumber">Skill position number (one based)</param>
-        /// <param name="partyMemberTarget"></param>
+        /// <param name="partyMemberActor">The acting party member that is giving the buff</param>
+        /// <param name="actorSkillNumber">Skill position number (left = 1, middle = 2, right = 3)</param>
+        /// <param name="partyMemberTarget">The targeted party member that is receiving the buff</param>
         private void BuffPartyMember(PartyMember partyMemberActor, int actorSkillNumber, PartyMember partyMemberTarget)
         {
-            // TODO: Check if cooldown exists for selected skill
+            if (partyMemberActor.SkillCooldowns.Exists(s => s.SkillId == actorSkillNumber))
+            {
+                Console.WriteLine($"WARNING: Cannot buff using {partyMemberActor.Servant.ServantInfo.Name}'s {actorSkillNumber} skill because of cooldown!");
+                return; // don't buff again
+            }
+
             // Get highest priority skill
             SkillServant skill = partyMemberActor
                 .Servant
@@ -380,6 +393,7 @@ namespace FateGrandOrderPOC
             }
 
             int currentSkillLevel = partyMemberActor.Servant.SkillLevels[actorSkillNumber - 1];
+
             string support = "";
             if (partyMemberActor.Servant.IsSupportServant)
             {
@@ -401,6 +415,12 @@ namespace FateGrandOrderPOC
                         break;
                 }
             }
+
+            partyMemberActor.SkillCooldowns.Add(new SkillCooldown 
+            { 
+                SkillId = actorSkillNumber, 
+                Cooldown = skill.Cooldown[currentSkillLevel - 1] 
+            });
         }
 
         private float GetCraftEssenceValue(PartyMember partyMember, string funcType) 

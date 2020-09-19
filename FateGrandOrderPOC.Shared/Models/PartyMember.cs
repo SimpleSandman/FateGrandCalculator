@@ -18,20 +18,22 @@ namespace FateGrandOrderPOC.Shared.Models
         public float NpCharge { get; set; }
         public NpChainOrderEnum NpChainOrder { get; set; } = NpChainOrderEnum.None;
         public NoblePhantasm NoblePhantasm { get; set; }
-        public float AttackUp { get; set; }
+        public List<ActiveStatus> ActiveStatuses { get; set; }
+        public List<SkillCooldown> SkillCooldowns { get; set; }
+    }
+
+    public class ActiveStatus
+    {
+        public BuffServant StatusEffect { get; set; }
+        public int Cooldown { get; set; } = -1;
+    }
+
+    public class SkillCooldown
+    {
         /// <summary>
-        /// How much NP we can generate per hit
+        /// Skill position number (left = 1, middle = 2, right = 3)
         /// </summary>
-        public float NpGainUp { get; set; }
-        /// <summary>
-        /// How much card type effectiveness has been applied (based on NP card type)
-        /// </summary>
-        public float TypeUp { get; set; }
-        /// <summary>
-        /// Misc power modifiers added on
-        /// </summary>
-        public float PowerModifier { get; set; }
-        public List<BuffServant> ActiveBuffs { get; set; }
-        public List<BuffServant> ActiveDebuffs { get; set; }
+        public int SkillId { get; set; }
+        public int Cooldown { get; set; } = -1;
     }
 }
