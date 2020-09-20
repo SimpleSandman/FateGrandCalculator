@@ -79,12 +79,12 @@ namespace FateGrandOrderPOC.Shared
 
                 // Replace old charge with newly refunded NP
                 totalNpRefund /= 100.0f;
-                partyMember.NpCharge = totalNpRefund;
+                partyMember.NpCharge = (float)Math.Floor(totalNpRefund);
                 partyMember.NpChainOrder = NpChainOrderEnum.None;
 
                 enemyMobs.RemoveAll(e => e.Health <= 0.0f); // remove dead enemies in preparation for next NP
 
-                Console.WriteLine($"Total NP refund for {partyMember.Servant.ServantInfo.Name}: {totalNpRefund}%\n");
+                Console.WriteLine($"Total NP refund for {partyMember.Servant.ServantInfo.Name}: {partyMember.NpCharge}%\n");
             }
         }
 
