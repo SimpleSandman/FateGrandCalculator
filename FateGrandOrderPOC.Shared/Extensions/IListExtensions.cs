@@ -10,5 +10,15 @@ namespace FateGrandOrderPOC.Shared.Extensions
             list[a] = list[b];
             list[b] = tmp;
         }
+
+        public static void Swap<T>(this IList<T> list, T a, T b)
+        {
+            int indexA = list.IndexOf(a);
+            int indexB = list.IndexOf(b);
+
+            T tmp = list[indexA];
+            list[indexA] = list[indexB];
+            list[indexB] = tmp;
+        }
     }
 }

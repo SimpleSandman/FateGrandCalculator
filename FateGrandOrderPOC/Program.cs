@@ -261,30 +261,23 @@ namespace FateGrandOrderPOC
             //       Possibly add a debuff list property for the EnemyMob object
             NpChargeCheck(partyMemberAttacker);
             Console.WriteLine(">>>>>> Fight 1/3 <<<<<<\n");
-
-            // TODO: Reduce cooldown counters for all front-line party members
-            // TODO: Pop any skill cooldowns == 0 out of the list for all front-line party members
-            // TODO: Reduce skill effect counter by 1 per turn
-            if (!partyMemberCaster.SkillCooldowns.Exists(s => s.SkillId == 3))
-            {
-                // Do cool stuffs here
-            }
-
             _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f, 1.00f, 0.00f);
 
-            BuffPartyMember(partyMemberCaster, 3, partyMemberAttacker);
+            AdjustSkillCooldowns();
+            BuffPartyMember(partyMemberCaster, 3, partyMemberAttacker); // Skadi NP buff
 
             NpChargeCheck(partyMemberAttacker);
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
             _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f, 1.00f, 0.00f);
 
-            BuffPartyMember(partyMemberSupportCaster, 3, partyMemberAttacker);
+            AdjustSkillCooldowns();
+            BuffPartyMember(partyMemberSupportCaster, 3, partyMemberAttacker); // Skadi (support) NP buff
 
             NpChargeCheck(partyMemberAttacker);
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
             _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Third, 0.50f, 1.36f, 1.00f, 0.13f);
 
-            Console.WriteLine("Battle ended! ^.^");
+            Console.WriteLine("Simulation ended! ^.^");
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -294,6 +287,27 @@ namespace FateGrandOrderPOC
         }
 
         #region Private Methods
+        /// <summary>
+        /// Reduce cooldown counters for all front-line party members
+        /// </summary>
+        private void AdjustSkillCooldowns()
+        {
+            foreach (PartyMember partyMember in _party.Take(3))
+            {
+                foreach (SkillCooldown skillCooldown in partyMember.SkillCooldowns)
+                {
+                    if (skillCooldown.Cooldown == 1)
+                    {
+                        partyMember.SkillCooldowns.Remove(skillCooldown);
+                    }
+                    else
+                    {
+                        skillCooldown.Cooldown--;
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Check if party member has enough NP charge for an attack. If so, add them to the queue
         /// </summary>
@@ -326,6 +340,12 @@ namespace FateGrandOrderPOC
             }
         }
 
+        /// <summary>
+        /// Add a servant from the player's Chaldea to the battle party and equip the specified CE (if available)
+        /// </summary>
+        /// <param name="chaldeaServant"></param>
+        /// <param name="chaldeaCraftEssence"></param>
+        /// <returns></returns>
         private PartyMember AddPartyMember(Servant chaldeaServant, CraftEssence chaldeaCraftEssence = null)
         {
             int servantTotalAtk = chaldeaServant.ServantInfo.AtkGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouAttack;
