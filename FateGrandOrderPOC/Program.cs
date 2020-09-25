@@ -14,6 +14,7 @@ namespace FateGrandOrderPOC
     public class Program
     {
         private readonly CombatFormula _combatFormula = new CombatFormula();
+        private readonly SkillAdjustments _skillAdjustments = new SkillAdjustments();
         private List<PartyMember> _party = new List<PartyMember>();
 
         /* Servants */
@@ -263,15 +264,15 @@ namespace FateGrandOrderPOC
             Console.WriteLine(">>>>>> Fight 1/3 <<<<<<\n");
             _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f, 1.00f, 0.00f);
 
-            AdjustSkillCooldowns();
-            BuffPartyMember(partyMemberCaster, 3, partyMemberAttacker); // Skadi NP buff
+            _party = _skillAdjustments.AdjustSkillCooldowns(_party);
+            _skillAdjustments.BuffSystem(partyMemberCaster, 3, _party, 1); // Skadi NP buff
 
             NpChargeCheck(partyMemberAttacker);
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
             _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f, 1.00f, 0.00f);
 
-            AdjustSkillCooldowns();
-            BuffPartyMember(partyMemberSupportCaster, 3, partyMemberAttacker); // Skadi (support) NP buff
+            _party = _skillAdjustments.AdjustSkillCooldowns(_party);
+            _skillAdjustments.BuffSystem(partyMemberSupportCaster, 3, _party, 1); // Skadi (support) NP buff
 
             NpChargeCheck(partyMemberAttacker);
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
@@ -287,27 +288,6 @@ namespace FateGrandOrderPOC
         }
 
         #region Private Methods
-        /// <summary>
-        /// Reduce cooldown counters for all front-line party members
-        /// </summary>
-        private void AdjustSkillCooldowns()
-        {
-            foreach (PartyMember partyMember in _party.Take(3))
-            {
-                foreach (SkillCooldown skillCooldown in partyMember.SkillCooldowns)
-                {
-                    if (skillCooldown.Cooldown == 1)
-                    {
-                        partyMember.SkillCooldowns.Remove(skillCooldown);
-                    }
-                    else
-                    {
-                        skillCooldown.Cooldown--;
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// Check if party member has enough NP charge for an attack. If so, add them to the queue
         /// </summary>
@@ -372,75 +352,6 @@ namespace FateGrandOrderPOC
                     .Aggregate((agg, next) =>
                         next.Priority >= agg.Priority ? next : agg)
             };
-        }
-
-        /// <summary>
-        /// Buff a party member with the desired skill based on the actor's list of available skills
-        /// </summary>
-        /// <param name="partyMemberActor">The acting party member that is giving the buff</param>
-        /// <param name="actorSkillNumber">Skill position number (left = 1, middle = 2, right = 3)</param>
-        /// <param name="partyMemberTarget">The targeted party member that is receiving the buff</param>
-        private void BuffPartyMember(PartyMember partyMemberActor, int actorSkillNumber, PartyMember partyMemberTarget)
-        {
-            if (partyMemberActor.SkillCooldowns.Exists(s => s.SkillId == actorSkillNumber))
-            {
-                Console.WriteLine($"WARNING: Cannot buff using {partyMemberActor.Servant.ServantInfo.Name}'s {actorSkillNumber} skill because of cooldown!");
-                return; // don't buff again
-            }
-
-            // Get highest priority skill
-            SkillServant skill = partyMemberActor
-                .Servant
-                .ServantInfo
-                .Skills
-                .FindAll(s => s.Num == actorSkillNumber)
-                .Aggregate((agg, next) =>
-                    next.Priority >= agg.Priority ? next : agg);
-
-            List<FunctionServant> servantFunctions = (from f in skill.Functions
-                where (f.FuncTargetType == "ptOne"        // party member
-                    || f.FuncTargetType == "ptAll"        // party
-                    || f.FuncTargetType == "ptFull"       // party (including reserve)
-                    || f.FuncTargetType == "ptOther"      // party except self
-                    || f.FuncTargetType == "ptOtherFull"  // party except self (including reserve)
-                    || f.FuncTargetType == "ptselectSub") // reserve party member
-                    && f.FuncTargetTeam != "enemy"
-                select f).ToList();
-
-            if (servantFunctions == null || servantFunctions.Count == 0)
-            {
-                return; // didn't find any buffs that apply to other members
-            }
-
-            int currentSkillLevel = partyMemberActor.Servant.SkillLevels[actorSkillNumber - 1];
-
-            string support = "";
-            if (partyMemberActor.Servant.IsSupportServant)
-            {
-                support = "(Support) ";
-            }
-
-            // TODO: Add more buffs here
-            foreach (FunctionServant servantFunction in servantFunctions)
-            {
-                switch (servantFunction.FuncType)
-                {
-                    case "gainNp":
-                        partyMemberTarget.NpCharge += servantFunction.Svals[currentSkillLevel - 1].Value / 100.0f;
-                        Console.WriteLine($"{partyMemberActor.Servant.ServantInfo.Name} {support}" + "has buffed " +
-                            $"{partyMemberTarget.Servant.ServantInfo.Name}'s NP charge by " +
-                            $"{servantFunction.Svals[currentSkillLevel - 1].Value / 100.0f}% and is now at {partyMemberTarget.NpCharge}%");
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            partyMemberActor.SkillCooldowns.Add(new SkillCooldown 
-            { 
-                SkillId = actorSkillNumber, 
-                Cooldown = skill.Cooldown[currentSkillLevel - 1] 
-            });
         }
 
         private float GetCraftEssenceValue(PartyMember partyMember, string funcType) 
