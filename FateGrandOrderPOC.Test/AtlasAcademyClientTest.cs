@@ -10,7 +10,7 @@ using FluentAssertions;
 
 namespace FateGrandOrderPOC.Test
 {
-    public class AtlasAcademyRequestTest
+    public class AtlasAcademyClientTest
     {
 
         [Fact]
