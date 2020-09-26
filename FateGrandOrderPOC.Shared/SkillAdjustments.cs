@@ -10,7 +10,7 @@ namespace FateGrandOrderPOC.Shared
     public class SkillAdjustments
     {
         /// <summary>
-        /// Reduce cooldown counters for all front-line party members
+        /// Reduce cooldown counters for all front-line party members at the end of the turn
         /// </summary>
         public List<PartyMember> AdjustSkillCooldowns(List<PartyMember> party)
         {
@@ -25,6 +25,18 @@ namespace FateGrandOrderPOC.Shared
                     else
                     {
                         skillCooldown.Cooldown--;
+                    }
+                }
+
+                foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
+                {
+                    if (activeStatus.ActiveTurnCount == 1)
+                    {
+                        partyMember.ActiveStatuses.Remove(activeStatus);
+                    }
+                    else
+                    {
+                        activeStatus.ActiveTurnCount--;
                     }
                 }
             }
@@ -78,7 +90,7 @@ namespace FateGrandOrderPOC.Shared
 
             foreach (FunctionServant servantFunction in servantFunctions)
             {
-                ApplyFuncTargetType(servantFunction.FuncTargetType, partyMemberPosition, partyMemberActor, servantFunction, currentSkillLevel, party);
+                ApplyPartyFuncTargetType(servantFunction.FuncTargetType, partyMemberPosition, partyMemberActor, servantFunction, currentSkillLevel, party);
             }
 
             partyMemberActor.SkillCooldowns.Add(new SkillCooldown
@@ -88,7 +100,8 @@ namespace FateGrandOrderPOC.Shared
             });
         }
 
-        private void ApplyFuncTargetType(string funcTargetType, int partyMemberPosition, PartyMember partyMemberActor, FunctionServant servantFunction,
+        #region Private Methods
+        private void ApplyPartyFuncTargetType(string funcTargetType, int partyMemberPosition, PartyMember partyMemberActor, FunctionServant servantFunction,
             int currentSkillLevel, List<PartyMember> partyMemberTargets)
         {
             if (funcTargetType == "self")
@@ -100,8 +113,10 @@ namespace FateGrandOrderPOC.Shared
                 switch (funcTargetType)
                 {
                     case "ptAll":         // party
-                    case "ptFull":        // party (including reserve)
                     case "ptOther":       // party except self
+                        ApplyBuff(partyMemberActor, servantFunction, currentSkillLevel, partyMemberTargets.Take(3).ToList());
+                        break;
+                    case "ptFull":        // party (including reserve)
                     case "ptOtherFull":   // party except self (including reserve)
                         ApplyBuff(partyMemberActor, servantFunction, currentSkillLevel, partyMemberTargets);
                         break;
@@ -144,15 +159,28 @@ namespace FateGrandOrderPOC.Shared
                 case "gainNp":
                     partyMemberTarget.NpCharge += servantFunction.Svals[currentSkillLevel - 1].Value / 100.0f;
 
+                    // Pity NP gain
+                    if (partyMemberTarget.NpCharge == 99.0f)
+                    {
+                        partyMemberTarget.NpCharge++;
+                    }
+
                     Console.WriteLine($"{partyMemberActor.Servant.ServantInfo.Name} {support}" + "has buffed " +
                         $"{partyMemberTarget.Servant.ServantInfo.Name}'s NP charge by " +
                         $"{servantFunction.Svals[currentSkillLevel - 1].Value / 100.0f}% and is now at {partyMemberTarget.NpCharge}%");
                     break;
                 default:
+                    partyMemberTarget.ActiveStatuses.Add(new ActiveStatus 
+                    { 
+                        StatusEffect = servantFunction,
+                        AppliedSkillLevel = currentSkillLevel,
+                        ActiveTurnCount = servantFunction.Svals[currentSkillLevel - 1].Turn
+                    });
                     break;
-            }            
+            }
 
             return partyMemberTarget;
         }
+        #endregion
     }
 }
