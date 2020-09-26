@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy.Calculations;
+using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Enums;
 using FateGrandOrderPOC.Shared.Extensions;
 using FateGrandOrderPOC.Shared.Models;
@@ -24,12 +25,14 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="waveNumber"></param>
         /// <param name="npGainUp"></param>
         /// <param name="attackUp"></param>
-        /// <param name="cardNpTypeUp"></param>
         /// <param name="powerModifier"></param>
         public void NoblePhantasmChainSimulator(ref List<PartyMember> party, ref List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, 
-            float npGainUp, float attackUp, float cardNpTypeUp, float powerModifier)
+            float npGainUp, float attackUp, float powerModifier)
         {
-            List<PartyMember> npChainList = party.FindAll(p => p.NpChainOrder != NpChainOrderEnum.None).OrderBy(p => p.NpChainOrder).ToList();
+            List<PartyMember> npChainList = party
+                .FindAll(p => p.NpChainOrder != NpChainOrderEnum.None)
+                .OrderBy(p => p.NpChainOrder)
+                .ToList();
 
             // Go through each party member's NP attack in the order of the NP chain provided
             foreach (PartyMember partyMember in npChainList)
@@ -41,10 +44,22 @@ namespace FateGrandOrderPOC.Shared
                     return;
                 }
 
-                float totalNpRefund = 0.0f;
+                float totalNpRefund = 0.0f, cardNpTypeUp = 0.0f;
+
+                // TODO: Create a method that handles more buff types using a switch statemetn
+                // Calculate card buff for NP if same card type
+                foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
+                {
+                    BuffServant buff = activeStatus.StatusEffect.Buffs[0];
+
+                    if (buff.Type == "upCommandall" && buff.CkSelfIndv.Any(f => f.Name == ("card" + partyMember.NoblePhantasm.Card.ToUpperFirstChar())))
+                    {
+                        cardNpTypeUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / 1000.0f;
+                    }
+                }
 
                 // Go through each enemy mob grouped by their wave number
-                for (int i = 0; i < enemyMobs.FindAll(e => e.WaveNumber == waveNumber).Count; i++)
+                for (int i = 0; i < enemyMobs.FindAll(e => e.WaveNumber == waveNumber).Take(3).Count(); i++)
                 {
                     EnemyMob enemyMob = enemyMobs[i];
 

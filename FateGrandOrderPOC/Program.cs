@@ -260,23 +260,26 @@ namespace FateGrandOrderPOC
             /* Simulate node combat */
             // TODO: Specify defense down buffs to specific enemy mobs instead of always assuming AOE.
             //       Possibly add a debuff list property for the EnemyMob object
+            _skillAdjustments.BuffSystem(partyMemberCaster, 1, _party, 1); // Skadi quick up buff
+            _skillAdjustments.BuffSystem(partyMemberSupportCaster, 1, _party, 1); // Skadi quick up buff
+
             NpChargeCheck(partyMemberAttacker);
             Console.WriteLine(">>>>>> Fight 1/3 <<<<<<\n");
-            _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f, 1.00f, 0.00f);
+            _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f, 0.00f);
 
             _party = _skillAdjustments.AdjustSkillCooldowns(_party);
             _skillAdjustments.BuffSystem(partyMemberCaster, 3, _party, 1); // Skadi NP buff
 
             NpChargeCheck(partyMemberAttacker);
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
-            _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f, 1.00f, 0.00f);
+            _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f, 0.00f);
 
             _party = _skillAdjustments.AdjustSkillCooldowns(_party);
             _skillAdjustments.BuffSystem(partyMemberSupportCaster, 3, _party, 1); // Skadi (support) NP buff
 
             NpChargeCheck(partyMemberAttacker);
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
-            _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Third, 0.50f, 1.36f, 1.00f, 0.13f);
+            _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Third, 0.50f, 1.36f, 0.13f);
 
             Console.WriteLine("Simulation ended! ^.^");
 
@@ -383,7 +386,7 @@ namespace FateGrandOrderPOC
                 }
             }
 
-            return (float)function.Svals[0].Value / 100.0f;
+            return function.Svals[0].Value / 100.0f;
         }
         #endregion
     }
