@@ -18,26 +18,23 @@ namespace FateGrandOrderPOC.Test
         {
             // build mock response
             ServantNiceJson mockResponse = new ServantNiceJson();
-            mockResponse.Id = 1;
+            mockResponse.AtkBase = 1000;
 
             // bootstrap mockserver
             var mockServer = WireMockServer.Start(new WireMockServerSettings
             {
-                Urls = new[] { "https://+:9090/" },
-                StartAdminInterface = true,
-                ProxyAndRecordSettings = new ProxyAndRecordSettings {
-                    Url = "https://api.atlasacademy.io",
-                    SaveMapping = true
-                }
+                Urls = new[] { "http://localhost:9090/" },
+                StartAdminInterface = true
             });
 
             mockServer.Given(Request.Create().WithPath("/nice/NA/servant/1?lang=en").UsingGet())
             .RespondWith(Response.Create().WithStatusCode(200).WithHeader("Content-Type", "application/json").WithBodyAsJson(mockResponse));
 
             // test the REST client
-            ServantNiceJson response = AtlasAcademyRequest.GetServantInfo("1");
+            IAtlasAcademyClient client = new AtlasAcademyClient(() => "http://localhost:9090");
+            ServantNiceJson response = client.GetServantInfo("1");
 
-            response.Id.Should().Be(1);
+            response.AtkBase.Should().Be(1000);
 
             mockServer.Stop();
         }

@@ -4,6 +4,7 @@ using System.Linq;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy.Calculations;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
+using FateGrandOrderPOC.Shared.AtlasAcademy;
 using FateGrandOrderPOC.Shared.Enums;
 using FateGrandOrderPOC.Shared.Extensions;
 using FateGrandOrderPOC.Shared.Models;
@@ -12,10 +13,20 @@ namespace FateGrandOrderPOC.Shared
 {
     public class CombatFormula
     {
+        private readonly IAtlasAcademyClient aaClient;
         private readonly AttributeRelation _attributeRelation = new AttributeRelation();
         private readonly ClassRelation _classRelation = new ClassRelation();
-        private readonly ClassAttackRate _classAttackRate = new ClassAttackRate();
-        private readonly ConstantRate _constantRate = new ConstantRate();
+        private readonly ClassAttackRate _classAttackRate;
+        private readonly ConstantRate _constantRate;
+
+        
+
+        public CombatFormula(IAtlasAcademyClient client)
+        {
+            this.aaClient = client;
+            this._constantRate = new ConstantRate(client);
+            this._classAttackRate = new ClassAttackRate(client);
+        }
 
         /// <summary>
         /// Simulate noble phantasms against a wave of enemies
