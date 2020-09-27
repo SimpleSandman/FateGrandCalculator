@@ -26,8 +26,14 @@ namespace FateGrandOrderPOC.Shared
                 try
                 {
                     IRestResponse<T> response = await client.ExecuteAsync<T>(request, cancellationToken.Token);
-
-                    return JsonConvert.DeserializeObject<T>(response.Content);
+                    if (response.IsSuccessful)
+                    {
+                        return JsonConvert.DeserializeObject<T>(response.Content);
+                    }
+                    else
+                    {
+                        throw HttpStatusCodeException.of(response.StatusCode);
+                    }
                 }
                 catch (WebException ex)
                 {
