@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FateGrandOrderPOC", "FateGr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FateGrandOrderPOC.Shared", "FateGrandOrderPOC.Shared\FateGrandOrderPOC.Shared.csproj", "{C4792564-EABD-4E8F-AC32-7192D1C64AC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FateGrandOrderPOC.Test", "FateGrandOrderPOC.Test\FateGrandOrderPOC.Test.csproj", "{AF334469-78A6-428C-915F-5BD1E86E43D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C4792564-EABD-4E8F-AC32-7192D1C64AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4792564-EABD-4E8F-AC32-7192D1C64AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4792564-EABD-4E8F-AC32-7192D1C64AC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF334469-78A6-428C-915F-5BD1E86E43D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF334469-78A6-428C-915F-5BD1E86E43D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF334469-78A6-428C-915F-5BD1E86E43D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF334469-78A6-428C-915F-5BD1E86E43D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

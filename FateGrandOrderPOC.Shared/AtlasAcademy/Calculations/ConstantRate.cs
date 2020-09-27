@@ -8,9 +8,16 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
     {
         private const float CLASS_ATTACK_RATE_DENOMINATOR = 1000.0f;
 
+        private IAtlasAcademyClient aaClient;
+
+        public ConstantRate(IAtlasAcademyClient client)
+        {
+            this.aaClient = client;
+        }
+
         public float GetAttackMultiplier(string constantName)
         {
-            ConstantNiceJson constantGameInfo = AtlasAcademyRequest.GetConstantGameInfo();
+            ConstantNiceJson constantGameInfo = aaClient.GetConstantGameInfo();
 
             switch (constantName.ToUpper())
             {

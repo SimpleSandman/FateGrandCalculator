@@ -13,9 +13,17 @@ namespace FateGrandOrderPOC
 {
     public class Program
     {
-        private readonly CombatFormula _combatFormula = new CombatFormula();
+        private readonly CombatFormula _combatFormula;
         private readonly SkillAdjustments _skillAdjustments = new SkillAdjustments();
+        private readonly IAtlasAcademyClient aaClient;
         private List<PartyMember> _party = new List<PartyMember>();
+
+
+        public Program()
+        {
+            this.aaClient = new AtlasAcademyClient(() => "https://api.atlasacademy.io");
+            this._combatFormula = new CombatFormula(this.aaClient);
+        }
 
         /* Servants */
         const string ARTORIA_PENDRAGON_SABER = "100100";
@@ -52,7 +60,7 @@ namespace FateGrandOrderPOC
             {
                 CraftEssenceLevel = 100,
                 Mlb = true,
-                CraftEssenceInfo = AtlasAcademyRequest.GetCraftEssenceInfo(KSCOPE_CE)
+                CraftEssenceInfo = aaClient.GetCraftEssenceInfo(KSCOPE_CE)
             };
 
             Servant chaldeaAttackServant = new Servant
@@ -63,7 +71,7 @@ namespace FateGrandOrderPOC
                 FouAttack = 1000,
                 SkillLevels = new int[3] { 10, 10, 10 },
                 IsSupportServant = false,
-                ServantInfo = AtlasAcademyRequest.GetServantInfo(DANTES_AVENGER)
+                ServantInfo = aaClient.GetServantInfo(DANTES_AVENGER)
             };
 
             PartyMember partyMemberAttacker = AddPartyMember(chaldeaAttackServant, chaldeaKscope);
@@ -83,7 +91,7 @@ namespace FateGrandOrderPOC
                 FouAttack = 1000,
                 SkillLevels = new int[3] { 10, 10, 10 },
                 IsSupportServant = false,
-                ServantInfo = AtlasAcademyRequest.GetServantInfo(SKADI_CASTER)
+                ServantInfo = aaClient.GetServantInfo(SKADI_CASTER)
             };
 
             PartyMember partyMemberCaster = AddPartyMember(chaldeaCaster);
@@ -100,7 +108,7 @@ namespace FateGrandOrderPOC
                 FouAttack = 1000,
                 SkillLevels = new int[3] { 10, 10, 10 },
                 IsSupportServant = true,
-                ServantInfo = AtlasAcademyRequest.GetServantInfo(SKADI_CASTER)
+                ServantInfo = aaClient.GetServantInfo(SKADI_CASTER)
             };
 
             PartyMember partyMemberSupportCaster = AddPartyMember(supportCaster);

@@ -8,9 +8,16 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
     {
         private const float CLASS_ATTACK_RATE_DENOMINATOR = 1000.0f;
 
+        private readonly IAtlasAcademyClient aaClient;
+
+        public ClassAttackRate(IAtlasAcademyClient client)
+        {
+            this.aaClient = client;
+        }           
+
         public float GetAttackMultiplier(string className)
         {
-            ClassAttackRateNiceJson classAttackRate = AtlasAcademyRequest.GetClassAttackRateInfo();
+            ClassAttackRateNiceJson classAttackRate = aaClient.GetClassAttackRateInfo();
 
             switch (className.ToLower())
             {
