@@ -11,8 +11,40 @@ using FluentAssertions;
 
 namespace FateGrandOrderPOC.Test
 {
-    public class AtlasAcademyClientTest
+
+    public class WiremockFixture : IDisposable
     {
+
+        private WireMockServer mockServer { get; private set; }
+
+        public WiremockFixture()
+        {
+            // bootstrap mockserver
+            this.mockServer = WireMockServer.Start(new WireMockServerSettings
+            {
+                Urls = new[] { "http://localhost:9090/" },
+                StartAdminInterface = true,
+                Logger = new WireMockConsoleLogger(),
+                AllowPartialMapping = true
+            });
+        }
+
+        public void Dispose()
+        {
+            mockServer.Stop();
+        }
+
+    }
+
+    public class AtlasAcademyClientTest : IClassFixture<WiremockFixture>
+    {
+
+        private WiremockFixture _wiremockFixture;
+
+        public AtlasAcademyClientTest(WiremockFixture wiremockFixture)
+        {
+            this._wiremockFixture = wiremockFixture;
+        }
 
         [Fact]
         public void TestGetServantInfo()
@@ -22,16 +54,7 @@ namespace FateGrandOrderPOC.Test
             mockResponse.Id = 1;
             mockResponse.AtkBase = 1000;
 
-            // bootstrap mockserver
-            var mockServer = WireMockServer.Start(new WireMockServerSettings
-            {
-                Urls = new[] { "http://localhost:9090/" },
-                StartAdminInterface = true,
-                Logger = new WireMockConsoleLogger(),
-                AllowPartialMapping = true
-            });
-
-            mockServer.Given(Request.Create().WithPath("/nice/NA/servant/1").WithParam("lang", "en").UsingGet())
+            _wiremockFixture.MockServer().Given(Request.Create().WithPath("/nice/NA/servant/1").WithParam("lang", "en").UsingGet())
             .RespondWith(Response.Create().WithStatusCode(200).WithHeader("Content-Type", "application/json").WithBodyAsJson(mockResponse));
 
             // test the REST client
@@ -40,11 +63,28 @@ namespace FateGrandOrderPOC.Test
 
             response.AtkBase.Should().Be(1000);
 
-            mockServer.Stop();
         }
 
         [Fact]
-        public void Test2()
+        public void TestGetEquip()
+        {
+
+        }
+
+        [Fact]
+        public void TestGetClassAttackRateInfo()
+        {
+
+        }
+
+        [Fact]
+        public void TestGetConstantGameInfo()
+        {
+
+        }
+
+        [Fact]
+        public void TestGetListBasicServantInfo()
         {
 
         }
