@@ -17,69 +17,6 @@ using System.Collections.Generic;
 namespace FateGrandOrderPOC.Test
 {
 
-    public class JsonFilesystemHandler : IFileSystemHandler
-    {
-        public void CreateFolder(string path)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteFile(string filename)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<string> EnumerateFiles(string path, bool includeSubdirectories)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool FileExists(string filename)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool FolderExists(string path)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string GetMappingFolder()
-        {
-            throw new NotImplementedException();
-        }
-
-        public byte[] ReadFile(string filename)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ReadMappingFile(string path)
-        {
-            throw new NotImplementedException();
-        }
-
-        public byte[] ReadResponseBodyAsFile(string path)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ReadResponseBodyAsString(string path)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void WriteFile(string filename, byte[] bytes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void WriteMappingFile(string path, string text)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public class WiremockFixture : IDisposable
     {
 
@@ -94,8 +31,7 @@ namespace FateGrandOrderPOC.Test
                 Urls = new[] { "http://localhost:9090/" },
                 StartAdminInterface = true,
                 Logger = new WireMockConsoleLogger(),
-                AllowPartialMapping = true,
-                FileSystemHandler = new JsonFilesystemHandler()
+                AllowPartialMapping = true
             });
         }
 
@@ -185,6 +121,8 @@ namespace FateGrandOrderPOC.Test
             response.USER_COST.Should().Be(6);
         }
 
+
+        // how to match .json???
         [Fact]
         public void TestGetListBasicServantInfo()
         {
@@ -193,7 +131,7 @@ namespace FateGrandOrderPOC.Test
             json.ClassName = "Lancer";
             mockResponse.Add(json);
 
-            WiremockFixture.MockServer.Given(Request.Create().WithPath("/export/NA/basic_servant.json").UsingGet())
+            WiremockFixture.MockServer.Given(Request.Create().WithUrl("http://localhost:9090/export/NA/basic_servant.json").UsingGet())
             .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
 
             IAtlasAcademyClient client = new AtlasAcademyClient(() => "http://localhost:9000");
