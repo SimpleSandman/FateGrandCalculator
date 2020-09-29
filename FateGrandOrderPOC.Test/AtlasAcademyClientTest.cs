@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 using FateGrandOrderPOC.Shared.AtlasAcademy;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 
@@ -11,24 +14,21 @@ using WireMock.Settings;
 using WireMock.Handlers;
 
 using Xunit;
-using System;
-using System.Collections.Generic;
 
 namespace FateGrandOrderPOC.Test
 {
-
     public class WiremockFixture : IDisposable
     {
+        public const string SERVER_URL = "http://localhost:9090/";
 
         public WireMockServer MockServer { get; private set; }
 
         public WiremockFixture()
         {
             // bootstrap mockserver
-            this.MockServer = WireMockServer.Start(new WireMockServerSettings
-
+            MockServer = WireMockServer.Start(new WireMockServerSettings
             {
-                Urls = new[] { "http://localhost:9090/" },
+                Urls = new[] { SERVER_URL },
                 StartAdminInterface = true,
                 Logger = new WireMockConsoleLogger(),
                 AllowPartialMapping = true
@@ -39,20 +39,19 @@ namespace FateGrandOrderPOC.Test
         {
             MockServer.Stop();
         }
-
     }
 
     public class AtlasAcademyClientTest : IClassFixture<WiremockFixture>
     {
+        const string CONTENT_TYPE_HEADER = "Content-Type";
+        const string CONTENT_TYPE_APPLICATION_JSON = "application/json";
+        const string REGION = "NA";
 
-        const String CONTENT_TYPE_HEADER = "Content-Type";
-        const String CONTENT_TYPE_APPLICATION_JSON = "application/json";
+        private readonly WiremockFixture _wiremockFixture;
 
-        private WiremockFixture WiremockFixture;
-
-        public AtlasAcademyClientTest(WiremockFixture WiremockFixture)
+        public AtlasAcademyClientTest(WiremockFixture wiremockFixture)
         {
-            this.WiremockFixture = WiremockFixture;
+            _wiremockFixture = wiremockFixture;
         }
 
         [Fact]
@@ -63,15 +62,14 @@ namespace FateGrandOrderPOC.Test
             mockResponse.Id = 1;
             mockResponse.AtkBase = 1000;
 
-            WiremockFixture.MockServer.Given(Request.Create().WithPath("/nice/NA/servant/1").WithParam("lang", "en").UsingGet())
+            _wiremockFixture.MockServer.Given(Request.Create().WithPath($"/nice/{REGION}/servant/1").WithParam("lang", "en").UsingGet())
             .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
 
             // test the REST client
-            IAtlasAcademyClient client = new AtlasAcademyClient(() => "http://localhost:9090");
+            IAtlasAcademyClient client = new AtlasAcademyClient(() => WiremockFixture.SERVER_URL);
             ServantNiceJson response = client.GetServantInfo("1");
 
             response.AtkBase.Should().Be(1000);
-
         }
 
         [Fact]
@@ -81,10 +79,10 @@ namespace FateGrandOrderPOC.Test
             mockResponse.Id = 1;
             mockResponse.AtkBase = 600;
 
-            WiremockFixture.MockServer.Given(Request.Create().WithPath("/nice/NA/equip/1").WithParam("lore", "true").WithParam("lang", "en").UsingGet())
+            _wiremockFixture.MockServer.Given(Request.Create().WithPath($"/nice/{REGION}/equip/1").WithParam("lore", "true").WithParam("lang", "en").UsingGet())
             .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
 
-            IAtlasAcademyClient client = new AtlasAcademyClient(() => "http://localhost:9090");
+            IAtlasAcademyClient client = new AtlasAcademyClient(() => WiremockFixture.SERVER_URL);
             EquipNiceJson response = client.GetCraftEssenceInfo("1");
 
             response.Id.Should().Be(1);
@@ -97,10 +95,10 @@ namespace FateGrandOrderPOC.Test
             ClassAttackRateNiceJson mockResponse = new ClassAttackRateNiceJson();
             mockResponse.Lancer = 105;
 
-            WiremockFixture.MockServer.Given(Request.Create().WithPath("/export/NA/NiceClassAttackRate.json").UsingGet())
+            _wiremockFixture.MockServer.Given(Request.Create().WithPath($"/export/{REGION}/NiceClassAttackRate.json").UsingGet())
             .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
 
-            IAtlasAcademyClient client = new AtlasAcademyClient(() => "http://localhost:9000");
+            IAtlasAcademyClient client = new AtlasAcademyClient(() => WiremockFixture.SERVER_URL);
             ClassAttackRateNiceJson response = client.GetClassAttackRateInfo();
 
             response.Lancer.Should().Be(105);
@@ -112,17 +110,15 @@ namespace FateGrandOrderPOC.Test
             ConstantNiceJson mockResponse = new ConstantNiceJson();
             mockResponse.USER_COST = 6;
 
-            WiremockFixture.MockServer.Given(Request.Create().WithPath("/export/NA/NiceConstant.json").UsingGet())
+            _wiremockFixture.MockServer.Given(Request.Create().WithPath($"/export/{REGION}/NiceConstant.json").UsingGet())
             .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
 
-            IAtlasAcademyClient client = new AtlasAcademyClient(() => "http://localhost:9000");
+            IAtlasAcademyClient client = new AtlasAcademyClient(() => WiremockFixture.SERVER_URL);
             ConstantNiceJson response = client.GetConstantGameInfo();
 
             response.USER_COST.Should().Be(6);
         }
 
-
-        // how to match .json???
         [Fact]
         public void TestGetListBasicServantInfo()
         {
@@ -131,13 +127,13 @@ namespace FateGrandOrderPOC.Test
             json.ClassName = "Lancer";
             mockResponse.Add(json);
 
-            WiremockFixture.MockServer.Given(Request.Create().WithUrl("http://localhost:9090/export/NA/basic_servant.json").UsingGet())
+            _wiremockFixture.MockServer.Given(Request.Create().WithUrl($"{WiremockFixture.SERVER_URL}/export/{REGION}/basic_servant.json").UsingGet())
             .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
 
-            IAtlasAcademyClient client = new AtlasAcademyClient(() => "http://localhost:9000");
+            IAtlasAcademyClient client = new AtlasAcademyClient(() => WiremockFixture.SERVER_URL);
             List<ServantBasicJson> response = client.GetListBasicServantInfo();
 
-            response.Should().Contain(json);
+            response.Should().BeEquivalentTo(json);
         }
     }
 }
