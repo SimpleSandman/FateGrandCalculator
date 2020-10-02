@@ -1,19 +1,20 @@
-using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 
 namespace FateGrandOrderPOC.Shared.AtlasAcademy
 {
     public interface IAtlasAcademyClient
     {
-        public ServantNiceJson GetServantInfo(string servantId);
+        Task<ServantNiceJson> GetServantInfo(string servantId);
 
-        public EquipNiceJson GetCraftEssenceInfo(string ceId);
+        Task<EquipNiceJson> GetCraftEssenceInfo(string ceId);
 
-        public ClassAttackRateNiceJson GetClassAttackRateInfo();
+        Task<ClassAttackRateNiceJson> GetClassAttackRateInfo();
 
-        public ConstantNiceJson GetConstantGameInfo();
+        Task<ConstantNiceJson> GetConstantGameInfo();
         
-        public List<ServantBasicJson> GetListBasicServantInfo();
+        Task<List<ServantBasicJson>> GetListBasicServantInfo();
     }
 }

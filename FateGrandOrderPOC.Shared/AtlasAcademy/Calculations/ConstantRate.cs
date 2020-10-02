@@ -1,5 +1,7 @@
 ﻿using System;
 
+using System.Threading.Tasks;
+
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 
 namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
@@ -8,16 +10,16 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
     {
         private const float CLASS_ATTACK_RATE_DENOMINATOR = 1000.0f;
 
-        private IAtlasAcademyClient aaClient;
+        private readonly IAtlasAcademyClient _aaClient;
 
         public ConstantRate(IAtlasAcademyClient client)
         {
-            this.aaClient = client;
+            _aaClient = client;
         }
 
-        public float GetAttackMultiplier(string constantName)
+        public async Task<float> GetAttackMultiplier(string constantName)
         {
-            ConstantNiceJson constantGameInfo = aaClient.GetConstantGameInfo();
+            ConstantNiceJson constantGameInfo = await _aaClient.GetConstantGameInfo();
 
             switch (constantName.ToUpper())
             {
@@ -36,9 +38,9 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
             return 0.0f;
         }
 
-        public float GetAttackMultiplier(string attack, string defend)
+        public async Task<float> GetAttackMultiplier(string attack, string defend)
         {
-            throw new NotImplementedException();
+            return await Task.FromException<float>(new NotImplementedException());
         }
     }
 }

@@ -32,17 +32,19 @@ namespace FateGrandOrderPOC.Shared
                     }
                     else
                     {
-                        string message = $"The client threw an exception with the status code \"{response.StatusCode}\". " 
-                            + $"The contents of the response is as follows, {response.Content}";
+                        string message = $"The client threw an exception with the status code \"{response.StatusCode}\"";
+
+                        if (!string.IsNullOrEmpty(response.Content))
+                        {
+                            message += $". The contents of the response is as follows, \"{response.Content}\"";
+                        }
 
                         if (response.ErrorException != null)
                         {
                             throw new ApplicationException(message, response.ErrorException);
                         }
-                        else
-                        {
-                            throw new ApplicationException(message);
-                        }
+                        
+                        throw new ApplicationException(message);
                     }
                 }
                 catch (WebException ex)

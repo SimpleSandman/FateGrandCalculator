@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy.Calculations;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
@@ -13,19 +14,15 @@ namespace FateGrandOrderPOC.Shared
 {
     public class CombatFormula
     {
-        private readonly IAtlasAcademyClient aaClient;
         private readonly AttributeRelation _attributeRelation = new AttributeRelation();
         private readonly ClassRelation _classRelation = new ClassRelation();
         private readonly ClassAttackRate _classAttackRate;
-        private readonly ConstantRate _constantRate;
-
-        
+        private readonly ConstantRate _constantRate;        
 
         public CombatFormula(IAtlasAcademyClient client)
         {
-            this.aaClient = client;
-            this._constantRate = new ConstantRate(client);
-            this._classAttackRate = new ClassAttackRate(client);
+            _constantRate = new ConstantRate(client);
+            _classAttackRate = new ClassAttackRate(client);
         }
 
         /// <summary>
@@ -37,7 +34,7 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="npGainUp"></param>
         /// <param name="attackUp"></param>
         /// <param name="powerModifier"></param>
-        public void NoblePhantasmChainSimulator(ref List<PartyMember> party, ref List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, 
+        public async Task<(List<PartyMember>, List<EnemyMob>)> NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, 
             float npGainUp, float attackUp, float powerModifier)
         {
             List<PartyMember> npChainList = party
@@ -52,7 +49,7 @@ namespace FateGrandOrderPOC.Shared
                 if (enemyMobs.Count == 0)
                 {
                     Console.WriteLine("Node cleared!!");
-                    return;
+                    return (party, enemyMobs);
                 }
 
                 float totalNpRefund = 0.0f, cardNpTypeUp = 0.0f;
@@ -78,7 +75,7 @@ namespace FateGrandOrderPOC.Shared
                     //Console.WriteLine($"Attribute Multiplier ({enemyMob.Name}): {AttributeModifier(partyMember, enemyMob)}x");
                     //Console.WriteLine($"Class Advantage Multiplier ({enemyMob.Name}): {ClassModifier(partyMember, enemyMob)}x");
 
-                    float baseNpDamage = BaseNpDamage(partyMember);
+                    float baseNpDamage = await BaseNpDamage(partyMember);
                     //Console.WriteLine($"{partyMember.Servant.ServantInfo.Name}'s base NP damage: {baseNpDamage}");
 
                     float totalPowerDamageModifier = (1.0f + attackUp) * (1.0f + cardNpTypeUp) * (1.0f + powerModifier);
@@ -87,7 +84,7 @@ namespace FateGrandOrderPOC.Shared
                     float modifiedNpDamage = baseNpDamage * totalPowerDamageModifier;
                     //Console.WriteLine($"Modified NP damage: {modifiedNpDamage}\n");
 
-                    float npDamageForEnemyMob = AverageNpDamage(partyMember, enemyMob, modifiedNpDamage);
+                    float npDamageForEnemyMob = await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage);
                     //Console.WriteLine($"Average NP damage towards {enemyMob.Name}: {npDamageForEnemyMob}");
 
                     List<float> npDistributionPercentages = NpDistributionPercentages(partyMember);
@@ -96,7 +93,7 @@ namespace FateGrandOrderPOC.Shared
                     totalNpRefund += NpGainedFromEnemy(partyMember, enemyMob, npGainUp, cardNpTypeUp, npDamageForEnemyMob, npDistributionPercentages);
 
                     // Check health of enemy
-                    float chanceToKillEnemyMob = ChanceToKill(partyMember, enemyMob, modifiedNpDamage);
+                    float chanceToKillEnemyMob = await ChanceToKill(partyMember, enemyMob, modifiedNpDamage);
                     enemyMob.Health = HealthRemaining(enemyMob, npDamageForEnemyMob);
 
                     Console.WriteLine($"Chance to kill {enemyMob.Name}: {chanceToKillEnemyMob}%\n");
@@ -112,6 +109,8 @@ namespace FateGrandOrderPOC.Shared
 
                 Console.WriteLine($"Total NP refund for {partyMember.Servant.ServantInfo.Name}: {partyMember.NpCharge}%\n");
             }
+
+            return (party, enemyMobs);
         }
 
         #region Private Methods
@@ -210,7 +209,7 @@ namespace FateGrandOrderPOC.Shared
             return healthRemaining;
         }
 
-        private float BaseNpDamage(PartyMember partyMember)
+        private async Task<float> BaseNpDamage(PartyMember partyMember)
         {
             int npValue = partyMember.NoblePhantasm
                 .Functions.Find(f => f.FuncType.Contains("damageNp"))
@@ -222,31 +221,31 @@ namespace FateGrandOrderPOC.Shared
             //Console.WriteLine($"NP value: {npValue / 1000.0f}");
 
             // Base NP damage = ATTACK_RATE * Servant total attack * Class modifier * NP type modifier * NP damage
-            return _constantRate.GetAttackMultiplier("ATTACK_RATE")
+            return await _constantRate.GetAttackMultiplier("ATTACK_RATE")
                 * partyMember.TotalAttack
-                * _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName)
-                * _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}")
+                * await _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName)
+                * await _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}")
                 * (npValue / 1000.0f);
         }
 
-        private float AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
+        private async Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
         {
-            return modifiedNpDamage * AttributeModifier(partyMember, enemyMob) * ClassModifier(partyMember, enemyMob);
+            return modifiedNpDamage * await AttributeModifier(partyMember, enemyMob) * await ClassModifier(partyMember, enemyMob);
         }
 
-        private float ChanceToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
+        private async Task<float> ChanceToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
         {
-            if (0.9f * AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) > enemyMob.Health)
+            if (0.9f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) > enemyMob.Health)
             {
                 return 100.0f; // perfect clear
             }
-            else if (1.1f * AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) < enemyMob.Health)
+            else if (1.1f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) < enemyMob.Health)
             {
                 return 0.0f; // never clear
             }
             else // show chance of success
             {
-                return (1.0f - ((enemyMob.Health / AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) - 0.9f) / 0.2f)) * 100.0f;
+                return (1.0f - ((enemyMob.Health / await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) - 0.9f) / 0.2f)) * 100.0f;
             }
         }
 
@@ -256,9 +255,9 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="partyMember"></param>
         /// <param name="enemyMob"></param>
         /// <returns></returns>
-        private float AttributeModifier(PartyMember partyMember, EnemyMob enemyMob)
+        private async Task<float> AttributeModifier(PartyMember partyMember, EnemyMob enemyMob)
         {
-            return _attributeRelation.GetAttackMultiplier(partyMember.Servant.ServantInfo.Attribute, enemyMob.AttributeName.ToString().ToLower());
+            return await _attributeRelation.GetAttackMultiplier(partyMember.Servant.ServantInfo.Attribute, enemyMob.AttributeName.ToString().ToLower());
         }
 
         /// <summary>
@@ -267,9 +266,9 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="partyMember"></param>
         /// <param name="enemyMob"></param>
         /// <returns></returns>
-        private float ClassModifier(PartyMember partyMember, EnemyMob enemyMob)
+        private async Task<float> ClassModifier(PartyMember partyMember, EnemyMob enemyMob)
         {
-            return _classRelation.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName, enemyMob.ClassName.ToString().ToLower());
+            return await _classRelation.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName, enemyMob.ClassName.ToString().ToLower());
         }
         #endregion
     }

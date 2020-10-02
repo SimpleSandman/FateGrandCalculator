@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 using FateGrandOrderPOC.Shared;
 using FateGrandOrderPOC.Shared.AtlasAcademy;
@@ -15,17 +16,10 @@ namespace FateGrandOrderPOC
     {
         private readonly CombatFormula _combatFormula;
         private readonly SkillAdjustments _skillAdjustments = new SkillAdjustments();
-        private readonly IAtlasAcademyClient aaClient;
+        private readonly IAtlasAcademyClient _aaClient;
         private List<PartyMember> _party = new List<PartyMember>();
 
-
-        public Program()
-        {
-            this.aaClient = new AtlasAcademyClient(() => "https://api.atlasacademy.io");
-            this._combatFormula = new CombatFormula(this.aaClient);
-        }
-
-        /* Servants */
+        #region Servant IDs
         const string ARTORIA_PENDRAGON_SABER = "100100";
         const string MHX_ASSASSIN = "601800";
         const string TOMOE_GOZEN_ARCHER = "202100";
@@ -37,22 +31,30 @@ namespace FateGrandOrderPOC
         const string DANTES_AVENGER = "1100200";
         const string SKADI_CASTER = "503900";
         const string PARACELSUS_CASTER = "501000";
+        #endregion
 
-        /* Craft Essences */
+        #region Craft Essence IDs
         const string KSCOPE_CE = "9400340";
         const string AERIAL_DRIVE_CE = "9402750";
         const string BLACK_GRAIL_CE = "9400480";
+        #endregion
+
+        public Program()
+        {
+            _aaClient = new AtlasAcademyClient(() => "https://api.atlasacademy.io");
+            _combatFormula = new CombatFormula(_aaClient);
+        }
 
         static void Main()
         {
             Program program = new Program();
-            program.Calculations();
+            Task.WaitAll(program.Calculations());
         }
 
         /// <summary>
         /// Main calculations
         /// </summary>
-        private void Calculations()
+        private async Task Calculations()
         {
             /* Party data */
             #region Party Member
@@ -60,7 +62,7 @@ namespace FateGrandOrderPOC
             {
                 CraftEssenceLevel = 100,
                 Mlb = true,
-                CraftEssenceInfo = aaClient.GetCraftEssenceInfo(KSCOPE_CE)
+                CraftEssenceInfo = await _aaClient.GetCraftEssenceInfo(KSCOPE_CE)
             };
 
             Servant chaldeaAttackServant = new Servant
@@ -71,7 +73,7 @@ namespace FateGrandOrderPOC
                 FouAttack = 1000,
                 SkillLevels = new int[3] { 10, 10, 10 },
                 IsSupportServant = false,
-                ServantInfo = aaClient.GetServantInfo(DANTES_AVENGER)
+                ServantInfo = await _aaClient.GetServantInfo(DANTES_AVENGER)
             };
 
             PartyMember partyMemberAttacker = AddPartyMember(chaldeaAttackServant, chaldeaKscope);
@@ -91,7 +93,7 @@ namespace FateGrandOrderPOC
                 FouAttack = 1000,
                 SkillLevels = new int[3] { 10, 10, 10 },
                 IsSupportServant = false,
-                ServantInfo = aaClient.GetServantInfo(SKADI_CASTER)
+                ServantInfo = await _aaClient.GetServantInfo(SKADI_CASTER)
             };
 
             PartyMember partyMemberCaster = AddPartyMember(chaldeaCaster);
@@ -108,7 +110,7 @@ namespace FateGrandOrderPOC
                 FouAttack = 1000,
                 SkillLevels = new int[3] { 10, 10, 10 },
                 IsSupportServant = true,
-                ServantInfo = aaClient.GetServantInfo(SKADI_CASTER)
+                ServantInfo = await _aaClient.GetServantInfo(SKADI_CASTER)
             };
 
             PartyMember partyMemberSupportCaster = AddPartyMember(supportCaster);
@@ -273,21 +275,21 @@ namespace FateGrandOrderPOC
 
             NpChargeCheck(partyMemberAttacker);
             Console.WriteLine(">>>>>> Fight 1/3 <<<<<<\n");
-            _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f, 0.00f);
+            (_party, enemyMobs) = await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f, 0.00f);
 
             _party = _skillAdjustments.AdjustSkillCooldowns(_party);
             _skillAdjustments.BuffSystem(partyMemberCaster, 3, _party, 1); // Skadi NP buff
 
             NpChargeCheck(partyMemberAttacker);
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
-            _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f, 0.00f);
+            (_party, enemyMobs) = await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f, 0.00f);
 
             _party = _skillAdjustments.AdjustSkillCooldowns(_party);
             _skillAdjustments.BuffSystem(partyMemberSupportCaster, 3, _party, 1); // Skadi (support) NP buff
 
             NpChargeCheck(partyMemberAttacker);
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
-            _combatFormula.NoblePhantasmChainSimulator(ref _party, ref enemyMobs, WaveNumberEnum.Third, 0.50f, 1.36f, 0.13f);
+            (_party, enemyMobs) = await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Third, 0.50f, 1.36f, 0.13f);
 
             Console.WriteLine("Simulation ended! ^.^");
 
