@@ -29,18 +29,6 @@ namespace FateGrandOrderPOC.Test
             _wiremockFixture = wiremockFixture;
         }
 
-        private void CheckIfMockServerInUse()
-        {
-            while (_isMockServerInUse)
-            {
-                IPGlobalProperties ipGlobalProperties = IPGlobalProperties.GetIPGlobalProperties();
-
-                _isMockServerInUse = ipGlobalProperties
-                    .GetActiveTcpConnections()
-                    .Any(p => p.LocalEndPoint.Port == _wiremockFixture.MockServer.Ports[0]);
-            }
-        }
-
         [Fact]
         public async Task TestGetServantInfo()
         {
@@ -143,5 +131,24 @@ namespace FateGrandOrderPOC.Test
 
             response.Should().BeEquivalentTo(json);
         }
+
+        #region Private Methods
+        /// <summary>
+        /// Check if the TCP port the mock server is using is free for the next test
+        /// </summary>
+        private void CheckIfMockServerInUse()
+        {
+            while (_isMockServerInUse)
+            {
+                IPGlobalProperties ipGlobalProperties = IPGlobalProperties.GetIPGlobalProperties();
+
+                _isMockServerInUse = ipGlobalProperties
+                    .GetActiveTcpConnections()
+                    .Any(p => p.LocalEndPoint.Port == _wiremockFixture.MockServer.Ports[0]);
+            }
+
+            _wiremockFixture.MockServer.Reset(); // clean up for the next test
+        }
+        #endregion
     }
 }
