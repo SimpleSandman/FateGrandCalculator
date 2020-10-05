@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Enums;
@@ -9,14 +10,14 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
     {
         private const float CLASS_DENOMINATOR = 1000.0f;
 
-        public float GetAttackMultiplier(string attack)
+        public async Task<float> GetAttackMultiplier(string attack)
         {
-            throw new NotImplementedException();
+            return await Task.FromException<float>(new NotImplementedException());
         }
 
-        public float GetAttackMultiplier(string atkClassName, string defClassName)
+        public async Task<float> GetAttackMultiplier(string atkClassName, string defClassName)
         {
-            float[,] damageMultiplier = GetListDamageMultiplier();
+            float[,] damageMultiplier = await GetListDamageMultiplier();
 
             bool validAtkClass = Enum.TryParse(atkClassName, true, out ClassRelationEnum atkClass);
             bool validDefClass = Enum.TryParse(defClassName, true, out ClassRelationEnum defClass);
@@ -33,9 +34,9 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
         /// Get Atlas Academy's class relations to manage class damage multipliers
         /// </summary>
         /// <returns></returns>
-        private static float[,] GetListDamageMultiplier()
+        private async Task<float[,]> GetListDamageMultiplier()
         {
-            ClassRelationNiceJson classRelations = ApiRequest.GetDeserializeObjectAsync<ClassRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceClassRelation.json").Result;
+            ClassRelationNiceJson classRelations = await ApiRequest.GetDeserializeObjectAsync<ClassRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceClassRelation.json");
 
             return new float[,]
             {

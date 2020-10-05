@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Enums;
@@ -9,14 +10,14 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
     {
         private const float ATTRIBUTE_DENOMINATOR = 1000.0f;
 
-        public float GetAttackMultiplier(string attack)
+        public async Task<float> GetAttackMultiplier(string attack)
         {
-            throw new NotImplementedException();
+            return await Task.FromException<float>(new NotImplementedException());
         }
 
-        public float GetAttackMultiplier(string atkAttribute, string defAttribute)
+        public async Task<float> GetAttackMultiplier(string atkAttribute, string defAttribute)
         {
-            AttributeRelationNiceJson attributeRelations = ApiRequest.GetDeserializeObjectAsync<AttributeRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceAttributeRelation.json").Result;
+            AttributeRelationNiceJson attributeRelations = await ApiRequest.GetDeserializeObjectAsync<AttributeRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceAttributeRelation.json");
 
              // Reference: https://fategrandorder.fandom.com/wiki/Attributes
             float[,] damageMultiplier =
