@@ -16,5 +16,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy
         Task<ConstantNiceJson> GetConstantGameInfo();
         
         Task<List<ServantBasicJson>> GetListBasicServantInfo();
+
+        Task<MysticCodeNiceJson> GetMysticCodeInfo(string mcId);
     }
 }

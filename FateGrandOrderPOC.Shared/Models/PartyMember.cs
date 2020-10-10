@@ -21,20 +21,4 @@ namespace FateGrandOrderPOC.Shared.Models
         public List<ActiveStatus> ActiveStatuses { get; set; }
         public List<SkillCooldown> SkillCooldowns { get; set; }
     }
-
-    public class ActiveStatus
-    {
-        public FunctionServant StatusEffect { get; set; }
-        public int AppliedSkillLevel { get; set; }
-        public int ActiveTurnCount { get; set; } = -1;
-    }
-
-    public class SkillCooldown
-    {
-        /// <summary>
-        /// Skill position number (left = 1, middle = 2, right = 3)
-        /// </summary>
-        public int SkillId { get; set; }
-        public int Cooldown { get; set; } = -1;
-    }
 }

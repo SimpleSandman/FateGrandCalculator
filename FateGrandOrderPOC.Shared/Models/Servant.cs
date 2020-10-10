@@ -1,6 +1,4 @@
 ﻿using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
-using System;
-using System.Collections.Generic;
 
 namespace FateGrandOrderPOC.Shared.Models
 {

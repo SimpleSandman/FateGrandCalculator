@@ -7,11 +7,12 @@ using FateGrandOrderPOC.Shared.Models;
 
 namespace FateGrandOrderPOC.Shared
 {
-    public class SkillAdjustments
+    public class ServantSkillAdjustments
     {
         /// <summary>
         /// Reduce cooldown counters for all front-line party members at the end of the turn
         /// </summary>
+        /// <param name="party"></param>
         public List<PartyMember> AdjustSkillCooldowns(List<PartyMember> party)
         {
             foreach (PartyMember partyMember in party.Take(3))
@@ -45,13 +46,34 @@ namespace FateGrandOrderPOC.Shared
         }
 
         /// <summary>
-        /// Buff a party member with the desired skill based on the actor's list of available skills
+        /// Reduce cooldown counters for all front-line party members at the end of the turn
+        /// </summary>
+        /// <param name="mysticCode"></param>
+        public MysticCode AdjustSkillCooldowns(MysticCode mysticCode)
+        {
+            foreach (SkillCooldown skillCooldown in mysticCode.SkillCooldowns)
+            {
+                if (skillCooldown.Cooldown == 1)
+                {
+                    mysticCode.SkillCooldowns.Remove(skillCooldown);
+                }
+                else
+                {
+                    skillCooldown.Cooldown--;
+                }
+            }
+
+            return mysticCode;
+        }
+
+        /// <summary>
+        /// Buff a party member with the desired skill based on the mystic code's list of available skills
         /// </summary>
         /// <param name="partyMemberActor">The acting party member that is giving the buff</param>
         /// <param name="actorSkillNumber">Skill position number (left = 1, middle = 2, right = 3)</param>
         /// <param name="party">The targeted party members that are receiving the buff</param>
         /// <param name="partyMemberPosition">The position the selected party member is currently sitting (1-6)</param>
-        public void BuffSystem(PartyMember partyMemberActor, int actorSkillNumber, List<PartyMember> party, int partyMemberPosition)
+        public void BuffPartyMember(PartyMember partyMemberActor, int actorSkillNumber, List<PartyMember> party, int partyMemberPosition)
         {
             if (partyMemberActor.SkillCooldowns.Exists(s => s.SkillId == actorSkillNumber))
             {
@@ -100,7 +122,54 @@ namespace FateGrandOrderPOC.Shared
             });
         }
 
-        #region Private Methods
+        /// <summary>
+        /// Buff a party member with the desired skill based on the mystic code's list of available skills
+        /// </summary>
+        /// <param name="mysticCode">The acting mystic code skill that is giving the buff</param>
+        /// <param name="mysticCodeSkillNumber">Skill position number (left = 1, middle = 2, right = 3)</param>
+        /// <param name="party">The targeted party members that are receiving the buff</param>
+        /// <param name="partyMemberPosition">The position the selected party member is currently sitting (1-6)</param>
+        public void BuffPartyMember(MysticCode mysticCode, int mysticCodeSkillNumber, List<PartyMember> party, int partyMemberPosition)
+        {
+            if (mysticCode.SkillCooldowns.Exists(s => s.SkillId == mysticCodeSkillNumber))
+            {
+                Console.WriteLine($"WARNING: Cannot buff using {mysticCode.MysticCodeInfo.Name}'s #{mysticCodeSkillNumber} skill because of cooldown!");
+                return; // don't buff again
+            }
+
+            SkillServant skill = mysticCode.MysticCodeInfo.Skills[mysticCodeSkillNumber - 1];
+
+            List<FunctionServant> mysticCodeFunctions
+                = (from f in skill.Functions
+                   where (f.FuncTargetType == "self"
+                       || f.FuncTargetType == "ptOne"         // party member
+                       || f.FuncTargetType == "ptAll"         // party
+                       || f.FuncTargetType == "ptFull"        // party (including reserve)
+                       || f.FuncTargetType == "ptOther"       // party except self
+                       || f.FuncTargetType == "ptOtherFull"   // party except self (including reserve)
+                       || f.FuncTargetType == "ptselectSub")  // reserve party member
+                       && f.FuncTargetTeam != "enemy"
+                   select f).ToList();
+
+            if (mysticCodeFunctions == null || mysticCodeFunctions.Count == 0)
+            {
+                Console.WriteLine($"ERROR: Cannot find the specified mystic code function for {mysticCode.MysticCodeInfo.Name}'s #{mysticCodeSkillNumber} skill");
+                return; // didn't find any buffs that apply to other members
+            }
+
+            foreach (FunctionServant mysticCodeFunction in mysticCodeFunctions)
+            {
+                ApplyPartyFuncTargetType(mysticCodeFunction.FuncTargetType, partyMemberPosition, mysticCode, mysticCodeFunction, party);
+            }
+
+            mysticCode.SkillCooldowns.Add(new SkillCooldown
+            {
+                SkillId = mysticCodeSkillNumber,
+                Cooldown = skill.Cooldown[mysticCode.MysticCodeLevel - 1]
+            });
+        }
+
+        #region Private Methods "Party Member"
         private void ApplyPartyFuncTargetType(string funcTargetType, int partyMemberPosition, PartyMember partyMemberActor, FunctionServant servantFunction,
             int currentSkillLevel, List<PartyMember> partyMemberTargets)
         {
@@ -153,7 +222,6 @@ namespace FateGrandOrderPOC.Shared
                 support = "(Support) ";
             }
 
-            // TODO: Add more buffs here
             switch (servantFunction.FuncType)
             {
                 case "gainNp":
@@ -167,7 +235,7 @@ namespace FateGrandOrderPOC.Shared
 
                     Console.WriteLine($"{partyMemberActor.Servant.ServantInfo.Name} {support}" + "has buffed " +
                         $"{partyMemberTarget.Servant.ServantInfo.Name}'s NP charge by " +
-                        $"{servantFunction.Svals[currentSkillLevel - 1].Value / 100.0f}% and is now at {partyMemberTarget.NpCharge}%");
+                        $"{servantFunction.Svals[currentSkillLevel - 1].Value / 100.0f}% and is now at {partyMemberTarget.NpCharge}%\n");
                     break;
                 default:
                     partyMemberTarget.ActiveStatuses.Add(new ActiveStatus 
@@ -175,6 +243,74 @@ namespace FateGrandOrderPOC.Shared
                         StatusEffect = servantFunction,
                         AppliedSkillLevel = currentSkillLevel,
                         ActiveTurnCount = servantFunction.Svals[currentSkillLevel - 1].Turn
+                    });
+                    break;
+            }
+
+            return partyMemberTarget;
+        }
+        #endregion
+
+        #region Private Methods "Mystic Code"
+        private void ApplyPartyFuncTargetType(string funcTargetType, int partyMemberPosition, MysticCode mysticCode, FunctionServant mysticCodeFunction, List<PartyMember> partyMemberTargets)
+        {
+            switch (funcTargetType)
+            {
+                case "ptAll":         // party
+                case "ptOther":       // party except self
+                    ApplyBuff(mysticCode, mysticCodeFunction, partyMemberTargets.Take(3).ToList());
+                    break;
+                case "ptFull":        // party (including reserve)
+                case "ptOtherFull":   // party except self (including reserve)
+                    ApplyBuff(mysticCode, mysticCodeFunction, partyMemberTargets);
+                    break;
+                case "ptOne":         // party member
+                case "ptselectSub":   // reserve party member
+                    ApplyBuff(mysticCode, mysticCodeFunction, partyMemberTargets[partyMemberPosition - 1]);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private List<PartyMember> ApplyBuff(MysticCode mysticCode, FunctionServant mysticCodeFunction, List<PartyMember> partyMemberTargets)
+        {
+            foreach (PartyMember partyMemberTarget in partyMemberTargets)
+            {
+                ApplyPartyMemberBuff(mysticCode, mysticCodeFunction, partyMemberTarget);
+            }
+
+            return partyMemberTargets;
+        }
+
+        private PartyMember ApplyBuff(MysticCode mysticCode, FunctionServant mysticCodeFunction, PartyMember partyMemberTarget)
+        {
+            return ApplyPartyMemberBuff(mysticCode, mysticCodeFunction, partyMemberTarget);
+        }
+
+        private PartyMember ApplyPartyMemberBuff(MysticCode mysticCode, FunctionServant mysticCodeFunction, PartyMember partyMemberTarget)
+        {
+            switch (mysticCodeFunction.FuncType)
+            {
+                case "gainNp":
+                    partyMemberTarget.NpCharge += mysticCodeFunction.Svals[mysticCode.MysticCodeLevel - 1].Value / 100.0f;
+
+                    // Pity NP gain
+                    if (partyMemberTarget.NpCharge == 99.0f)
+                    {
+                        partyMemberTarget.NpCharge++;
+                    }
+
+                    Console.WriteLine($"{mysticCode.MysticCodeInfo.Name} has buffed " +
+                        $"{partyMemberTarget.Servant.ServantInfo.Name}'s NP charge by " +
+                        $"{mysticCodeFunction.Svals[mysticCode.MysticCodeLevel - 1].Value / 100.0f}% and is now at {partyMemberTarget.NpCharge}%\n");
+                    break;
+                default:
+                    partyMemberTarget.ActiveStatuses.Add(new ActiveStatus
+                    {
+                        StatusEffect = mysticCodeFunction,
+                        AppliedSkillLevel = mysticCode.MysticCodeLevel,
+                        ActiveTurnCount = mysticCodeFunction.Svals[mysticCode.MysticCodeLevel - 1].Turn
                     });
                     break;
             }

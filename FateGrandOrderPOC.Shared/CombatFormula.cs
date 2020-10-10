@@ -32,10 +32,9 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="enemyMobs"></param>
         /// <param name="waveNumber"></param>
         /// <param name="npGainUp"></param>
-        /// <param name="attackUp"></param>
-        /// <param name="powerModifier"></param>
+        /// <param name="defenseDownModifier"></param>
         public async Task<(List<PartyMember>, List<EnemyMob>)> NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, 
-            float npGainUp, float attackUp, float powerModifier)
+            float npGainUp, float defenseDownModifier)
         {
             List<PartyMember> npChainList = party
                 .FindAll(p => p.NpChainOrder != NpChainOrderEnum.None)
@@ -52,19 +51,30 @@ namespace FateGrandOrderPOC.Shared
                     return (party, enemyMobs);
                 }
 
-                float totalNpRefund = 0.0f, cardNpTypeUp = 0.0f;
+                float totalNpRefund = 0.0f, cardNpTypeUp = 0.0f, attackUp = 0.0f, powerModifier = 0.0f;
 
-                // TODO: Create a method that handles more buff types using a switch statemetn
+                // TODO: Create a method that handles more buff types using a switch statement
                 // Calculate card buff for NP if same card type
                 foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
                 {
                     BuffServant buff = activeStatus.StatusEffect.Buffs[0];
 
-                    if (buff.Type == "upCommandall" && buff.CkSelfIndv.Any(f => f.Name == ("card" + partyMember.NoblePhantasm.Card.ToUpperFirstChar())))
+                    if (buff.Type == "upCommandall" && buff.CkSelfIndv.Any(f => f.Name == ($"card{partyMember.NoblePhantasm.Card.ToUpperFirstChar()}")))
                     {
                         cardNpTypeUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / 1000.0f;
                     }
+                    else if (buff.Type == "upAtk")
+                    {
+                        attackUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / 1000.0f;
+                    }
+                    else if (buff.Type == "upNpdamage") // TODO: Add more power modifers
+                    {
+                        powerModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / 1000.0f;
+                    }
                 }
+
+                // Add defense down to the overall attack up to simplify the math below
+                attackUp += defenseDownModifier;
 
                 // Go through each enemy mob grouped by their wave number
                 for (int i = 0; i < enemyMobs.FindAll(e => e.WaveNumber == waveNumber).Take(3).Count(); i++)

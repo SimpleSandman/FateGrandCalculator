@@ -40,5 +40,10 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy
         {
             return await ApiRequest.GetDeserializeObjectAsync<List<ServantBasicJson>>(baseUrl() + "/export/NA/basic_servant.json");
         }
+
+        public async Task<MysticCodeNiceJson> GetMysticCodeInfo(string mcId)
+        {
+            return await ApiRequest.GetDeserializeObjectAsync<MysticCodeNiceJson>(baseUrl() + "/nice/NA/MC/" + mcId);
+        }
     }
 }

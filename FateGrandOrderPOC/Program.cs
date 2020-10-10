@@ -15,7 +15,7 @@ namespace FateGrandOrderPOC
     public class Program
     {
         private readonly CombatFormula _combatFormula;
-        private readonly SkillAdjustments _skillAdjustments = new SkillAdjustments();
+        private readonly ServantSkillAdjustments _skillAdjustments = new ServantSkillAdjustments();
         private readonly IAtlasAcademyClient _aaClient;
         private List<PartyMember> _party = new List<PartyMember>();
 
@@ -37,6 +37,12 @@ namespace FateGrandOrderPOC
         const string KSCOPE_CE = "9400340";
         const string AERIAL_DRIVE_CE = "9402750";
         const string BLACK_GRAIL_CE = "9400480";
+        #endregion
+
+        #region Mystic Code IDs
+        const string PLUGSUIT_ID = "20";
+        const string FRAGMENT_ID = "100";
+        const string ARTIC_ID = "110";
         #endregion
 
         public Program()
@@ -117,6 +123,13 @@ namespace FateGrandOrderPOC
 
             _party.Add(partyMemberSupportCaster);
             #endregion
+
+            MysticCode mysticCode = new MysticCode
+            {
+                MysticCodeLevel = 4,
+                MysticCodeInfo = await _aaClient.GetMysticCodeInfo(ARTIC_ID),
+                SkillCooldowns = new List<SkillCooldown>()
+            };
 
             /* Enemy node data */
             #region First Wave
@@ -270,26 +283,28 @@ namespace FateGrandOrderPOC
             /* Simulate node combat */
             // TODO: Specify defense down buffs to specific enemy mobs instead of always assuming AOE.
             //       Possibly add a debuff list property for the EnemyMob object
-            _skillAdjustments.BuffSystem(partyMemberCaster, 1, _party, 1); // Skadi quick up buff
-            _skillAdjustments.BuffSystem(partyMemberSupportCaster, 1, _party, 1); // Skadi quick up buff
-
-            NpChargeCheck(partyMemberAttacker);
             Console.WriteLine(">>>>>> Fight 1/3 <<<<<<\n");
-            (_party, enemyMobs) = await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f, 0.00f);
-
-            _party = _skillAdjustments.AdjustSkillCooldowns(_party);
-            _skillAdjustments.BuffSystem(partyMemberCaster, 3, _party, 1); // Skadi NP buff
+            _skillAdjustments.BuffPartyMember(partyMemberCaster, 1, _party, 1); // Skadi quick up buff
+            _skillAdjustments.BuffPartyMember(partyMemberSupportCaster, 1, _party, 1); // Skadi quick up buff
 
             NpChargeCheck(partyMemberAttacker);
+            (_party, enemyMobs) = await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f);
+
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
-            (_party, enemyMobs) = await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f, 0.00f);
-
             _party = _skillAdjustments.AdjustSkillCooldowns(_party);
-            _skillAdjustments.BuffSystem(partyMemberSupportCaster, 3, _party, 1); // Skadi (support) NP buff
+            _skillAdjustments.BuffPartyMember(partyMemberCaster, 3, _party, 1); // Skadi NP buff
 
             NpChargeCheck(partyMemberAttacker);
+            (_party, enemyMobs) = await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f);
+
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
-            (_party, enemyMobs) = await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Third, 0.50f, 1.36f, 0.13f);
+            _party = _skillAdjustments.AdjustSkillCooldowns(_party);
+            _skillAdjustments.BuffPartyMember(partyMemberSupportCaster, 3, _party, 1); // Skadi (support) NP buff
+            _skillAdjustments.BuffPartyMember(partyMemberAttacker, 1, _party, 1); // Dante's 1st skill
+            _skillAdjustments.BuffPartyMember(mysticCode, 2, _party, 1); // Artic mystic code ATK and NP damage up
+
+            NpChargeCheck(partyMemberAttacker);
+            (_party, enemyMobs) = await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Third, 0.50f, 0.60f);
 
             Console.WriteLine("Simulation ended! ^.^");
 
