@@ -17,17 +17,7 @@ namespace FateGrandOrderPOC.Shared
         {
             foreach (PartyMember partyMember in party.Take(3))
             {
-                foreach (SkillCooldown skillCooldown in partyMember.SkillCooldowns)
-                {
-                    if (skillCooldown.Cooldown == 1)
-                    {
-                        partyMember.SkillCooldowns.Remove(skillCooldown);
-                    }
-                    else
-                    {
-                        skillCooldown.Cooldown--;
-                    }
-                }
+                ReduceSkillCooldowns(partyMember.SkillCooldowns);
 
                 foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
                 {
@@ -51,17 +41,7 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="mysticCode"></param>
         public MysticCode AdjustSkillCooldowns(MysticCode mysticCode)
         {
-            foreach (SkillCooldown skillCooldown in mysticCode.SkillCooldowns)
-            {
-                if (skillCooldown.Cooldown == 1)
-                {
-                    mysticCode.SkillCooldowns.Remove(skillCooldown);
-                }
-                else
-                {
-                    skillCooldown.Cooldown--;
-                }
-            }
+            ReduceSkillCooldowns(mysticCode.SkillCooldowns);
 
             return mysticCode;
         }
@@ -90,17 +70,7 @@ namespace FateGrandOrderPOC.Shared
                 .Aggregate((agg, next) =>
                     next.Priority >= agg.Priority ? next : agg);
 
-            List<FunctionServant> servantFunctions 
-                = (from f in skill.Functions
-                    where (f.FuncTargetType == "self"
-                        || f.FuncTargetType == "ptOne"         // party member
-                        || f.FuncTargetType == "ptAll"         // party
-                        || f.FuncTargetType == "ptFull"        // party (including reserve)
-                        || f.FuncTargetType == "ptOther"       // party except self
-                        || f.FuncTargetType == "ptOtherFull"   // party except self (including reserve)
-                        || f.FuncTargetType == "ptselectSub")  // reserve party member
-                        && f.FuncTargetTeam != "enemy"
-                    select f).ToList();
+            List<FunctionServant> servantFunctions = GetServantFunctions(skill);
 
             if (servantFunctions == null || servantFunctions.Count == 0)
             {
@@ -139,17 +109,7 @@ namespace FateGrandOrderPOC.Shared
 
             SkillServant skill = mysticCode.MysticCodeInfo.Skills[mysticCodeSkillNumber - 1];
 
-            List<FunctionServant> mysticCodeFunctions
-                = (from f in skill.Functions
-                   where (f.FuncTargetType == "self"
-                       || f.FuncTargetType == "ptOne"         // party member
-                       || f.FuncTargetType == "ptAll"         // party
-                       || f.FuncTargetType == "ptFull"        // party (including reserve)
-                       || f.FuncTargetType == "ptOther"       // party except self
-                       || f.FuncTargetType == "ptOtherFull"   // party except self (including reserve)
-                       || f.FuncTargetType == "ptselectSub")  // reserve party member
-                       && f.FuncTargetTeam != "enemy"
-                   select f).ToList();
+            List<FunctionServant> mysticCodeFunctions = GetServantFunctions(skill);
 
             if (mysticCodeFunctions == null || mysticCodeFunctions.Count == 0)
             {
@@ -227,11 +187,7 @@ namespace FateGrandOrderPOC.Shared
                 case "gainNp":
                     partyMemberTarget.NpCharge += servantFunction.Svals[currentSkillLevel - 1].Value / 100.0f;
 
-                    // Pity NP gain
-                    if (partyMemberTarget.NpCharge == 99.0f)
-                    {
-                        partyMemberTarget.NpCharge++;
-                    }
+                    PityNpGain(partyMemberTarget);
 
                     Console.WriteLine($"{partyMemberActor.Servant.ServantInfo.Name} {support}" + "has buffed " +
                         $"{partyMemberTarget.Servant.ServantInfo.Name}'s NP charge by " +
@@ -316,6 +272,49 @@ namespace FateGrandOrderPOC.Shared
             }
 
             return partyMemberTarget;
+        }
+        #endregion
+
+        #region Private Shared Methods
+        private void ReduceSkillCooldowns(List<SkillCooldown> skillCooldowns)
+        {
+            foreach (SkillCooldown skillCooldown in skillCooldowns)
+            {
+                if (skillCooldown.Cooldown == 1)
+                {
+                    skillCooldowns.Remove(skillCooldown);
+                }
+                else
+                {
+                    skillCooldown.Cooldown--;
+                }
+            }
+        }
+
+        private List<FunctionServant> GetServantFunctions(SkillServant skill)
+        {
+            return (from f in skill.Functions
+                    where (f.FuncTargetType == "self"
+                        || f.FuncTargetType == "ptOne"         // party member
+                        || f.FuncTargetType == "ptAll"         // party
+                        || f.FuncTargetType == "ptFull"        // party (including reserve)
+                        || f.FuncTargetType == "ptOther"       // party except self
+                        || f.FuncTargetType == "ptOtherFull"   // party except self (including reserve)
+                        || f.FuncTargetType == "ptselectSub")  // reserve party member
+                        && f.FuncTargetTeam != "enemy"
+                    select f).ToList();
+        }
+
+        /// <summary>
+        /// Adjust the NP gain to 100% if the charge reached 99%
+        /// </summary>
+        /// <param name="partyMemberTarget">Affected party member</param>
+        private void PityNpGain(PartyMember partyMemberTarget)
+        {
+            if (partyMemberTarget.NpCharge == 99.0f)
+            {
+                partyMemberTarget.NpCharge++;
+            }
         }
         #endregion
     }
