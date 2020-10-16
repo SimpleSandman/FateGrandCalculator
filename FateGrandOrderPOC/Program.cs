@@ -288,14 +288,14 @@ namespace FateGrandOrderPOC
             _skillAdjustments.BuffPartyMember(partyMemberSupportCaster, 1, _party, 1); // Skadi quick up buff
 
             NpChargeCheck(partyMemberAttacker);
-            (_party, enemyMobs) = await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f);
+            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f);
 
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
             _party = _skillAdjustments.AdjustSkillCooldowns(_party);
             _skillAdjustments.BuffPartyMember(partyMemberCaster, 3, _party, 1); // Skadi NP buff
 
             NpChargeCheck(partyMemberAttacker);
-            (_party, enemyMobs) = await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f);
+            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f);
 
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
             _party = _skillAdjustments.AdjustSkillCooldowns(_party);
@@ -304,7 +304,7 @@ namespace FateGrandOrderPOC
             _skillAdjustments.BuffPartyMember(mysticCode, 2, _party, 1); // Artic mystic code ATK and NP damage up
 
             NpChargeCheck(partyMemberAttacker);
-            (_party, enemyMobs) = await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Third, 0.50f, 0.60f);
+            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Third, 0.50f, 0.60f);
 
             Console.WriteLine("Simulation ended! ^.^");
 

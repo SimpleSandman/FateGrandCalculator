@@ -33,7 +33,7 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="waveNumber"></param>
         /// <param name="npGainUp"></param>
         /// <param name="defenseDownModifier"></param>
-        public async Task<(List<PartyMember>, List<EnemyMob>)> NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, 
+        public async Task NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, 
             float npGainUp, float defenseDownModifier)
         {
             List<PartyMember> npChainList = party
@@ -48,7 +48,7 @@ namespace FateGrandOrderPOC.Shared
                 if (enemyMobs.Count == 0)
                 {
                     Console.WriteLine("Node cleared!!");
-                    return (party, enemyMobs);
+                    return;
                 }
 
                 float totalNpRefund = 0.0f, cardNpTypeUp = 0.0f, attackUp = 0.0f, powerModifier = 0.0f;
@@ -120,7 +120,7 @@ namespace FateGrandOrderPOC.Shared
                 Console.WriteLine($"Total NP refund for {partyMember.Servant.ServantInfo.Name}: {partyMember.NpCharge}%\n");
             }
 
-            return (party, enemyMobs);
+            return;
         }
 
         #region Private Methods
