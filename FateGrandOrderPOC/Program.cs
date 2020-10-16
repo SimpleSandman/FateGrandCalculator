@@ -286,16 +286,17 @@ namespace FateGrandOrderPOC
             Console.WriteLine(">>>>>> Fight 1/3 <<<<<<\n");
             _skillAdjustments.BuffPartyMember(partyMemberCaster, 1, _party, 1); // Skadi quick up buff
             _skillAdjustments.BuffPartyMember(partyMemberSupportCaster, 1, _party, 1); // Skadi quick up buff
+            _skillAdjustments.BuffPartyMember(partyMemberAttacker, 2, _party, 1); // Dante's 2nd skill
 
             NpChargeCheck(partyMemberAttacker);
-            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.First, 0.50f, 0.00f);
+            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.First, 0.00f);
 
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
             _party = _skillAdjustments.AdjustSkillCooldowns(_party);
             _skillAdjustments.BuffPartyMember(partyMemberCaster, 3, _party, 1); // Skadi NP buff
 
             NpChargeCheck(partyMemberAttacker);
-            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Second, 0.50f, 0.00f);
+            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Second, 0.00f);
 
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
             _party = _skillAdjustments.AdjustSkillCooldowns(_party);
@@ -304,7 +305,7 @@ namespace FateGrandOrderPOC
             _skillAdjustments.BuffPartyMember(mysticCode, 2, _party, 1); // Artic mystic code ATK and NP damage up
 
             NpChargeCheck(partyMemberAttacker);
-            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Third, 0.50f, 0.60f);
+            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Third, 0.60f);
 
             Console.WriteLine("Simulation ended! ^.^");
 
