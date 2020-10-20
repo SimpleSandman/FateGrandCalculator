@@ -17,7 +17,7 @@ namespace FateGrandOrderPOC.Shared
         private readonly AttributeRelation _attributeRelation = new AttributeRelation();
         private readonly ClassRelation _classRelation = new ClassRelation();
         private readonly ClassAttackRate _classAttackRate;
-        private readonly ConstantRate _constantRate;        
+        private readonly ConstantRate _constantRate;
 
         public CombatFormula(IAtlasAcademyClient client)
         {
@@ -51,32 +51,7 @@ namespace FateGrandOrderPOC.Shared
 
                 float totalNpRefund = 0.0f, cardNpTypeUp = 0.0f, attackUp = 0.0f, powerModifier = 0.0f, npGainUp = 0.0f;
 
-                // TODO: Create a method that handles more buff types using a switch statement
-                // Calculate card buff for NP if same card type
-                foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
-                {
-                    BuffServant buff = activeStatus.StatusEffect.Buffs[0];
-
-                    if (buff.Type == "upCommandall" && buff.CkSelfIndv.Any(f => f.Name == ($"card{partyMember.NoblePhantasm.Card.ToUpperFirstChar()}")))
-                    {
-                        cardNpTypeUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / 1000.0f;
-                    }
-                    else if (buff.Type == "upAtk")
-                    {
-                        attackUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / 1000.0f;
-                    }
-                    else if (buff.Type == "upDropnp")
-                    {
-                        npGainUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / 1000.0f;
-                    }
-                    else if (buff.Type == "upNpdamage") // TODO: Add more power modifers
-                    {
-                        powerModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / 1000.0f;
-                    }
-                }
-
-                // Add defense down to the overall attack up to simplify the math below
-                attackUp += defenseDownModifier;
+                SetStatusEffects(partyMember, ref cardNpTypeUp, ref attackUp, ref powerModifier, ref npGainUp, ref defenseDownModifier);                
 
                 // Go through each enemy mob grouped by their wave number
                 for (int i = 0; i < enemyMobs.FindAll(e => e.WaveNumber == waveNumber).Take(3).Count(); i++)
@@ -126,6 +101,46 @@ namespace FateGrandOrderPOC.Shared
         }
 
         #region Private Methods
+        /// <summary>
+        /// Set necessary status effects for NP damage
+        /// </summary>
+        /// <param name="partyMember"></param>
+        /// <param name="cardNpTypeUp"></param>
+        /// <param name="attackUp"></param>
+        /// <param name="powerModifier"></param>
+        /// <param name="npGainUp"></param>
+        /// <param name="defenseDownModifier"></param>
+        private void SetStatusEffects(PartyMember partyMember, ref float cardNpTypeUp, ref float attackUp, ref float powerModifier, ref float npGainUp, ref float defenseDownModifier)
+        {
+            const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
+
+            foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
+            {
+                BuffServant buff = activeStatus.StatusEffect.Buffs[0];
+
+                if (buff.Type == "upCommandall" && buff.CkSelfIndv.Any(f => f.Name == ($"card{partyMember.NoblePhantasm.Card.ToUpperFirstChar()}")))
+                {
+                    // Calculate card buff for NP if same card type
+                    cardNpTypeUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                }
+                else if (buff.Type == "upAtk")
+                {
+                    attackUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                }
+                else if (buff.Type == "upDropnp")
+                {
+                    npGainUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                }
+                else if (buff.Type == "upNpdamage") // TODO: Add more power modifers
+                {
+                    powerModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                }
+            }
+
+            // Add defense down to the overall attack up to simplify the math below
+            attackUp += defenseDownModifier;
+        }
+
         /// <summary>
         /// NP gain modifier based on enemy class and special (server-side data)
         /// </summary>
