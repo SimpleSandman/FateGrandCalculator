@@ -15,7 +15,7 @@ namespace FateGrandOrderPOC
     public class Program
     {
         private readonly CombatFormula _combatFormula;
-        private readonly ServantSkillAdjustments _skillAdjustments = new ServantSkillAdjustments();
+        private readonly ServantSkillActivation _skillActivation = new ServantSkillActivation();
         private readonly IAtlasAcademyClient _aaClient;
         private List<PartyMember> _party = new List<PartyMember>();
 
@@ -127,14 +127,14 @@ namespace FateGrandOrderPOC
             MysticCode mysticCode = new MysticCode
             {
                 MysticCodeLevel = 4,
-                MysticCodeInfo = await _aaClient.GetMysticCodeInfo(ARTIC_ID),
-                SkillCooldowns = new List<SkillCooldown>()
+                MysticCodeInfo = await _aaClient.GetMysticCodeInfo(ARTIC_ID)
             };
 
             /* Enemy node data */
             #region First Wave
             EnemyMob enemyMob1 = new EnemyMob
             {
+                Id = 0,
                 Name = "Walkure",
                 ClassName = ClassRelationEnum.Rider,
                 AttributeName = AttributeRelationEnum.Sky,
@@ -150,6 +150,7 @@ namespace FateGrandOrderPOC
 
             EnemyMob enemyMob2 = new EnemyMob
             {
+                Id = 1,
                 Name = "Walkure",
                 ClassName = ClassRelationEnum.Rider,
                 AttributeName = AttributeRelationEnum.Sky,
@@ -165,6 +166,7 @@ namespace FateGrandOrderPOC
 
             EnemyMob enemyMob3 = new EnemyMob
             {
+                Id = 2,
                 Name = "Muspell",
                 ClassName = ClassRelationEnum.Berserker,
                 AttributeName = AttributeRelationEnum.Earth,
@@ -182,6 +184,7 @@ namespace FateGrandOrderPOC
             #region Second Wave
             EnemyMob enemyMob4 = new EnemyMob
             {
+                Id = 3,
                 Name = "Muspell",
                 ClassName = ClassRelationEnum.Berserker,
                 AttributeName = AttributeRelationEnum.Earth,
@@ -197,6 +200,7 @@ namespace FateGrandOrderPOC
 
             EnemyMob enemyMob5 = new EnemyMob
             {
+                Id = 4,
                 Name = "Walkure",
                 ClassName = ClassRelationEnum.Rider,
                 AttributeName = AttributeRelationEnum.Sky,
@@ -212,6 +216,7 @@ namespace FateGrandOrderPOC
 
             EnemyMob enemyMob6 = new EnemyMob
             {
+                Id = 5,
                 Name = "Muspell",
                 ClassName = ClassRelationEnum.Berserker,
                 AttributeName = AttributeRelationEnum.Earth,
@@ -229,6 +234,7 @@ namespace FateGrandOrderPOC
             #region Third Wave
             EnemyMob enemyMob7 = new EnemyMob
             {
+                Id = 6,
                 Name = "Walkure",
                 ClassName = ClassRelationEnum.Rider,
                 AttributeName = AttributeRelationEnum.Sky,
@@ -244,6 +250,7 @@ namespace FateGrandOrderPOC
 
             EnemyMob enemyMob8 = new EnemyMob
             {
+                Id = 7,
                 Name = "Walkure",
                 ClassName = ClassRelationEnum.Rider,
                 AttributeName = AttributeRelationEnum.Sky,
@@ -259,6 +266,7 @@ namespace FateGrandOrderPOC
 
             EnemyMob enemyMob9 = new EnemyMob
             {
+                Id = 8,
                 Name = "Muspell",
                 ClassName = ClassRelationEnum.Berserker,
                 AttributeName = AttributeRelationEnum.Earth,
@@ -284,28 +292,30 @@ namespace FateGrandOrderPOC
             // TODO: Specify defense down buffs to specific enemy mobs instead of always assuming AOE.
             //       Possibly add a debuff list property for the EnemyMob object
             Console.WriteLine(">>>>>> Fight 1/3 <<<<<<\n");
-            _skillAdjustments.BuffPartyMember(partyMemberCaster, 1, _party, 1); // Skadi quick up buff
-            _skillAdjustments.BuffPartyMember(partyMemberSupportCaster, 1, _party, 1); // Skadi quick up buff
-            _skillAdjustments.BuffPartyMember(partyMemberAttacker, 2, _party, 1); // Dante's 2nd skill
+            _skillActivation.SkillActivation(partyMemberCaster, 1, _party, 1, enemyMobs, 1); // Skadi quick up buff
+            _skillActivation.SkillActivation(partyMemberSupportCaster, 1, _party, 1, enemyMobs, 1); // Skadi (support) quick up buff
+            _skillActivation.SkillActivation(partyMemberAttacker, 2, _party, 1, enemyMobs, 1); // Dante's 2nd skill
 
             NpChargeCheck(partyMemberAttacker);
-            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.First, 0.00f);
+            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.First);
 
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
-            _party = _skillAdjustments.AdjustSkillCooldowns(_party);
-            _skillAdjustments.BuffPartyMember(partyMemberCaster, 3, _party, 1); // Skadi NP buff
+            _party = _skillActivation.AdjustSkillCooldowns(_party);
+            _skillActivation.SkillActivation(partyMemberCaster, 3, _party, 1, enemyMobs, 1); // Skadi NP buff
 
             NpChargeCheck(partyMemberAttacker);
-            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Second, 0.00f);
+            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Second);
 
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
-            _party = _skillAdjustments.AdjustSkillCooldowns(_party);
-            _skillAdjustments.BuffPartyMember(partyMemberSupportCaster, 3, _party, 1); // Skadi (support) NP buff
-            _skillAdjustments.BuffPartyMember(partyMemberAttacker, 1, _party, 1); // Dante's 1st skill
-            _skillAdjustments.BuffPartyMember(mysticCode, 2, _party, 1); // Artic mystic code ATK and NP damage up
+            _party = _skillActivation.AdjustSkillCooldowns(_party);
+            _skillActivation.SkillActivation(partyMemberSupportCaster, 3, _party, 1, enemyMobs, 1); // Skadi (support) NP buff
+            _skillActivation.SkillActivation(partyMemberSupportCaster, 2, _party, 1, enemyMobs, 1); // Skadi (support) enemy defense down
+            _skillActivation.SkillActivation(partyMemberCaster, 2, _party, 1, enemyMobs, 1); // Skadi enemy defense down
+            _skillActivation.SkillActivation(partyMemberAttacker, 1, _party, 1, enemyMobs, 1); // Dante's 1st skill
+            _skillActivation.SkillActivation(mysticCode, 2, _party, 1, enemyMobs, 1); // Artic mystic code ATK and NP damage up
 
             NpChargeCheck(partyMemberAttacker);
-            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Third, 0.60f);
+            await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Third);
 
             Console.WriteLine("Simulation ended! ^.^");
 
@@ -373,8 +383,6 @@ namespace FateGrandOrderPOC
                 EquippedCraftEssence = chaldeaCraftEssence,
                 TotalAttack = servantTotalAtk,
                 TotalHealth = servantTotalHp,
-                ActiveStatuses = new List<ActiveStatus>(),
-                SkillCooldowns = new List<SkillCooldown>(),
                 NoblePhantasm = chaldeaServant  // Set NP for party member at start of fight
                     .ServantInfo                // (assume highest upgraded NP by priority)
                     .NoblePhantasms

@@ -18,7 +18,7 @@ namespace FateGrandOrderPOC.Shared.Models
         public float NpCharge { get; set; }
         public NpChainOrderEnum NpChainOrder { get; set; } = NpChainOrderEnum.None;
         public NoblePhantasm NoblePhantasm { get; set; }
-        public List<ActiveStatus> ActiveStatuses { get; set; }
-        public List<SkillCooldown> SkillCooldowns { get; set; }
+        public List<ActiveStatus> ActiveStatuses { get; set; } = new List<ActiveStatus>();
+        public List<SkillCooldown> SkillCooldowns { get; set; } = new List<SkillCooldown>();
     }
 }

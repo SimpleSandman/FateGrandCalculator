@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using FateGrandOrderPOC.Shared.AtlasAcademy;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Calculations;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
-using FateGrandOrderPOC.Shared.AtlasAcademy;
 using FateGrandOrderPOC.Shared.Enums;
 using FateGrandOrderPOC.Shared.Extensions;
 using FateGrandOrderPOC.Shared.Models;
@@ -31,8 +31,7 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="party"></param>
         /// <param name="enemyMobs"></param>
         /// <param name="waveNumber"></param>
-        /// <param name="defenseDownModifier"></param>
-        public async Task NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, float defenseDownModifier)
+        public async Task NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber)
         {
             List<PartyMember> npChainList = party
                 .FindAll(p => p.NpChainOrder != NpChainOrderEnum.None)
@@ -49,14 +48,17 @@ namespace FateGrandOrderPOC.Shared
                     return;
                 }
 
+                // Determine party member buffs
                 float totalNpRefund = 0.0f, cardNpTypeUp = 0.0f, attackUp = 0.0f, powerModifier = 0.0f, npGainUp = 0.0f;
-
-                SetStatusEffects(partyMember, ref cardNpTypeUp, ref attackUp, ref powerModifier, ref npGainUp, ref defenseDownModifier);                
+                SetStatusEffects(partyMember, ref cardNpTypeUp, ref attackUp, ref powerModifier, ref npGainUp);
 
                 // Go through each enemy mob grouped by their wave number
                 for (int i = 0; i < enemyMobs.FindAll(e => e.WaveNumber == waveNumber).Take(3).Count(); i++)
                 {
                     EnemyMob enemyMob = enemyMobs[i];
+
+                    float defenseDownModifier = 0.0f;
+                    SetStatusEffects(enemyMob, ref defenseDownModifier);
 
                     //Console.WriteLine(">>>>>>>> Stats <<<<<<<<");
                     //Console.WriteLine($"Attribute Multiplier ({enemyMob.Name}): {AttributeModifier(partyMember, enemyMob)}x");
@@ -65,7 +67,7 @@ namespace FateGrandOrderPOC.Shared
                     float baseNpDamage = await BaseNpDamage(partyMember);
                     //Console.WriteLine($"{partyMember.Servant.ServantInfo.Name}'s base NP damage: {baseNpDamage}");
 
-                    float totalPowerDamageModifier = (1.0f + attackUp) * (1.0f + cardNpTypeUp) * (1.0f + powerModifier);
+                    float totalPowerDamageModifier = (1.0f + attackUp + defenseDownModifier) * (1.0f + cardNpTypeUp) * (1.0f + powerModifier);
                     //Console.WriteLine($"Total power damage modifier: {totalPowerDamageModifier}");
 
                     float modifiedNpDamage = baseNpDamage * totalPowerDamageModifier;
@@ -102,15 +104,14 @@ namespace FateGrandOrderPOC.Shared
 
         #region Private Methods
         /// <summary>
-        /// Set necessary status effects for NP damage
+        /// Set necessary party member status effects for NP damage
         /// </summary>
         /// <param name="partyMember"></param>
         /// <param name="cardNpTypeUp"></param>
         /// <param name="attackUp"></param>
         /// <param name="powerModifier"></param>
         /// <param name="npGainUp"></param>
-        /// <param name="defenseDownModifier"></param>
-        private void SetStatusEffects(PartyMember partyMember, ref float cardNpTypeUp, ref float attackUp, ref float powerModifier, ref float npGainUp, ref float defenseDownModifier)
+        private void SetStatusEffects(PartyMember partyMember, ref float cardNpTypeUp, ref float attackUp, ref float powerModifier, ref float npGainUp)
         {
             const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
 
@@ -136,9 +137,26 @@ namespace FateGrandOrderPOC.Shared
                     powerModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
                 }
             }
+        }
 
-            // Add defense down to the overall attack up to simplify the math below
-            attackUp += defenseDownModifier;
+        /// <summary>
+        /// Set necessary enemy status effects for NP damage
+        /// </summary>
+        /// <param name="enemy"></param>
+        /// <param name="defenseDownModifier"></param>
+        private void SetStatusEffects(EnemyMob enemy, ref float defenseDownModifier)
+        {
+            const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
+
+            foreach (ActiveStatus activeStatus in enemy.ActiveStatuses)
+            {
+                BuffServant buff = activeStatus.StatusEffect.Buffs[0];
+
+                if (buff.Type == "downDefence")
+                {
+                    defenseDownModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                }
+            }
         }
 
         /// <summary>

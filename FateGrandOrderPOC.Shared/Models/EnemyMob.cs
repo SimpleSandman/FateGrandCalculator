@@ -6,6 +6,7 @@ namespace FateGrandOrderPOC.Shared.Models
 {
     public class EnemyMob
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public float Health { get; set; }
         /// <summary>
@@ -13,6 +14,7 @@ namespace FateGrandOrderPOC.Shared.Models
         /// </summary>
         public bool IsSpecial { get; set; }
         public List<string> Traits { get; set; }
+        public List<ActiveStatus> ActiveStatuses { get; set; } = new List<ActiveStatus>();
         public GenderRelationEnum Gender { get; set; }
         public AttributeRelationEnum AttributeName { get; set; }
         public ClassRelationEnum ClassName { get; set; }
