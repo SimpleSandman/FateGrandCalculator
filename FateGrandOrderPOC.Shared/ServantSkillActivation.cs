@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using FateGrandOrderPOC.Shared.ApplyStatuses;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Models;
 

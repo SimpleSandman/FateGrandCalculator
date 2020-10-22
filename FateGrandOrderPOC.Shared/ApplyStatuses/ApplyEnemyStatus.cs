@@ -4,7 +4,7 @@ using System.Linq;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Models;
 
-namespace FateGrandOrderPOC.Shared
+namespace FateGrandOrderPOC.Shared.ApplyStatuses
 {
     public static class ApplyEnemyStatus
     {
