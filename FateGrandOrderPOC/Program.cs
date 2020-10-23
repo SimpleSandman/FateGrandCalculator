@@ -289,8 +289,6 @@ namespace FateGrandOrderPOC
             };
 
             /* Simulate node combat */
-            // TODO: Specify defense down buffs to specific enemy mobs instead of always assuming AOE.
-            //       Possibly add a debuff list property for the EnemyMob object
             Console.WriteLine(">>>>>> Fight 1/3 <<<<<<\n");
             _skillActivation.SkillActivation(partyMemberCaster, 1, _party, 1, enemyMobs, 1); // Skadi quick up buff
             _skillActivation.SkillActivation(partyMemberSupportCaster, 1, _party, 1, enemyMobs, 1); // Skadi (support) quick up buff
