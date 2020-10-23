@@ -57,8 +57,9 @@ namespace FateGrandOrderPOC.Shared
                 {
                     EnemyMob enemyMob = enemyMobs[i];
 
-                    float defenseDownModifier = 0.0f;
-                    SetStatusEffects(enemyMob, ref defenseDownModifier);
+                    // Determine enemy debuffs
+                    float defenseDownModifier = 0.0f, cardDefenseDebuffModifier = 0.0f;
+                    SetStatusEffects(enemyMob, partyMember, ref defenseDownModifier, ref cardDefenseDebuffModifier);
 
                     //Console.WriteLine(">>>>>>>> Stats <<<<<<<<");
                     //Console.WriteLine($"Attribute Multiplier ({enemyMob.Name}): {AttributeModifier(partyMember, enemyMob)}x");
@@ -67,7 +68,9 @@ namespace FateGrandOrderPOC.Shared
                     float baseNpDamage = await BaseNpDamage(partyMember);
                     //Console.WriteLine($"{partyMember.Servant.ServantInfo.Name}'s base NP damage: {baseNpDamage}");
 
-                    float totalPowerDamageModifier = (1.0f + attackUp + defenseDownModifier) * (1.0f + cardNpTypeUp) * (1.0f + powerModifier);
+                    float totalPowerDamageModifier = (1.0f + attackUp + defenseDownModifier + cardDefenseDebuffModifier) 
+                        * (1.0f + cardNpTypeUp) 
+                        * (1.0f + powerModifier);
                     //Console.WriteLine($"Total power damage modifier: {totalPowerDamageModifier}");
 
                     float modifiedNpDamage = baseNpDamage * totalPowerDamageModifier;
@@ -102,7 +105,7 @@ namespace FateGrandOrderPOC.Shared
             return;
         }
 
-        #region Private Methods
+        #region Status Effect Methods
         /// <summary>
         /// Set necessary party member status effects for NP damage
         /// </summary>
@@ -143,8 +146,10 @@ namespace FateGrandOrderPOC.Shared
         /// Set necessary enemy status effects for NP damage
         /// </summary>
         /// <param name="enemy"></param>
+        /// <param name="partyMember"></param>
         /// <param name="defenseDownModifier"></param>
-        private void SetStatusEffects(EnemyMob enemy, ref float defenseDownModifier)
+        /// <param name="cardDefenseDownModifier"></param>
+        private void SetStatusEffects(EnemyMob enemy, PartyMember partyMember, ref float defenseDownModifier, ref float cardDefenseDownModifier)
         {
             const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
 
@@ -156,9 +161,15 @@ namespace FateGrandOrderPOC.Shared
                 {
                     defenseDownModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
                 }
+                else if (buff.Type == "downDefencecommandall" && buff.CkOpIndv.Any(f => f.Name == ($"card{partyMember.NoblePhantasm.Card.ToUpperFirstChar()}")))
+                {
+                    cardDefenseDownModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                }
             }
         }
+        #endregion
 
+        #region Other Private Methods
         /// <summary>
         /// NP gain modifier based on enemy class and special (server-side data)
         /// </summary>

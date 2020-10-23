@@ -347,6 +347,15 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public string Name { get; set; }
     }
 
+    public class CkOpIndvServant
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+    }
+
     public class BuffServant
     {
         [JsonProperty("id")]
@@ -377,7 +386,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public List<CkSelfIndvServant> CkSelfIndv { get; set; }
 
         [JsonProperty("ckOpIndv")]
-        public List<object> CkOpIndv { get; set; }
+        public List<CkOpIndvServant> CkOpIndv { get; set; }
 
         [JsonProperty("maxRate")]
         public int MaxRate { get; set; }
@@ -485,15 +494,6 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
 
         [JsonProperty("functions")]
         public List<FunctionServant> Functions { get; set; }
-    }
-
-    public class CkOpIndvServant
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
     }
 
     public class ClassPassive
