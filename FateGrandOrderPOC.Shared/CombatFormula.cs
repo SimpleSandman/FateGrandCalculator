@@ -10,10 +10,13 @@ using FateGrandOrderPOC.Shared.Enums;
 using FateGrandOrderPOC.Shared.Extensions;
 using FateGrandOrderPOC.Shared.Models;
 
+using Newtonsoft.Json.Linq;
+
 namespace FateGrandOrderPOC.Shared
 {
     public class CombatFormula
     {
+        private readonly IAtlasAcademyClient _aaClient;
         private readonly AttributeRelation _attributeRelation = new AttributeRelation();
         private readonly ClassRelation _classRelation = new ClassRelation();
         private readonly ClassAttackRate _classAttackRate;
@@ -21,6 +24,7 @@ namespace FateGrandOrderPOC.Shared
 
         public CombatFormula(IAtlasAcademyClient client)
         {
+            _aaClient = client;
             _constantRate = new ConstantRate(client);
             _classAttackRate = new ClassAttackRate(client);
         }
@@ -48,6 +52,8 @@ namespace FateGrandOrderPOC.Shared
                     return;
                 }
 
+                int npChainPosition = 0; // used to calculate overcharge
+
                 // Determine party member buffs
                 float totalNpRefund = 0.0f, cardNpTypeUp = 0.0f, attackUp = 0.0f, powerModifier = 0.0f, npGainUp = 0.0f;
                 SetStatusEffects(partyMember, ref cardNpTypeUp, ref attackUp, ref powerModifier, ref npGainUp);
@@ -67,7 +73,7 @@ namespace FateGrandOrderPOC.Shared
                     //Console.WriteLine($"Attribute Multiplier ({enemyMob.Name}): {AttributeModifier(partyMember, enemyMob)}x");
                     //Console.WriteLine($"Class Advantage Multiplier ({enemyMob.Name}): {ClassModifier(partyMember, enemyMob)}x");
 
-                    float baseNpDamage = await BaseNpDamage(partyMember);
+                    float baseNpDamage = await BaseNpDamage(partyMember, enemyMob, npChainPosition);
                     //Console.WriteLine($"{partyMember.Servant.ServantInfo.Name}'s base NP damage: {baseNpDamage}");
 
                     float totalPowerDamageModifier = (1.0f + attackUp + defenseDownModifier + cardDefenseDebuffModifier) 
@@ -96,10 +102,15 @@ namespace FateGrandOrderPOC.Shared
 
                 // Replace old charge with newly refunded NP
                 totalNpRefund /= 100.0f;
+                if (totalNpRefund > 300.0f)
+                {
+                    totalNpRefund = 300.0f; // set max charge
+                }
                 partyMember.NpCharge = (float)Math.Floor(totalNpRefund);
                 partyMember.NpChainOrder = NpChainOrderEnum.None;
 
                 enemyMobs.RemoveAll(e => e.Health <= 0.0f); // remove dead enemies in preparation for next NP
+                npChainPosition++;
 
                 Console.WriteLine($"Total NP refund for {partyMember.Servant.ServantInfo.Name}: {partyMember.NpCharge}%\n");
             }
@@ -292,23 +303,88 @@ namespace FateGrandOrderPOC.Shared
             return healthRemaining;
         }
 
-        private async Task<float> BaseNpDamage(PartyMember partyMember)
+        private async Task<float> BaseNpDamage(PartyMember partyMember, EnemyMob enemy, int npChainPosition)
         {
-            int npValue = partyMember.NoblePhantasm
-                .Functions.Find(f => f.FuncType.Contains("damageNp"))
-                .Svals[partyMember.Servant.NpLevel - 1].Value;
+            Function npFunction = partyMember
+                .NoblePhantasm
+                .Functions
+                .Find(f => f.FuncType.Contains("damageNp"));
+
+            Sval svalNp = Overcharge(partyMember.NpCharge, npChainPosition) switch
+            {
+                5 => npFunction.Svals5[partyMember.Servant.NpLevel - 1],
+                4 => npFunction.Svals4[partyMember.Servant.NpLevel - 1],
+                3 => npFunction.Svals3[partyMember.Servant.NpLevel - 1],
+                2 => npFunction.Svals2[partyMember.Servant.NpLevel - 1],
+                _ => npFunction.Svals[partyMember.Servant.NpLevel - 1],
+            };
+
+            int npValue = svalNp.Value;
+            int targetBonusNpDamage = 0;
+
+            // Add additional NP damage if there is a special target ID
+            if (svalNp.Target > 0)
+            {
+                JObject traits = await _aaClient.GetTraitEnumInfo();
+                string traitName = traits.Property(svalNp.Target.ToString())?.Value.ToString() ?? "";
+                if (enemy.Traits.Contains(traitName))
+                {
+                    targetBonusNpDamage = svalNp.Correction;
+                }
+            }
 
             //Console.WriteLine($"Total attack: {partyMember.TotalAttack}");
             //Console.WriteLine($"Class modifier: {_classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName)}");
             //Console.WriteLine($"NP type modifier: {_constantRate.GetAttackMultiplier("enemy_attack_rate_" + partyMember.NoblePhantasm.Card)}");
             //Console.WriteLine($"NP value: {npValue / 1000.0f}");
+            //Console.WriteLine($"Target Bonus NP damage: {targetBonusNpDamage / 1000.0f}");
 
             // Base NP damage = ATTACK_RATE * Servant total attack * Class modifier * NP type modifier * NP damage
-            return await _constantRate.GetAttackMultiplier("ATTACK_RATE")
+            float baseNpDamage = await _constantRate.GetAttackMultiplier("ATTACK_RATE")
                 * partyMember.TotalAttack
                 * await _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName)
                 * await _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}")
                 * (npValue / 1000.0f);
+
+            if (targetBonusNpDamage != 0)
+            {
+                baseNpDamage *= targetBonusNpDamage / 1000.0f;
+            }
+
+            return baseNpDamage;
+        }
+
+        /// <summary>
+        /// Return the overcharge in decimal (non-percent) format based on NP charge and the position in the NP chain
+        /// </summary>
+        /// <param name="npCharge"></param>
+        /// <param name="npChainPosition"></param>
+        /// <returns></returns>
+        private int Overcharge(float npCharge, int npChainPosition)
+        {
+            int overcharge = 0;
+
+            // Set overcharge based on the level of NP charge
+            if (npCharge == 300.0f)
+            {
+                overcharge = 3;
+            }
+            else if (npCharge >= 200.0f)
+            {
+                overcharge = 2;
+            }
+
+            // Add additional overcharge depending on the position in the NP chain
+            if (npChainPosition == 1) // 2nd NP in the chain
+            {
+                overcharge += 1;
+            }
+            else if (npChainPosition == 2) // 3rd NP in the chain
+            {
+                overcharge += 2;
+            }
+
+            return overcharge;
         }
 
         private async Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
@@ -320,11 +396,11 @@ namespace FateGrandOrderPOC.Shared
         {
             if (0.9f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) > enemyMob.Health)
             {
-                return 100.0f; // perfect clear
+                return 100.0f; // perfect clear, even with the worst RNG
             }
             else if (1.1f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) < enemyMob.Health)
             {
-                return 0.0f; // never clear
+                return 0.0f; // never clear, even with the best RNG
             }
             else // show chance of success
             {

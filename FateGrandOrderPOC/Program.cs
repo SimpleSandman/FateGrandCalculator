@@ -31,6 +31,7 @@ namespace FateGrandOrderPOC
         const string DANTES_AVENGER = "1100200";
         const string SKADI_CASTER = "503900";
         const string PARACELSUS_CASTER = "501000";
+        const string MORDRED_SABER = "100900";
         #endregion
 
         #region Craft Essence IDs

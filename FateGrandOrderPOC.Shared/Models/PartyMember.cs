@@ -13,7 +13,7 @@ namespace FateGrandOrderPOC.Shared.Models
         public int TotalAttack { get; set; }
         public int TotalHealth { get; set; }
         /// <summary>
-        /// Current noble phantasm bar's charge with a range from 0% to 500%. Needs a minimum of 100% in order to execute the NP
+        /// Current noble phantasm bar's charge with a range from 0% to 300%. Needs a minimum of 100% in order to execute the NP
         /// </summary>
         public float NpCharge { get; set; }
         public NpChainOrderEnum NpChainOrder { get; set; } = NpChainOrderEnum.None;

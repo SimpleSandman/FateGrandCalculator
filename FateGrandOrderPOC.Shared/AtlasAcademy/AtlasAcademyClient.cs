@@ -4,11 +4,12 @@ using System.Threading.Tasks;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 
+using Newtonsoft.Json.Linq;
+
 namespace FateGrandOrderPOC.Shared.AtlasAcademy
 {
     public class AtlasAcademyClient : IAtlasAcademyClient
     {
-
         private readonly Func<string> baseUrl;
 
         public AtlasAcademyClient(Func<string> config)
@@ -44,6 +45,11 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy
         public async Task<MysticCodeNiceJson> GetMysticCodeInfo(string mcId)
         {
             return await ApiRequest.GetDeserializeObjectAsync<MysticCodeNiceJson>(baseUrl() + "/nice/NA/MC/" + mcId);
+        }
+
+        public async Task<JObject> GetTraitEnumInfo()
+        {
+            return await ApiRequest.GetDeserializeObjectAsync<JObject>(baseUrl() + "/export/JP/nice_trait.json"); // same for both NA and JP
         }
     }
 }

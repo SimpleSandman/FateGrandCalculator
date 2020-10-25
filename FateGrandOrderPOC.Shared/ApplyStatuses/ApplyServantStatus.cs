@@ -132,10 +132,13 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
                 case "gainNp":
                     partyMemberTarget.NpCharge += mysticCodeFunction.Svals[mysticCode.MysticCodeLevel - 1].Value / 100.0f;
 
-                    // Pity NP gain
                     if (partyMemberTarget.NpCharge == 99.0f)
                     {
-                        partyMemberTarget.NpCharge++;
+                        partyMemberTarget.NpCharge++; // pity NP gain
+                    }
+                    else if (partyMemberTarget.NpCharge > 300.0f)
+                    {
+                        partyMemberTarget.NpCharge = 300.0f; // set max charge
                     }
 
                     Console.WriteLine($"{mysticCode.MysticCodeInfo.Name} has buffed " +

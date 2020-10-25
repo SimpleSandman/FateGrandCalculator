@@ -627,6 +627,9 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         [JsonProperty("Correction")]
         public int Correction { get; set; }
 
+        /// <summary>
+        /// Target monster by trait enum ID
+        /// </summary>
         [JsonProperty("Target")]
         public int Target { get; set; }
     }
