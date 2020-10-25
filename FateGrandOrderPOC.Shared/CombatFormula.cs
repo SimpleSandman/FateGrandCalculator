@@ -57,6 +57,8 @@ namespace FateGrandOrderPOC.Shared
                 {
                     EnemyMob enemyMob = enemyMobs[i];
 
+                    powerModifier += SpecialAttackUp(partyMember, enemyMob);
+
                     // Determine enemy debuffs
                     float defenseDownModifier = 0.0f, cardDefenseDebuffModifier = 0.0f;
                     SetStatusEffects(enemyMob, partyMember, ref defenseDownModifier, ref cardDefenseDebuffModifier);
@@ -105,7 +107,34 @@ namespace FateGrandOrderPOC.Shared
             return;
         }
 
-        #region Status Effect Methods
+        #region Private Methods
+        /// <summary>
+        /// Find special damage up buff versus an enemy trait
+        /// </summary>
+        /// <param name="partyMember"></param>
+        /// <param name="enemy"></param>
+        /// <returns></returns>
+        private float SpecialAttackUp(PartyMember partyMember, EnemyMob enemy)
+        {
+            float powerModifier = 0.0f;
+            const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
+
+            foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
+            {
+                BuffServant buff = activeStatus.StatusEffect.Buffs[0];
+
+                if (buff.Type == "upDamage" 
+                    && buff.Vals.Any(f => f.Name == "buffPowerModStrUp") 
+                    && buff.CkOpIndv.Any(f => f.Name == buff.Tvals.First().Name) 
+                    && enemy.Traits.Contains(buff.Tvals.First().Name))
+                {
+                    powerModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                }
+            }
+
+            return powerModifier;
+        }
+
         /// <summary>
         /// Set necessary party member status effects for NP damage
         /// </summary>
@@ -135,7 +164,7 @@ namespace FateGrandOrderPOC.Shared
                 {
                     npGainUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
                 }
-                else if (buff.Type == "upNpdamage") // TODO: Add more power modifers
+                else if (buff.Type == "upNpdamage")
                 {
                     powerModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
                 }
@@ -167,9 +196,7 @@ namespace FateGrandOrderPOC.Shared
                 }
             }
         }
-        #endregion
 
-        #region Other Private Methods
         /// <summary>
         /// NP gain modifier based on enemy class and special (server-side data)
         /// </summary>
