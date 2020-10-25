@@ -9,7 +9,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
 {
     public static class ApplyServantStatus
     {
-        public static void ApplyFuncTargetType(string funcTargetType, int partyMemberPosition, PartyMember partyMemberActor, FunctionServant servantFunction,
+        public static void ApplyFuncTargetType(string funcTargetType, int partyMemberPosition, PartyMember partyMemberActor, Function servantFunction,
             int currentSkillLevel, List<PartyMember> partyMemberTargets)
         {
             if (funcTargetType == "self")
@@ -38,7 +38,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
             }
         }
 
-        public static void ApplyFuncTargetType(string funcTargetType, int partyMemberPosition, MysticCode mysticCode, FunctionServant mysticCodeFunction, 
+        public static void ApplyFuncTargetType(string funcTargetType, int partyMemberPosition, MysticCode mysticCode, Function mysticCodeFunction, 
             List<PartyMember> partyMemberTargets)
         {
             switch (funcTargetType)
@@ -61,7 +61,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
         }
 
         #region Private Methods "Party Member"
-        private static List<PartyMember> ApplyStatus(PartyMember partyMemberActor, FunctionServant servantFunction, int currentSkillLevel, List<PartyMember> partyMemberTargets)
+        private static List<PartyMember> ApplyStatus(PartyMember partyMemberActor, Function servantFunction, int currentSkillLevel, List<PartyMember> partyMemberTargets)
         {
             foreach (PartyMember partyMemberTarget in partyMemberTargets)
             {
@@ -71,12 +71,12 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
             return partyMemberTargets;
         }
 
-        private static PartyMember ApplyStatus(PartyMember partyMemberActor, FunctionServant servantFunction, int currentSkillLevel, PartyMember partyMemberTarget)
+        private static PartyMember ApplyStatus(PartyMember partyMemberActor, Function servantFunction, int currentSkillLevel, PartyMember partyMemberTarget)
         {
             return ApplyPartyMemberStatus(partyMemberActor, servantFunction, currentSkillLevel, partyMemberTarget);
         }
 
-        private static PartyMember ApplyPartyMemberStatus(PartyMember partyMemberActor, FunctionServant servantFunction, int currentSkillLevel, PartyMember partyMemberTarget)
+        private static PartyMember ApplyPartyMemberStatus(PartyMember partyMemberActor, Function servantFunction, int currentSkillLevel, PartyMember partyMemberTarget)
         {
             string support = "";
             if (partyMemberActor.Servant.IsSupportServant)
@@ -110,7 +110,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
         #endregion
 
         #region Private Methods "Mystic Code"
-        private static List<PartyMember> ApplyStatus(MysticCode mysticCode, FunctionServant mysticCodeFunction, List<PartyMember> partyMemberTargets)
+        private static List<PartyMember> ApplyStatus(MysticCode mysticCode, Function mysticCodeFunction, List<PartyMember> partyMemberTargets)
         {
             foreach (PartyMember partyMemberTarget in partyMemberTargets)
             {
@@ -120,12 +120,12 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
             return partyMemberTargets;
         }
 
-        private static PartyMember ApplyStatus(MysticCode mysticCode, FunctionServant mysticCodeFunction, PartyMember partyMemberTarget)
+        private static PartyMember ApplyStatus(MysticCode mysticCode, Function mysticCodeFunction, PartyMember partyMemberTarget)
         {
             return ApplyPartyMemberStatus(mysticCode, mysticCodeFunction, partyMemberTarget);
         }
 
-        private static PartyMember ApplyPartyMemberStatus(MysticCode mysticCode, FunctionServant mysticCodeFunction, PartyMember partyMemberTarget)
+        private static PartyMember ApplyPartyMemberStatus(MysticCode mysticCode, Function mysticCodeFunction, PartyMember partyMemberTarget)
         {
             switch (mysticCodeFunction.FuncType)
             {

@@ -29,7 +29,7 @@ namespace FateGrandOrderPOC.Shared
             }
 
             // Get highest priority skill
-            SkillServant skill = partyMemberActor
+            Skill skill = partyMemberActor
                 .Servant
                 .ServantInfo
                 .Skills
@@ -39,19 +39,19 @@ namespace FateGrandOrderPOC.Shared
 
             int currentSkillLevel = partyMemberActor.Servant.SkillLevels[actorSkillPositionNumber - 1];
 
-            List<FunctionServant> partyBuffServantFunctions = GetPartyBuffServantFunctions(skill);
+            List<Function> partyBuffServantFunctions = GetPartyBuffServantFunctions(skill);
             if (partyBuffServantFunctions?.Count > 0)
             {
-                foreach (FunctionServant servantFunction in partyBuffServantFunctions)
+                foreach (Function servantFunction in partyBuffServantFunctions)
                 {
                     ApplyServantStatus.ApplyFuncTargetType(servantFunction.FuncTargetType, partyMemberPosition, partyMemberActor, servantFunction, currentSkillLevel, party);
                 }
             }
 
-            List<FunctionServant> enemyServantFunctions = GetEnemyServantFunctions(skill);
+            List<Function> enemyServantFunctions = GetEnemyServantFunctions(skill);
             if (enemyServantFunctions?.Count > 0)
             {
-                foreach (FunctionServant servantFunction in enemyServantFunctions)
+                foreach (Function servantFunction in enemyServantFunctions)
                 {
                     ApplyEnemyStatus.ApplyFuncTargetType(servantFunction.FuncTargetType, enemyPosition, servantFunction, currentSkillLevel, enemies);
                 }
@@ -85,21 +85,21 @@ namespace FateGrandOrderPOC.Shared
                 return; // don't activate again
             }
 
-            SkillServant skill = mysticCode.MysticCodeInfo.Skills[mysticCodeSkillPositionNumber - 1];
+            Skill skill = mysticCode.MysticCodeInfo.Skills[mysticCodeSkillPositionNumber - 1];
 
-            List<FunctionServant> mysticCodePartyBuffFunctions = GetPartyBuffServantFunctions(skill);
+            List<Function> mysticCodePartyBuffFunctions = GetPartyBuffServantFunctions(skill);
             if (mysticCodePartyBuffFunctions?.Count > 0)
             {
-                foreach (FunctionServant mysticCodeFunction in mysticCodePartyBuffFunctions)
+                foreach (Function mysticCodeFunction in mysticCodePartyBuffFunctions)
                 {
                     ApplyServantStatus.ApplyFuncTargetType(mysticCodeFunction.FuncTargetType, partyMemberPosition, mysticCode, mysticCodeFunction, party);
                 }
             }
 
-            List<FunctionServant> mysticCodeEnemyServantFunctions = GetEnemyServantFunctions(skill);
+            List<Function> mysticCodeEnemyServantFunctions = GetEnemyServantFunctions(skill);
             if (mysticCodeEnemyServantFunctions?.Count > 0)
             {
-                foreach (FunctionServant mysticCodeFunction in mysticCodeEnemyServantFunctions)
+                foreach (Function mysticCodeFunction in mysticCodeEnemyServantFunctions)
                 {
                     ApplyEnemyStatus.ApplyFuncTargetType(mysticCodeFunction.FuncTargetType, enemyPosition, mysticCode, mysticCodeFunction, enemies);
                 }
@@ -168,7 +168,7 @@ namespace FateGrandOrderPOC.Shared
             }
         }
 
-        private List<FunctionServant> GetPartyBuffServantFunctions(SkillServant skill)
+        private List<Function> GetPartyBuffServantFunctions(Skill skill)
         {
             return (from f in skill.Functions
                     where (f.FuncTargetType == "self"
@@ -182,7 +182,7 @@ namespace FateGrandOrderPOC.Shared
                     select f).ToList();
         }
 
-        private List<FunctionServant> GetEnemyServantFunctions(SkillServant skill)
+        private List<Function> GetEnemyServantFunctions(Skill skill)
         {
             return (from f in skill.Functions
                     where (f.FuncTargetType == "enemy"                  // one enemy

@@ -124,7 +124,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public SkillMaterials SkillMaterials { get; set; }
 
         [JsonProperty("skills")]
-        public List<SkillServant> Skills { get; set; }
+        public List<Skill> Skills { get; set; }
 
         [JsonProperty("classPassive")]
         public List<ClassPassive> ClassPassive { get; set; }
@@ -194,9 +194,6 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
 
         [JsonProperty("4")]
         public ItemMaterials FourthAsc { get; set; }
-
-        [JsonProperty("5")]
-        public ItemMaterials GrailAsc { get; set; }
     }
 
     public class SkillMaterials
@@ -318,9 +315,9 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
 
     public class EquipFaceServant { }
 
-    public class ScriptServant { }
+    public class Script { }
 
-    public class ValServant
+    public class Val
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -329,7 +326,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public string Name { get; set; }
     }
 
-    public class TvalServant
+    public class Tval
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -338,7 +335,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public string Name { get; set; }
     }
 
-    public class CkSelfIndvServant
+    public class CkSelfIndv
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -347,7 +344,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public string Name { get; set; }
     }
 
-    public class CkOpIndvServant
+    public class CkOpIndv
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -356,7 +353,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public string Name { get; set; }
     }
 
-    public class BuffServant
+    public partial class Buff
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -377,37 +374,22 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public int BuffGroup { get; set; }
 
         [JsonProperty("vals")]
-        public List<ValServant> Vals { get; set; }
+        public List<Val> Vals { get; set; }
 
         [JsonProperty("tvals")]
-        public List<TvalServant> Tvals { get; set; }
+        public List<Tval> Tvals { get; set; }
 
         [JsonProperty("ckSelfIndv")]
-        public List<CkSelfIndvServant> CkSelfIndv { get; set; }
+        public List<CkSelfIndv> CkSelfIndv { get; set; }
 
         [JsonProperty("ckOpIndv")]
-        public List<CkOpIndvServant> CkOpIndv { get; set; }
+        public List<CkOpIndv> CkOpIndv { get; set; }
 
         [JsonProperty("maxRate")]
         public int MaxRate { get; set; }
-    }
+    }    
 
-    public class SvalServant
-    {
-        [JsonProperty("Rate")]
-        public int Rate { get; set; }
-
-        [JsonProperty("Turn")]
-        public int Turn { get; set; }
-
-        [JsonProperty("Count")]
-        public int Count { get; set; }
-
-        [JsonProperty("Value")]
-        public int Value { get; set; }
-    }
-
-    public class FunctionServant
+    public partial class Function
     {
         [JsonProperty("funcId")]
         public int FuncId { get; set; }
@@ -436,19 +418,31 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public string FuncPopupIcon { get; set; }
 
         [JsonProperty("functvals")]
-        public List<object> FuncTvals { get; set; }
+        public List<FuncTval> FuncTvals { get; set; }
 
         [JsonProperty("funcquestTvals")]
-        public List<object> FuncQuestTvals { get; set; }
+        public List<FuncQuestTval> FuncQuestTvals { get; set; }
 
         [JsonProperty("buffs")]
-        public List<BuffServant> Buffs { get; set; }
+        public List<Buff> Buffs { get; set; }
 
         [JsonProperty("svals")]
-        public List<SvalServant> Svals { get; set; }
+        public List<Sval> Svals { get; set; }
+
+        [JsonProperty("svals2")]
+        public List<Sval> Svals2 { get; set; }
+
+        [JsonProperty("svals3")]
+        public List<Sval> Svals3 { get; set; }
+
+        [JsonProperty("svals4")]
+        public List<Sval> Svals4 { get; set; }
+
+        [JsonProperty("svals5")]
+        public List<Sval> Svals5 { get; set; }
     }
 
-    public class SkillServant
+    public class Skill
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -487,13 +481,13 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public List<int> Cooldown { get; set; }
 
         [JsonProperty("actIndividuality")]
-        public List<object> ActIndividuality { get; set; }
+        public List<ActIndividuality> ActIndividuality { get; set; }
 
         [JsonProperty("script")]
-        public ScriptServant Script { get; set; }
+        public Script Script { get; set; }
 
         [JsonProperty("functions")]
-        public List<FunctionServant> Functions { get; set; }
+        public List<Function> Functions { get; set; }
     }
 
     public class ClassPassive
@@ -520,10 +514,10 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public List<object> ActIndividuality { get; set; }
 
         [JsonProperty("script")]
-        public ScriptServant Script { get; set; }
+        public Script Script { get; set; }
 
         [JsonProperty("functions")]
-        public List<FunctionServant> Functions { get; set; }
+        public List<Function> Functions { get; set; }
     }
 
     public class NpGain
@@ -604,6 +598,36 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public List<Individuality> Individuality { get; set; }
 
         [JsonProperty("functions")]
-        public List<FunctionServant> Functions { get; set; }
+        public List<Function> Functions { get; set; }
+    }
+
+    public class FuncTval
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+    }
+
+    public partial class Sval
+    {
+        [JsonProperty("Rate")]
+        public int Rate { get; set; }
+
+        [JsonProperty("Turn")]
+        public int Turn { get; set; }
+
+        [JsonProperty("Count")]
+        public int Count { get; set; }
+
+        [JsonProperty("Value")]
+        public int Value { get; set; }
+
+        [JsonProperty("Correction")]
+        public int Correction { get; set; }
+
+        [JsonProperty("Target")]
+        public int Target { get; set; }
     }
 }

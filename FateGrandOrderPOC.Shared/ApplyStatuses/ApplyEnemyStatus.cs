@@ -8,7 +8,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
 {
     public static class ApplyEnemyStatus
     {
-        public static void ApplyFuncTargetType(string funcTargetType, int enemyPosition, FunctionServant servantFunction, int currentSkillLevel, 
+        public static void ApplyFuncTargetType(string funcTargetType, int enemyPosition, Function servantFunction, int currentSkillLevel, 
             List<EnemyMob> enemies)
         {
             switch (funcTargetType)
@@ -29,7 +29,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
             }
         }
 
-        public static void ApplyFuncTargetType(string funcTargetType, int enemyPosition, MysticCode mysticCode, FunctionServant mysticCodeFunction,
+        public static void ApplyFuncTargetType(string funcTargetType, int enemyPosition, MysticCode mysticCode, Function mysticCodeFunction,
             List<EnemyMob> enemies)
         {
             switch (funcTargetType)
@@ -51,7 +51,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
         }
 
         #region Private Methods "Party Member"
-        private static List<EnemyMob> ApplyStatus(FunctionServant servantFunction, int currentSkillLevel, List<EnemyMob> enemies)
+        private static List<EnemyMob> ApplyStatus(Function servantFunction, int currentSkillLevel, List<EnemyMob> enemies)
         {
             foreach (EnemyMob enemy in enemies)
             {
@@ -61,12 +61,12 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
             return enemies;
         }
 
-        private static EnemyMob ApplyStatus(FunctionServant servantFunction, int currentSkillLevel, EnemyMob enemy)
+        private static EnemyMob ApplyStatus(Function servantFunction, int currentSkillLevel, EnemyMob enemy)
         {
             return ApplyPartyMemberStatus(servantFunction, currentSkillLevel, enemy);
         }
 
-        private static EnemyMob ApplyPartyMemberStatus(FunctionServant servantFunction, int currentSkillLevel, EnemyMob enemy)
+        private static EnemyMob ApplyPartyMemberStatus(Function servantFunction, int currentSkillLevel, EnemyMob enemy)
         {
             enemy.ActiveStatuses.Add(new ActiveStatus
             {
@@ -80,7 +80,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
         #endregion
 
         #region Private Methods "Mystic Code"
-        private static List<EnemyMob> ApplyStatus(MysticCode mysticCode, FunctionServant mysticCodeFunction, List<EnemyMob> enemies)
+        private static List<EnemyMob> ApplyStatus(MysticCode mysticCode, Function mysticCodeFunction, List<EnemyMob> enemies)
         {
             foreach (EnemyMob enemy in enemies)
             {
@@ -90,12 +90,12 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
             return enemies;
         }
 
-        private static EnemyMob ApplyStatus(MysticCode mysticCode, FunctionServant mysticCodeFunction, EnemyMob enemy)
+        private static EnemyMob ApplyStatus(MysticCode mysticCode, Function mysticCodeFunction, EnemyMob enemy)
         {
             return ApplyPartyMemberStatus(mysticCode, mysticCodeFunction, enemy);
         }
 
-        private static EnemyMob ApplyPartyMemberStatus(MysticCode mysticCode, FunctionServant mysticCodeFunction, EnemyMob enemy)
+        private static EnemyMob ApplyPartyMemberStatus(MysticCode mysticCode, Function mysticCodeFunction, EnemyMob enemy)
         {
             enemy.ActiveStatuses.Add(new ActiveStatus
             {

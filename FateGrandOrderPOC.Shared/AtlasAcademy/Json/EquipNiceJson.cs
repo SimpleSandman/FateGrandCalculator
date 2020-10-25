@@ -152,9 +152,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public string Name { get; set; }
     }
 
-    public class Script { }
-
-    public class Functval
+    public class FuncQuestTval
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -163,104 +161,14 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public string Name { get; set; }
     }
 
-    public class FuncquestTval
+    public partial class Buff
     {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-    }
-
-    public class Val
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-    }
-
-    public class Tval
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-    }
-
-    public class CkSelfIndv
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-    }
-
-    public class CkOpIndv
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-    }
-
-    public class Buff
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("detail")]
-        public string Detail { get; set; }
-
-        [JsonProperty("icon")]
-        public string Icon { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonProperty("buffGroup")]
-        public int BuffGroup { get; set; }
-
         [JsonProperty("script")]
         public Script Script { get; set; }
-
-        [JsonProperty("vals")]
-        public List<Val> Vals { get; set; }
-
-        [JsonProperty("tvals")]
-        public List<Tval> Tvals { get; set; }
-
-        [JsonProperty("ckSelfIndv")]
-        public List<CkSelfIndv> CkSelfIndv { get; set; }
-
-        [JsonProperty("ckOpIndv")]
-        public List<CkOpIndv> CkOpIndv { get; set; }
-
-        [JsonProperty("maxRate")]
-        public int MaxRate { get; set; }
     }
 
-    public class Sval
+    public partial class Sval
     {
-        [JsonProperty("Rate")]
-        public int Rate { get; set; }
-
-        [JsonProperty("Turn")]
-        public int Turn { get; set; }
-
-        [JsonProperty("Count")]
-        public int Count { get; set; }
-
-        [JsonProperty("Value")]
-        public int Value { get; set; }
-
         [JsonProperty("OnField")]
         public int OnField { get; set; }
 
@@ -307,88 +215,13 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public int RateCount { get; set; }
     }
 
-    public class Function
+    public partial class Function
     {
-        [JsonProperty("funcId")]
-        public int FuncId { get; set; }
-
-        [JsonProperty("funcType")]
-        public string FuncType { get; set; }
-
-        [JsonProperty("funcTargetType")]
-        public string FuncTargetType { get; set; }
-
-        [JsonProperty("funcTargetTeam")]
-        public string FuncTargetTeam { get; set; }
-
-        [JsonProperty("funcPopupText")]
-        public string FuncPopupText { get; set; }
-
-        [JsonProperty("funcPopupIcon")]
-        public string FuncPopupIcon { get; set; }
-
-        [JsonProperty("functvals")]
-        public List<Functval> Functvals { get; set; }
-
-        [JsonProperty("funcquestTvals")]
-        public List<FuncquestTval> FuncquestTvals { get; set; }
-
-        [JsonProperty("buffs")]
-        public List<Buff> Buffs { get; set; }
-
-        [JsonProperty("svals")]
-        public List<Sval> Svals { get; set; }
-
         [JsonProperty("traitVals")]
         public List<TraitVal> TraitVals { get; set; }
 
         [JsonProperty("followerVals")]
         public List<FollowerVal> FollowerVals { get; set; }
-    }
-
-    public class Skill
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("num")]
-        public int Num { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("detail")]
-        public string Detail { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonProperty("strengthStatus")]
-        public int StrengthStatus { get; set; }
-
-        [JsonProperty("priority")]
-        public int Priority { get; set; }
-
-        [JsonProperty("condQuestId")]
-        public int CondQuestId { get; set; }
-
-        [JsonProperty("condQuestPhase")]
-        public int CondQuestPhase { get; set; }
-
-        [JsonProperty("icon")]
-        public string Icon { get; set; }
-
-        [JsonProperty("coolDown")]
-        public List<int> CoolDown { get; set; }
-
-        [JsonProperty("actIndividuality")]
-        public List<ActIndividuality> ActIndividuality { get; set; }
-
-        [JsonProperty("script")]
-        public Script Script { get; set; }
-
-        [JsonProperty("functions")]
-        public List<Function> Functions { get; set; }
     }
 
     public class Costume { }

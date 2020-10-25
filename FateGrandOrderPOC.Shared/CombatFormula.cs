@@ -121,7 +121,7 @@ namespace FateGrandOrderPOC.Shared
 
             foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
             {
-                BuffServant buff = activeStatus.StatusEffect.Buffs[0];
+                Buff buff = activeStatus.StatusEffect.Buffs[0];
 
                 if (buff.Type == "upDamage" 
                     && buff.Vals.Any(f => f.Name == "buffPowerModStrUp") 
@@ -149,7 +149,7 @@ namespace FateGrandOrderPOC.Shared
 
             foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
             {
-                BuffServant buff = activeStatus.StatusEffect.Buffs[0];
+                Buff buff = activeStatus.StatusEffect.Buffs[0];
 
                 if (buff.Type == "upCommandall" && buff.CkSelfIndv.Any(f => f.Name == ($"card{partyMember.NoblePhantasm.Card.ToUpperFirstChar()}")))
                 {
@@ -184,7 +184,7 @@ namespace FateGrandOrderPOC.Shared
 
             foreach (ActiveStatus activeStatus in enemy.ActiveStatuses)
             {
-                BuffServant buff = activeStatus.StatusEffect.Buffs[0];
+                Buff buff = activeStatus.StatusEffect.Buffs[0];
 
                 if (buff.Type == "downDefence")
                 {

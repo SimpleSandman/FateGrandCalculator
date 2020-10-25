@@ -22,7 +22,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Json
         public ExtraAssetsMysticCode ExtraAssets { get; set; }
 
         [JsonProperty("skills")]
-        public List<SkillServant> Skills { get; set; }
+        public List<Skill> Skills { get; set; }
 
         [JsonProperty("expRequired")]
         public List<int> ExpRequired { get; set; }
