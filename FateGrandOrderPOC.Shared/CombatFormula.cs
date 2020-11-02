@@ -14,7 +14,7 @@ using Newtonsoft.Json.Linq;
 
 namespace FateGrandOrderPOC.Shared
 {
-    public class CombatFormula
+    public class CombatFormula : ICombatFormula
     {
         private readonly IAtlasAcademyClient _aaClient;
         private readonly AttributeRelation _attributeRelation = new AttributeRelation();
@@ -118,14 +118,13 @@ namespace FateGrandOrderPOC.Shared
             return;
         }
 
-        #region Private Methods
         /// <summary>
         /// Find special damage up buff versus an enemy trait
         /// </summary>
         /// <param name="partyMember"></param>
         /// <param name="enemy"></param>
         /// <returns></returns>
-        private float SpecialAttackUp(PartyMember partyMember, EnemyMob enemy)
+        public float SpecialAttackUp(PartyMember partyMember, EnemyMob enemy)
         {
             float powerModifier = 0.0f;
             const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
@@ -154,7 +153,7 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="attackUp"></param>
         /// <param name="powerModifier"></param>
         /// <param name="npGainUp"></param>
-        private void SetStatusEffects(PartyMember partyMember, ref float cardNpTypeUp, ref float attackUp, ref float powerModifier, ref float npGainUp)
+        public void SetStatusEffects(PartyMember partyMember, ref float cardNpTypeUp, ref float attackUp, ref float powerModifier, ref float npGainUp)
         {
             const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
 
@@ -189,7 +188,7 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="partyMember"></param>
         /// <param name="defenseDownModifier"></param>
         /// <param name="cardDefenseDownModifier"></param>
-        private void SetStatusEffects(EnemyMob enemy, PartyMember partyMember, ref float defenseDownModifier, ref float cardDefenseDownModifier)
+        public void SetStatusEffects(EnemyMob enemy, PartyMember partyMember, ref float defenseDownModifier, ref float cardDefenseDownModifier)
         {
             const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
 
@@ -208,39 +207,7 @@ namespace FateGrandOrderPOC.Shared
             }
         }
 
-        /// <summary>
-        /// NP gain modifier based on enemy class and special (server-side data)
-        /// </summary>
-        /// <param name="className"></param>
-        /// <returns></returns>
-        private float EnemyClassModifier(string className)
-        {
-            switch (className.ToLower())
-            {
-                case "berserker":
-                    return 0.8f;
-                case "assassin":
-                    return 0.9f;
-                case "saber":
-                case "archer":
-                case "lancer":
-                case "ruler":
-                case "avenger":
-                case "alterEgo":
-                case "foreigner":
-                case "shielder":
-                    return 1.0f;
-                case "rider":
-                    return 1.1f;
-                case "caster":
-                case "moonCancer":
-                    return 1.2f;
-                default:
-                    return 0.0f;
-            }
-        }
-
-        private float NpGainedFromEnemy(PartyMember partyMember, EnemyMob enemyMob, float npGainUp, float cardNpTypeUp,
+        public float NpGainedFromEnemy(PartyMember partyMember, EnemyMob enemyMob, float npGainUp, float cardNpTypeUp,
             float npDamageForEnemyMob, List<float> npDistributionPercentages)
         {
             float effectiveHitModifier, npRefund = 0.0f;
@@ -265,7 +232,7 @@ namespace FateGrandOrderPOC.Shared
             return npRefund;
         }
 
-        private float CalculatedNpPerHit(PartyMember partyMember, EnemyMob enemyMob, float cardNpTypeUp, float npGainUp)
+        public float CalculatedNpPerHit(PartyMember partyMember, EnemyMob enemyMob, float cardNpTypeUp, float npGainUp)
         {
             return EnemyClassModifier(enemyMob.ClassName.ToString())
                 * partyMember.NoblePhantasm.NpGain.Np[partyMember.Servant.NpLevel - 1]
@@ -273,7 +240,7 @@ namespace FateGrandOrderPOC.Shared
                 * (1.0f + npGainUp);
         }
 
-        private List<float> NpDistributionPercentages(PartyMember partyMember)
+        public List<float> NpDistributionPercentages(PartyMember partyMember)
         {
             float perc, lastNpHitPerc = 0.0f;
             List<float> percNpHitDistribution = new List<float>();
@@ -292,7 +259,7 @@ namespace FateGrandOrderPOC.Shared
             return percNpHitDistribution;
         }
 
-        private float HealthRemaining(EnemyMob enemyMob, float npDamageForEnemyMob)
+        public float HealthRemaining(EnemyMob enemyMob, float npDamageForEnemyMob)
         {
             float healthRemaining = enemyMob.Health - (npDamageForEnemyMob * 0.9f);
             if (healthRemaining < 0.0f)
@@ -303,7 +270,7 @@ namespace FateGrandOrderPOC.Shared
             return healthRemaining;
         }
 
-        private async Task<float> BaseNpDamage(PartyMember partyMember, EnemyMob enemy, int npChainPosition)
+        public async Task<float> BaseNpDamage(PartyMember partyMember, EnemyMob enemy, int npChainPosition)
         {
             Function npFunction = partyMember
                 .NoblePhantasm
@@ -360,7 +327,7 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="npCharge"></param>
         /// <param name="npChainPosition"></param>
         /// <returns></returns>
-        private int Overcharge(float npCharge, int npChainPosition)
+        public int Overcharge(float npCharge, int npChainPosition)
         {
             int overcharge = 0;
 
@@ -387,12 +354,12 @@ namespace FateGrandOrderPOC.Shared
             return overcharge;
         }
 
-        private async Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
+        public async Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
         {
             return modifiedNpDamage * await AttributeModifier(partyMember, enemyMob) * await ClassModifier(partyMember, enemyMob);
         }
 
-        private async Task<float> ChanceToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
+        public async Task<float> ChanceToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
         {
             if (0.9f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) > enemyMob.Health)
             {
@@ -405,6 +372,39 @@ namespace FateGrandOrderPOC.Shared
             else // show chance of success
             {
                 return (1.0f - ((enemyMob.Health / await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) - 0.9f) / 0.2f)) * 100.0f;
+            }
+        }
+
+        #region Private Methods
+        /// <summary>
+        /// NP gain modifier based on enemy class and special (server-side data)
+        /// </summary>
+        /// <param name="className"></param>
+        /// <returns></returns>
+        private float EnemyClassModifier(string className)
+        {
+            switch (className.ToLower())
+            {
+                case "berserker":
+                    return 0.8f;
+                case "assassin":
+                    return 0.9f;
+                case "saber":
+                case "archer":
+                case "lancer":
+                case "ruler":
+                case "avenger":
+                case "alterEgo":
+                case "foreigner":
+                case "shielder":
+                    return 1.0f;
+                case "rider":
+                    return 1.1f;
+                case "caster":
+                case "moonCancer":
+                    return 1.2f;
+                default:
+                    return 0.0f;
             }
         }
 
