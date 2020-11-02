@@ -84,9 +84,7 @@ namespace FateGrandOrderPOC
             };
 
             PartyMember partyMemberAttacker = AddPartyMember(chaldeaAttackServant, chaldeaKscope);
-
-            // TODO: Get more funcTypes and apply them to party member properties
-            partyMemberAttacker.NpCharge = GetCraftEssenceValue(partyMemberAttacker, "gainNp");
+            ApplyCraftEssenceEffects(partyMemberAttacker);
 
             _party.Add(partyMemberAttacker);
             #endregion
@@ -390,36 +388,42 @@ namespace FateGrandOrderPOC
             };
         }
 
-        private float GetCraftEssenceValue(PartyMember partyMember, string funcType) 
+        private void ApplyCraftEssenceEffects(PartyMember partyMember) 
         {
             if (partyMember.EquippedCraftEssence == null)
             {
-                throw new NotSupportedException();
+                return;
             }
 
-            List<Skill> skills = new List<Skill>();
-
-            if (!partyMember.EquippedCraftEssence.Mlb)
+            int priority = 1;
+            if (partyMember.EquippedCraftEssence.Mlb)
             {
-                skills = partyMember.EquippedCraftEssence.CraftEssenceInfo.Skills.FindAll(s => s.Priority == 1);
-            }
-            else 
-            {
-                skills = partyMember.EquippedCraftEssence.CraftEssenceInfo.Skills.FindAll(s => s.Priority == 2);
+                priority = 2;
             }
 
-            Function function = new Function();
+            List<Skill> skills = partyMember.EquippedCraftEssence.CraftEssenceInfo.Skills.FindAll(s => s.Priority == priority);
 
             foreach (Skill skill in skills) 
             {
-                function = skill.Functions.Find(n => n.FuncType == funcType);
-                if (function != null)
+                foreach (Function function in skill.Functions)
                 {
-                    break;
+                    if (function.FuncType == "gainNp")
+                    {
+                        partyMember.NpCharge += function.Svals[0].Value / 100.0f;
+                    }
+                    else
+                    {
+                        partyMember.ActiveStatuses.Add(new ActiveStatus
+                        {
+                            StatusEffect = function,
+                            AppliedSkillLevel = 1,
+                            ActiveTurnCount = function.Svals[0].Turn
+                        });
+                    }
                 }
             }
 
-            return function.Svals[0].Value / 100.0f;
+            return;
         }
         #endregion
     }
