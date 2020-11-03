@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy;
@@ -22,7 +20,6 @@ namespace FateGrandOrderPOC.Test
         const string REGION = "NA";
 
         private readonly WireMockFixture _wiremockFixture;
-        private bool _isMockServerInUse;
 
         public AtlasAcademyClientTest(WireMockFixture wiremockFixture)
         {
@@ -30,9 +27,9 @@ namespace FateGrandOrderPOC.Test
         }
 
         [Fact]
-        public async Task TestGetServantInfo()
+        public async Task GetServantInfo()
         {
-            CheckIfMockServerInUse();
+            _wiremockFixture.CheckIfMockServerInUse();
 
             // build mock response
             ServantNiceJson mockResponse = new ServantNiceJson
@@ -53,9 +50,9 @@ namespace FateGrandOrderPOC.Test
         }
 
         [Fact]
-        public async Task TestGetCraftEssenceInfo()
+        public async Task GetCraftEssenceInfo()
         {
-            CheckIfMockServerInUse();
+            _wiremockFixture.CheckIfMockServerInUse();
 
             EquipNiceJson mockResponse = new EquipNiceJson
             {
@@ -75,9 +72,9 @@ namespace FateGrandOrderPOC.Test
         }
 
         [Fact]
-        public async Task TestGetClassAttackRateInfo()
+        public async Task GetClassAttackRateInfo()
         {
-            CheckIfMockServerInUse();
+            _wiremockFixture.CheckIfMockServerInUse();
 
             ClassAttackRateNiceJson mockResponse = new ClassAttackRateNiceJson
             {
@@ -95,9 +92,9 @@ namespace FateGrandOrderPOC.Test
         }
 
         [Fact]
-        public async Task TestGetConstantGameInfo()
+        public async Task GetConstantGameInfo()
         {
-            CheckIfMockServerInUse();
+            _wiremockFixture.CheckIfMockServerInUse();
 
             ConstantNiceJson mockResponse = new ConstantNiceJson
             {
@@ -115,9 +112,9 @@ namespace FateGrandOrderPOC.Test
         }
 
         [Fact]
-        public async Task TestGetListBasicServantInfo()
+        public async Task GetListBasicServantInfo()
         {
-            CheckIfMockServerInUse();
+            _wiremockFixture.CheckIfMockServerInUse();
 
             List<ServantBasicJson> mockResponse = new List<ServantBasicJson>();
             ServantBasicJson json = new ServantBasicJson
@@ -136,24 +133,5 @@ namespace FateGrandOrderPOC.Test
 
             response.Should().BeEquivalentTo(json);
         }
-
-        #region Private Methods
-        /// <summary>
-        /// Check if the TCP port the mock server is using is free for the next test
-        /// </summary>
-        private void CheckIfMockServerInUse()
-        {
-            while (_isMockServerInUse)
-            {
-                IPGlobalProperties ipGlobalProperties = IPGlobalProperties.GetIPGlobalProperties();
-
-                _isMockServerInUse = ipGlobalProperties
-                    .GetActiveTcpConnections()
-                    .Any(p => p.LocalEndPoint.Port == _wiremockFixture.MockServer.Ports[0]);
-            }
-
-            _wiremockFixture.MockServer.Reset(); // clean up for the next test
-        }
-        #endregion
     }
 }

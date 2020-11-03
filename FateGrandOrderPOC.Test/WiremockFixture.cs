@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Net.NetworkInformation;
 
 using WireMock.Logging;
 using WireMock.Server;
@@ -9,6 +11,7 @@ namespace FateGrandOrderPOC.Test
     public class WireMockFixture : IDisposable
     {
         public const string SERVER_URL = "http://localhost:8080/";
+        private bool _isMockServerInUse = false;
 
         public WireMockServer MockServer { get; private set; }
 
@@ -27,6 +30,23 @@ namespace FateGrandOrderPOC.Test
         public void Dispose()
         {
             MockServer.Stop();
+        }
+
+        /// <summary>
+        /// Check if the TCP port the mock server is using is free for the next test
+        /// </summary>
+        public void CheckIfMockServerInUse()
+        {
+            while (_isMockServerInUse)
+            {
+                IPGlobalProperties ipGlobalProperties = IPGlobalProperties.GetIPGlobalProperties();
+
+                _isMockServerInUse = ipGlobalProperties
+                    .GetActiveTcpConnections()
+                    .Any(p => p.LocalEndPoint.Port == MockServer.Ports[0]);
+            }
+
+            MockServer.Reset(); // clean up for the next test
         }
     }
 }
