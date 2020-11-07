@@ -35,4 +35,28 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Json\JP\ServantData\Archer\" />
+    <Folder Include="Json\JP\ServantData\Lancer\" />
+    <Folder Include="Json\JP\ServantData\Assassin\" />
+    <Folder Include="Json\JP\ServantData\AlterEgo\" />
+    <Folder Include="Json\JP\ServantData\Avenger\" />
+    <Folder Include="Json\JP\ServantData\MoonCancer\" />
+    <Folder Include="Json\JP\ServantData\Foreigner\" />
+    <Folder Include="Json\JP\ServantData\Berserker\" />
+    <Folder Include="Json\JP\ServantData\Ruler\" />
+    <Folder Include="Json\JP\ServantData\Shielder\" />
+    <Folder Include="Json\NA\ServantData\AlterEgo\" />
+    <Folder Include="Json\NA\ServantData\Archer\" />
+    <Folder Include="Json\NA\ServantData\Assassin\" />
+    <Folder Include="Json\NA\ServantData\Avenger\" />
+    <Folder Include="Json\NA\ServantData\Berserker\" />
+    <Folder Include="Json\NA\ServantData\Foreigner\" />
+    <Folder Include="Json\NA\ServantData\Lancer\" />
+    <Folder Include="Json\NA\ServantData\MoonCancer\" />
+    <Folder Include="Json\NA\ServantData\Rider\" />
+    <Folder Include="Json\NA\ServantData\Ruler\" />
+    <Folder Include="Json\NA\ServantData\Shielder\" />
+  </ItemGroup>
+
 </Project>
