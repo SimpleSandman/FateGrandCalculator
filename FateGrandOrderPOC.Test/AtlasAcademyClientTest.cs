@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using Autofac;
+
 using FateGrandOrderPOC.Shared.AtlasAcademy;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 
@@ -20,10 +22,19 @@ namespace FateGrandOrderPOC.Test
         const string REGION = "NA";
 
         private readonly WireMockFixture _wiremockFixture;
+        private readonly IContainer _container;
 
         public AtlasAcademyClientTest(WireMockFixture wiremockFixture)
         {
             _wiremockFixture = wiremockFixture;
+
+            ContainerBuilder builder = new ContainerBuilder();
+            builder.RegisterModule(new AutofacModule 
+            { 
+                BaseApiUrl = new NamedParameter("baseApiUrl", WireMockFixture.SERVER_URL)
+            });
+
+            _container = builder.Build();
         }
 
         [Fact]
@@ -42,11 +53,13 @@ namespace FateGrandOrderPOC.Test
                 .Given(Request.Create().WithPath($"/nice/{REGION}/servant/1").WithParam("lang", "en").UsingGet())
                 .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
 
-            // test the REST client
-            IAtlasAcademyClient client = new AtlasAcademyClient(() => WireMockFixture.SERVER_URL);
-            ServantNiceJson response = await client.GetServantInfo("1");
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
+                ServantNiceJson response = await client.GetServantInfo("1");
 
-            response.AtkBase.Should().Be(1000);
+                response.AtkBase.Should().Be(1000);
+            }
         }
 
         [Fact]
@@ -64,11 +77,14 @@ namespace FateGrandOrderPOC.Test
                 .Given(Request.Create().WithPath($"/nice/{REGION}/equip/1").WithParam("lore", "true").WithParam("lang", "en").UsingGet())
                 .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
 
-            IAtlasAcademyClient client = new AtlasAcademyClient(() => WireMockFixture.SERVER_URL);
-            EquipNiceJson response = await client.GetCraftEssenceInfo("1");
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
+                EquipNiceJson response = await client.GetCraftEssenceInfo("1");
 
-            response.Id.Should().Be(1);
-            response.AtkBase.Should().Be(600);
+                response.Id.Should().Be(1);
+                response.AtkBase.Should().Be(600);
+            }
         }
 
         [Fact]
@@ -85,10 +101,13 @@ namespace FateGrandOrderPOC.Test
                 .Given(Request.Create().WithPath($"/export/{REGION}/NiceClassAttackRate.json").UsingGet())
                 .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
 
-            IAtlasAcademyClient client = new AtlasAcademyClient(() => WireMockFixture.SERVER_URL);
-            ClassAttackRateNiceJson response = await client.GetClassAttackRateInfo();
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
+                ClassAttackRateNiceJson response = await client.GetClassAttackRateInfo();
 
-            response.Lancer.Should().Be(105);
+                response.Lancer.Should().Be(105);
+            }
         }
 
         [Fact]
@@ -105,10 +124,13 @@ namespace FateGrandOrderPOC.Test
                 .Given(Request.Create().WithPath($"/export/{REGION}/NiceConstant.json").UsingGet())
                 .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
 
-            IAtlasAcademyClient client = new AtlasAcademyClient(() => WireMockFixture.SERVER_URL);
-            ConstantNiceJson response = await client.GetConstantGameInfo();
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
+                ConstantNiceJson response = await client.GetConstantGameInfo();
 
-            response.USER_COST.Should().Be(6);
+                response.USER_COST.Should().Be(6);
+            }
         }
 
         [Fact]
@@ -125,13 +147,16 @@ namespace FateGrandOrderPOC.Test
             mockResponse.Add(json);
 
             _wiremockFixture.MockServer
-                .Given(Request.Create().WithUrl($"{WireMockFixture.SERVER_URL}/export/{REGION}/basic_servant.json").UsingGet())
+                .Given(Request.Create().WithPath($"/export/{REGION}/basic_servant.json").UsingGet())
                 .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
 
-            IAtlasAcademyClient client = new AtlasAcademyClient(() => WireMockFixture.SERVER_URL);
-            List<ServantBasicJson> response = await client.GetListBasicServantInfo();
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
+                List<ServantBasicJson> response = await client.GetListBasicServantInfo();
 
-            response.Should().BeEquivalentTo(json);
+                response.Should().BeEquivalentTo(json);
+            }
         }
     }
 }

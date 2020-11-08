@@ -48,7 +48,7 @@ namespace FateGrandOrderPOC
 
         public Program()
         {
-            _aaClient = new AtlasAcademyClient(() => "https://api.atlasacademy.io");
+            _aaClient = new AtlasAcademyClient("https://api.atlasacademy.io");
             _combatFormula = new CombatFormula(_aaClient);
         }
 
