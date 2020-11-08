@@ -29,7 +29,7 @@ namespace FateGrandOrderPOC.Test
         }
 
         [Fact]
-        public async Task ReplaceThisWithRealTesting()
+        public void ConfirmJsonDeserializationJP()
         {
             _wiremockFixture.CheckIfMockServerInUse();
             
@@ -37,7 +37,19 @@ namespace FateGrandOrderPOC.Test
             string fullPath = ServantFilePath("JP", "Caster", "500300-TamamoNoMaeCasterEN.json");
             ServantNiceJson testServant = JsonConvert.DeserializeObject<ServantNiceJson>(File.ReadAllText(fullPath));
 
-            // do some testing here
+            testServant.Name.Should().Be("Tamamo-no-Mae");
+        }
+
+        [Fact]
+        public void ConfirmJsonDeserializationNA()
+        {
+            _wiremockFixture.CheckIfMockServerInUse();
+
+            // Set "Copy to Output Directory" to "Copy if newer" for JSON files
+            string fullPath = ServantFilePath("NA", "Caster", "500800-MerlinCaster.json");
+            ServantNiceJson testServant = JsonConvert.DeserializeObject<ServantNiceJson>(File.ReadAllText(fullPath));
+
+            testServant.Name.Should().Be("Merlin");
         }
 
         #region Private Methods
