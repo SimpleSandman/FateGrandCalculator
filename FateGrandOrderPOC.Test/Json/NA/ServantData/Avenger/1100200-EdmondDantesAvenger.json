@@ -1,0 +1,6039 @@
+﻿{
+  "id": 1100200,
+  "collectionNo": 96,
+  "name": "Edmond Dantès",
+  "className": "avenger",
+  "type": "normal",
+  "flag": "normal",
+  "rarity": 5,
+  "cost": 16,
+  "lvMax": 90,
+  "extraAssets": {
+    "charaGraph": {
+      "ascension": {
+        "1": "https://assets.atlasacademy.io/GameData/NA/CharaGraph/1100200/1100200a@1.png",
+        "2": "https://assets.atlasacademy.io/GameData/NA/CharaGraph/1100200/1100200a@2.png",
+        "3": "https://assets.atlasacademy.io/GameData/NA/CharaGraph/1100200/1100200b@1.png",
+        "4": "https://assets.atlasacademy.io/GameData/NA/CharaGraph/1100200/1100200b@2.png"
+      },
+      "costume": {
+        "1100230": "https://assets.atlasacademy.io/GameData/NA/CharaGraph/1100230/1100230a.png"
+      }
+    },
+    "faces": {
+      "ascension": {
+        "1": "https://assets.atlasacademy.io/GameData/NA/Faces/f_11002000.png",
+        "2": "https://assets.atlasacademy.io/GameData/NA/Faces/f_11002001.png",
+        "3": "https://assets.atlasacademy.io/GameData/NA/Faces/f_11002002.png",
+        "4": "https://assets.atlasacademy.io/GameData/NA/Faces/f_11002003.png"
+      },
+      "costume": {
+        "1100230": "https://assets.atlasacademy.io/GameData/NA/Faces/f_11002300.png"
+      }
+    },
+    "narrowFigure": {
+      "ascension": {
+        "1": "https://assets.atlasacademy.io/GameData/NA/NarrowFigure/1100200/1100200@0.png",
+        "2": "https://assets.atlasacademy.io/GameData/NA/NarrowFigure/1100200/1100200@1.png",
+        "3": "https://assets.atlasacademy.io/GameData/NA/NarrowFigure/1100200/1100200@2.png",
+        "4": "https://assets.atlasacademy.io/GameData/NA/NarrowFigure/1100200/1100200_2@0.png"
+      },
+      "costume": {
+        "1100230": "https://assets.atlasacademy.io/GameData/NA/NarrowFigure/1100230/1100230@0.png"
+      }
+    },
+    "charaFigure": {
+      "ascension": {
+        "1": "https://assets.atlasacademy.io/GameData/NA/CharaFigure/11002000/11002000_merged.png",
+        "2": "https://assets.atlasacademy.io/GameData/NA/CharaFigure/11002001/11002001_merged.png",
+        "3": "https://assets.atlasacademy.io/GameData/NA/CharaFigure/11002002/11002002_merged.png"
+      },
+      "costume": {
+        "1100230": "https://assets.atlasacademy.io/GameData/NA/CharaFigure/11002300/11002300_merged.png"
+      }
+    },
+    "commands": {
+      "ascension": {
+        "1": "https://assets.atlasacademy.io/GameData/NA/Servants/Commands/1100200/card_servant_1.png",
+        "2": "https://assets.atlasacademy.io/GameData/NA/Servants/Commands/1100200/card_servant_2.png",
+        "3": "https://assets.atlasacademy.io/GameData/NA/Servants/Commands/1100200/card_servant_3.png"
+      },
+      "costume": {
+        "1100230": "https://assets.atlasacademy.io/GameData/NA/Servants/Commands/1100200/card_servant_11.png"
+      }
+    },
+    "status": {
+      "ascension": {
+        "1": "https://assets.atlasacademy.io/GameData/NA/Servants/Status/1100200/status_servant_1.png",
+        "2": "https://assets.atlasacademy.io/GameData/NA/Servants/Status/1100200/status_servant_2.png",
+        "3": "https://assets.atlasacademy.io/GameData/NA/Servants/Status/1100200/status_servant_3.png"
+      },
+      "costume": {
+        "1100230": "https://assets.atlasacademy.io/GameData/NA/Servants/Status/1100200/status_servant_11.png"
+      }
+    },
+    "equipFace": {}
+  },
+  "gender": "male",
+  "attribute": "human",
+  "traits": [
+    {
+      "id": 1,
+      "name": "genderMale"
+    },
+    {
+      "id": 110,
+      "name": "classAvenger"
+    },
+    {
+      "id": 202,
+      "name": "attributeHuman"
+    },
+    {
+      "id": 301,
+      "name": "alignmentChaotic"
+    },
+    {
+      "id": 304,
+      "name": "alignmentEvil"
+    },
+    {
+      "id": 1000,
+      "name": "basedOnServant"
+    },
+    {
+      "id": 2001,
+      "name": "humanoid"
+    },
+    {
+      "id": 2008,
+      "name": "weakToEnumaElish"
+    },
+    {
+      "id": 5000,
+      "name": "canBeInBattle"
+    },
+    {
+      "id": 1100200,
+      "name": "unknown"
+    }
+  ],
+  "starAbsorb": 30,
+  "starGen": 59,
+  "instantDeathChance": 70,
+  "cards": [
+    "quick",
+    "quick",
+    "arts",
+    "buster",
+    "buster"
+  ],
+  "hitsDistribution": {
+    "arts": [
+      33,
+      67
+    ],
+    "buster": [
+      16,
+      33,
+      51
+    ],
+    "quick": [
+      10,
+      20,
+      30,
+      40
+    ],
+    "extra": [
+      5,
+      11,
+      5,
+      17,
+      62
+    ]
+  },
+  "atkBase": 1953,
+  "atkMax": 12641,
+  "hpBase": 1785,
+  "hpMax": 12177,
+  "relateQuestIds": [
+    911100201,
+    94026512
+  ],
+  "growthCurve": 15,
+  "atkGrowth": [
+    1953,
+    1963,
+    1974,
+    1995,
+    2027,
+    2070,
+    2113,
+    2156,
+    2220,
+    2273,
+    2348,
+    2423,
+    2498,
+    2583,
+    2679,
+    2775,
+    2882,
+    2989,
+    3107,
+    3224,
+    3353,
+    3481,
+    3609,
+    3748,
+    3898,
+    4047,
+    4197,
+    4347,
+    4507,
+    4678,
+    4838,
+    5009,
+    5180,
+    5351,
+    5533,
+    5715,
+    5896,
+    6078,
+    6260,
+    6441,
+    6634,
+    6816,
+    7008,
+    7200,
+    7382,
+    7574,
+    7767,
+    7948,
+    8141,
+    8323,
+    8504,
+    8686,
+    8868,
+    9049,
+    9231,
+    9402,
+    9573,
+    9744,
+    9904,
+    10075,
+    10236,
+    10385,
+    10535,
+    10685,
+    10834,
+    10973,
+    11101,
+    11230,
+    11358,
+    11476,
+    11593,
+    11700,
+    11807,
+    11903,
+    11999,
+    12085,
+    12160,
+    12234,
+    12309,
+    12363,
+    12427,
+    12469,
+    12491,
+    12512,
+    12534,
+    12555,
+    12576,
+    12598,
+    12619,
+    12641,
+    12758,
+    12876,
+    12993,
+    13111,
+    13239,
+    13357,
+    13474,
+    13592,
+    13720,
+    13838
+  ],
+  "hpGrowth": [
+    1785,
+    1795,
+    1805,
+    1826,
+    1857,
+    1899,
+    1940,
+    1982,
+    2044,
+    2096,
+    2169,
+    2242,
+    2314,
+    2398,
+    2491,
+    2585,
+    2689,
+    2793,
+    2907,
+    3021,
+    3146,
+    3271,
+    3395,
+    3530,
+    3676,
+    3821,
+    3967,
+    4112,
+    4268,
+    4434,
+    4590,
+    4757,
+    4923,
+    5089,
+    5266,
+    5442,
+    5619,
+    5796,
+    5972,
+    6149,
+    6336,
+    6513,
+    6700,
+    6887,
+    7064,
+    7251,
+    7438,
+    7614,
+    7801,
+    7978,
+    8155,
+    8331,
+    8508,
+    8685,
+    8861,
+    9028,
+    9194,
+    9360,
+    9516,
+    9682,
+    9838,
+    9984,
+    10129,
+    10275,
+    10420,
+    10555,
+    10680,
+    10805,
+    10929,
+    11044,
+    11158,
+    11262,
+    11366,
+    11459,
+    11553,
+    11636,
+    11709,
+    11782,
+    11854,
+    11906,
+    11969,
+    12010,
+    12031,
+    12052,
+    12073,
+    12093,
+    12114,
+    12135,
+    12156,
+    12177,
+    12291,
+    12405,
+    12519,
+    12634,
+    12758,
+    12873,
+    12987,
+    13101,
+    13226,
+    13340
+  ],
+  "bondGrowth": [
+    6000,
+    30000,
+    45000,
+    47500,
+    50000,
+    210000,
+    650000,
+    980000,
+    1330000,
+    1705000
+  ],
+  "expGrowth": [
+    0,
+    100,
+    400,
+    1000,
+    2000,
+    3500,
+    5600,
+    8400,
+    12000,
+    16500,
+    22000,
+    28600,
+    36400,
+    45500,
+    56000,
+    68000,
+    81600,
+    96900,
+    114000,
+    133000,
+    154000,
+    177100,
+    202400,
+    230000,
+    260000,
+    292500,
+    327600,
+    365400,
+    406000,
+    449500,
+    496000,
+    545600,
+    598400,
+    654500,
+    714000,
+    777000,
+    843600,
+    913900,
+    988000,
+    1066000,
+    1148000,
+    1234100,
+    1324400,
+    1419000,
+    1518000,
+    1621500,
+    1729600,
+    1842400,
+    1960000,
+    2082500,
+    2210000,
+    2342600,
+    2480400,
+    2623500,
+    2772000,
+    2926000,
+    3085600,
+    3250900,
+    3422000,
+    3599000,
+    3782000,
+    3971100,
+    4166400,
+    4368000,
+    4576000,
+    4790500,
+    5011600,
+    5239400,
+    5474000,
+    5715500,
+    5964000,
+    6219600,
+    6482400,
+    6752500,
+    7030000,
+    7315000,
+    7607600,
+    7907900,
+    8216000,
+    8532000,
+    8856000,
+    9188100,
+    9528400,
+    9877000,
+    10234000,
+    10599500,
+    10973600,
+    11356400,
+    11748000,
+    12148500,
+    12567000,
+    13021900,
+    13532000,
+    14116500,
+    14795000,
+    15587500,
+    16514400,
+    17596500,
+    18855000,
+    20311500
+  ],
+  "expFeed": [
+    15000,
+    15010,
+    15020,
+    15030,
+    15040,
+    15050,
+    15060,
+    15070,
+    15080,
+    15090,
+    15100,
+    15110,
+    15120,
+    15130,
+    15140,
+    15150,
+    15160,
+    15170,
+    15180,
+    15190,
+    15200,
+    15210,
+    15220,
+    15230,
+    15240,
+    15250,
+    15260,
+    15270,
+    15280,
+    15290,
+    15300,
+    15310,
+    15320,
+    15330,
+    15340,
+    15350,
+    15360,
+    15370,
+    15380,
+    15390,
+    15400,
+    15410,
+    15420,
+    15430,
+    15440,
+    15450,
+    15460,
+    15470,
+    15480,
+    15490,
+    15500,
+    15510,
+    15520,
+    15530,
+    15540,
+    15550,
+    15560,
+    15570,
+    15580,
+    15590,
+    15600,
+    15610,
+    15620,
+    15630,
+    15640,
+    15650,
+    15660,
+    15670,
+    15680,
+    15690,
+    15700,
+    15710,
+    15720,
+    15730,
+    15740,
+    15750,
+    15760,
+    15770,
+    15780,
+    15790,
+    15800,
+    15810,
+    15820,
+    15830,
+    15840,
+    15850,
+    15860,
+    15870,
+    15880,
+    15890,
+    15900,
+    15910,
+    15920,
+    15930,
+    15940,
+    15950,
+    15960,
+    15970,
+    15980,
+    15990
+  ],
+  "bondEquip": 9300830,
+  "ascensionAdd": {
+    "individuality": {
+      "ascension": {},
+      "costume": {
+        "1100230": []
+      }
+    },
+    "voicePrefix": {
+      "ascension": {},
+      "costume": {
+        "1100230": 11
+      }
+    }
+  },
+  "svtChange": [],
+  "ascensionMaterials": {
+    "0": {
+      "items": [
+        {
+          "item": {
+            "id": 6516,
+            "name": "Evil Bone",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nOminous bones wielding curses.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6516.png",
+            "background": "bronze"
+          },
+          "amount": 10
+        },
+        {
+          "item": {
+            "id": 6515,
+            "name": "Octuplet Crystals",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nA multi-crystal created within a golem's body.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6515.png",
+            "background": "silver"
+          },
+          "amount": 10
+        }
+      ],
+      "qp": 100000
+    },
+    "1": {
+      "items": [
+        {
+          "item": {
+            "id": 6509,
+            "name": "Serpent Jewel",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nA jewel as if you are being stared by serpent eyes.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6509.png",
+            "background": "silver"
+          },
+          "amount": 10
+        },
+        {
+          "item": {
+            "id": 6511,
+            "name": "Forbidden Page",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nA page which nobody should ever read.\nUsually mixed in as the first or last page.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6511.png",
+            "background": "silver"
+          },
+          "amount": 10
+        }
+      ],
+      "qp": 300000
+    },
+    "2": {
+      "items": [
+        {
+          "item": {
+            "id": 6505,
+            "name": "Void's Dust",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nDust that disperses when hollow shadows disappear.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6505.png",
+            "background": "bronze"
+          },
+          "amount": 10
+        },
+        {
+          "item": {
+            "id": 6510,
+            "name": "Eternal Gear",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nDream of an eternal machine.\nA gear that spins forever once it starts turning.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6510.png",
+            "background": "silver"
+          },
+          "amount": 10
+        }
+      ],
+      "qp": 1000000
+    },
+    "3": {
+      "items": [
+        {
+          "item": {
+            "id": 6501,
+            "name": "Phoenix Feather",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nFeather from a sacred bird of the Orient.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6501.png",
+            "background": "silver"
+          },
+          "amount": 10
+        },
+        {
+          "item": {
+            "id": 6517,
+            "name": "Heart of the Foreign God",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nThe heart of a savage demi-god.\nA god is a god, even if it's a fake.\nIts heartbeat emits many curses.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6517.png",
+            "background": "gold"
+          },
+          "amount": 10
+        }
+      ],
+      "qp": 3000000
+    }
+  },
+  "skillMaterials": {
+    "1": {
+      "items": [
+        {
+          "item": {
+            "id": 6503,
+            "name": "Proof of Hero",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nProof that you've been acknowledged as a hero.\nMany possess it, but they aren't \nconscious of it so they forget.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6503.png",
+            "background": "bronze"
+          },
+          "amount": 10
+        }
+      ],
+      "qp": 200000
+    },
+    "2": {
+      "items": [
+        {
+          "item": {
+            "id": 6502,
+            "name": "Seed of Yggdrasil",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nA seed of a giant tree that symbolizes the world.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6502.png",
+            "background": "silver"
+          },
+          "amount": 10
+        }
+      ],
+      "qp": 400000
+    },
+    "3": {
+      "items": [
+        {
+          "item": {
+            "id": 6512,
+            "name": "Dragon Fang",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nThe fang of a dragon. Dragon Tooth Warriors are created using these fangs.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6512.png",
+            "background": "bronze"
+          },
+          "amount": 12
+        }
+      ],
+      "qp": 1200000
+    },
+    "4": {
+      "items": [
+        {
+          "item": {
+            "id": 6508,
+            "name": "Ghost Lantern",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nLantern that uses souls as fuel to burn.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6508.png",
+            "background": "silver"
+          },
+          "amount": 12
+        }
+      ],
+      "qp": 1600000
+    },
+    "5": {
+      "items": [
+        {
+          "item": {
+            "id": 6513,
+            "name": "Meteor Horseshoe",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nA tough horseshoe made of metal from a meteor.\nEven if the elements are the same, since it wasn't created on Earth, it has a special role.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6513.png",
+            "background": "silver"
+          },
+          "amount": 12
+        }
+      ],
+      "qp": 4000000
+    },
+    "6": {
+      "items": [
+        {
+          "item": {
+            "id": 6514,
+            "name": "Homunculus Baby",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nThe body of a young homunculus before a soul is written into it.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6514.png",
+            "background": "silver"
+          },
+          "amount": 15
+        }
+      ],
+      "qp": 5000000
+    },
+    "7": {
+      "items": [
+        {
+          "item": {
+            "id": 6507,
+            "name": "Claw of Chaos",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nThose wounded by this claw become prisoners of chaos.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6507.png",
+            "background": "gold"
+          },
+          "amount": 15
+        }
+      ],
+      "qp": 10000000
+    },
+    "8": {
+      "items": [
+        {
+          "item": {
+            "id": 6506,
+            "name": "Dragon's Reverse Scale",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nA scale that grew upside-down under a dragon's chin.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6506.png",
+            "background": "gold"
+          },
+          "amount": 15
+        }
+      ],
+      "qp": 12000000
+    },
+    "9": {
+      "items": [
+        {
+          "item": {
+            "id": 6999,
+            "name": "Crystallized Lore",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nA highly pure crystal of magic created\nwhen human history crosses a stream of Mana.\nIt can be said that it is the ingredient for materializing Heroic Spirits.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6999.png",
+            "background": "gold"
+          },
+          "amount": 1
+        }
+      ],
+      "qp": 20000000
+    }
+  },
+  "costumeMaterials": {
+    "1100230": {
+      "items": [
+        {
+          "item": {
+            "id": 6533,
+            "name": "Stake of Wailing Night",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nA stake driven into a corpse to prevent its reanimation.\nIt never rusts, and retains its luster by absorbing blood.\nIt can even pierce otherworldly beings that lurk in the dark of night.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6533.png",
+            "background": "bronze"
+          },
+          "amount": 10
+        },
+        {
+          "item": {
+            "id": 6526,
+            "name": "Shell of Reminiscence",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nThe shell of a clam that has lived for an eternity.\nWhen you put your ear against the aperture, you can hear the sounds of pure waves from the distant past.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6526.png",
+            "background": "silver"
+          },
+          "amount": 5
+        },
+        {
+          "item": {
+            "id": 6520,
+            "name": "Tearstone of Blood",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nThe crystal of the tear shed by a giant eyeball-like creature when it dies.\nA strong curse is residing within this crystal.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6520.png",
+            "background": "gold"
+          },
+          "amount": 5
+        },
+        {
+          "item": {
+            "id": 6529,
+            "name": "Cursed Beast Gallstone",
+            "type": "skillLvUp",
+            "detail": "\"Skill Up & Ascension Material\"\nA stone whose curse fermented in the innards of a hexed beast.\nIt continues to release a strong curse that will never fade.",
+            "icon": "https://assets.atlasacademy.io/GameData/NA/Items/6529.png",
+            "background": "gold"
+          },
+          "amount": 5
+        }
+      ],
+      "qp": 3000000
+    }
+  },
+  "script": {},
+  "skills": [
+    {
+      "id": 172650,
+      "num": 1,
+      "name": "Iron Determination EX",
+      "detail": "Apply Ignore Invincible (1 turn) & increase ATK (1 turn) & Debuff Resist (3 turns) for yourself",
+      "type": "active",
+      "strengthStatus": 0,
+      "priority": 1,
+      "condQuestId": 0,
+      "condQuestPhase": 0,
+      "icon": "https://assets.atlasacademy.io/GameData/NA/SkillIcons/skill_00312.png",
+      "coolDown": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        7,
+        7,
+        7,
+        7,
+        6
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 510,
+          "funcType": "addStateShort",
+          "funcTargetType": "self",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "Ignore\nInvincible",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_329.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 189,
+              "name": "Ignore Invincible",
+              "detail": "Ignore Evade and Invincible to deal damage",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_329.png",
+              "type": "pierceInvincible",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                },
+                {
+                  "id": 3006,
+                  "name": "buffIncreaseDamage"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 0
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1
+            }
+          ]
+        },
+        {
+          "funcId": 147,
+          "funcType": "addStateShort",
+          "funcTargetType": "self",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "ATK Up",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_300.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 126,
+              "name": "ATK Up",
+              "detail": "Increase ATK",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_300.png",
+              "type": "upAtk",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                },
+                {
+                  "id": 3006,
+                  "name": "buffIncreaseDamage"
+                },
+                {
+                  "id": 3027,
+                  "name": "buffAtkUp"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 320
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 340
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 360
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 380
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 400
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 420
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 440
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 460
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 500
+            }
+          ]
+        },
+        {
+          "funcId": 389,
+          "funcType": "addState",
+          "funcTargetType": "self",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "Debuff Resist\nUp",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_306.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 162,
+              "name": "Debuff Resist Up",
+              "detail": "Increase debuff resistance",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_306.png",
+              "type": "upTolerance",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                }
+              ],
+              "tvals": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                }
+              ],
+              "ckSelfIndv": [],
+              "ckOpIndv": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                }
+              ],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 140
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 158
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 176
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 194
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 212
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 230
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 248
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 266
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 284
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 320
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 97550,
+      "num": 2,
+      "name": "Golden Rule A",
+      "detail": "Increase your NP Gain (3 turns)",
+      "type": "active",
+      "strengthStatus": 0,
+      "priority": 1,
+      "condQuestId": 0,
+      "condQuestPhase": 0,
+      "icon": "https://assets.atlasacademy.io/GameData/NA/SkillIcons/skill_00602.png",
+      "coolDown": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        7,
+        7,
+        7,
+        7,
+        6
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 338,
+          "funcType": "addStateShort",
+          "funcTargetType": "self",
+          "funcTargetTeam": "player",
+          "funcPopupText": "NP Gain Up",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_303.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 140,
+              "name": "NP Gain Up",
+              "detail": "Increase NP amount gained",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_303.png",
+              "type": "upDropnp",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 230
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 260
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 290
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 320
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 350
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 380
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 410
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 440
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 500
+            }
+          ]
+        },
+        {
+          "funcId": 470,
+          "funcType": "hastenNpturn",
+          "funcTargetType": "self",
+          "funcTargetTeam": "enemy",
+          "funcPopupText": "Charge Gain",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 173550,
+      "num": 3,
+      "name": "Wisdom of Crisis A",
+      "detail": "Decrease one enemy's Charge + remove your Debuffs + gain C. Stars ",
+      "type": "active",
+      "strengthStatus": 0,
+      "priority": 1,
+      "condQuestId": 0,
+      "condQuestPhase": 0,
+      "icon": "https://assets.atlasacademy.io/GameData/NA/SkillIcons/skill_00513.png",
+      "coolDown": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        7,
+        7,
+        7,
+        7,
+        6
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 473,
+          "funcType": "delayNpturn",
+          "funcTargetType": "enemy",
+          "funcTargetTeam": "enemy",
+          "funcPopupText": "Charge Loss",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            },
+            {
+              "Rate": 1000,
+              "Value": 1
+            }
+          ]
+        },
+        {
+          "funcId": 468,
+          "funcType": "lossNp",
+          "funcTargetType": "enemy",
+          "funcTargetTeam": "player",
+          "funcPopupText": "NP Loss",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Value": 2000
+            },
+            {
+              "Rate": 1000,
+              "Value": 2000
+            },
+            {
+              "Rate": 1000,
+              "Value": 2000
+            },
+            {
+              "Rate": 1000,
+              "Value": 2000
+            },
+            {
+              "Rate": 1000,
+              "Value": 2000
+            },
+            {
+              "Rate": 1000,
+              "Value": 2000
+            },
+            {
+              "Rate": 1000,
+              "Value": 2000
+            },
+            {
+              "Rate": 1000,
+              "Value": 2000
+            },
+            {
+              "Rate": 1000,
+              "Value": 2000
+            },
+            {
+              "Rate": 1000,
+              "Value": 2000
+            }
+          ]
+        },
+        {
+          "funcId": 434,
+          "funcType": "subState",
+          "funcTargetType": "self",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "Remove Debuff",
+          "functvals": [],
+          "funcquestTvals": [],
+          "traitVals": [
+            {
+              "id": 3005,
+              "name": "buffNegativeEffect"
+            }
+          ],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            }
+          ]
+        },
+        {
+          "funcId": 215,
+          "funcType": "addStateShort",
+          "funcTargetType": "self",
+          "funcTargetTeam": "enemy",
+          "funcPopupText": "Critical Rate\nUp",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_327.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 144,
+              "name": "Critical Hit Rate Up",
+              "detail": "Increase Critical Hit rate",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_327.png",
+              "type": "upCriticalrate",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                },
+                {
+                  "id": 3006,
+                  "name": "buffIncreaseDamage"
+                },
+                {
+                  "id": 3032,
+                  "name": "buffCritRateUp"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 200
+            }
+          ]
+        },
+        {
+          "funcId": 477,
+          "funcType": "gainStar",
+          "funcTargetType": "self",
+          "funcTargetTeam": "player",
+          "funcPopupText": "C. Star Gain",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Value": 10
+            },
+            {
+              "Rate": 1000,
+              "Value": 11
+            },
+            {
+              "Rate": 1000,
+              "Value": 12
+            },
+            {
+              "Rate": 1000,
+              "Value": 13
+            },
+            {
+              "Rate": 1000,
+              "Value": 14
+            },
+            {
+              "Rate": 1000,
+              "Value": 15
+            },
+            {
+              "Rate": 1000,
+              "Value": 16
+            },
+            {
+              "Rate": 1000,
+              "Value": 17
+            },
+            {
+              "Rate": 1000,
+              "Value": 18
+            },
+            {
+              "Rate": 1000,
+              "Value": 20
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "classPassive": [
+    {
+      "id": 169550,
+      "name": "Avenger A",
+      "detail": "Increase the amount of NP you gain when damaged + Decrease Debuff Resist for all allies (including sub-members) except yourself [Demerit]",
+      "type": "passive",
+      "icon": "https://assets.atlasacademy.io/GameData/NA/SkillIcons/skill_00107.png",
+      "coolDown": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 726,
+          "funcType": "addState",
+          "funcTargetType": "ptOtherFull",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "Debuff Resist\nDown",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_506.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 169,
+              "name": "Debuff Resist Down",
+              "detail": "Decrease debuff resistance",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_506.png",
+              "type": "downTolerance",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                }
+              ],
+              "tvals": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                }
+              ],
+              "ckSelfIndv": [],
+              "ckOpIndv": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                }
+              ],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            }
+          ]
+        },
+        {
+          "funcId": 769,
+          "funcType": "addState",
+          "funcTargetType": "self",
+          "funcTargetTeam": "player",
+          "funcPopupText": "NP Gain Up\nWhen Damaged",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_335.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 228,
+              "name": "NP Gain Up When Damaged",
+              "detail": "Increase amount of NP gained when taking damage",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_335.png",
+              "type": "upDamagedropnp",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 170450,
+      "name": "Oblivion Correction B",
+      "detail": "Increase your Critical Strength",
+      "type": "passive",
+      "icon": "https://assets.atlasacademy.io/GameData/NA/SkillIcons/skill_00108.png",
+      "coolDown": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 199,
+          "funcType": "addStateShort",
+          "funcTargetType": "self",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "Critical Up",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_324.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 142,
+              "name": "Critical Up",
+              "detail": "Increase Critical Hit damage",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_324.png",
+              "type": "upCriticaldamage",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                },
+                {
+                  "id": 3006,
+                  "name": "buffIncreaseDamage"
+                },
+                {
+                  "id": 3031,
+                  "name": "buffCritDamageUp"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 80
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 80
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 80
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 80
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 80
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 80
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 80
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 80
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 80
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 80
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 171250,
+      "name": "Self-Restoration (Magical Energy) D",
+      "detail": "Increase NP Gauge each turn for yourself",
+      "type": "passive",
+      "icon": "https://assets.atlasacademy.io/GameData/NA/SkillIcons/skill_00109.png",
+      "coolDown": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 324,
+          "funcType": "addStateShort",
+          "funcTargetType": "self",
+          "funcTargetTeam": "player",
+          "funcPopupText": "NP Gain\nPer Turn",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_319.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 119,
+              "name": "NP Gain Per Turn ",
+              "detail": "Gain NP at end of each turn",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_319.png",
+              "type": "regainNp",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 0
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 300
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "noblePhantasms": [
+    {
+      "id": 1100201,
+      "num": 1,
+      "card": "quick",
+      "name": "Enfer Château d'If",
+      "icon": "https://assets.atlasacademy.io/GameData/NA/Servants/Commands/1100200/card_servant_np.png",
+      "rank": "A",
+      "type": "Anti-Army",
+      "detail": "Deal heavy damage to all enemies & decrease DEF (3 turns) <effect increases with Overcharge> & inflict Curse (5 turns) <effect increases with Overcharge> for all enemies",
+      "npGain": {
+        "buster": [
+          62,
+          62,
+          62,
+          62,
+          62
+        ],
+        "arts": [
+          62,
+          62,
+          62,
+          62,
+          62
+        ],
+        "quick": [
+          62,
+          62,
+          62,
+          62,
+          62
+        ],
+        "extra": [
+          62,
+          62,
+          62,
+          62,
+          62
+        ],
+        "defence": [
+          500,
+          500,
+          500,
+          500,
+          500
+        ],
+        "np": [
+          62,
+          62,
+          62,
+          62,
+          62
+        ]
+      },
+      "npDistribution": [
+        3,
+        6,
+        10,
+        13,
+        16,
+        13,
+        10,
+        29
+      ],
+      "strengthStatus": 1,
+      "priority": 101,
+      "condQuestId": 0,
+      "condQuestPhase": 0,
+      "individuality": [
+        {
+          "id": 3000,
+          "name": "normalAttack0"
+        },
+        {
+          "id": 4003,
+          "name": "cardQuick"
+        },
+        {
+          "id": 4007,
+          "name": "cardNP"
+        }
+      ],
+      "functions": [
+        {
+          "funcId": 13,
+          "funcType": "damageNp",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "None",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 8000
+            },
+            {
+              "Rate": 1000,
+              "Value": 9000
+            },
+            {
+              "Rate": 1000,
+              "Value": 9500
+            },
+            {
+              "Rate": 1000,
+              "Value": 10000
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 8000
+            },
+            {
+              "Rate": 1000,
+              "Value": 9000
+            },
+            {
+              "Rate": 1000,
+              "Value": 9500
+            },
+            {
+              "Rate": 1000,
+              "Value": 10000
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 8000
+            },
+            {
+              "Rate": 1000,
+              "Value": 9000
+            },
+            {
+              "Rate": 1000,
+              "Value": 9500
+            },
+            {
+              "Rate": 1000,
+              "Value": 10000
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 8000
+            },
+            {
+              "Rate": 1000,
+              "Value": 9000
+            },
+            {
+              "Rate": 1000,
+              "Value": 9500
+            },
+            {
+              "Rate": 1000,
+              "Value": 10000
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 8000
+            },
+            {
+              "Rate": 1000,
+              "Value": 9000
+            },
+            {
+              "Rate": 1000,
+              "Value": 9500
+            },
+            {
+              "Rate": 1000,
+              "Value": 10000
+            }
+          ]
+        },
+        {
+          "funcId": 198,
+          "funcType": "addStateShort",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "DEF Down",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_504.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 148,
+              "name": "DEF Down",
+              "detail": "Decrease DEF",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_504.png",
+              "type": "downDefence",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                },
+                {
+                  "id": 3009,
+                  "name": "buffDecreaseDefence"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 250
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 300
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 350
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 350
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 350
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 350
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 350
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 400
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 400
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 400
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 400
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 400
+            }
+          ]
+        },
+        {
+          "funcId": 321,
+          "funcType": "addState",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "Curse",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_521.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 125,
+              "name": "Curse",
+              "detail": "Lose HP at end of each turn",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_521.png",
+              "type": "reduceHp",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                },
+                {
+                  "id": 3026,
+                  "name": "buffCurse"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 0
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 500
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 750
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 750
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 750
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 750
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 750
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1250
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1500
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1100202,
+      "num": 1,
+      "card": "quick",
+      "name": "Enfer Château d'If",
+      "icon": "https://assets.atlasacademy.io/GameData/NA/Servants/Commands/1100200/card_servant_np.png",
+      "rank": "A+",
+      "type": "Anti-Army",
+      "detail": "Deal heavy damage ▲ & decrease DEF (3 turns) <effect increases with Overcharge> & inflict Curse (5 turns) <effect increases with Overcharge> & inflict Disastrous Curse (increase Curse damage) ▲ (5 turns) to all enemies.",
+      "npGain": {
+        "buster": [
+          62,
+          62,
+          62,
+          62,
+          62
+        ],
+        "arts": [
+          62,
+          62,
+          62,
+          62,
+          62
+        ],
+        "quick": [
+          62,
+          62,
+          62,
+          62,
+          62
+        ],
+        "extra": [
+          62,
+          62,
+          62,
+          62,
+          62
+        ],
+        "defence": [
+          500,
+          500,
+          500,
+          500,
+          500
+        ],
+        "np": [
+          62,
+          62,
+          62,
+          62,
+          62
+        ]
+      },
+      "npDistribution": [
+        3,
+        6,
+        10,
+        13,
+        16,
+        13,
+        10,
+        29
+      ],
+      "strengthStatus": 2,
+      "priority": 102,
+      "condQuestId": 94026512,
+      "condQuestPhase": 3,
+      "individuality": [
+        {
+          "id": 3000,
+          "name": "normalAttack0"
+        },
+        {
+          "id": 4003,
+          "name": "cardQuick"
+        },
+        {
+          "id": 4007,
+          "name": "cardNP"
+        }
+      ],
+      "functions": [
+        {
+          "funcId": 13,
+          "funcType": "damageNp",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "None",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Value": 8000
+            },
+            {
+              "Rate": 1000,
+              "Value": 10000
+            },
+            {
+              "Rate": 1000,
+              "Value": 11000
+            },
+            {
+              "Rate": 1000,
+              "Value": 11500
+            },
+            {
+              "Rate": 1000,
+              "Value": 12000
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 1000,
+              "Value": 8000
+            },
+            {
+              "Rate": 1000,
+              "Value": 10000
+            },
+            {
+              "Rate": 1000,
+              "Value": 11000
+            },
+            {
+              "Rate": 1000,
+              "Value": 11500
+            },
+            {
+              "Rate": 1000,
+              "Value": 12000
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 1000,
+              "Value": 8000
+            },
+            {
+              "Rate": 1000,
+              "Value": 10000
+            },
+            {
+              "Rate": 1000,
+              "Value": 11000
+            },
+            {
+              "Rate": 1000,
+              "Value": 11500
+            },
+            {
+              "Rate": 1000,
+              "Value": 12000
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 1000,
+              "Value": 8000
+            },
+            {
+              "Rate": 1000,
+              "Value": 10000
+            },
+            {
+              "Rate": 1000,
+              "Value": 11000
+            },
+            {
+              "Rate": 1000,
+              "Value": 11500
+            },
+            {
+              "Rate": 1000,
+              "Value": 12000
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000,
+              "Value": 8000
+            },
+            {
+              "Rate": 1000,
+              "Value": 10000
+            },
+            {
+              "Rate": 1000,
+              "Value": 11000
+            },
+            {
+              "Rate": 1000,
+              "Value": 11500
+            },
+            {
+              "Rate": 1000,
+              "Value": 12000
+            }
+          ]
+        },
+        {
+          "funcId": 198,
+          "funcType": "addStateShort",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "DEF Down",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_504.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 148,
+              "name": "DEF Down",
+              "detail": "Decrease DEF",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_504.png",
+              "type": "downDefence",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                },
+                {
+                  "id": 3009,
+                  "name": "buffDecreaseDefence"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 250
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 300
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 350
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 350
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 350
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 350
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 350
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 400
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 400
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 400
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 400
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 400
+            }
+          ]
+        },
+        {
+          "funcId": 321,
+          "funcType": "addState",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "Curse",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_521.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 125,
+              "name": "Curse",
+              "detail": "Lose HP at end of each turn",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_521.png",
+              "type": "reduceHp",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                },
+                {
+                  "id": 3026,
+                  "name": "buffCurse"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 0
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 500
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 750
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 750
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 750
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 750
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 750
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1250
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1250
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1500
+            }
+          ]
+        },
+        {
+          "funcId": 2452,
+          "funcType": "addState",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "Disastrous Curse",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_547.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 1115,
+              "name": "Disastrous Curse",
+              "detail": "Increase Curse effectiveness",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_547.png",
+              "type": "upFuncHpReduce",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                },
+                {
+                  "id": 3048,
+                  "name": "buffCurseEffectUp"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [
+                {
+                  "id": 3026,
+                  "name": "buffCurse"
+                }
+              ],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 5,
+              "Count": -1,
+              "Value": 1000
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "profile": {
+    "cv": "Nobunaga Shimazaki",
+    "illustrator": "Rui Komatsuzaki",
+    "stats": {
+      "strength": "B",
+      "endurance": "A+",
+      "agility": "C",
+      "magic": "B",
+      "luck": "?",
+      "np": "A"
+    },
+    "costume": {
+      "1100230": {
+        "id": 11,
+        "costumeCollectionNo": 9,
+        "name": "Monte Cristo Selection",
+        "shortName": "Monte Cristo Selection",
+        "detail": "The Count of Monte Cristo's summer attire. He actually really likes the inflatable tube, but won't admit it.",
+        "priority": 1
+      }
+    },
+    "comments": [
+      {
+        "id": 1,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "The world's most well known seeker of vengeance.\nKnown as \"The Count of Monte Cristo.\"\nEntrapped by a cruel plot and convicted of a crime he didn't commit, he was sent to the nightmarish Château d'If. His iron will kept him from falling into despair, and with the treasure of Monte Cristo island in hand he returned to Paris.\nThere he exacted a terrible revenge upon the city's most influential people who had betrayed him to become so.",
+        "condType": "none",
+        "condValues": [
+          0
+        ],
+        "condValue2": 0
+      },
+      {
+        "id": 2,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "Height/Weight: 185cm, 75kg\nOrigin: Dumas' \"The Count of Monte Cristo\"?\nRegion: France\nAlignment: Chaotic-Evil\nGender: Male\nHis favorite phrase is \"Attendre et espérer,\" which translates to \"Wait and hope.\"",
+        "condType": "svtFriendship",
+        "condValues": [
+          1
+        ],
+        "condValue2": 0
+      },
+      {
+        "id": 3,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "His dreadful life, his path of vengeance, his devotion to his beloved Mercédès, his struggle and regret, and finally his path to repentance... It is a story beloved by the people of France and the world that features him as the \"World's Greatest Seeker of Vengeance.\"\n\nThe story of the Count of Monte Cristo was written by Alexandre Dumas and is a work of fiction. However, the existence of the priest who gave Edmond guidance within the Château d'If, Abbé Faria, has been confirmed...",
+        "condType": "svtFriendship",
+        "condValues": [
+          2
+        ],
+        "condValue2": 0
+      },
+      {
+        "id": 4,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "His True Name is Edmond Dantès, but he considers himself a different person than the \"Edmond Dantès\" who was a sailor in Marseille.\nHis reasoning is that at the end of his quest for vengeance, \"Edmond Dantès\" abandoned his evil nature...but this Servant continues to be a personification of vengeance. Thus, he says, he is not Edmond.",
+        "condType": "svtFriendship",
+        "condValues": [
+          3
+        ],
+        "condValue2": 0
+      },
+      {
+        "id": 5,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "『Monte Cristo Mythology』\nRank: C\nNP Type: Anti-Personnel\nRange: N/A　Maximum Targets: 1\nHe is the personification of vengeance itself. He doesn't belong to any single class, and is summoned as an Extra Class, Avenger. When he materializes as an Avenger, the tales of his lifetime have been elevated to the status of Noble Phantasm and grant him a superhuman physique.\nIn addition to his physique, he can use magical energy to attack and conceal his own stats and class.\n\nThis Noble Phantasm is constantly active. It has an extra effect when his True Name is released, but it is not used in this game.",
+        "condType": "svtFriendship",
+        "condValues": [
+          4
+        ],
+        "condValue2": 0
+      },
+      {
+        "id": 6,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "『Enfer Château d'If』\nRank: A\nNP Type: Anti-Personnel/Anti-Army\nRange: 1-20　Maximum Targets: 1-100\nThe manifestation of his iron will, trained within the hellish Château d'If. He can escape not only the prison of his body, but also the formless prisons of time and space.\nBy accelerating his thought processes and forcing his body to reflect them, he can move at incredibly high speeds.\nTo those observing his movements, it might look like he has the ability to stop time.\n\nIn this game, his high-speed movements enable him to create clones and attack multiple times simultaneously.",
+        "condType": "svtFriendship",
+        "condValues": [
+          5
+        ],
+        "condValue2": 0
+      },
+      {
+        "id": 7,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "I am the Count of Monte Cristo.\nI know neither love nor compassion. Until I burn everything to cinders, I will remain an Avenger, fueled by hatred and vengeance to make myself a brightly burning black flame of rage.\nMy beloved Haydée does not exist in this world, and thus, I will be a vengeful demon for eternity...",
+        "condType": "questClear",
+        "condValues": [
+          911100201
+        ],
+        "condValue2": 0
+      }
+    ],
+    "voices": [
+      {
+        "svtId": 1100200,
+        "voicePrefix": 0,
+        "type": "home",
+        "voiceLines": [
+          {
+            "name": "Birthday",
+            "condType": "birthDay",
+            "condValue": 0,
+            "priority": 8190,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H010",
+              "0_H011",
+              "0_H012"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H010.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H011.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H012.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1
+            ],
+            "face": [
+              1,
+              0,
+              1
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "Congratulations Master!\nThis is the day you were born into a world filled with hardships!",
+            "conds": [
+              {
+                "condType": "birthDay",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "During an Event",
+            "condType": "flag",
+            "condValue": 11,
+            "priority": 8260,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H020",
+              "0_H021",
+              "0_H022"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H020.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H021.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H022.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1
+            ],
+            "face": [
+              0,
+              5,
+              1
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "We'll be late to the party.\nHurry. Frenzy and mania are waiting.",
+            "conds": [
+              {
+                "condType": "event",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Conversation 1",
+            "condType": "flag",
+            "condValue": 12,
+            "priority": 8690,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H030"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H030.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              5
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Don't bore me, Master.",
+            "conds": []
+          },
+          {
+            "name": "Conversation 2",
+            "condType": "flag",
+            "condValue": 13,
+            "priority": 8680,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H040",
+              "0_H041"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H040.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H041.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1
+            ],
+            "face": [
+              0,
+              1
+            ],
+            "form": [
+              0,
+              0
+            ],
+            "text": [
+              "",
+              ""
+            ],
+            "subtitle": "Can you show me the path, just like the Abbé?",
+            "conds": []
+          },
+          {
+            "name": "Conversation 3",
+            "condType": "flag",
+            "condValue": 14,
+            "priority": 8670,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H050",
+              "0_H051"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H050.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H051.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1
+            ],
+            "face": [
+              5,
+              4
+            ],
+            "form": [
+              0,
+              0
+            ],
+            "text": [
+              "",
+              ""
+            ],
+            "subtitle": "I only have one mentor in life.\nAbbé Faria...",
+            "conds": []
+          },
+          {
+            "name": "Likes",
+            "condType": "flag",
+            "condValue": 15,
+            "priority": 8290,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H060",
+              "0_H061",
+              "0_H062"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H060.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H061.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H062.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1
+            ],
+            "face": [
+              0,
+              0,
+              4
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "What do I like?\nThat no longer holds any meaning for me.\nAll I have is determination filled with darkness.",
+            "conds": []
+          },
+          {
+            "name": "Dislikes",
+            "condType": "flag",
+            "condValue": 16,
+            "priority": 8280,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H070",
+              "0_H071",
+              "0_H072"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H070.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H071.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H072.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1
+            ],
+            "face": [
+              5,
+              5,
+              5
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "Of course I hate it!\nAah! The world! Everything!",
+            "conds": []
+          },
+          {
+            "name": "About the Holy Grail",
+            "condType": "flag",
+            "condValue": 17,
+            "priority": 8270,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H080",
+              "0_H081",
+              "0_H082",
+              "0_H083"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H080.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H081.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H082.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H083.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.3,
+              0.1,
+              0.1
+            ],
+            "face": [
+              0,
+              4,
+              5,
+              5
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "The Holy Grail, a vessel of desire which fulfills wishes...\nI'm sure it's stuffed full.\nFull of human desires... of everything evil.",
+            "conds": []
+          },
+          {
+            "name": "Bond Level 1",
+            "condType": "svtFriendship",
+            "condValue": 1,
+            "priority": 8790,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H090",
+              "0_H091",
+              "0_H092",
+              "0_H093"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H090.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H091.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H092.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H093.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1,
+              0.1
+            ],
+            "face": [
+              0,
+              0,
+              4,
+              5
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "If you say you are my Master then at least show me something.\nWhat? Don't be nervous.\nI'm not expecting anything.",
+            "conds": [
+              {
+                "condType": "friendship",
+                "value": 1,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Bond Level 2",
+            "condType": "svtFriendship",
+            "condValue": 2,
+            "priority": 8783,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H100",
+              "0_H101",
+              "0_H102",
+              "0_H103"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H100.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H101.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H102.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H103.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1,
+              0.1
+            ],
+            "face": [
+              1,
+              0,
+              4,
+              5
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "My name is the Count of Monte Cristo.\nMy True Name is the same.\nI've already abandoned the name Edmond Dantès along with my past.",
+            "conds": [
+              {
+                "condType": "friendship",
+                "value": 2,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Bond Level 3",
+            "condType": "svtFriendship",
+            "condValue": 3,
+            "priority": 8776,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H110",
+              "0_H111",
+              "0_H112",
+              "0_H113"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H110.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H111.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H112.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H113.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1,
+              0.1
+            ],
+            "face": [
+              5,
+              5,
+              5,
+              2
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "I am the Count of Monte Cristo.\nI am not the Edmond who struggled with revenge and was saved by regret and reform.\nI am the notorious incarnation of vengeance, the Avenger.",
+            "conds": [
+              {
+                "condType": "friendship",
+                "value": 3,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Bond Level 4",
+            "condType": "svtFriendship",
+            "condValue": 4,
+            "priority": 8770,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H120",
+              "0_H121",
+              "0_H122",
+              "0_H123"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H120.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H121.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H122.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H123.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1,
+              0.1
+            ],
+            "face": [
+              0,
+              4,
+              1,
+              0
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "Be careful.\nI am made of grudges, vengeance, and poisonous flames which bring death to whoever touches them.\nBe prepared for the consequences if you touch them.",
+            "conds": [
+              {
+                "condType": "friendship",
+                "value": 4,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Bond Level 5",
+            "condType": "svtFriendship",
+            "condValue": 5,
+            "priority": 8764,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H130",
+              "0_H131",
+              "0_H132",
+              "0_H133",
+              "0_H134"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H130.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H131.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H132.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H133.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H134.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.3,
+              0.1,
+              0.1
+            ],
+            "face": [
+              5,
+              5,
+              4,
+              5,
+              0
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "...What are you?\nTo associate with me so much, it's just like...\nNo, you are not like Haydée.\nYou are you.",
+            "conds": [
+              {
+                "condType": "friendship",
+                "value": 5,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Conversation 4",
+            "condType": "flag",
+            "condValue": 18,
+            "priority": 8660,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H140",
+              "0_H141",
+              "0_H142",
+              "0_H143"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H140.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H141.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H142.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H143.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1,
+              0.3
+            ],
+            "face": [
+              0,
+              1,
+              5,
+              0
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "Oh-ho? There is another who has materialized as an Avenger.\nI despise human nature, he laughs at it...\nI see. People are inexplicable.",
+            "conds": [
+              {
+                "condType": "svtGet",
+                "value": 1100100,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Conversation 5",
+            "condType": "flag",
+            "condValue": 19,
+            "priority": 8600,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H150",
+              "0_H151"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H150.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H151.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.3
+            ],
+            "face": [
+              1,
+              0
+            ],
+            "form": [
+              0,
+              0
+            ],
+            "text": [
+              "",
+              ""
+            ],
+            "subtitle": "There's another Extra Class here... Interesting.",
+            "conds": [
+              {
+                "condType": "svtGroup",
+                "value": 1005,
+                "valueList": [
+                  900100,
+                  900200,
+                  900400,
+                  900500,
+                  1000100,
+                  1000200,
+                  1000300,
+                  1000400,
+                  1000500,
+                  1000700,
+                  1000800,
+                  1100300,
+                  1100400,
+                  1100500,
+                  1100600,
+                  2300100,
+                  2300200,
+                  2500100,
+                  2500200,
+                  2500300
+                ],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Conversation 6",
+            "condType": "flag",
+            "condValue": 20,
+            "priority": 8540,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H160",
+              "0_H161"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H160.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H161.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.0
+            ],
+            "face": [
+              0,
+              1
+            ],
+            "form": [
+              0,
+              0
+            ],
+            "text": [
+              "",
+              ""
+            ],
+            "subtitle": "There's an artist-type Caster here.\nVery well.\nWaiter, bring him a coffee!",
+            "conds": [
+              {
+                "condType": "svtGroup",
+                "value": 1006,
+                "valueList": [
+                  500500,
+                  500700
+                ],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Conversation 7",
+            "condType": "flag",
+            "condValue": 21,
+            "priority": 8480,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H170",
+              "0_H171",
+              "0_H172",
+              "0_H173",
+              "0_H174"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H170.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H171.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H172.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H173.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H174.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.3,
+              0.1,
+              0.1,
+              0.1
+            ],
+            "face": [
+              5,
+              4,
+              4,
+              0,
+              5
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "Who is he?\nAh, I see...\nNapoleon Bonaparte. So that emperor has finally manifested.\nI won't meet with him right now.\nBut one of these days...",
+            "conds": [
+              {
+                "condType": "svtGet",
+                "value": 203100,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Conversation 8",
+            "condType": "flag",
+            "condValue": 22,
+            "priority": 8420,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H180"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H180.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              1
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "His operas are nice.",
+            "conds": [
+              {
+                "condType": "svtGet",
+                "value": 1100600,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Conversation 9",
+            "condType": "flag",
+            "condValue": 23,
+            "priority": 8360,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H190"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_H190.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              5
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Heh. They never change...",
+            "conds": [
+              {
+                "condType": "svtGroup",
+                "value": 1101,
+                "valueList": [
+                  900100,
+                  900200
+                ],
+                "eventId": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "svtId": 1100200,
+        "voicePrefix": 0,
+        "type": "groeth",
+        "voiceLines": [
+          {
+            "name": "Level up",
+            "condType": "svtLevel",
+            "condValue": 2,
+            "priority": 8990,
+            "svtVoiceType": "groeth",
+            "overwriteName": "",
+            "id": [
+              "0_G010"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_G010.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              1
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Bwahaha!",
+            "conds": [
+              {
+                "condType": "levelUp",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Ascension 2",
+            "condType": "svtLimit",
+            "condValue": 2,
+            "priority": 8880,
+            "svtVoiceType": "groeth",
+            "overwriteName": "",
+            "id": [
+              "0_G020"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_G020.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              2
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "[id 1100200_0_G020]Good, good...",
+            "conds": [
+              {
+                "condType": "limitCountCommon",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Ascension 1",
+            "condType": "svtLimit",
+            "condValue": 1,
+            "priority": 8890,
+            "svtVoiceType": "groeth",
+            "overwriteName": "",
+            "id": [
+              "0_G030",
+              "0_G031"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_G030.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_G031.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1
+            ],
+            "face": [
+              0,
+              1
+            ],
+            "form": [
+              0,
+              0
+            ],
+            "text": [
+              "",
+              ""
+            ],
+            "subtitle": "[id 1100200_0_G030]This is how it should be.\n[id 1100200_0_G031]You've made the right choice.",
+            "conds": [
+              {
+                "condType": "limitCount",
+                "value": 1,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Ascension 3",
+            "condType": "svtLimit",
+            "condValue": 3,
+            "priority": 8870,
+            "svtVoiceType": "groeth",
+            "overwriteName": "",
+            "id": [
+              "0_G040",
+              "0_G041"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_G040.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_G041.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1
+            ],
+            "face": [
+              2,
+              0
+            ],
+            "form": [
+              0,
+              0
+            ],
+            "text": [
+              "",
+              ""
+            ],
+            "subtitle": "[id 1100200_0_G040]Ah, I taste Hell.\n[id 1100200_0_G041]How nostalgic.",
+            "conds": [
+              {
+                "condType": "limitCount",
+                "value": 3,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Ascension 4",
+            "condType": "svtCountStop",
+            "condValue": 0,
+            "priority": 8860,
+            "svtVoiceType": "groeth",
+            "overwriteName": "",
+            "id": [
+              "0_G050",
+              "0_G051",
+              "0_G052"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_G050.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_G051.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_G052.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1
+            ],
+            "face": [
+              0,
+              4,
+              5
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "[id 1100200_0_G050]I follow an endless path.\n[id 1100200_0_G051]I'll show you too, [id 1100200_0_G052]that which lies beyond love and hate.",
+            "conds": [
+              {
+                "condType": "countStop",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "svtId": 1100200,
+        "voicePrefix": 0,
+        "type": "firstGet",
+        "voiceLines": [
+          {
+            "name": "Summon",
+            "condType": "svtGet",
+            "condValue": 0,
+            "priority": 8090,
+            "svtVoiceType": "firstGet",
+            "overwriteName": "",
+            "id": [
+              "0_S010",
+              "0_S011",
+              "0_S012",
+              "0_S013"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_S010.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_S011.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_S012.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/0_S013.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1,
+              0.1
+            ],
+            "face": [
+              2,
+              2,
+              5,
+              1
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "You called me! ",
+              "The reincarnation of vengence itself?",
+              "[r]Well precisely, I am the grudge of darkness",
+              "[r]I am Extra Class, Avenger!"
+            ],
+            "subtitle": "You called me! The reincarnation of vengence itself?\nWell precisely, I am the grudge of darkness\nI am Extra Class, Avenger!",
+            "conds": []
+          }
+        ]
+      },
+      {
+        "svtId": 1100200,
+        "voicePrefix": 0,
+        "type": "battle",
+        "voiceLines": [
+          {
+            "name": "Attack 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9590,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B010"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B010.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Ooh!",
+            "conds": []
+          },
+          {
+            "name": "Attack 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9580,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B020"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B020.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Nnngh!",
+            "conds": []
+          },
+          {
+            "name": "Attack 3",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9570,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B030"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B030.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Hyah!",
+            "conds": []
+          },
+          {
+            "name": "Extra Attack",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9490,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B040"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B040.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Bwahahaha!",
+            "conds": []
+          },
+          {
+            "name": "Skill 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9890,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B080"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B080.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Hahahahaha!",
+            "conds": []
+          },
+          {
+            "name": "Skill 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9880,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B090"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B090.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "That should do it.",
+            "conds": []
+          },
+          {
+            "name": "Battle Start 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9990,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B100"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B100.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "You... What do I look like to you!",
+            "conds": []
+          },
+          {
+            "name": "Battle Start 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9980,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B110"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B110.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Have you ever seen Hell?",
+            "conds": []
+          },
+          {
+            "name": "Victory 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9090,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B120"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B120.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "...Fall into despair!\nThat itself is... Hell.",
+            "conds": []
+          },
+          {
+            "name": "Victory 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9080,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B130"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B130.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "I'll show no mercy.\nDie and rot away completely.",
+            "conds": []
+          },
+          {
+            "name": "Damage 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9280,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B140"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B140.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Ugh!",
+            "conds": []
+          },
+          {
+            "name": "Damage 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9290,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B150"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B150.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Aaaaugh!",
+            "conds": []
+          },
+          {
+            "name": "Incapacitated 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9190,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B160"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B160.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Haydée! \nI...",
+            "conds": []
+          },
+          {
+            "name": "Incapacitated 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9180,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B170"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B170.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Impossible, impossible...",
+            "conds": []
+          },
+          {
+            "name": "Command Card 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9790,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B180"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B180.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "That's cruel.",
+            "conds": []
+          },
+          {
+            "name": "Command Card 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9780,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B190"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B190.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Hahaha!",
+            "conds": []
+          },
+          {
+            "name": "Command Card 3",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9770,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B200"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B200.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "That's good.",
+            "conds": []
+          },
+          {
+            "name": "Noble Phantasm Card",
+            "condType": "flag",
+            "condValue": 5,
+            "priority": 9680,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B220"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/0_B220.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "I don't need mercy!",
+            "conds": []
+          }
+        ]
+      },
+      {
+        "svtId": 1100200,
+        "voicePrefix": 0,
+        "type": "treasureDevice",
+        "voiceLines": [
+          {
+            "name": "Noble Phantasm",
+            "condType": "flag",
+            "condValue": 1,
+            "priority": 9390,
+            "svtVoiceType": "treasureDevice",
+            "overwriteName": "",
+            "id": [
+              "0_B050",
+              "0_B051",
+              "0_B052"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/NoblePhantasm_1100200/0_B050.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/NoblePhantasm_1100200/0_B051.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/NoblePhantasm_1100200/0_B052.mp3"
+            ],
+            "delay": [
+              0.0,
+              4.189323,
+              0.01662326
+            ],
+            "face": [
+              4,
+              4,
+              4
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "[id 1100200_0_B050]I follow a path beyond love and hate!\n[id 1100200_0_B051,1100200_0_B052]Enfer Château d'If!",
+            "conds": [
+              {
+                "condType": "eventEnd",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "svtId": 1100200,
+        "voicePrefix": 11,
+        "type": "home",
+        "voiceLines": [
+          {
+            "name": "About Spiritron Dress",
+            "condType": "flag",
+            "condValue": 63,
+            "priority": 8265,
+            "svtVoiceType": "home",
+            "overwriteName": "About Spiritron Dress Monte Cristo Selection",
+            "id": [
+              "11_H9000",
+              "11_H9001",
+              "11_H9002"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/11_H9000.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/11_H9001.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/11_H9002.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.3
+            ],
+            "face": [
+              5,
+              0,
+              6
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "Appearances mean nothing.\nBut...\nHmph. If something like this inspires you, then I see no reason to put a stop to it.",
+            "conds": []
+          }
+        ]
+      },
+      {
+        "svtId": 1100200,
+        "voicePrefix": 11,
+        "type": "groeth",
+        "voiceLines": [
+          {
+            "name": "Level up",
+            "condType": "svtLevel",
+            "condValue": 2,
+            "priority": 8990,
+            "svtVoiceType": "groeth",
+            "overwriteName": "Level Up Monte Cristo Selection",
+            "id": [
+              "11_G010"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/11_G010.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              1
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Fuhaha!",
+            "conds": [
+              {
+                "condType": "levelUp",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "Unlock Wardrobe",
+            "condType": "costumeGet",
+            "condValue": 11,
+            "priority": 8850,
+            "svtVoiceType": "groeth",
+            "overwriteName": "Unlock Wardrobe Monte Cristo Selection",
+            "id": [
+              "11_G060",
+              "11_G061"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/11_G060.mp3",
+              "https://assets.atlasacademy.io/GameData/NA/Audio/ChrVoice_1100200/11_G061.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.3
+            ],
+            "face": [
+              6,
+              1
+            ],
+            "form": [
+              0,
+              0
+            ],
+            "text": [
+              "",
+              ""
+            ],
+            "subtitle": "[id 1100200_11_G060,1100200_11_G061]Kuku...! \nThis is madness. ",
+            "conds": [
+              {
+                "condType": "costume",
+                "value": 1100230,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "svtId": 1100200,
+        "voicePrefix": 11,
+        "type": "battle",
+        "voiceLines": [
+          {
+            "name": "Battle Start 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9990,
+            "svtVoiceType": "battle",
+            "overwriteName": "Battle Start 1 Monte Cristo Selection",
+            "id": [
+              "11_B100"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B100.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "The sea, huh...?",
+            "conds": []
+          },
+          {
+            "name": "Battle Start 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9980,
+            "svtVoiceType": "battle",
+            "overwriteName": "Battle Start 2 Monte Cristo Selection",
+            "id": [
+              "11_B110"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B110.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Kuku...hahahahahaha!",
+            "conds": []
+          },
+          {
+            "name": "Skill 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9890,
+            "svtVoiceType": "battle",
+            "overwriteName": "Skill 1 Monte Cristo Selection",
+            "id": [
+              "11_B080"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B080.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Kukuku!",
+            "conds": []
+          },
+          {
+            "name": "Skill 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9880,
+            "svtVoiceType": "battle",
+            "overwriteName": "Skill 2 Monte Cristo Selection",
+            "id": [
+              "11_B090"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B090.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Amusing.",
+            "conds": []
+          },
+          {
+            "name": "Command Card 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9790,
+            "svtVoiceType": "battle",
+            "overwriteName": "Command Card 1 Monte Cristo Selection",
+            "id": [
+              "11_B180"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B180.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Hahaha!",
+            "conds": []
+          },
+          {
+            "name": "Command Card 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9780,
+            "svtVoiceType": "battle",
+            "overwriteName": "Command Card 2 Monte Cristo Selection",
+            "id": [
+              "11_B190"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B190.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Hmph.",
+            "conds": []
+          },
+          {
+            "name": "Command Card 3",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9770,
+            "svtVoiceType": "battle",
+            "overwriteName": "Command Card 3 Monte Cristo Selection",
+            "id": [
+              "11_B200"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B200.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Boring.",
+            "conds": []
+          },
+          {
+            "name": "Noble Phantasm Card",
+            "condType": "flag",
+            "condValue": 5,
+            "priority": 9680,
+            "svtVoiceType": "battle",
+            "overwriteName": "Noble Phantasm Card Monte Cristo Selection",
+            "id": [
+              "11_B220"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B220.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Shut up, shut up!",
+            "conds": []
+          },
+          {
+            "name": "Attack 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9590,
+            "svtVoiceType": "battle",
+            "overwriteName": "Attack 1 Monte Cristo Selection",
+            "id": [
+              "11_B010"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B010.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Fuh!",
+            "conds": []
+          },
+          {
+            "name": "Attack 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9580,
+            "svtVoiceType": "battle",
+            "overwriteName": "Attack 2 Monte Cristo Selection",
+            "id": [
+              "11_B020"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B020.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Hah!",
+            "conds": []
+          },
+          {
+            "name": "Attack 3",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9570,
+            "svtVoiceType": "battle",
+            "overwriteName": "Attack 3 Monte Cristo Selection",
+            "id": [
+              "11_B030"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B030.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Zei!",
+            "conds": []
+          },
+          {
+            "name": "Extra Attack",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9490,
+            "svtVoiceType": "battle",
+            "overwriteName": "Extra Attack Monte Cristo Selection",
+            "id": [
+              "11_B040"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B040.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Haha! Hahaha!",
+            "conds": []
+          },
+          {
+            "name": "Damage 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9290,
+            "svtVoiceType": "battle",
+            "overwriteName": "Damage 1 Monte Cristo Selection",
+            "id": [
+              "11_B150"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B150.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Hahahahahaha!",
+            "conds": []
+          },
+          {
+            "name": "Damage 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9280,
+            "svtVoiceType": "battle",
+            "overwriteName": "Damage 2 Monte Cristo Selection",
+            "id": [
+              "11_B140"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B140.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Hnnngh!",
+            "conds": []
+          },
+          {
+            "name": "Incapacitated 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9190,
+            "svtVoiceType": "battle",
+            "overwriteName": "Incapacitated 1 Monte Cristo Selection",
+            "id": [
+              "11_B160"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B160.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "I will be there...soon...Haydée...",
+            "conds": []
+          },
+          {
+            "name": "Incapacitated 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9180,
+            "svtVoiceType": "battle",
+            "overwriteName": "Incapacitated 2 Monte Cristo Selection",
+            "id": [
+              "11_B170"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B170.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Why you... WHY YOU!!!",
+            "conds": []
+          },
+          {
+            "name": "Victory 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9090,
+            "svtVoiceType": "battle",
+            "overwriteName": "Victory 1 Monte Cristo Selection",
+            "id": [
+              "11_B120"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B120.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Close your eyes. Sleep.",
+            "conds": []
+          },
+          {
+            "name": "Victory 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9080,
+            "svtVoiceType": "battle",
+            "overwriteName": "Victory 2 Monte Cristo Selection",
+            "id": [
+              "11_B130"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/NA/Audio/Servants_1100200/11_B130.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "Fall and rot away.",
+            "conds": []
+          }
+        ]
+      }
+    ]
+  }
+}

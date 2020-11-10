@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 using FateGrandOrderPOC.Shared;
 using FateGrandOrderPOC.Shared.AtlasAcademy;
-using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Enums;
 using FateGrandOrderPOC.Shared.Models;
 
@@ -48,7 +46,7 @@ namespace FateGrandOrderPOC
 
         public Program()
         {
-            _aaClient = new AtlasAcademyClient("https://api.atlasacademy.io");
+            _aaClient = new AtlasAcademyClient("https://api.atlasacademy.io", "NA");
             _combatFormula = new CombatFormula(_aaClient);
         }
 
@@ -83,8 +81,8 @@ namespace FateGrandOrderPOC
                 ServantInfo = await _aaClient.GetServantInfo(DANTES_AVENGER)
             };
 
-            PartyMember partyMemberAttacker = AddPartyMember(chaldeaAttackServant, chaldeaKscope);
-            ApplyCraftEssenceEffects(partyMemberAttacker);
+            PartyMember partyMemberAttacker = _combatFormula.AddPartyMember(_party, chaldeaAttackServant, chaldeaKscope);
+            _combatFormula.ApplyCraftEssenceEffects(partyMemberAttacker);
 
             _party.Add(partyMemberAttacker);
             #endregion
@@ -101,7 +99,7 @@ namespace FateGrandOrderPOC
                 ServantInfo = await _aaClient.GetServantInfo(SKADI_CASTER)
             };
 
-            PartyMember partyMemberCaster = AddPartyMember(chaldeaCaster);
+            PartyMember partyMemberCaster = _combatFormula.AddPartyMember(_party, chaldeaCaster);
 
             _party.Add(partyMemberCaster);
             #endregion
@@ -118,7 +116,7 @@ namespace FateGrandOrderPOC
                 ServantInfo = await _aaClient.GetServantInfo(SKADI_CASTER)
             };
 
-            PartyMember partyMemberSupportCaster = AddPartyMember(supportCaster);
+            PartyMember partyMemberSupportCaster = _combatFormula.AddPartyMember(_party, supportCaster);
 
             _party.Add(partyMemberSupportCaster);
             #endregion
@@ -293,14 +291,14 @@ namespace FateGrandOrderPOC
             _skillActivation.SkillActivation(partyMemberSupportCaster, 1, _party, 1, enemyMobs, 1); // Skadi (support) quick up buff
             _skillActivation.SkillActivation(partyMemberAttacker, 2, _party, 1, enemyMobs, 1); // Dante's 2nd skill
 
-            NpChargeCheck(partyMemberAttacker);
+            _combatFormula.NpChargeCheck(_party, partyMemberAttacker);
             await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.First);
 
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
             _party = _skillActivation.AdjustSkillCooldowns(_party);
             _skillActivation.SkillActivation(partyMemberCaster, 3, _party, 1, enemyMobs, 1); // Skadi NP buff
 
-            NpChargeCheck(partyMemberAttacker);
+            _combatFormula.NpChargeCheck(_party, partyMemberAttacker);
             await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Second);
 
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
@@ -311,7 +309,7 @@ namespace FateGrandOrderPOC
             _skillActivation.SkillActivation(partyMemberAttacker, 1, _party, 1, enemyMobs, 1); // Dante's 1st skill
             _skillActivation.SkillActivation(mysticCode, 2, _party, 1, enemyMobs, 1); // Artic mystic code ATK and NP damage up
 
-            NpChargeCheck(partyMemberAttacker);
+            _combatFormula.NpChargeCheck(_party, partyMemberAttacker);
             await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Third);
 
             Console.WriteLine("Simulation ended! ^.^");
@@ -322,109 +320,5 @@ namespace FateGrandOrderPOC
                 Console.ReadKey(); // end program
             }
         }
-
-        #region Private Methods
-        /// <summary>
-        /// Check if party member has enough NP charge for an attack. If so, add them to the queue
-        /// </summary>
-        /// <param name="partyMember"></param>
-        private void NpChargeCheck(PartyMember partyMember)
-        {
-            if (partyMember.NpCharge < 100.0f)
-            {
-                Console.WriteLine($"{partyMember.Servant.ServantInfo.Name} only has {partyMember.NpCharge}% charge");
-            }
-            else
-            {
-                if (!_party.Exists(p => p.NpChainOrder == NpChainOrderEnum.First))
-                {
-                    partyMember.NpChainOrder = NpChainOrderEnum.First;
-                }
-                else if (!_party.Exists(p => p.NpChainOrder == NpChainOrderEnum.Second))
-                {
-                    partyMember.NpChainOrder = NpChainOrderEnum.Second;
-                }
-                else if (!_party.Exists(p => p.NpChainOrder == NpChainOrderEnum.Third))
-                {
-                    partyMember.NpChainOrder = NpChainOrderEnum.Third;
-                }
-                else
-                {
-                    Console.WriteLine("Error: Max NP chain limit is 3");
-                    return;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Add a servant from the player's Chaldea to the battle party and equip the specified CE (if available)
-        /// </summary>
-        /// <param name="chaldeaServant"></param>
-        /// <param name="chaldeaCraftEssence"></param>
-        /// <returns></returns>
-        private PartyMember AddPartyMember(Servant chaldeaServant, CraftEssence chaldeaCraftEssence = null)
-        {
-            int servantTotalAtk = chaldeaServant.ServantInfo.AtkGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouAttack;
-            int servantTotalHp = chaldeaServant.ServantInfo.HpGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouHealth;
-
-            if (chaldeaCraftEssence != null)
-            {
-                servantTotalAtk += chaldeaCraftEssence.CraftEssenceInfo.AtkGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
-                servantTotalHp += chaldeaCraftEssence.CraftEssenceInfo.HpGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
-            }
-
-            return new PartyMember
-            {
-                Id = _party.Count,
-                Servant = chaldeaServant,
-                EquippedCraftEssence = chaldeaCraftEssence,
-                TotalAttack = servantTotalAtk,
-                TotalHealth = servantTotalHp,
-                NoblePhantasm = chaldeaServant  // Set NP for party member at start of fight
-                    .ServantInfo                // (assume highest upgraded NP by priority)
-                    .NoblePhantasms
-                    .Aggregate((agg, next) =>
-                        next.Priority >= agg.Priority ? next : agg)
-            };
-        }
-
-        private void ApplyCraftEssenceEffects(PartyMember partyMember) 
-        {
-            if (partyMember.EquippedCraftEssence == null)
-            {
-                return;
-            }
-
-            int priority = 1;
-            if (partyMember.EquippedCraftEssence.Mlb)
-            {
-                priority = 2;
-            }
-
-            List<Skill> skills = partyMember.EquippedCraftEssence.CraftEssenceInfo.Skills.FindAll(s => s.Priority == priority);
-
-            foreach (Skill skill in skills) 
-            {
-                foreach (Function function in skill.Functions)
-                {
-                    if (function.FuncType == "gainNp")
-                    {
-                        partyMember.NpCharge += function.Svals[0].Value / 100.0f;
-                    }
-                    else
-                    {
-                        partyMember.ActiveStatuses.Add(new ActiveStatus
-                        {
-                            StatusEffect = function,
-                            AppliedSkillLevel = 1,
-                            ActiveTurnCount = function.Svals[0].Turn
-                        });
-                    }
-                }
-            }
-
-            return;
-        }
-        #endregion
     }
 }

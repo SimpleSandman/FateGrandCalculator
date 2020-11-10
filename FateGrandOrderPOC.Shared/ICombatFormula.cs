@@ -20,5 +20,8 @@ namespace FateGrandOrderPOC.Shared
         int Overcharge(float npCharge, int npChainPosition);
         Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage);
         Task<float> ChanceToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage);
+        void NpChargeCheck(List<PartyMember> party, PartyMember partyMember);
+        PartyMember AddPartyMember(List<PartyMember> party, Servant chaldeaServant, CraftEssence chaldeaCraftEssence = null);
+        void ApplyCraftEssenceEffects(PartyMember partyMember);
     }
 }

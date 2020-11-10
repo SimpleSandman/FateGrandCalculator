@@ -10,7 +10,7 @@ namespace FateGrandOrderPOC.Test
 {
     public class WireMockFixture : IDisposable
     {
-        public const string SERVER_URL = "http://localhost:8080/";
+        public const string SERVER_URL = "http://localhost:8080";
         private bool _isMockServerInUse = false;
 
         public WireMockServer MockServer { get; private set; }

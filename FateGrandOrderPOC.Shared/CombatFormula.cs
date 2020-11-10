@@ -354,11 +354,25 @@ namespace FateGrandOrderPOC.Shared
             return overcharge;
         }
 
+        /// <summary>
+        /// Multiply the modified NP damage passed in and the attribute and class modifiers between the party member and enemy
+        /// </summary>
+        /// <param name="partyMember"></param>
+        /// <param name="enemyMob"></param>
+        /// <param name="modifiedNpDamage"></param>
+        /// <returns></returns>
         public async Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
         {
             return modifiedNpDamage * await AttributeModifier(partyMember, enemyMob) * await ClassModifier(partyMember, enemyMob);
         }
 
+        /// <summary>
+        /// Return the chance to kill an enemy based on 90% and 110% NP damage RNG
+        /// </summary>
+        /// <param name="partyMember"></param>
+        /// <param name="enemyMob"></param>
+        /// <param name="modifiedNpDamage"></param>
+        /// <returns></returns>
         public async Task<float> ChanceToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
         {
             if (0.9f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) > enemyMob.Health)
@@ -373,6 +387,109 @@ namespace FateGrandOrderPOC.Shared
             {
                 return (1.0f - ((enemyMob.Health / await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) - 0.9f) / 0.2f)) * 100.0f;
             }
+        }
+
+        /// <summary>
+        /// Check if party member has enough NP charge for an attack. If so, add them to the queue
+        /// </summary>
+        /// <param name="partyMember"></param>
+        public void NpChargeCheck(List<PartyMember> party, PartyMember partyMember)
+        {
+            if (partyMember.NpCharge < 100.0f)
+            {
+                Console.WriteLine($"{partyMember.Servant.ServantInfo.Name} only has {partyMember.NpCharge}% charge");
+            }
+            else
+            {
+                if (!party.Exists(p => p.NpChainOrder == NpChainOrderEnum.First))
+                {
+                    partyMember.NpChainOrder = NpChainOrderEnum.First;
+                }
+                else if (!party.Exists(p => p.NpChainOrder == NpChainOrderEnum.Second))
+                {
+                    partyMember.NpChainOrder = NpChainOrderEnum.Second;
+                }
+                else if (!party.Exists(p => p.NpChainOrder == NpChainOrderEnum.Third))
+                {
+                    partyMember.NpChainOrder = NpChainOrderEnum.Third;
+                }
+                else
+                {
+                    Console.WriteLine("Error: Max NP chain limit is 3");
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add a servant from the player's Chaldea to the battle party and equip the specified CE (if available)
+        /// </summary>
+        /// <param name="party"></param>
+        /// <param name="chaldeaServant"></param>
+        /// <param name="chaldeaCraftEssence"></param>
+        /// <returns></returns>
+        public PartyMember AddPartyMember(List<PartyMember> party, Servant chaldeaServant, CraftEssence chaldeaCraftEssence = null)
+        {
+            int servantTotalAtk = chaldeaServant.ServantInfo.AtkGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouAttack;
+            int servantTotalHp = chaldeaServant.ServantInfo.HpGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouHealth;
+
+            if (chaldeaCraftEssence != null)
+            {
+                servantTotalAtk += chaldeaCraftEssence.CraftEssenceInfo.AtkGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
+                servantTotalHp += chaldeaCraftEssence.CraftEssenceInfo.HpGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
+            }
+
+            return new PartyMember
+            {
+                Id = party.Count,
+                Servant = chaldeaServant,
+                EquippedCraftEssence = chaldeaCraftEssence,
+                TotalAttack = servantTotalAtk,
+                TotalHealth = servantTotalHp,
+                NoblePhantasm = chaldeaServant  // Set NP for party member at start of fight
+                    .ServantInfo                // (assume highest upgraded NP by priority)
+                    .NoblePhantasms
+                    .Aggregate((agg, next) =>
+                        next.Priority >= agg.Priority ? next : agg)
+            };
+        }
+
+        public void ApplyCraftEssenceEffects(PartyMember partyMember)
+        {
+            if (partyMember.EquippedCraftEssence == null)
+            {
+                return;
+            }
+
+            int priority = 1;
+            if (partyMember.EquippedCraftEssence.Mlb)
+            {
+                priority = 2;
+            }
+
+            List<Skill> skills = partyMember.EquippedCraftEssence.CraftEssenceInfo.Skills.FindAll(s => s.Priority == priority);
+
+            foreach (Skill skill in skills)
+            {
+                foreach (Function function in skill.Functions)
+                {
+                    if (function.FuncType == "gainNp")
+                    {
+                        partyMember.NpCharge += function.Svals[0].Value / 100.0f;
+                    }
+                    else
+                    {
+                        partyMember.ActiveStatuses.Add(new ActiveStatus
+                        {
+                            StatusEffect = function,
+                            AppliedSkillLevel = 1,
+                            ActiveTurnCount = function.Svals[0].Turn
+                        });
+                    }
+                }
+            }
+
+            return;
         }
 
         #region Private Methods

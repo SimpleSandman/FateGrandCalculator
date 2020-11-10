@@ -31,7 +31,9 @@ namespace FateGrandOrderPOC.Test
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterModule(new AutofacModule 
             { 
-                BaseApiUrl = new NamedParameter("baseApiUrl", WireMockFixture.SERVER_URL)
+                BaseApiUrl = new NamedParameter("baseApiUrl", WireMockFixture.SERVER_URL),
+                AtlasAcademyClient = new NamedParameter("client", new AtlasAcademyClient(WireMockFixture.SERVER_URL, REGION)),
+                Region = new NamedParameter("region", REGION)
             });
 
             _container = builder.Build();
