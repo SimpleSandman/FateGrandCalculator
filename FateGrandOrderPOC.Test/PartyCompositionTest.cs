@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 
 using Autofac;
@@ -12,19 +11,12 @@ using FateGrandOrderPOC.Shared.Models;
 using FluentAssertions;
 using FluentAssertions.Execution;
 
-using Newtonsoft.Json;
-
-using WireMock.RequestBuilders;
-using WireMock.ResponseBuilders;
-
 using Xunit;
 
 namespace FateGrandOrderPOC.Test
 {
     public class PartyCompositionTest : IClassFixture<WireMockFixture>
     {
-        const string CONTENT_TYPE_HEADER = "Content-Type";
-        const string CONTENT_TYPE_APPLICATION_JSON = "application/json";
         const string REGION = "NA";
 
         private readonly WireMockFixture _wiremockFixture;
@@ -49,8 +41,7 @@ namespace FateGrandOrderPOC.Test
         public void ConfirmJsonDeserializationServantJP()
         {
             // Set "Copy to Output Directory" to "Copy if newer" for JSON files
-            string fullPath = HelperMethods.JsonServantFilepath("JP", "Caster", "500300-TamamoNoMaeCasterEN.json");
-            ServantNiceJson testServant = JsonConvert.DeserializeObject<ServantNiceJson>(File.ReadAllText(fullPath));
+            ServantNiceJson testServant = HelperMethods.DeserializeServantJson("JP", "Caster", "500300-TamamoNoMaeCasterEN.json");
 
             testServant.Name.Should().Be("Tamamo-no-Mae");
         }
@@ -59,14 +50,13 @@ namespace FateGrandOrderPOC.Test
         public void ConfirmJsonDeserializationServantNA()
         {
             // Set "Copy to Output Directory" to "Copy if newer" for JSON files
-            string fullPath = HelperMethods.JsonServantFilepath("NA", "Caster", "500800-MerlinCaster.json");
-            ServantNiceJson testServant = JsonConvert.DeserializeObject<ServantNiceJson>(File.ReadAllText(fullPath));
+            ServantNiceJson testServant = HelperMethods.DeserializeServantJson("NA", "Caster", "500800-MerlinCaster.json");
 
             testServant.Name.Should().Be("Merlin");
         }
 
         [Fact]
-        public async Task GetPartyMemberInfo()
+        public async Task CreatePartyMemberWithCraftEssence()
         {
             _wiremockFixture.CheckIfMockServerInUse();
 
@@ -76,10 +66,12 @@ namespace FateGrandOrderPOC.Test
             List<PartyMember> party = new List<PartyMember>();
 
             // build mock servant response
-            CreateNiceWireMockStub(REGION, "servant", DANTES_AVENGER, CreateServantMockResponse(REGION, "Avenger", "1100200-EdmondDantesAvenger.json"));
+            ServantNiceJson mockServantResponse = HelperMethods.DeserializeServantJson(REGION, "Avenger", "1100200-EdmondDantesAvenger.json");
+            HelperMethods.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", DANTES_AVENGER, mockServantResponse);
 
             // build mock craft essence response
-            CreateNiceWireMockStub(REGION, "equip", KSCOPE_CE, CreateCraftEssenceMockResponse(REGION, "9400340-Kaleidoscope.json"));
+            EquipNiceJson mockCraftEssenceResponse = HelperMethods.DeserializeCraftEssenceJson(REGION, "9400340-Kaleidoscope.json");
+            HelperMethods.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", KSCOPE_CE, mockCraftEssenceResponse);
 
             using (var scope = _container.BeginLifetimeScope())
             {
@@ -114,26 +106,5 @@ namespace FateGrandOrderPOC.Test
                 }
             }
         }
-
-        #region Private Methods
-        private ServantNiceJson CreateServantMockResponse(string region, string className, string filename)
-        {
-            string fullFilepath = HelperMethods.JsonServantFilepath(region, className, filename);
-            return JsonConvert.DeserializeObject<ServantNiceJson>(File.ReadAllText(fullFilepath));
-        }
-
-        private EquipNiceJson CreateCraftEssenceMockResponse(string region, string filename)
-        {
-            string fullFilepath = HelperMethods.JsonCraftEssenceFilepath(region, filename);
-            return JsonConvert.DeserializeObject<EquipNiceJson>(File.ReadAllText(fullFilepath));
-        }
-
-        private void CreateNiceWireMockStub<T>(string region, string objectPath, string servantId, T mockResponse)
-        {
-            _wiremockFixture.MockServer
-                .Given(Request.Create().WithPath($"/nice/{region}/{objectPath}/{servantId}").WithParam("lang", "en").UsingGet())
-                .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
-        }
-        #endregion
     }
 }
