@@ -109,5 +109,30 @@ namespace FateGrandOrderPOC.Test
                 }
             }
         }
+
+        [Fact]
+        public async Task SetMysticCode()
+        {
+            _wiremockFixture.CheckIfMockServerInUse();
+
+            const string ARTIC_ID = "110";
+
+            // build mock craft essence response
+            MysticCodeNiceJson mockMysticCodeResponse = LoadTestData.DeserializeMysticCodeJson(REGION, "110-Artic.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", ARTIC_ID, mockMysticCodeResponse);
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                AtlasAcademyClient aaClient = scope.Resolve<AtlasAcademyClient>();
+
+                MysticCode mysticCode = new MysticCode
+                {
+                    MysticCodeLevel = 4,
+                    MysticCodeInfo = await aaClient.GetMysticCodeInfo(ARTIC_ID)
+                };
+
+                mysticCode.MysticCodeInfo.Id.Should().Be(110);
+            }
+        }
     }
 }

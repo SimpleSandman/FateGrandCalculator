@@ -34,6 +34,9 @@
     <None Update="Json\JP\CraftEssenceData\9400340-KaleidoscopeEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\JP\MysticCodeData\110-Artic.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\JP\ServantData\Caster\500300-TamamoNoMaeCasterEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -71,6 +74,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\NA\CraftEssenceData\9400340-Kaleidoscope.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\NA\MysticCodeData\110-Artic.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\NA\ServantData\Avenger\1100200-EdmondDantesAvenger.json">

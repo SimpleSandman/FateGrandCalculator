@@ -159,5 +159,26 @@ namespace FateGrandOrderPOC.Test
                 response.Should().BeEquivalentTo(json);
             }
         }
+
+        [Fact]
+        public async Task GetMysticCodeInfo()
+        {
+            _wiremockFixture.CheckIfMockServerInUse();
+
+            MysticCodeNiceJson mockResponse = new MysticCodeNiceJson
+            {
+                Id = 1
+            };
+
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", "1", mockResponse);
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
+                MysticCodeNiceJson response = await client.GetMysticCodeInfo("1");
+
+                response.Id.Should().Be(1);
+            }
+        }
     }
 }

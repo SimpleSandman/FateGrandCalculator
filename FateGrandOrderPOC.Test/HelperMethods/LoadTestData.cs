@@ -39,12 +39,24 @@ namespace FateGrandOrderPOC.Test.HelperMethods
         }
 
         /// <summary>
+        /// Convert the mystic code info from its JSON file to MysticCodeNiceJson
+        /// </summary>
+        /// <param name="region">NA or JP</param>
+        /// <param name="filename">The name of the mystic code's JSON file</param>
+        /// <returns></returns>
+        public static MysticCodeNiceJson DeserializeMysticCodeJson(string region, string filename)
+        {
+            string fullFilepath = JsonMysticCodeFilepath(region, filename);
+            return JsonConvert.DeserializeObject<MysticCodeNiceJson>(File.ReadAllText(fullFilepath));
+        }
+
+        /// <summary>
         /// Creates a WireMock stub to represent a mock request and response
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="wiremockFixture"></param>
         /// <param name="region">NA or JP</param>
-        /// <param name="objectPath">Path for NICE json data like "servant" or "equip"</param>
+        /// <param name="objectPath">Path for NICE json data like "servant" or "equip" or "MC"</param>
         /// <param name="id">The actual ID, not their collection ID</param>
         /// <param name="mockResponse">The expected JSON response</param>
         public static void CreateNiceWireMockStub<T>(WireMockFixture wiremockFixture, string region, string objectPath, string id, T mockResponse)
@@ -76,6 +88,17 @@ namespace FateGrandOrderPOC.Test.HelperMethods
         private static string JsonCraftEssenceFilepath(string region, string craftEssenceFilename)
         {
             return Path.Combine(Environment.CurrentDirectory, "Json", region, "CraftEssenceData", craftEssenceFilename);
+        }
+
+        /// <summary>
+        /// Get the full file path of the mystic code data. Set "Copy to Output Directory" property to "Copy if newer" for JSON files
+        /// </summary>
+        /// <param name="region">NA or JP</param>
+        /// <param name="mysticCodeFilename">The name of the mystic code's JSON file</param>
+        /// <returns></returns>
+        private static string JsonMysticCodeFilepath(string region, string mysticCodeFilename)
+        {
+            return Path.Combine(Environment.CurrentDirectory, "Json", region, "MysticCodeData", mysticCodeFilename);
         }
         #endregion
     }
