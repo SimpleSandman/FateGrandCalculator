@@ -6,7 +6,7 @@ using WireMock.Logging;
 using WireMock.Server;
 using WireMock.Settings;
 
-namespace FateGrandOrderPOC.Test
+namespace FateGrandOrderPOC.Test.Fixture
 {
     public class WireMockFixture : IDisposable
     {

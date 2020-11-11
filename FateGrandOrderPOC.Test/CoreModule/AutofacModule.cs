@@ -3,7 +3,7 @@
 using FateGrandOrderPOC.Shared;
 using FateGrandOrderPOC.Shared.AtlasAcademy;
 
-namespace FateGrandOrderPOC.Test
+namespace FateGrandOrderPOC.Test.CoreModule
 {
     public class AutofacModule : Module
     {

@@ -5,6 +5,9 @@ using Autofac;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
+using FateGrandOrderPOC.Test.CoreModule;
+using FateGrandOrderPOC.Test.Fixture;
+using FateGrandOrderPOC.Test.HelperMethods;
 
 using FluentAssertions;
 
@@ -51,9 +54,7 @@ namespace FateGrandOrderPOC.Test
                 AtkBase = 1000
             };
 
-            _wiremockFixture.MockServer
-                .Given(Request.Create().WithPath($"/nice/{REGION}/servant/1").WithParam("lang", "en").UsingGet())
-                .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", "1", mockResponse);
 
             using (var scope = _container.BeginLifetimeScope())
             {
@@ -75,9 +76,7 @@ namespace FateGrandOrderPOC.Test
                 AtkBase = 600
             };
 
-            _wiremockFixture.MockServer
-                .Given(Request.Create().WithPath($"/nice/{REGION}/equip/1").WithParam("lore", "true").WithParam("lang", "en").UsingGet())
-                .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", "1", mockResponse);
 
             using (var scope = _container.BeginLifetimeScope())
             {

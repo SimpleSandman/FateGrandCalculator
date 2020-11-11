@@ -7,6 +7,9 @@ using FateGrandOrderPOC.Shared;
 using FateGrandOrderPOC.Shared.AtlasAcademy;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Models;
+using FateGrandOrderPOC.Test.CoreModule;
+using FateGrandOrderPOC.Test.Fixture;
+using FateGrandOrderPOC.Test.HelperMethods;
 
 using FluentAssertions;
 using FluentAssertions.Execution;
@@ -41,7 +44,7 @@ namespace FateGrandOrderPOC.Test
         public void ConfirmJsonDeserializationServantJP()
         {
             // Set "Copy to Output Directory" to "Copy if newer" for JSON files
-            ServantNiceJson testServant = HelperMethods.DeserializeServantJson("JP", "Caster", "500300-TamamoNoMaeCasterEN.json");
+            ServantNiceJson testServant = LoadTestData.DeserializeServantJson("JP", "Caster", "500300-TamamoNoMaeCasterEN.json");
 
             testServant.Name.Should().Be("Tamamo-no-Mae");
         }
@@ -50,7 +53,7 @@ namespace FateGrandOrderPOC.Test
         public void ConfirmJsonDeserializationServantNA()
         {
             // Set "Copy to Output Directory" to "Copy if newer" for JSON files
-            ServantNiceJson testServant = HelperMethods.DeserializeServantJson("NA", "Caster", "500800-MerlinCaster.json");
+            ServantNiceJson testServant = LoadTestData.DeserializeServantJson("NA", "Caster", "500800-MerlinCaster.json");
 
             testServant.Name.Should().Be("Merlin");
         }
@@ -66,12 +69,12 @@ namespace FateGrandOrderPOC.Test
             List<PartyMember> party = new List<PartyMember>();
 
             // build mock servant response
-            ServantNiceJson mockServantResponse = HelperMethods.DeserializeServantJson(REGION, "Avenger", "1100200-EdmondDantesAvenger.json");
-            HelperMethods.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", DANTES_AVENGER, mockServantResponse);
+            ServantNiceJson mockServantResponse = LoadTestData.DeserializeServantJson(REGION, "Avenger", "1100200-EdmondDantesAvenger.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", DANTES_AVENGER, mockServantResponse);
 
             // build mock craft essence response
-            EquipNiceJson mockCraftEssenceResponse = HelperMethods.DeserializeCraftEssenceJson(REGION, "9400340-Kaleidoscope.json");
-            HelperMethods.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", KSCOPE_CE, mockCraftEssenceResponse);
+            EquipNiceJson mockCraftEssenceResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, "9400340-Kaleidoscope.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", KSCOPE_CE, mockCraftEssenceResponse);
 
             using (var scope = _container.BeginLifetimeScope())
             {
