@@ -1,15 +1,11 @@
 version: 1.0.{build}
 image: Visual Studio 2019
 before_build:
-- nuget restore
-- dotnet restore
+  - nuget restore
+  - dotnet restore
+  - dotnet tool install --global Codecov.Tool
 build:
   verbosity: quiet
 test_script:
- - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
-after_test:
-  - ps: |
-      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
-      $env:APPVEYOR="true"
-      $env:CI="true"
-      bash codecov.sh -f "FateGrandOrderPOC.Test/coverage.cobertura.xml" -v
+  - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+  - codecov -f "FateGrandOrderPOC.Test/coverage.cobertura.xml"
