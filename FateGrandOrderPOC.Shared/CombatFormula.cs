@@ -73,7 +73,7 @@ namespace FateGrandOrderPOC.Shared
                     //Console.WriteLine($"Attribute Multiplier ({enemyMob.Name}): {AttributeModifier(partyMember, enemyMob)}x");
                     //Console.WriteLine($"Class Advantage Multiplier ({enemyMob.Name}): {ClassModifier(partyMember, enemyMob)}x");
 
-                    float baseNpDamage = await BaseNpDamage(partyMember, enemyMob, npChainPosition);
+                    float baseNpDamage = await BaseNpDamage(partyMember, enemyMob, npChainPosition).ConfigureAwait(false);
                     //Console.WriteLine($"{partyMember.Servant.ServantInfo.Name}'s base NP damage: {baseNpDamage}");
 
                     float totalPowerDamageModifier = (1.0f + attackUp + defenseDownModifier + cardDefenseDebuffModifier) 
@@ -84,7 +84,7 @@ namespace FateGrandOrderPOC.Shared
                     float modifiedNpDamage = baseNpDamage * totalPowerDamageModifier;
                     //Console.WriteLine($"Modified NP damage: {modifiedNpDamage}\n");
 
-                    float npDamageForEnemyMob = await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage);
+                    float npDamageForEnemyMob = await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false);
                     //Console.WriteLine($"Average NP damage towards {enemyMob.Name}: {npDamageForEnemyMob}");
 
                     List<float> npDistributionPercentages = NpDistributionPercentages(partyMember);
@@ -93,7 +93,7 @@ namespace FateGrandOrderPOC.Shared
                     totalNpRefund += NpGainedFromEnemy(partyMember, enemyMob, npGainUp, cardNpTypeUp, npDamageForEnemyMob, npDistributionPercentages);
 
                     // Check health of enemy
-                    float chanceToKillEnemyMob = await ChanceToKill(partyMember, enemyMob, modifiedNpDamage);
+                    float chanceToKillEnemyMob = await ChanceToKill(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false);
                     enemyMob.Health = HealthRemaining(enemyMob, npDamageForEnemyMob);
 
                     Console.WriteLine($"Chance to kill {enemyMob.Name}: {chanceToKillEnemyMob}%\n");
@@ -363,7 +363,9 @@ namespace FateGrandOrderPOC.Shared
         /// <returns></returns>
         public async Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
         {
-            return modifiedNpDamage * await AttributeModifier(partyMember, enemyMob) * await ClassModifier(partyMember, enemyMob);
+            return modifiedNpDamage 
+                * await AttributeModifier(partyMember, enemyMob).ConfigureAwait(false) 
+                * await ClassModifier(partyMember, enemyMob).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -375,17 +377,17 @@ namespace FateGrandOrderPOC.Shared
         /// <returns></returns>
         public async Task<float> ChanceToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
         {
-            if (0.9f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) > enemyMob.Health)
+            if (0.9f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false) > enemyMob.Health)
             {
                 return 100.0f; // perfect clear, even with the worst RNG
             }
-            else if (1.1f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) < enemyMob.Health)
+            else if (1.1f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false) < enemyMob.Health)
             {
                 return 0.0f; // never clear, even with the best RNG
             }
             else // show chance of success
             {
-                return (1.0f - ((enemyMob.Health / await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage) - 0.9f) / 0.2f)) * 100.0f;
+                return (1.0f - ((enemyMob.Health / await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false) - 0.9f) / 0.2f)) * 100.0f;
             }
         }
 

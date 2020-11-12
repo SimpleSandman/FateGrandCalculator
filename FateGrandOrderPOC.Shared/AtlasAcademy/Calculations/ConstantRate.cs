@@ -40,7 +40,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
 
         public async Task<float> GetAttackMultiplier(string attack, string defend)
         {
-            return await Task.FromException<float>(new NotImplementedException());
+            return await Task.FromException<float>(new NotImplementedException()).ConfigureAwait(false);
         }
     }
 }

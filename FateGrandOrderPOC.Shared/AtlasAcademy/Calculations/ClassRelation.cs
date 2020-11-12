@@ -12,12 +12,12 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
 
         public async Task<float> GetAttackMultiplier(string attack)
         {
-            return await Task.FromException<float>(new NotImplementedException());
+            return await Task.FromException<float>(new NotImplementedException()).ConfigureAwait(false);
         }
 
         public async Task<float> GetAttackMultiplier(string atkClassName, string defClassName)
         {
-            float[,] damageMultiplier = await GetListDamageMultiplier();
+            float[,] damageMultiplier = await GetListDamageMultiplier().ConfigureAwait(false);
 
             bool validAtkClass = Enum.TryParse(atkClassName, true, out ClassRelationEnum atkClass);
             bool validDefClass = Enum.TryParse(defClassName, true, out ClassRelationEnum defClass);
