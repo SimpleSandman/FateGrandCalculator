@@ -9,8 +9,8 @@ namespace FateGrandOrderPOC.Test.Fixture
 {
     public class WireMockFixture : IDisposable
     {
-        public const string SERVER_URL = "http://localhost:8080";
-        private bool _isMockServerInUse = false;
+        private static readonly int _port = 8080;
+        public static readonly string SERVER_URL = $"http://localhost:{_port}";
 
         public WireMockServer MockServer { get; private set; }
 
@@ -38,19 +38,22 @@ namespace FateGrandOrderPOC.Test.Fixture
         /// </summary>
         public void CheckIfMockServerInUse()
         {
-            while (_isMockServerInUse)
-            {
-                IPGlobalProperties ipGlobalProperties = IPGlobalProperties.GetIPGlobalProperties();
-
-                _isMockServerInUse = ipGlobalProperties
-                    .GetActiveTcpConnections()
-                    .Any(p => p.LocalEndPoint.Port == MockServer.Ports[0]);
-            }
+            // wait until the port is free
+            while (IsPortBusy()) { }
 
             if (MockServer != null)
             {
                 MockServer.Reset(); // clean up for the next test
             }
+        }
+
+        private bool IsPortBusy()
+        {
+            IPGlobalProperties ipGlobalProperties = IPGlobalProperties.GetIPGlobalProperties();
+
+            return ipGlobalProperties
+                .GetActiveTcpConnections()
+                .Any(p => p.LocalEndPoint.Port == _port);
         }
     }
 }
