@@ -12,4 +12,4 @@ after_test:
       Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
       $env:APPVEYOR="true"
       $env:CI="true"
-      bash codecov.sh -f "FateGrandOrderPOC/coverage.cobertura.xml"
+      bash codecov.sh -f "FateGrandOrderPOC.Test/coverage.cobertura.xml"
