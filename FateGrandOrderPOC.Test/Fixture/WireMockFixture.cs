@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Net.NetworkInformation;
 
-using WireMock.Logging;
 using WireMock.Server;
 using WireMock.Settings;
 
@@ -22,7 +21,7 @@ namespace FateGrandOrderPOC.Test.Fixture
             {
                 Urls = new[] { SERVER_URL },
                 StartAdminInterface = true,
-                Logger = new WireMockConsoleLogger(),
+                //Logger = new WireMockConsoleLogger(),
                 AllowPartialMapping = true
             });
         }
