@@ -7,7 +7,7 @@ using FateGrandOrderPOC.Shared.AtlasAcademy;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Test.CoreModule;
 using FateGrandOrderPOC.Test.Fixture;
-using FateGrandOrderPOC.Test.HelperMethods;
+using FateGrandOrderPOC.Test.Utility;
 
 using FluentAssertions;
 

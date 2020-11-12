@@ -61,22 +61,20 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
         }
 
         #region Private Methods "Party Member"
-        private static List<PartyMember> ApplyStatus(PartyMember partyMemberActor, Function servantFunction, int currentSkillLevel, List<PartyMember> partyMemberTargets)
+        private static void ApplyStatus(PartyMember partyMemberActor, Function servantFunction, int currentSkillLevel, List<PartyMember> partyMemberTargets)
         {
             foreach (PartyMember partyMemberTarget in partyMemberTargets)
             {
                 ApplyPartyMemberStatus(partyMemberActor, servantFunction, currentSkillLevel, partyMemberTarget);
             }
-
-            return partyMemberTargets;
         }
 
-        private static PartyMember ApplyStatus(PartyMember partyMemberActor, Function servantFunction, int currentSkillLevel, PartyMember partyMemberTarget)
+        private static void ApplyStatus(PartyMember partyMemberActor, Function servantFunction, int currentSkillLevel, PartyMember partyMemberTarget)
         {
-            return ApplyPartyMemberStatus(partyMemberActor, servantFunction, currentSkillLevel, partyMemberTarget);
+            ApplyPartyMemberStatus(partyMemberActor, servantFunction, currentSkillLevel, partyMemberTarget);
         }
 
-        private static PartyMember ApplyPartyMemberStatus(PartyMember partyMemberActor, Function servantFunction, int currentSkillLevel, PartyMember partyMemberTarget)
+        private static void ApplyPartyMemberStatus(PartyMember partyMemberActor, Function servantFunction, int currentSkillLevel, PartyMember partyMemberTarget)
         {
             string support = "";
             if (partyMemberActor.Servant.IsSupportServant)
@@ -104,42 +102,31 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
                     });
                     break;
             }
-
-            return partyMemberTarget;
         }
         #endregion
 
         #region Private Methods "Mystic Code"
-        private static List<PartyMember> ApplyStatus(MysticCode mysticCode, Function mysticCodeFunction, List<PartyMember> partyMemberTargets)
+        private static void ApplyStatus(MysticCode mysticCode, Function mysticCodeFunction, List<PartyMember> partyMemberTargets)
         {
             foreach (PartyMember partyMemberTarget in partyMemberTargets)
             {
                 ApplyPartyMemberStatus(mysticCode, mysticCodeFunction, partyMemberTarget);
             }
-
-            return partyMemberTargets;
         }
 
-        private static PartyMember ApplyStatus(MysticCode mysticCode, Function mysticCodeFunction, PartyMember partyMemberTarget)
+        private static void ApplyStatus(MysticCode mysticCode, Function mysticCodeFunction, PartyMember partyMemberTarget)
         {
-            return ApplyPartyMemberStatus(mysticCode, mysticCodeFunction, partyMemberTarget);
+            ApplyPartyMemberStatus(mysticCode, mysticCodeFunction, partyMemberTarget);
         }
 
-        private static PartyMember ApplyPartyMemberStatus(MysticCode mysticCode, Function mysticCodeFunction, PartyMember partyMemberTarget)
+        private static void ApplyPartyMemberStatus(MysticCode mysticCode, Function mysticCodeFunction, PartyMember partyMemberTarget)
         {
             switch (mysticCodeFunction.FuncType)
             {
                 case "gainNp":
                     partyMemberTarget.NpCharge += mysticCodeFunction.Svals[mysticCode.MysticCodeLevel - 1].Value / 100.0f;
 
-                    if (partyMemberTarget.NpCharge == 99.0f)
-                    {
-                        partyMemberTarget.NpCharge++; // pity NP gain
-                    }
-                    else if (partyMemberTarget.NpCharge > 300.0f)
-                    {
-                        partyMemberTarget.NpCharge = 300.0f; // set max charge
-                    }
+                    PityNpGain(partyMemberTarget);
 
                     Console.WriteLine($"{mysticCode.MysticCodeInfo.Name} has buffed " +
                         $"{partyMemberTarget.Servant.ServantInfo.Name}'s NP charge by " +
@@ -154,21 +141,23 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
                     });
                     break;
             }
-
-            return partyMemberTarget;
         }
         #endregion
 
         #region Private Shared Methods
         /// <summary>
-        /// Adjust the NP gain to 100% if the charge reached 99%
+        /// Adjust the NP gain to 100% if the charge reached 99% or cap the NP charge to 300%
         /// </summary>
         /// <param name="partyMemberTarget">Affected party member</param>
         private static void PityNpGain(PartyMember partyMemberTarget)
         {
             if (partyMemberTarget.NpCharge == 99.0f)
             {
-                partyMemberTarget.NpCharge++;
+                partyMemberTarget.NpCharge++; // pity NP gain
+            }
+            else if (partyMemberTarget.NpCharge > 300.0f)
+            {
+                partyMemberTarget.NpCharge = 300.0f; // set max charge
             }
         }
         #endregion

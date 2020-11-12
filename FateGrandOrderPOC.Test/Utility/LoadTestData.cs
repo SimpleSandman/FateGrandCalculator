@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 
-namespace FateGrandOrderPOC.Test.HelperMethods
+namespace FateGrandOrderPOC.Test.Utility
 {
     public static class LoadTestData
     {

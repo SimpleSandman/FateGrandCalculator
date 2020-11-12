@@ -51,22 +51,20 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
         }
 
         #region Private Methods "Party Member"
-        private static List<EnemyMob> ApplyStatus(Function servantFunction, int currentSkillLevel, List<EnemyMob> enemies)
+        private static void ApplyStatus(Function servantFunction, int currentSkillLevel, List<EnemyMob> enemies)
         {
             foreach (EnemyMob enemy in enemies)
             {
                 ApplyPartyMemberStatus(servantFunction, currentSkillLevel, enemy);
             }
-
-            return enemies;
         }
 
-        private static EnemyMob ApplyStatus(Function servantFunction, int currentSkillLevel, EnemyMob enemy)
+        private static void ApplyStatus(Function servantFunction, int currentSkillLevel, EnemyMob enemy)
         {
-            return ApplyPartyMemberStatus(servantFunction, currentSkillLevel, enemy);
+            ApplyPartyMemberStatus(servantFunction, currentSkillLevel, enemy);
         }
 
-        private static EnemyMob ApplyPartyMemberStatus(Function servantFunction, int currentSkillLevel, EnemyMob enemy)
+        private static void ApplyPartyMemberStatus(Function servantFunction, int currentSkillLevel, EnemyMob enemy)
         {
             enemy.ActiveStatuses.Add(new ActiveStatus
             {
@@ -74,28 +72,24 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
                 AppliedSkillLevel = currentSkillLevel,
                 ActiveTurnCount = servantFunction.Svals[currentSkillLevel - 1].Turn
             });
-            
-            return enemy;
         }
         #endregion
 
         #region Private Methods "Mystic Code"
-        private static List<EnemyMob> ApplyStatus(MysticCode mysticCode, Function mysticCodeFunction, List<EnemyMob> enemies)
+        private static void ApplyStatus(MysticCode mysticCode, Function mysticCodeFunction, List<EnemyMob> enemies)
         {
             foreach (EnemyMob enemy in enemies)
             {
                 ApplyPartyMemberStatus(mysticCode, mysticCodeFunction, enemy);
             }
-
-            return enemies;
         }
 
-        private static EnemyMob ApplyStatus(MysticCode mysticCode, Function mysticCodeFunction, EnemyMob enemy)
+        private static void ApplyStatus(MysticCode mysticCode, Function mysticCodeFunction, EnemyMob enemy)
         {
-            return ApplyPartyMemberStatus(mysticCode, mysticCodeFunction, enemy);
+            ApplyPartyMemberStatus(mysticCode, mysticCodeFunction, enemy);
         }
 
-        private static EnemyMob ApplyPartyMemberStatus(MysticCode mysticCode, Function mysticCodeFunction, EnemyMob enemy)
+        private static void ApplyPartyMemberStatus(MysticCode mysticCode, Function mysticCodeFunction, EnemyMob enemy)
         {
             enemy.ActiveStatuses.Add(new ActiveStatus
             {
@@ -103,8 +97,6 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
                 AppliedSkillLevel = mysticCode.MysticCodeLevel,
                 ActiveTurnCount = mysticCodeFunction.Svals[mysticCode.MysticCodeLevel - 1].Turn
             });
-
-            return enemy;
         }
         #endregion
     }

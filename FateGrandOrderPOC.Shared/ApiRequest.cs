@@ -9,7 +9,7 @@ using RestSharp;
 
 namespace FateGrandOrderPOC.Shared
 {
-    public class ApiRequest
+    public static class ApiRequest
     {
         public static async Task<T> GetDeserializeObjectAsync<T>(string basicUrl)
         {

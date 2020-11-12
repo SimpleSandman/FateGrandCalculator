@@ -9,7 +9,7 @@ using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Models;
 using FateGrandOrderPOC.Test.CoreModule;
 using FateGrandOrderPOC.Test.Fixture;
-using FateGrandOrderPOC.Test.HelperMethods;
+using FateGrandOrderPOC.Test.Utility;
 
 using FluentAssertions;
 using FluentAssertions.Execution;
@@ -94,7 +94,7 @@ namespace FateGrandOrderPOC.Test
                     NpLevel = 1,
                     FouHealth = 1000,
                     FouAttack = 1000,
-                    SkillLevels = new int[3] { 10, 10, 10 },
+                    SkillLevels = new int[] { 10, 10, 10 },
                     IsSupportServant = false,
                     ServantInfo = await aaClient.GetServantInfo(DANTES_AVENGER)
                 };
