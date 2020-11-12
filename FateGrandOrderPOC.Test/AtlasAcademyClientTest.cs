@@ -11,6 +11,8 @@ using FateGrandOrderPOC.Test.Utility;
 
 using FluentAssertions;
 
+using Newtonsoft.Json.Linq;
+
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 
@@ -178,6 +180,31 @@ namespace FateGrandOrderPOC.Test
                 MysticCodeNiceJson response = await client.GetMysticCodeInfo("1");
 
                 response.Id.Should().Be(1);
+            }
+        }
+
+        [Fact]
+        public async Task GetTraitEnumInfo()
+        {
+            _wiremockFixture.CheckIfMockServerInUse();
+
+            JObject mockResponse = new JObject
+            {
+                { "1", JToken.Parse(@"'genderMale'") }
+            };
+
+            // same for both NA and JP
+            _wiremockFixture.MockServer
+                .Given(Request.Create().WithPath($"/export/JP/nice_trait.json").UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
+                JObject response = await client.GetTraitEnumInfo();
+
+                string traitName = response.Property("1")?.Value.ToString() ?? "";
+                traitName.Should().Be("genderMale");
             }
         }
     }

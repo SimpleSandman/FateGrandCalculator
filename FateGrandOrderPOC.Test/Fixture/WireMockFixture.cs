@@ -16,6 +16,8 @@ namespace FateGrandOrderPOC.Test.Fixture
 
         public WireMockFixture()
         {
+            CheckIfMockServerInUse();
+
             // bootstrap mockserver
             MockServer = WireMockServer.Start(new WireMockServerSettings
             {
@@ -45,7 +47,10 @@ namespace FateGrandOrderPOC.Test.Fixture
                     .Any(p => p.LocalEndPoint.Port == MockServer.Ports[0]);
             }
 
-            MockServer.Reset(); // clean up for the next test
+            if (MockServer != null)
+            {
+                MockServer.Reset(); // clean up for the next test
+            }
         }
     }
 }
