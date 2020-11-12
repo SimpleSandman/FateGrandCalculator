@@ -12,8 +12,8 @@ namespace FateGrandOrderPOC
 {
     public class Program
     {
-        private readonly CombatFormula _combatFormula;
-        private readonly ServantSkillActivation _skillActivation = new ServantSkillActivation();
+        private readonly ICombatFormula _combatFormula;
+        private readonly IServantSkillActivation _skillActivation;
         private readonly IAtlasAcademyClient _aaClient;
         private List<PartyMember> _party = new List<PartyMember>();
 
@@ -47,6 +47,7 @@ namespace FateGrandOrderPOC
         public Program()
         {
             _aaClient = new AtlasAcademyClient("https://api.atlasacademy.io", "NA");
+            _skillActivation = new ServantSkillActivation();
             _combatFormula = new CombatFormula(_aaClient);
         }
 

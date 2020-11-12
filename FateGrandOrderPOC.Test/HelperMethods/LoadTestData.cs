@@ -11,7 +11,7 @@ using WireMock.ResponseBuilders;
 
 namespace FateGrandOrderPOC.Test.HelperMethods
 {
-    public class LoadTestData
+    public static class LoadTestData
     {
         /// <summary>
         /// Convert the servant info from its JSON file to ServantNiceJson

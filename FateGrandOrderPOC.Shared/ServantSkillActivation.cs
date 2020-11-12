@@ -8,7 +8,7 @@ using FateGrandOrderPOC.Shared.Models;
 
 namespace FateGrandOrderPOC.Shared
 {
-    public class ServantSkillActivation
+    public class ServantSkillActivation : IServantSkillActivation
     {
         /// <summary>
         /// Buff a party member with the desired skill based on the mystic code's list of available skills

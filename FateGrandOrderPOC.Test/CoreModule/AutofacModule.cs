@@ -19,6 +19,8 @@ namespace FateGrandOrderPOC.Test.CoreModule
 
             builder.RegisterType<CombatFormula>()
                 .WithParameter(AtlasAcademyClient);
+
+            builder.RegisterType<ServantSkillActivation>();
         }
     }
 }
