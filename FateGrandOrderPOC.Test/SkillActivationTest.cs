@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Autofac;
@@ -42,7 +43,7 @@ namespace FateGrandOrderPOC.Test
         }
 
         [Fact]
-        public async Task ActivatePartyMemberBuff()
+        public async Task ActivatePartyMemberSkills()
         {
             _wiremockFixture.CheckIfMockServerInUse();
 
@@ -100,6 +101,23 @@ namespace FateGrandOrderPOC.Test
                 party.Add(partyMemberCaster);
                 #endregion
 
+                #region Party Member Support
+                Servant supportCaster = new Servant
+                {
+                    ServantLevel = 90,
+                    NpLevel = 1,
+                    FouHealth = 1000,
+                    FouAttack = 1000,
+                    SkillLevels = new int[3] { 10, 10, 10 },
+                    IsSupportServant = true,
+                    ServantInfo = await aaClient.GetServantInfo(SKADI_CASTER)
+                };
+
+                PartyMember partyMemberSupportCaster = cfClient.AddPartyMember(party, supportCaster);
+
+                party.Add(partyMemberSupportCaster);
+                #endregion
+
                 // Actual enemy stats from LB2's "Ablazed Mansion" or "Flaming Mansion" free quest
                 List<EnemyMob> enemyMobs = new List<EnemyMob>
                 {
@@ -121,11 +139,26 @@ namespace FateGrandOrderPOC.Test
                 };
 
                 ssaClient.SkillActivation(partyMemberCaster, 1, party, 1, enemyMobs, 1); // Skadi quick up buff
+                ssaClient.SkillActivation(partyMemberSupportCaster, 1, party, 1, enemyMobs, 1); // Skadi (support) quick up buff
+                ssaClient.SkillActivation(partyMemberAttacker, 2, party, 1, enemyMobs, 1); // Dante's 2nd skill
+                ssaClient.AdjustSkillCooldowns(party); // before next turn
+                ssaClient.SkillActivation(partyMemberCaster, 3, party, 1, enemyMobs, 1); // Skadi NP buff
+                ssaClient.AdjustSkillCooldowns(party); // before next turn
+                ssaClient.SkillActivation(partyMemberSupportCaster, 3, party, 1, enemyMobs, 1); // Skadi (support) NP buff
+                ssaClient.SkillActivation(partyMemberSupportCaster, 2, party, 1, enemyMobs, 1); // Skadi (support) enemy defense down
+                ssaClient.SkillActivation(partyMemberCaster, 2, party, 1, enemyMobs, 1); // Skadi enemy defense down
+                ssaClient.SkillActivation(partyMemberAttacker, 1, party, 1, enemyMobs, 1); // Dante's 1st skill
 
                 using (new AssertionScope())
                 {
-                    partyMemberAttacker.ActiveStatuses.Count.Should().BeGreaterThan(0);
-                    partyMemberCaster.SkillCooldowns.Count.Should().BeGreaterThan(0);
+                    partyMemberAttacker.SkillCooldowns.Count.Should().Be(2); // 1st and 2nd skills used
+                    partyMemberCaster.SkillCooldowns.Count.Should().Be(3); // all 3 skills used
+                    partyMemberSupportCaster.SkillCooldowns.Count.Should().Be(3); // all 3 skills used
+                    partyMemberAttacker.ActiveStatuses.Count.Should().Be(8); // Status Count = skadi 2 + skadi (support) 2
+                                                                             // + dantes (1st skill) 3 + dantes (2nd skill) 1
+                    enemyMobs
+                        .FindAll(d => d.ActiveStatuses.Any(f => f.StatusEffect.FuncPopupText == "DEF Down"))
+                        .Count.Should().Be(1); // find enemies with defense down
                 }
             }
         }

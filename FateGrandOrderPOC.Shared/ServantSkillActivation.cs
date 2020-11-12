@@ -123,7 +123,7 @@ namespace FateGrandOrderPOC.Shared
         /// Reduce cooldown counters for all front-line party members at the end of the turn
         /// </summary>
         /// <param name="party">The targeted party members that are receiving the status effect</param>
-        public List<PartyMember> AdjustSkillCooldowns(List<PartyMember> party)
+        public void AdjustSkillCooldowns(List<PartyMember> party)
         {
             foreach (PartyMember partyMember in party.Take(3))
             {
@@ -141,19 +141,15 @@ namespace FateGrandOrderPOC.Shared
                     }
                 }
             }
-
-            return party;
         }
 
         /// <summary>
         /// Reduce cooldown counters for all front-line party members at the end of the turn
         /// </summary>
         /// <param name="mysticCode">The acting mystic code skill that is giving the buff</param>
-        public MysticCode AdjustSkillCooldowns(MysticCode mysticCode)
+        public void AdjustSkillCooldowns(MysticCode mysticCode)
         {
             ReduceSkillCooldowns(mysticCode.SkillCooldowns);
-
-            return mysticCode;
         }
 
         #region Private Methods

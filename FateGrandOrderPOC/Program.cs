@@ -296,14 +296,14 @@ namespace FateGrandOrderPOC
             await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.First);
 
             Console.WriteLine("\n>>>>>> Fight 2/3 <<<<<<\n");
-            _party = _skillActivation.AdjustSkillCooldowns(_party);
+            _skillActivation.AdjustSkillCooldowns(_party);
             _skillActivation.SkillActivation(partyMemberCaster, 3, _party, 1, enemyMobs, 1); // Skadi NP buff
 
             _combatFormula.NpChargeCheck(_party, partyMemberAttacker);
             await _combatFormula.NoblePhantasmChainSimulator(_party, enemyMobs, WaveNumberEnum.Second);
 
             Console.WriteLine("\n>>>>>> Fatal 3/3 <<<<<<\n");
-            _party = _skillActivation.AdjustSkillCooldowns(_party);
+            _skillActivation.AdjustSkillCooldowns(_party);
             _skillActivation.SkillActivation(partyMemberSupportCaster, 3, _party, 1, enemyMobs, 1); // Skadi (support) NP buff
             _skillActivation.SkillActivation(partyMemberSupportCaster, 2, _party, 1, enemyMobs, 1); // Skadi (support) enemy defense down
             _skillActivation.SkillActivation(partyMemberCaster, 2, _party, 1, enemyMobs, 1); // Skadi enemy defense down
