@@ -1,6 +1,15 @@
 version: 1.0.{build}
 image: Visual Studio 2019
 before_build:
-- ps: dotnet restore
+- nuget restore
+- dotnet restore
 build:
-  verbosity: minimal
+  verbosity: quiet
+test_script:
+ - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+after_test:
+  - ps: |
+      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
+      $env:APPVEYOR="true"
+      $env:CI="true"
+      bash codecov.sh -f "FateGrandOrderPOC/coverage.cobertura.xml"
