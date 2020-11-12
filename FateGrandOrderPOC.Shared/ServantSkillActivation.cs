@@ -24,7 +24,9 @@ namespace FateGrandOrderPOC.Shared
         {
             if (partyMemberActor.SkillCooldowns.Exists(s => s.SkillId == actorSkillPositionNumber))
             {
+#if DEBUG
                 Console.WriteLine($"WARNING: Cannot buff using {partyMemberActor.Servant.ServantInfo.Name}'s #{actorSkillPositionNumber} skill because of cooldown!");
+#endif
                 return; // don't activate again
             }
 
@@ -81,7 +83,9 @@ namespace FateGrandOrderPOC.Shared
         {
             if (mysticCode.SkillCooldowns.Exists(s => s.SkillId == mysticCodeSkillPositionNumber))
             {
+#if DEBUG
                 Console.WriteLine($"WARNING: Cannot buff using {mysticCode.MysticCodeInfo.Name}'s #{mysticCodeSkillPositionNumber} skill because of cooldown!");
+#endif
                 return; // don't activate again
             }
 

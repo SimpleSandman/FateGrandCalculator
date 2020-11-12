@@ -48,7 +48,9 @@ namespace FateGrandOrderPOC.Shared
                 // Check if any enemies are alive
                 if (enemyMobs.Count == 0)
                 {
+#if DEBUG
                     Console.WriteLine("Node cleared!!");
+#endif
                     return;
                 }
 
@@ -68,25 +70,29 @@ namespace FateGrandOrderPOC.Shared
                     // Determine enemy debuffs
                     float defenseDownModifier = 0.0f, cardDefenseDebuffModifier = 0.0f;
                     SetStatusEffects(enemyMob, partyMember, ref defenseDownModifier, ref cardDefenseDebuffModifier);
-
-                    //Console.WriteLine(">>>>>>>> Stats <<<<<<<<");
-                    //Console.WriteLine($"Attribute Multiplier ({enemyMob.Name}): {AttributeModifier(partyMember, enemyMob)}x");
-                    //Console.WriteLine($"Class Advantage Multiplier ({enemyMob.Name}): {ClassModifier(partyMember, enemyMob)}x");
-
+#if DEBUG
+                    Console.WriteLine(">>>>>>>> Stats <<<<<<<<");
+                    Console.WriteLine($"Attribute Multiplier ({enemyMob.Name}): {await AttributeModifier(partyMember, enemyMob).ConfigureAwait(false)}x");
+                    Console.WriteLine($"Class Advantage Multiplier ({enemyMob.Name}): {await ClassModifier(partyMember, enemyMob).ConfigureAwait(false)}x");
+#endif
                     float baseNpDamage = await BaseNpDamage(partyMember, enemyMob, npChainPosition).ConfigureAwait(false);
-                    //Console.WriteLine($"{partyMember.Servant.ServantInfo.Name}'s base NP damage: {baseNpDamage}");
-
+#if DEBUG
+                    Console.WriteLine($"{partyMember.Servant.ServantInfo.Name}'s base NP damage: {baseNpDamage}");
+#endif
                     float totalPowerDamageModifier = (1.0f + attackUp + defenseDownModifier + cardDefenseDebuffModifier) 
                         * (1.0f + cardNpTypeUp) 
                         * (1.0f + powerModifier);
-                    //Console.WriteLine($"Total power damage modifier: {totalPowerDamageModifier}");
-
+#if DEBUG
+                    Console.WriteLine($"Total power damage modifier: {totalPowerDamageModifier}");
+#endif
                     float modifiedNpDamage = baseNpDamage * totalPowerDamageModifier;
-                    //Console.WriteLine($"Modified NP damage: {modifiedNpDamage}\n");
-
+#if DEBUG
+                    Console.WriteLine($"Modified NP damage: {modifiedNpDamage}\n");
+#endif
                     float npDamageForEnemyMob = await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false);
-                    //Console.WriteLine($"Average NP damage towards {enemyMob.Name}: {npDamageForEnemyMob}");
-
+#if DEBUG
+                    Console.WriteLine($"Average NP damage towards {enemyMob.Name}: {npDamageForEnemyMob}");
+#endif
                     List<float> npDistributionPercentages = NpDistributionPercentages(partyMember);
 
                     // Grab NP refund from current enemy
@@ -95,9 +101,10 @@ namespace FateGrandOrderPOC.Shared
                     // Check health of enemy
                     float chanceToKillEnemyMob = await ChanceToKill(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false);
                     enemyMob.Health = HealthRemaining(enemyMob, npDamageForEnemyMob);
-
+#if DEBUG
                     Console.WriteLine($"Chance to kill {enemyMob.Name}: {chanceToKillEnemyMob}%\n");
                     Console.WriteLine($"Health remaining: {enemyMob.Health}\n");
+#endif
                 }
 
                 // Replace old charge with newly refunded NP
@@ -111,8 +118,9 @@ namespace FateGrandOrderPOC.Shared
 
                 enemyMobs.RemoveAll(e => e.Health <= 0.0f); // remove dead enemies in preparation for next NP
                 npChainPosition++;
-
+#if DEBUG
                 Console.WriteLine($"Total NP refund for {partyMember.Servant.ServantInfo.Name}: {partyMember.NpCharge}%\n");
+#endif
             }
 
             return;
@@ -224,11 +232,14 @@ namespace FateGrandOrderPOC.Shared
                 }
 
                 npRefund += (float)Math.Floor(effectiveHitModifier * CalculatedNpPerHit(partyMember, enemyMob, cardNpTypeUp, npGainUp));
-
-                //Console.WriteLine($"NP Hit Perc: {npHitPerc}% || Effective hit: {effectiveHitModifier} || Accumulated NP refund: {npRefund / 100.0f}");
+#if DEBUG
+                Console.WriteLine($"NP Hit Perc: {npHitPerc}% || Effective hit: {effectiveHitModifier} || Accumulated NP refund: {npRefund / 100.0f}");
+#endif
             }
 
+#if DEBUG
             Console.WriteLine($"Total NP refund from {enemyMob.Name}: {npRefund / 100.0f}%");
+#endif
             return npRefund;
         }
 
@@ -249,8 +260,9 @@ namespace FateGrandOrderPOC.Shared
             foreach (int npHit in partyMember.NoblePhantasm.NpDistribution)
             {
                 perc = npHit + lastNpHitPerc;
-
-                //Console.WriteLine($"NP Hit: {npHit}, Perc: {perc}%");
+#if DEBUG
+                Console.WriteLine($"NP Hit: {npHit}, Perc: {perc}%");
+#endif
                 percNpHitDistribution.Add(perc);
 
                 lastNpHitPerc = perc;
@@ -299,18 +311,18 @@ namespace FateGrandOrderPOC.Shared
                     targetBonusNpDamage = svalNp.Correction;
                 }
             }
-
-            //Console.WriteLine($"Total attack: {partyMember.TotalAttack}");
-            //Console.WriteLine($"Class modifier: {_classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName)}");
-            //Console.WriteLine($"NP type modifier: {_constantRate.GetAttackMultiplier("enemy_attack_rate_" + partyMember.NoblePhantasm.Card)}");
-            //Console.WriteLine($"NP value: {npValue / 1000.0f}");
-            //Console.WriteLine($"Target Bonus NP damage: {targetBonusNpDamage / 1000.0f}");
-
+#if DEBUG
+            Console.WriteLine($"Total attack: {partyMember.TotalAttack}");
+            Console.WriteLine($"Class modifier: {await _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName).ConfigureAwait(false)}");
+            Console.WriteLine($"NP type modifier: {await _constantRate.GetAttackMultiplier("enemy_attack_rate_" + partyMember.NoblePhantasm.Card).ConfigureAwait(false)}");
+            Console.WriteLine($"NP value: {npValue / 1000.0f}");
+            Console.WriteLine($"Target Bonus NP damage: {targetBonusNpDamage / 1000.0f}");
+#endif
             // Base NP damage = ATTACK_RATE * Servant total attack * Class modifier * NP type modifier * NP damage
-            float baseNpDamage = await _constantRate.GetAttackMultiplier("ATTACK_RATE")
+            float baseNpDamage = await _constantRate.GetAttackMultiplier("ATTACK_RATE").ConfigureAwait(false)
                 * partyMember.TotalAttack
-                * await _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName)
-                * await _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}")
+                * await _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName).ConfigureAwait(false)
+                * await _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}").ConfigureAwait(false)
                 * (npValue / 1000.0f);
 
             if (targetBonusNpDamage != 0)
@@ -399,7 +411,9 @@ namespace FateGrandOrderPOC.Shared
         {
             if (partyMember.NpCharge < 100.0f)
             {
+#if DEBUG
                 Console.WriteLine($"{partyMember.Servant.ServantInfo.Name} only has {partyMember.NpCharge}% charge");
+#endif
             }
             else
             {
@@ -417,8 +431,9 @@ namespace FateGrandOrderPOC.Shared
                 }
                 else
                 {
+#if DEBUG
                     Console.WriteLine("Error: Max NP chain limit is 3");
-                    return;
+#endif
                 }
             }
         }
