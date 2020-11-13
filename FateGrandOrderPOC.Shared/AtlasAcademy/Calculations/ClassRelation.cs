@@ -36,6 +36,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
         /// <returns></returns>
         private async Task<float[,]> GetListDamageMultiplier()
         {
+            // TODO: Put this in AtlasAcademyClient.cs
             ClassRelationNiceJson classRelations = await ApiRequest.GetDeserializeObjectAsync<ClassRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceClassRelation.json");
 
             return new float[,]

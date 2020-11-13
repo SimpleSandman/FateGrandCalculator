@@ -17,6 +17,7 @@ namespace FateGrandOrderPOC.Shared.AtlasAcademy.Calculations
 
         public async Task<float> GetAttackMultiplier(string atkAttribute, string defAttribute)
         {
+            // TODO: Put this in AtlasAcademyClient.cs
             AttributeRelationNiceJson attributeRelations = await ApiRequest.GetDeserializeObjectAsync<AttributeRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceAttributeRelation.json");
 
              // Reference: https://fategrandorder.fandom.com/wiki/Attributes

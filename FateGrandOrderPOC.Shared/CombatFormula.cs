@@ -311,18 +311,22 @@ namespace FateGrandOrderPOC.Shared
                     targetBonusNpDamage = svalNp.Correction;
                 }
             }
+
+            float constantAttackRate = await _constantRate.GetAttackMultiplier("ATTACK_RATE").ConfigureAwait(false);
+            float classModifier = await _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName).ConfigureAwait(false);
+            float npTypeModifier = await _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}").ConfigureAwait(false);
 #if DEBUG
             Console.WriteLine($"Total attack: {partyMember.TotalAttack}");
-            Console.WriteLine($"Class modifier: {await _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName).ConfigureAwait(false)}");
-            Console.WriteLine($"NP type modifier: {await _constantRate.GetAttackMultiplier("enemy_attack_rate_" + partyMember.NoblePhantasm.Card).ConfigureAwait(false)}");
+            Console.WriteLine($"Class modifier: {classModifier}");
+            Console.WriteLine($"NP type modifier: {npTypeModifier}");
             Console.WriteLine($"NP value: {npValue / 1000.0f}");
             Console.WriteLine($"Target Bonus NP damage: {targetBonusNpDamage / 1000.0f}");
 #endif
             // Base NP damage = ATTACK_RATE * Servant total attack * Class modifier * NP type modifier * NP damage
-            float baseNpDamage = await _constantRate.GetAttackMultiplier("ATTACK_RATE").ConfigureAwait(false)
+            float baseNpDamage = constantAttackRate
                 * partyMember.TotalAttack
-                * await _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName).ConfigureAwait(false)
-                * await _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}").ConfigureAwait(false)
+                * classModifier
+                * npTypeModifier
                 * (npValue / 1000.0f);
 
             if (targetBonusNpDamage != 0)

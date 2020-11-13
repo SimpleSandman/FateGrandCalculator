@@ -5,7 +5,6 @@ using Autofac;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
-using FateGrandOrderPOC.Test.CoreModule;
 using FateGrandOrderPOC.Test.Fixture;
 using FateGrandOrderPOC.Test.Utility;
 
@@ -32,16 +31,7 @@ namespace FateGrandOrderPOC.Test
         public AtlasAcademyClientTest(WireMockFixture wiremockFixture)
         {
             _wiremockFixture = wiremockFixture;
-
-            ContainerBuilder builder = new ContainerBuilder();
-            builder.RegisterModule(new AutofacModule 
-            { 
-                BaseApiUrl = new NamedParameter("baseApiUrl", WireMockFixture.SERVER_URL),
-                AtlasAcademyClient = new NamedParameter("client", new AtlasAcademyClient(WireMockFixture.SERVER_URL, REGION)),
-                Region = new NamedParameter("region", REGION)
-            });
-
-            _container = builder.Build();
+            _container = ContainerBuilderInit.Create(REGION);
         }
 
         [Fact]
