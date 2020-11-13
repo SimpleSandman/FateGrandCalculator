@@ -12,6 +12,7 @@ using FateGrandOrderPOC.Test.Fixture;
 using FateGrandOrderPOC.Test.Utility;
 
 using FluentAssertions;
+using FluentAssertions.Execution;
 
 using Xunit;
 using Xunit.Abstractions;
@@ -34,7 +35,7 @@ namespace FateGrandOrderPOC.Test
         }
 
         [Fact]
-        public async Task DantesLooping()
+        public async Task FlamingMansionLB2Dantes()
         {
             _wiremockFixture.CheckIfMockServerInUse();
 
@@ -42,10 +43,6 @@ namespace FateGrandOrderPOC.Test
             const string DANTES_AVENGER = "1100200";
             const string SKADI_CASTER = "503900";
             const string ARTIC_ID = "110";
-            const string CONSTANT_RATE_JSON = "NiceConstant.json";
-            const string CLASS_ATTACK_RATE_JSON = "NiceClassAttackRate.json";
-            const string CLASS_RELATION_JSON = "NiceClassRelation.json";
-            const string ATTRIBUTE_RELATION_JSON = "NiceAttributeRelation.json";            
 
             #region Mock Responses
             // build mock servant responses
@@ -63,18 +60,7 @@ namespace FateGrandOrderPOC.Test
             MysticCodeNiceJson mockMysticCodeResponse = LoadTestData.DeserializeMysticCodeJson(REGION, "110-Artic.json");
             LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", ARTIC_ID, mockMysticCodeResponse);
 
-            // build necessary export mock responses
-            ConstantNiceJson mockConstantRateResponse = LoadTestData.DeserializeExportJson<ConstantNiceJson>(REGION, CONSTANT_RATE_JSON);
-            LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, CONSTANT_RATE_JSON, mockConstantRateResponse);
-
-            ClassAttackRateNiceJson mockClassAttackRateResponse = LoadTestData.DeserializeExportJson<ClassAttackRateNiceJson>(REGION, CLASS_ATTACK_RATE_JSON);
-            LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, CLASS_ATTACK_RATE_JSON, mockClassAttackRateResponse);
-
-            ClassRelationNiceJson mockClassRelationResponse = LoadTestData.DeserializeExportJson<ClassRelationNiceJson>(REGION, CLASS_RELATION_JSON);
-            LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, CLASS_RELATION_JSON, mockClassRelationResponse);
-
-            AttributeRelationNiceJson mockAttributeRelationResponse = LoadTestData.DeserializeExportJson<AttributeRelationNiceJson>(REGION, ATTRIBUTE_RELATION_JSON);
-            LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, ATTRIBUTE_RELATION_JSON, mockAttributeRelationResponse);
+            AddExportStubs();
             #endregion
 
             using (var scope = _container.BeginLifetimeScope())
@@ -100,7 +86,7 @@ namespace FateGrandOrderPOC.Test
                     NpLevel = 1,
                     FouHealth = 1000,
                     FouAttack = 1000,
-                    SkillLevels = new int[3] { 10, 10, 10 },
+                    SkillLevels = new int[] { 10, 10, 10 },
                     IsSupportServant = false,
                     ServantInfo = await aaClient.GetServantInfo(DANTES_AVENGER)
                 };
@@ -118,7 +104,7 @@ namespace FateGrandOrderPOC.Test
                     NpLevel = 1,
                     FouHealth = 1000,
                     FouAttack = 1000,
-                    SkillLevels = new int[3] { 10, 10, 10 },
+                    SkillLevels = new int[] { 10, 10, 10 },
                     IsSupportServant = false,
                     ServantInfo = await aaClient.GetServantInfo(SKADI_CASTER)
                 };
@@ -135,7 +121,7 @@ namespace FateGrandOrderPOC.Test
                     NpLevel = 1,
                     FouHealth = 1000,
                     FouAttack = 1000,
-                    SkillLevels = new int[3] { 10, 10, 10 },
+                    SkillLevels = new int[] { 10, 10, 10 },
                     IsSupportServant = true,
                     ServantInfo = await aaClient.GetServantInfo(SKADI_CASTER)
                 };
@@ -153,7 +139,7 @@ namespace FateGrandOrderPOC.Test
 
                 /* Enemy node data */
                 #region First Wave
-                EnemyMob enemyMob1 = new EnemyMob
+                EnemyMob walkure1 = new EnemyMob
                 {
                     Id = 0,
                     Name = "Walkure",
@@ -169,7 +155,7 @@ namespace FateGrandOrderPOC.Test
                 }
                 };
 
-                EnemyMob enemyMob2 = new EnemyMob
+                EnemyMob walkure2 = new EnemyMob
                 {
                     Id = 1,
                     Name = "Walkure",
@@ -185,7 +171,7 @@ namespace FateGrandOrderPOC.Test
                 }
                 };
 
-                EnemyMob enemyMob3 = new EnemyMob
+                EnemyMob muspell1 = new EnemyMob
                 {
                     Id = 2,
                     Name = "Muspell",
@@ -203,7 +189,7 @@ namespace FateGrandOrderPOC.Test
                 #endregion
 
                 #region Second Wave
-                EnemyMob enemyMob4 = new EnemyMob
+                EnemyMob muspell2 = new EnemyMob
                 {
                     Id = 3,
                     Name = "Muspell",
@@ -219,7 +205,7 @@ namespace FateGrandOrderPOC.Test
                 }
                 };
 
-                EnemyMob enemyMob5 = new EnemyMob
+                EnemyMob walkure3 = new EnemyMob
                 {
                     Id = 4,
                     Name = "Walkure",
@@ -235,7 +221,7 @@ namespace FateGrandOrderPOC.Test
                 }
                 };
 
-                EnemyMob enemyMob6 = new EnemyMob
+                EnemyMob muspell3 = new EnemyMob
                 {
                     Id = 5,
                     Name = "Muspell",
@@ -253,7 +239,7 @@ namespace FateGrandOrderPOC.Test
                 #endregion
 
                 #region Third Wave
-                EnemyMob enemyMob7 = new EnemyMob
+                EnemyMob walkure4 = new EnemyMob
                 {
                     Id = 6,
                     Name = "Walkure",
@@ -269,7 +255,7 @@ namespace FateGrandOrderPOC.Test
                 }
                 };
 
-                EnemyMob enemyMob8 = new EnemyMob
+                EnemyMob walkure5 = new EnemyMob
                 {
                     Id = 7,
                     Name = "Walkure",
@@ -285,7 +271,7 @@ namespace FateGrandOrderPOC.Test
                 }
                 };
 
-                EnemyMob enemyMob9 = new EnemyMob
+                EnemyMob muspell4 = new EnemyMob
                 {
                     Id = 8,
                     Name = "Muspell",
@@ -304,9 +290,9 @@ namespace FateGrandOrderPOC.Test
 
                 List<EnemyMob> enemyMobs = new List<EnemyMob>
                 {
-                    enemyMob1, enemyMob2, enemyMob3,
-                    enemyMob4, enemyMob5, enemyMob6,
-                    enemyMob7, enemyMob8, enemyMob9
+                    walkure1, walkure2, muspell1, // 1st wave
+                    muspell2, walkure3, muspell3, // 2nd wave
+                    walkure4, walkure5, muspell4  // 3rd wave
                 };
 
                 /* Simulate node combat */
@@ -343,8 +329,39 @@ namespace FateGrandOrderPOC.Test
 
                 _output.WriteLine($"{partyMemberAttacker.Servant.ServantInfo.Name} has {partyMemberAttacker.NpCharge}% charge after the fight");
 
-                partyMemberAttacker.NpCharge.Should().Be(52);
+                using (new AssertionScope())
+                {
+                    enemyMobs.Count.Should().Be(1);
+                    enemyMobs.Find(e => e.Health > 0.0f).Health.Should().Be(47025.5f);
+                    partyMemberAttacker.NpCharge.Should().Be(52);
+                }
             }
         }
+
+        #region Private Methods
+        /// <summary>
+        /// Create constant game data endpoints as WireMock stubs
+        /// </summary>
+        private void AddExportStubs()
+        {
+            const string CONSTANT_RATE_JSON = "NiceConstant.json";
+            const string CLASS_ATTACK_RATE_JSON = "NiceClassAttackRate.json";
+            const string CLASS_RELATION_JSON = "NiceClassRelation.json";
+            const string ATTRIBUTE_RELATION_JSON = "NiceAttributeRelation.json";
+
+            // build necessary export mock responses
+            ConstantNiceJson mockConstantRateResponse = LoadTestData.DeserializeExportJson<ConstantNiceJson>(REGION, CONSTANT_RATE_JSON);
+            LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, CONSTANT_RATE_JSON, mockConstantRateResponse);
+
+            ClassAttackRateNiceJson mockClassAttackRateResponse = LoadTestData.DeserializeExportJson<ClassAttackRateNiceJson>(REGION, CLASS_ATTACK_RATE_JSON);
+            LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, CLASS_ATTACK_RATE_JSON, mockClassAttackRateResponse);
+
+            ClassRelationNiceJson mockClassRelationResponse = LoadTestData.DeserializeExportJson<ClassRelationNiceJson>(REGION, CLASS_RELATION_JSON);
+            LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, CLASS_RELATION_JSON, mockClassRelationResponse);
+
+            AttributeRelationNiceJson mockAttributeRelationResponse = LoadTestData.DeserializeExportJson<AttributeRelationNiceJson>(REGION, ATTRIBUTE_RELATION_JSON);
+            LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, ATTRIBUTE_RELATION_JSON, mockAttributeRelationResponse);
+        }
+        #endregion
     }
 }
