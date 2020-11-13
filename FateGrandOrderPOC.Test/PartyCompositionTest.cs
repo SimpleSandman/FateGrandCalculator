@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 
 using Autofac;
 
-using FateGrandOrderPOC.Shared;
 using FateGrandOrderPOC.Shared.AtlasAcademy;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Models;
@@ -68,14 +67,13 @@ namespace FateGrandOrderPOC.Test
 
             using (var scope = _container.BeginLifetimeScope())
             {
-                AtlasAcademyClient aaClient = scope.Resolve<AtlasAcademyClient>();
-                CombatFormula cfClient = scope.Resolve<CombatFormula>();
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
 
                 CraftEssence chaldeaKscope = new CraftEssence
                 {
                     CraftEssenceLevel = 100,
                     Mlb = true,
-                    CraftEssenceInfo = await aaClient.GetCraftEssenceInfo(KSCOPE_CE)
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(KSCOPE_CE)
                 };
 
                 Servant chaldeaServant = new Servant
@@ -86,11 +84,11 @@ namespace FateGrandOrderPOC.Test
                     FouAttack = 1000,
                     SkillLevels = new int[] { 10, 10, 10 },
                     IsSupportServant = false,
-                    ServantInfo = await aaClient.GetServantInfo(DANTES_AVENGER)
+                    ServantInfo = await resolvedClasses.AtlasAcademyClient.GetServantInfo(DANTES_AVENGER)
                 };
 
-                PartyMember partyMember = cfClient.AddPartyMember(party, chaldeaServant, chaldeaKscope);
-                cfClient.ApplyCraftEssenceEffects(partyMember);
+                PartyMember partyMember = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaServant, chaldeaKscope);
+                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyMember);
 
                 using (new AssertionScope())
                 {

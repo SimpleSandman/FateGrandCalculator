@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 
 using Autofac;
 
-using FateGrandOrderPOC.Shared.AtlasAcademy;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Test.Fixture;
 using FateGrandOrderPOC.Test.Utility;
@@ -50,8 +49,8 @@ namespace FateGrandOrderPOC.Test
 
             using (var scope = _container.BeginLifetimeScope())
             {
-                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
-                ServantNiceJson response = await client.GetServantInfo("1");
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ServantNiceJson response = await resolvedClasses.AtlasAcademyClient.GetServantInfo("1");
 
                 response.AtkBase.Should().Be(1000);
             }
@@ -72,8 +71,8 @@ namespace FateGrandOrderPOC.Test
 
             using (var scope = _container.BeginLifetimeScope())
             {
-                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
-                EquipNiceJson response = await client.GetCraftEssenceInfo("1");
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                EquipNiceJson response = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo("1");
 
                 response.Id.Should().Be(1);
                 response.AtkBase.Should().Be(600);
@@ -96,8 +95,8 @@ namespace FateGrandOrderPOC.Test
 
             using (var scope = _container.BeginLifetimeScope())
             {
-                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
-                ClassAttackRateNiceJson response = await client.GetClassAttackRateInfo();
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ClassAttackRateNiceJson response = await resolvedClasses.AtlasAcademyClient.GetClassAttackRateInfo();
 
                 response.Lancer.Should().Be(105);
             }
@@ -119,8 +118,8 @@ namespace FateGrandOrderPOC.Test
 
             using (var scope = _container.BeginLifetimeScope())
             {
-                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
-                ConstantNiceJson response = await client.GetConstantGameInfo();
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ConstantNiceJson response = await resolvedClasses.AtlasAcademyClient.GetConstantGameInfo();
 
                 response.USER_COST.Should().Be(6);
             }
@@ -145,8 +144,8 @@ namespace FateGrandOrderPOC.Test
 
             using (var scope = _container.BeginLifetimeScope())
             {
-                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
-                List<ServantBasicJson> response = await client.GetListBasicServantInfo();
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                List<ServantBasicJson> response = await resolvedClasses.AtlasAcademyClient.GetListBasicServantInfo();
 
                 response.Should().BeEquivalentTo(json);
             }
@@ -166,8 +165,8 @@ namespace FateGrandOrderPOC.Test
 
             using (var scope = _container.BeginLifetimeScope())
             {
-                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
-                MysticCodeNiceJson response = await client.GetMysticCodeInfo("1");
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                MysticCodeNiceJson response = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo("1");
 
                 response.Id.Should().Be(1);
             }
@@ -190,8 +189,8 @@ namespace FateGrandOrderPOC.Test
 
             using (var scope = _container.BeginLifetimeScope())
             {
-                AtlasAcademyClient client = scope.Resolve<AtlasAcademyClient>();
-                JObject response = await client.GetTraitEnumInfo();
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                JObject response = await resolvedClasses.AtlasAcademyClient.GetTraitEnumInfo();
 
                 string traitName = response.Property("1")?.Value.ToString() ?? "";
                 traitName.Should().Be("genderMale");

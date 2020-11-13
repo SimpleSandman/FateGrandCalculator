@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 
 using Autofac;
 
-using FateGrandOrderPOC.Shared;
-using FateGrandOrderPOC.Shared.AtlasAcademy;
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Enums;
 using FateGrandOrderPOC.Shared.Models;
@@ -65,10 +63,7 @@ namespace FateGrandOrderPOC.Test
 
             using (var scope = _container.BeginLifetimeScope())
             {
-                AtlasAcademyClient aaClient = scope.Resolve<AtlasAcademyClient>();
-                CombatFormula cfClient = scope.Resolve<CombatFormula>();
-                ServantSkillActivation ssaClient = scope.Resolve<ServantSkillActivation>();
-
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
                 List<PartyMember> party = new List<PartyMember>();
 
                 /* Party data */
@@ -77,7 +72,7 @@ namespace FateGrandOrderPOC.Test
                 {
                     CraftEssenceLevel = 100,
                     Mlb = true,
-                    CraftEssenceInfo = await aaClient.GetCraftEssenceInfo(KSCOPE_CE)
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(KSCOPE_CE)
                 };
 
                 Servant chaldeaAttackServant = new Servant
@@ -88,11 +83,11 @@ namespace FateGrandOrderPOC.Test
                     FouAttack = 1000,
                     SkillLevels = new int[] { 10, 10, 10 },
                     IsSupportServant = false,
-                    ServantInfo = await aaClient.GetServantInfo(DANTES_AVENGER)
+                    ServantInfo = await resolvedClasses.AtlasAcademyClient.GetServantInfo(DANTES_AVENGER)
                 };
 
-                PartyMember partyMemberAttacker = cfClient.AddPartyMember(party, chaldeaAttackServant, chaldeaKscope);
-                cfClient.ApplyCraftEssenceEffects(partyMemberAttacker);
+                PartyMember partyMemberAttacker = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAttackServant, chaldeaKscope);
+                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyMemberAttacker);
 
                 party.Add(partyMemberAttacker);
                 #endregion
@@ -106,10 +101,10 @@ namespace FateGrandOrderPOC.Test
                     FouAttack = 1000,
                     SkillLevels = new int[] { 10, 10, 10 },
                     IsSupportServant = false,
-                    ServantInfo = await aaClient.GetServantInfo(SKADI_CASTER)
+                    ServantInfo = await resolvedClasses.AtlasAcademyClient.GetServantInfo(SKADI_CASTER)
                 };
 
-                PartyMember partyMemberCaster = cfClient.AddPartyMember(party, chaldeaCaster);
+                PartyMember partyMemberCaster = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaCaster);
 
                 party.Add(partyMemberCaster);
                 #endregion
@@ -123,10 +118,10 @@ namespace FateGrandOrderPOC.Test
                     FouAttack = 1000,
                     SkillLevels = new int[] { 10, 10, 10 },
                     IsSupportServant = true,
-                    ServantInfo = await aaClient.GetServantInfo(SKADI_CASTER)
+                    ServantInfo = await resolvedClasses.AtlasAcademyClient.GetServantInfo(SKADI_CASTER)
                 };
 
-                PartyMember partyMemberSupportCaster = cfClient.AddPartyMember(party, supportCaster);
+                PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
 
                 party.Add(partyMemberSupportCaster);
                 #endregion
@@ -134,7 +129,7 @@ namespace FateGrandOrderPOC.Test
                 MysticCode mysticCode = new MysticCode
                 {
                     MysticCodeLevel = 4,
-                    MysticCodeInfo = await aaClient.GetMysticCodeInfo(ARTIC_ID)
+                    MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(ARTIC_ID)
                 };
 
                 /* Enemy node data */
@@ -297,30 +292,30 @@ namespace FateGrandOrderPOC.Test
 
                 /* Simulate node combat */
                 // Fight 1/3
-                ssaClient.SkillActivation(partyMemberCaster, 1, party, 1, enemyMobs, 1); // Skadi quick up buff
-                ssaClient.SkillActivation(partyMemberSupportCaster, 1, party, 1, enemyMobs, 1); // Skadi (support) quick up buff
-                ssaClient.SkillActivation(partyMemberAttacker, 2, party, 1, enemyMobs, 1); // Dante's 2nd skill
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberCaster, 1, party, 1, enemyMobs, 1); // Skadi quick up buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, 1, enemyMobs, 1); // Skadi (support) quick up buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberAttacker, 2, party, 1, enemyMobs, 1); // Dante's 2nd skill
 
-                cfClient.NpChargeCheck(party, partyMemberAttacker);
-                await cfClient.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
+                resolvedClasses.CombatFormula.NpChargeCheck(party, partyMemberAttacker);
+                await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
 
                 // Fight 2/3
-                ssaClient.AdjustSkillCooldowns(party);
-                ssaClient.SkillActivation(partyMemberCaster, 3, party, 1, enemyMobs, 1); // Skadi NP buff
+                resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberCaster, 3, party, 1, enemyMobs, 1); // Skadi NP buff
 
-                cfClient.NpChargeCheck(party, partyMemberAttacker);
-                await cfClient.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
+                resolvedClasses.CombatFormula.NpChargeCheck(party, partyMemberAttacker);
+                await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
 
                 // Fight 3/3
-                ssaClient.AdjustSkillCooldowns(party);
-                ssaClient.SkillActivation(partyMemberSupportCaster, 3, party, 1, enemyMobs, 1); // Skadi (support) NP buff
-                ssaClient.SkillActivation(partyMemberSupportCaster, 2, party, 1, enemyMobs, 1); // Skadi (support) enemy defense down
-                ssaClient.SkillActivation(partyMemberCaster, 2, party, 1, enemyMobs, 1); // Skadi enemy defense down
-                ssaClient.SkillActivation(partyMemberAttacker, 1, party, 1, enemyMobs, 1); // Dante's 1st skill
-                ssaClient.SkillActivation(mysticCode, 2, party, 1, enemyMobs, 1); // Artic mystic code ATK and NP damage up
+                resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 3, party, 1, enemyMobs, 1); // Skadi (support) NP buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 2, party, 1, enemyMobs, 1); // Skadi (support) enemy defense down
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberCaster, 2, party, 1, enemyMobs, 1); // Skadi enemy defense down
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberAttacker, 1, party, 1, enemyMobs, 1); // Dante's 1st skill
+                resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 2, party, 1, enemyMobs, 1); // Artic mystic code ATK and NP damage up
 
-                cfClient.NpChargeCheck(party, partyMemberAttacker);
-                await cfClient.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
+                resolvedClasses.CombatFormula.NpChargeCheck(party, partyMemberAttacker);
+                await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
 
                 foreach (EnemyMob enemyMob in enemyMobs.FindAll(e => e.Health > 0.0f))
                 {
