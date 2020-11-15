@@ -53,16 +53,7 @@ namespace FateGrandOrderPOC.Test
 
                 /* Party data */
                 #region Party Member
-                Servant chaldeaAttackServant = new Servant
-                {
-                    ServantLevel = 90,
-                    NpLevel = 1,
-                    FouHealth = 1000,
-                    FouAttack = 1000,
-                    SkillLevels = new int[] { 10, 10, 10 },
-                    IsSupportServant = false,
-                    ServantInfo = await resolvedClasses.AtlasAcademyClient.GetServantInfo(DANTES_AVENGER)
-                };
+                Servant chaldeaAttackServant = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, DANTES_AVENGER, 1, false);
 
                 PartyMember partyMemberAttacker = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAttackServant);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyMemberAttacker);
@@ -71,16 +62,7 @@ namespace FateGrandOrderPOC.Test
                 #endregion
 
                 #region Party Member 2
-                Servant chaldeaCaster = new Servant
-                {
-                    ServantLevel = 90,
-                    NpLevel = 1,
-                    FouHealth = 1000,
-                    FouAttack = 1000,
-                    SkillLevels = new int[] { 10, 10, 10 },
-                    IsSupportServant = false,
-                    ServantInfo = await resolvedClasses.AtlasAcademyClient.GetServantInfo(SKADI_CASTER)
-                };
+                Servant chaldeaCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, SKADI_CASTER, 1, false);
 
                 PartyMember partyMemberCaster = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaCaster);
 
@@ -88,16 +70,7 @@ namespace FateGrandOrderPOC.Test
                 #endregion
 
                 #region Party Member Support
-                Servant supportCaster = new Servant
-                {
-                    ServantLevel = 90,
-                    NpLevel = 1,
-                    FouHealth = 1000,
-                    FouAttack = 1000,
-                    SkillLevels = new int[] { 10, 10, 10 },
-                    IsSupportServant = true,
-                    ServantInfo = await resolvedClasses.AtlasAcademyClient.GetServantInfo(SKADI_CASTER)
-                };
+                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, SKADI_CASTER, 1, true);
 
                 PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
 

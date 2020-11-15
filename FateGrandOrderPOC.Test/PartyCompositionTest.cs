@@ -76,16 +76,7 @@ namespace FateGrandOrderPOC.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(KSCOPE_CE)
                 };
 
-                Servant chaldeaServant = new Servant
-                {
-                    ServantLevel = 90,
-                    NpLevel = 1,
-                    FouHealth = 1000,
-                    FouAttack = 1000,
-                    SkillLevels = new int[] { 10, 10, 10 },
-                    IsSupportServant = false,
-                    ServantInfo = await resolvedClasses.AtlasAcademyClient.GetServantInfo(DANTES_AVENGER)
-                };
+                Servant chaldeaServant = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, DANTES_AVENGER, 1, false);
 
                 PartyMember partyMember = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaServant, chaldeaKscope);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyMember);
