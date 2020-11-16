@@ -357,7 +357,7 @@ namespace FateGrandOrderPOC.Test
                 List<PartyMember> party = new List<PartyMember>();
 
                 /* Party data */
-                #region Party Member
+                #region Lancelot Berserker
                 CraftEssence chaldeaSuperscope = new CraftEssence
                 {
                     CraftEssenceLevel = 100,
@@ -373,7 +373,7 @@ namespace FateGrandOrderPOC.Test
                 party.Add(partyLancelot);
                 #endregion
 
-                #region Party Member 2
+                #region Arash
                 CraftEssence chaldeaImaginaryElement = new CraftEssence
                 {
                     CraftEssenceLevel = 36,
@@ -389,7 +389,7 @@ namespace FateGrandOrderPOC.Test
                 party.Add(partyArash);
                 #endregion
 
-                #region Party Member 3
+                #region Jack
                 CraftEssence chaldeaMlbKscope = new CraftEssence
                 {
                     CraftEssenceLevel = 30,
@@ -405,7 +405,7 @@ namespace FateGrandOrderPOC.Test
                 party.Add(partyJack);
                 #endregion
 
-                #region Party Member Support
+                #region Skadi Support
                 Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, SKADI_CASTER, 1, true);
 
                 PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
@@ -579,32 +579,37 @@ namespace FateGrandOrderPOC.Test
                 /* Simulate node combat */
                 // Fight 1/3
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyArash, 3, party, 1, enemyMobs, 1); // Arash NP charge
-                
+
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyArash);
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First, 3);
 
                 // Fight 2/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyLancelot, 3, party, 1, enemyMobs, 1); // Zerkalot NP gain up
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, 2, enemyMobs, 1); // Skadi quick buff up
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, 1, enemyMobs, 1); // Skadi quick buff up
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyLancelot);
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, 3);
 
                 _output.WriteLine($"{partyLancelot.Servant.ServantInfo.Name} has {partyLancelot.NpCharge}% charge after the 2nd fight");
-                _output.WriteLine($"{partyJack.Servant.ServantInfo.Name} has {partyJack.NpCharge}% charge after the 2nd fight");
 
                 // Fight 3/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 2, party, 1, enemyMobs, 1); // Skadi (support) enemy defense down
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 3, party, 2, enemyMobs, 1); // Skadi (support) NP buff
-                resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 1, party, 2, enemyMobs, 1); // Fragment of 2004's NP strength buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 3, party, 1, enemyMobs, 1); // Skadi (support) NP buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 1, party, 1, enemyMobs, 1); // Fragment of 2004's NP strength buff
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyLancelot);
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyJack);
-                //await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third, 1);
+                await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third, 1);
 
-                //_output.WriteLine($"{partyLancelot.Servant.ServantInfo.Name} has {partyLancelot.NpCharge}% charge after the 3rd fight");
-                //_output.WriteLine($"{partyJack.Servant.ServantInfo.Name} has {partyJack.NpCharge}% charge after the 3rd fight");
+                _output.WriteLine($"{partyLancelot.Servant.ServantInfo.Name} has {partyLancelot.NpCharge}% charge after the 3rd fight");
+                _output.WriteLine($"{partyJack.Servant.ServantInfo.Name} has {partyJack.NpCharge}% charge after the 3rd fight");
+
+                using (new AssertionScope())
+                {
+                    //enemyMobs.Count.Should().Be(0);
+                    partyLancelot.NpCharge.Should().Be(27);
+                }
             }
         }
 

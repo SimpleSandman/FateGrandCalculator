@@ -113,8 +113,8 @@ namespace FateGrandOrderPOC.Shared
 
             foreach (PartyMember martyr in martyred)
             {
+                party.Swap(martyr, party[3]);
                 party.Remove(martyr);
-                // TODO: Move new units into their respective positions on the field
             }
 
             // Check if any NPs have "forceInstantDeath" and "ptSelfAnotherFirst" (i.e. Chen Gong)

@@ -4,17 +4,17 @@ namespace FateGrandOrderPOC.Shared.Extensions
 {
     public static class IListExtensions
     {
-        public static void Swap<T>(this IList<T> list, int a, int b)
+        public static void Swap<T>(this IList<T> list, int indexA, int indexB)
         {
-            T tmp = list[a];
-            list[a] = list[b];
-            list[b] = tmp;
+            T tmp = list[indexA];
+            list[indexA] = list[indexB];
+            list[indexB] = tmp;
         }
 
-        public static void Swap<T>(this IList<T> list, T a, T b)
+        public static void Swap<T>(this IList<T> list, T objectA, T objectB)
         {
-            int indexA = list.IndexOf(a);
-            int indexB = list.IndexOf(b);
+            int indexA = list.IndexOf(objectA);
+            int indexB = list.IndexOf(objectB);
 
             T tmp = list[indexA];
             list[indexA] = list[indexB];
