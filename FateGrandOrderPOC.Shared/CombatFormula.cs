@@ -271,11 +271,7 @@ namespace FateGrandOrderPOC.Shared
             foreach (int npHit in partyMember.NoblePhantasm.NpDistribution)
             {
                 perc = npHit + lastNpHitPerc;
-#if DEBUG
-                Console.WriteLine($"NP Hit: {npHit}, Perc: {perc}%");
-#endif
                 percNpHitDistribution.Add(perc);
-
                 lastNpHitPerc = perc;
             }
 

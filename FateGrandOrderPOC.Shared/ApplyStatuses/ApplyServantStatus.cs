@@ -19,7 +19,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
         {
             if (servantNpFunction.FuncTargetType == "self")
             {
-                ApplyStatus(partyMemberActor, servantNpFunction, partyMemberActor.Servant.NpLevel, partyMemberActor);
+                ApplyStatus(servantNpFunction, partyMemberActor.Servant.NpLevel, partyMemberActor);
             }
             else
             {
@@ -27,11 +27,11 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
                 {
                     case "ptAll":         // party
                     case "ptOther":       // party except self
-                        ApplyStatus(partyMemberActor, servantNpFunction, partyMemberActor.Servant.NpLevel, partyMemberTargets.Take(3).ToList());
+                        ApplyStatus(servantNpFunction, partyMemberActor.Servant.NpLevel, partyMemberTargets.Take(3).ToList());
                         break;
                     case "ptFull":        // party (including reserve)
                     case "ptOtherFull":   // party except self (including reserve)
-                        ApplyStatus(partyMemberActor, servantNpFunction, partyMemberActor.Servant.NpLevel, partyMemberTargets);
+                        ApplyStatus(servantNpFunction, partyMemberActor.Servant.NpLevel, partyMemberTargets);
                         break;
                     default:
                         break;
@@ -52,7 +52,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
         {
             if (servantFunction.FuncTargetType == "self")
             {
-                ApplyStatus(partyMemberActor, servantFunction, currentSkillLevel, partyMemberActor);
+                ApplyStatus(servantFunction, currentSkillLevel, partyMemberActor);
             }
             else
             {
@@ -60,15 +60,15 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
                 {
                     case "ptAll":         // party
                     case "ptOther":       // party except self
-                        ApplyStatus(partyMemberActor, servantFunction, currentSkillLevel, partyMemberTargets.Take(3).ToList());
+                        ApplyStatus(servantFunction, currentSkillLevel, partyMemberTargets.Take(3).ToList());
                         break;
                     case "ptFull":        // party (including reserve)
                     case "ptOtherFull":   // party except self (including reserve)
-                        ApplyStatus(partyMemberActor, servantFunction, currentSkillLevel, partyMemberTargets);
+                        ApplyStatus(servantFunction, currentSkillLevel, partyMemberTargets);
                         break;
                     case "ptOne":         // party member
                     case "ptselectSub":   // reserve party member
-                        ApplyStatus(partyMemberActor, servantFunction, currentSkillLevel, partyMemberTargets[partyMemberPosition - 1]);
+                        ApplyStatus(servantFunction, currentSkillLevel, partyMemberTargets[partyMemberPosition - 1]);
                         break;
                     default:
                         break;
@@ -105,37 +105,26 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
         }
 
         #region Private Methods "Party Member"
-        private static void ApplyStatus(PartyMember partyMemberActor, Function servantFunction, int level, List<PartyMember> partyMemberTargets)
+        private static void ApplyStatus(Function servantFunction, int level, List<PartyMember> partyMemberTargets)
         {
             foreach (PartyMember partyMemberTarget in partyMemberTargets)
             {
-                ApplyPartyMemberStatus(partyMemberActor, servantFunction, level, partyMemberTarget);
+                ApplyPartyMemberStatus(servantFunction, level, partyMemberTarget);
             }
         }
 
-        private static void ApplyStatus(PartyMember partyMemberActor, Function servantFunction, int level, PartyMember partyMemberTarget)
+        private static void ApplyStatus(Function servantFunction, int level, PartyMember partyMemberTarget)
         {
-            ApplyPartyMemberStatus(partyMemberActor, servantFunction, level, partyMemberTarget);
+            ApplyPartyMemberStatus(servantFunction, level, partyMemberTarget);
         }
 
-        private static void ApplyPartyMemberStatus(PartyMember partyMemberActor, Function servantFunction, int level, PartyMember partyMemberTarget)
+        private static void ApplyPartyMemberStatus(Function servantFunction, int level, PartyMember partyMemberTarget)
         {
-            string support = "";
-            if (partyMemberActor.Servant.IsSupportServant)
-            {
-                support = "(Support) ";
-            }
-
             switch (servantFunction.FuncType)
             {
                 case "gainNp":
                     partyMemberTarget.NpCharge += servantFunction.Svals[level - 1].Value / 100.0f;
-
                     PityNpGain(partyMemberTarget);
-
-                    Console.WriteLine($"{partyMemberActor.Servant.ServantInfo.Name} {support}" + "has buffed " +
-                        $"{partyMemberTarget.Servant.ServantInfo.Name}'s NP charge by " +
-                        $"{servantFunction.Svals[level - 1].Value / 100.0f}% and is now at {partyMemberTarget.NpCharge}%\n");
                     break;
                 default:
                     partyMemberTarget.ActiveStatuses.Add(new ActiveStatus 
