@@ -11,7 +11,7 @@ namespace FateGrandOrderPOC.Shared
     public class ServantSkillActivation : IServantSkillActivation
     {
         /// <summary>
-        /// Buff a party member with the desired skill based on the mystic code's list of available skills
+        /// Buff a party member with the desired skill based on the servant's list of available skills
         /// </summary>
         /// <param name="partyMemberActor">The acting party member that is giving the status effect</param>
         /// <param name="actorSkillPositionNumber">Skill position number (left = 1, middle = 2, right = 3)</param>
@@ -41,21 +41,23 @@ namespace FateGrandOrderPOC.Shared
 
             int currentSkillLevel = partyMemberActor.Servant.SkillLevels[actorSkillPositionNumber - 1];
 
+            // Target party members for buffs/debuffs
             List<Function> partyBuffServantFunctions = GetPartyBuffServantFunctions(skill);
             if (partyBuffServantFunctions?.Count > 0)
             {
                 foreach (Function servantFunction in partyBuffServantFunctions)
                 {
-                    ApplyServantStatus.ApplyFuncTargetType(servantFunction.FuncTargetType, partyMemberPosition, partyMemberActor, servantFunction, currentSkillLevel, party);
+                    ApplyServantStatus.ApplyFuncTargetType(partyMemberPosition, partyMemberActor, servantFunction, currentSkillLevel, party);
                 }
             }
 
+            // Target enemies for buffs/debuffs
             List<Function> enemyServantFunctions = GetEnemyServantFunctions(skill);
             if (enemyServantFunctions?.Count > 0)
             {
                 foreach (Function servantFunction in enemyServantFunctions)
                 {
-                    ApplyEnemyStatus.ApplyFuncTargetType(servantFunction.FuncTargetType, enemyPosition, servantFunction, currentSkillLevel, enemies);
+                    ApplyEnemyStatus.ApplyFuncTargetType(enemyPosition, servantFunction, currentSkillLevel, enemies);
                 }
             }
 
@@ -96,7 +98,7 @@ namespace FateGrandOrderPOC.Shared
             {
                 foreach (Function mysticCodeFunction in mysticCodePartyBuffFunctions)
                 {
-                    ApplyServantStatus.ApplyFuncTargetType(mysticCodeFunction.FuncTargetType, partyMemberPosition, mysticCode, mysticCodeFunction, party);
+                    ApplyServantStatus.ApplyFuncTargetType(partyMemberPosition, mysticCode, mysticCodeFunction, party);
                 }
             }
 
@@ -105,7 +107,7 @@ namespace FateGrandOrderPOC.Shared
             {
                 foreach (Function mysticCodeFunction in mysticCodeEnemyServantFunctions)
                 {
-                    ApplyEnemyStatus.ApplyFuncTargetType(mysticCodeFunction.FuncTargetType, enemyPosition, mysticCode, mysticCodeFunction, enemies);
+                    ApplyEnemyStatus.ApplyFuncTargetType(enemyPosition, mysticCode, mysticCodeFunction, enemies);
                 }
             }
 
@@ -122,7 +124,7 @@ namespace FateGrandOrderPOC.Shared
         /// <summary>
         /// Reduce cooldown counters for all front-line party members at the end of the turn
         /// </summary>
-        /// <param name="party">The targeted party members that are receiving the status effect</param>
+        /// <param name="party">The targeted party members that have active status effects</param>
         public void AdjustSkillCooldowns(List<PartyMember> party)
         {
             foreach (PartyMember partyMember in party.Take(3))
@@ -131,15 +133,10 @@ namespace FateGrandOrderPOC.Shared
 
                 foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
                 {
-                    if (activeStatus.ActiveTurnCount == 1)
-                    {
-                        partyMember.ActiveStatuses.Remove(activeStatus);
-                    }
-                    else
-                    {
-                        activeStatus.ActiveTurnCount--;
-                    }
+                    activeStatus.ActiveTurnCount--;
                 }
+
+                partyMember.ActiveStatuses.RemoveAll(a => a.ActiveTurnCount == 0);
             }
         }
 

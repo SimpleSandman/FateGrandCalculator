@@ -1,0 +1,394 @@
+﻿{
+  "id": 100,
+  "name": "A Fragment of 2004",
+  "detail": "A Mystic Code patterned after the school uniform once worn by several of the Masters who battled for the Holy Grail in a certain rural city in Japan.",
+  "maxLv": 10,
+  "extraAssets": {
+    "item": {
+      "male": "https://assets.atlasacademy.io/GameData/NA/Items/masterequip00101.png",
+      "female": "https://assets.atlasacademy.io/GameData/NA/Items/masterequip00102.png"
+    },
+    "masterFace": {
+      "male": "https://assets.atlasacademy.io/GameData/NA/MasterFace/equip00101.png",
+      "female": "https://assets.atlasacademy.io/GameData/NA/MasterFace/equip00102.png"
+    },
+    "masterFigure": {
+      "male": "https://assets.atlasacademy.io/GameData/NA/MasterFigure/equip00101.png",
+      "female": "https://assets.atlasacademy.io/GameData/NA/MasterFigure/equip00102.png"
+    }
+  },
+  "skills": [
+    {
+      "id": 980028,
+      "name": "Code: F",
+      "detail": "Increase NP Strength (1 turn) for one ally",
+      "type": "active",
+      "icon": "https://assets.atlasacademy.io/GameData/NA/SkillIcons/skill_00302.png",
+      "coolDown": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        11,
+        11,
+        11,
+        11,
+        10
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 252,
+          "funcType": "addStateShort",
+          "funcTargetType": "ptOne",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "NP Strength Up",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_310.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 138,
+              "name": "NP Strength Up",
+              "detail": "Increase NP damage",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_310.png",
+              "type": "upNpdamage",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                },
+                {
+                  "id": 3006,
+                  "name": "buffIncreaseDamage"
+                },
+                {
+                  "id": 3030,
+                  "name": "buffNpDamageUp"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 320
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 340
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 360
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 380
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 400
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 420
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 440
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 460
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 500
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 980029,
+      "name": "Code: U",
+      "detail": "Increase Buster Card C. Star Gather Rate (1 turn) for one ally",
+      "type": "active",
+      "icon": "https://assets.atlasacademy.io/GameData/NA/SkillIcons/skill_00308.png",
+      "coolDown": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        11,
+        11,
+        11,
+        11,
+        10
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 1855,
+          "funcType": "addStateShort",
+          "funcTargetType": "ptOne",
+          "funcTargetTeam": "player",
+          "funcPopupText": "C. Star Gather Up: Buster",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_325.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 720,
+              "name": "C. Star Gather Up: Buster",
+              "detail": "Increase C. Star Gather Rate for Buster Cards",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_325.png",
+              "type": "upStarweight",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [
+                {
+                  "id": 4002,
+                  "name": "cardBuster"
+                }
+              ],
+              "ckOpIndv": [],
+              "maxRate": 100000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 50000
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 55000
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 60000
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 65000
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 70000
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 75000
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 80000
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 85000
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 90000
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 100000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 980030,
+      "name": "Code: H",
+      "detail": "Increase NP Gain (1 turn) for one ally",
+      "type": "active",
+      "icon": "https://assets.atlasacademy.io/GameData/NA/SkillIcons/skill_00602.png",
+      "coolDown": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        11,
+        11,
+        11,
+        11,
+        10
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 684,
+          "funcType": "addStateShort",
+          "funcTargetType": "ptOne",
+          "funcTargetTeam": "player",
+          "funcPopupText": "NP Gain Up",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_303.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 140,
+              "name": "NP Gain Up",
+              "detail": "Increase NP amount gained",
+              "icon": "https://assets.atlasacademy.io/GameData/NA/BuffIcons/bufficon_303.png",
+              "type": "upDropnp",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 300
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 320
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 340
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 360
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 380
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 400
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 420
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 440
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 460
+            },
+            {
+              "Rate": 5000,
+              "Turn": 1,
+              "Count": -1,
+              "Value": 500
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "expRequired": [
+    53000,
+    132500,
+    305000,
+    609000,
+    1218000,
+    2200000,
+    3727000,
+    5963000,
+    8950000
+  ]
+}

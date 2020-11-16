@@ -31,6 +31,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Json\JP\CraftEssenceData\9400280-ImaginaryElementEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\JP\CraftEssenceData\9400340-KaleidoscopeEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -52,7 +55,19 @@
     <None Update="Json\JP\Export\nice_trait.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\JP\MysticCodeData\100-Fragment2004.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\JP\MysticCodeData\110-Artic.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\JP\ServantData\Archer\201300-ArashArcherEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\JP\ServantData\Assassin\600500-JackAssassinEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\JP\ServantData\Berserker\700200-LancelotBerserkerEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\JP\ServantData\Caster\500300-TamamoNoMaeCasterEN.json">
@@ -91,6 +106,9 @@
     <None Update="Json\JP\ServantData\Saber\100600-NeroClaudiusBrideSaberEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\NA\CraftEssenceData\9400280-ImaginaryElement.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\NA\CraftEssenceData\9400340-Kaleidoscope.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -112,10 +130,22 @@
     <None Update="Json\NA\Export\nice_trait.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\NA\MysticCodeData\100-Fragment2004.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\NA\MysticCodeData\110-Artic.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\NA\ServantData\Archer\201300-ArashArcher.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\NA\ServantData\Assassin\600500-JackAssassin.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\NA\ServantData\Avenger\1100200-EdmondDantesAvenger.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\NA\ServantData\Berserker\700200-LancelotBerserker.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\NA\ServantData\Caster\500300-TamamoNoMaeCaster.json">
@@ -154,19 +184,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Json\JP\ServantData\Archer\" />
     <Folder Include="Json\JP\ServantData\Lancer\" />
-    <Folder Include="Json\JP\ServantData\Assassin\" />
     <Folder Include="Json\JP\ServantData\AlterEgo\" />
     <Folder Include="Json\JP\ServantData\MoonCancer\" />
     <Folder Include="Json\JP\ServantData\Foreigner\" />
-    <Folder Include="Json\JP\ServantData\Berserker\" />
     <Folder Include="Json\JP\ServantData\Ruler\" />
     <Folder Include="Json\JP\ServantData\Shielder\" />
     <Folder Include="Json\NA\ServantData\AlterEgo\" />
-    <Folder Include="Json\NA\ServantData\Archer\" />
-    <Folder Include="Json\NA\ServantData\Assassin\" />
-    <Folder Include="Json\NA\ServantData\Berserker\" />
     <Folder Include="Json\NA\ServantData\Foreigner\" />
     <Folder Include="Json\NA\ServantData\Lancer\" />
     <Folder Include="Json\NA\ServantData\MoonCancer\" />

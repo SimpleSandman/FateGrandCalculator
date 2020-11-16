@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Threading;
 
 using WireMock.Server;
 using WireMock.Settings;
@@ -9,19 +10,24 @@ namespace FateGrandOrderPOC.Test.Fixture
 {
     public class WireMockFixture : IDisposable
     {
-        private static readonly int _port = 8080;
-        public static readonly string SERVER_URL = $"http://localhost:{_port}";
+        private static int _port;
 
+        public static string ServerUrl { get; private set; }
         public WireMockServer MockServer { get; private set; }
 
         public WireMockFixture()
         {
-            CheckIfMockServerInUse();
+            // Look for a free TCP port
+            do 
+            {
+                _port = new Random().Next(8000, 8999);
+            } while (IsPortBusy());
 
-            // bootstrap mockserver
+            ServerUrl = $"http://localhost:{_port}";
+
             MockServer = WireMockServer.Start(new WireMockServerSettings
             {
-                Urls = new[] { SERVER_URL },
+                Urls = new[] { ServerUrl },
                 StartAdminInterface = true,
                 //Logger = new WireMockConsoleLogger(),
                 AllowPartialMapping = true
@@ -39,7 +45,10 @@ namespace FateGrandOrderPOC.Test.Fixture
         public void CheckIfMockServerInUse()
         {
             // wait until the port is free
-            while (IsPortBusy()) { }
+            while (IsPortBusy()) 
+            {
+                Thread.Sleep(1000);
+            }
 
             if (MockServer != null)
             {
