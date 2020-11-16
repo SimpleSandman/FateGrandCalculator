@@ -119,7 +119,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
 
@@ -135,7 +135,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
 
@@ -151,7 +151,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Giant", "Humanoid", "Male", "Super Large"
+                        "giant", "humanoid", "genderMale", "superGiant"
                     }
                 };
                 #endregion
@@ -169,7 +169,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Giant", "Humanoid", "Male", "Super Large"
+                        "giant", "humanoid", "genderMale", "superGiant"
                     }
                 };
 
@@ -185,7 +185,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
 
@@ -201,7 +201,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Giant", "Humanoid", "Male", "Super Large"
+                        "giant", "humanoid", "genderMale", "superGiant"
                     }
                 };
                 #endregion
@@ -219,7 +219,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
 
@@ -235,7 +235,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
 
@@ -251,7 +251,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Giant", "Humanoid", "Male", "Super Large"
+                        "giant", "humanoid", "genderMale", "superGiant"
                     }
                 };
                 #endregion
@@ -432,7 +432,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
 
@@ -448,7 +448,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
 
@@ -464,7 +464,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
                 #endregion
@@ -482,7 +482,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
 
@@ -498,7 +498,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
 
@@ -514,7 +514,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
                 #endregion
@@ -532,7 +532,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
 
@@ -548,7 +548,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
 
@@ -564,7 +564,7 @@ namespace FateGrandOrderPOC.Test
                     IsSpecial = false,
                     Traits = new List<string>
                     {
-                        "Divine", "Humanoid", "Female"
+                        "divine", "humanoid", "genderFemale"
                     }
                 };
                 #endregion
@@ -607,7 +607,7 @@ namespace FateGrandOrderPOC.Test
 
                 using (new AssertionScope())
                 {
-                    //enemyMobs.Count.Should().Be(0);
+                    enemyMobs.Count.Should().Be(0);
                     partyLancelot.NpCharge.Should().Be(27);
                 }
             }

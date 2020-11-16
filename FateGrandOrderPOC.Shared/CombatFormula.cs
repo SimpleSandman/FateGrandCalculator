@@ -34,14 +34,16 @@ namespace FateGrandOrderPOC.Shared
         /// </summary>
         /// <param name="party"></param>
         /// <param name="enemyMobs"></param>
-        /// <param name="waveNumber"></param>
-        /// <param name="enemyPosition"></param>
+        /// <param name="waveNumber">The wave the node simulation is currently on</param>
+        /// <param name="enemyPosition">Set the cursor of an enemy's position from left to right (1-3)</param>
         public async Task NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, int enemyPosition)
         {
             List<PartyMember> npChainList = party
                 .FindAll(p => p.NpChainOrder != NpChainOrderEnum.None)
                 .OrderBy(p => p.NpChainOrder)
                 .ToList();
+
+            enemyPosition--; // set to zero-based
 
             // Go through each party member's NP attack in the order of the NP chain provided
             foreach (PartyMember partyMember in npChainList)
@@ -62,7 +64,7 @@ namespace FateGrandOrderPOC.Shared
 
                 foreach (Function partyMemberFunction in partyMember.NoblePhantasm.Functions)
                 {
-                    if (partyMemberFunction.FuncType == "damageNp")
+                    if (partyMemberFunction.FuncType == "damageNp" || partyMemberFunction.FuncType == "damageNpPierce")
                     {
                         Tuple<float, float, float, float> activePartyMemberEffects = SetStatusEffects(partyMember, cardNpTypeUp, attackUp, powerModifier, npGainUp);
                         cardNpTypeUp = activePartyMemberEffects.Item1;
@@ -72,7 +74,12 @@ namespace FateGrandOrderPOC.Shared
                         
                         if (partyMemberFunction.FuncTargetType == "enemy") // single target
                         {
-                            totalNpRefund += await DamagePhase(partyMember, enemyTargets[enemyPosition], powerModifier, npChainPosition, 
+                            // Find the next available target if the previously selected is already dead (zero-based comparison)
+                            EnemyMob enemyTarget = enemyTargets.Count - 1 >= enemyPosition 
+                                ? enemyTargets[enemyPosition] 
+                                : enemyTargets.Last();
+
+                            totalNpRefund += await DamagePhase(partyMember, enemyTarget, powerModifier, npChainPosition, 
                                 attackUp, cardNpTypeUp, npGainUp, partyMemberFunction);
                         }
                         else
@@ -113,7 +120,10 @@ namespace FateGrandOrderPOC.Shared
 
             foreach (PartyMember martyr in martyred)
             {
-                party.Swap(martyr, party[3]);
+                if (party.Count - 1 >= 3)
+                {
+                    party.Swap(martyr, party[3]);
+                }
                 party.Remove(martyr);
             }
 
@@ -124,41 +134,14 @@ namespace FateGrandOrderPOC.Shared
             {
                 // remove the first (left-most) party member that isn't the butcher
                 PartyMember scapegoat = party.Where(s => s.Id != servantButcher.Id).First();
+                if (party.Count - 1 >= 3)
+                {
+                    party.Swap(scapegoat, party[3]);
+                }
                 party.Remove(scapegoat);
             }
 
             return;
-        }
-
-        /// <summary>
-        /// Find special damage up buff versus an enemy trait
-        /// </summary>
-        /// <param name="partyMember"></param>
-        /// <param name="enemy"></param>
-        /// <returns></returns>
-        public float SpecialAttackUp(PartyMember partyMember, EnemyMob enemy)
-        {
-            float powerModifier = 0.0f;
-            const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
-
-            foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
-            {
-                Buff buff = GetBuff(activeStatus);
-                if (buff == null)
-                {
-                    return 0.0f;
-                }
-
-                if (buff.Type == "upDamage" 
-                    && buff.Vals.Any(f => f.Name == "buffPowerModStrUp") 
-                    && buff.CkOpIndv.Any(f => f.Name == buff.Tvals.First().Name) 
-                    && enemy.Traits.Contains(buff.Tvals.First().Name))
-                {
-                    powerModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
-                }
-            }
-
-            return powerModifier;
         }
 
         /// <summary>
@@ -289,17 +272,8 @@ namespace FateGrandOrderPOC.Shared
             return healthRemaining;
         }
 
-        public async Task<float> BaseNpDamage(PartyMember partyMember, EnemyMob enemy, int npChainPosition, Function npFunction)
+        public async Task<float> BaseNpDamage(PartyMember partyMember, EnemyMob enemy, Sval svalNp)
         {
-            Sval svalNp = Overcharge(partyMember.NpCharge, npChainPosition) switch
-            {
-                5 => npFunction.Svals5[partyMember.Servant.NpLevel - 1],
-                4 => npFunction.Svals4[partyMember.Servant.NpLevel - 1],
-                3 => npFunction.Svals3[partyMember.Servant.NpLevel - 1],
-                2 => npFunction.Svals2[partyMember.Servant.NpLevel - 1],
-                _ => npFunction.Svals[partyMember.Servant.NpLevel - 1],
-            };
-
             int npValue = svalNp.Value;
             int targetBonusNpDamage = 0;
 
@@ -509,10 +483,64 @@ namespace FateGrandOrderPOC.Shared
             return;
         }
 
+        /// <summary>
+        /// Find special damage up buff versus an enemy trait
+        /// </summary>
+        /// <param name="partyMember"></param>
+        /// <param name="enemy"></param>
+        /// <returns></returns>
+        public float SpecialAttackUp(PartyMember partyMember, EnemyMob enemy)
+        {
+            float powerModifier = 0.0f;
+            const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
+
+            foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
+            {
+                Buff buff = GetBuff(activeStatus);
+                if (buff == null)
+                {
+                    return 0.0f;
+                }
+
+                if (IsPowerMod(buff, enemy))
+                {
+                    powerModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                }
+            }
+
+            return powerModifier;
+        }
+
         #region Private Methods
+        private bool IsPowerMod(Buff buff, EnemyMob enemy)
+        {
+            if (buff.Type == "upDamage"
+                && buff.Vals.Any(f => f.Name == "buffPowerModStrUp")
+                && buff.CkOpIndv.Any(f => f.Name == buff.Tvals.First().Name)
+                && enemy.Traits.Contains(buff.Tvals.First().Name))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private Sval GetSvalNp(PartyMember partyMember, Function npFunction, int npChainPosition)
+        {
+            return Overcharge(partyMember.NpCharge, npChainPosition) switch
+            {
+                5 => npFunction.Svals5[partyMember.Servant.NpLevel - 1],
+                4 => npFunction.Svals4[partyMember.Servant.NpLevel - 1],
+                3 => npFunction.Svals3[partyMember.Servant.NpLevel - 1],
+                2 => npFunction.Svals2[partyMember.Servant.NpLevel - 1],
+                _ => npFunction.Svals[partyMember.Servant.NpLevel - 1],
+            };
+        }
+
         private async Task<float> DamagePhase(PartyMember partyMember, EnemyMob enemyMob, float powerModifier, int npChainPosition, float attackUp, 
             float cardNpTypeUp, float npGainUp, Function npFunction)
         {
+            Sval svalNp = GetSvalNp(partyMember, npFunction, npChainPosition);
             powerModifier += SpecialAttackUp(partyMember, enemyMob);
 
             // Determine enemy debuffs
@@ -521,7 +549,8 @@ namespace FateGrandOrderPOC.Shared
             defenseDownModifier = enemyEffects.Item1;
             cardDefenseDebuffModifier = enemyEffects.Item2;
 
-            float baseNpDamage = await BaseNpDamage(partyMember, enemyMob, npChainPosition, npFunction).ConfigureAwait(false);
+            float baseNpDamage = await BaseNpDamage(partyMember, enemyMob, svalNp).ConfigureAwait(false);
+
             if (baseNpDamage == 0.0f)
             {
                 return 0.0f; // skip unnecessary calculations

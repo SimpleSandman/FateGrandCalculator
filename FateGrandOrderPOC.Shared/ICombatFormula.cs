@@ -18,7 +18,7 @@ namespace FateGrandOrderPOC.Shared
         float CalculatedNpPerHit(PartyMember partyMember, EnemyMob enemyMob, float cardNpTypeUp, float npGainUp);
         List<float> NpDistributionPercentages(PartyMember partyMember);
         float AttemptToKillEnemy(EnemyMob enemyMob, float npDamageForEnemyMob);
-        Task<float> BaseNpDamage(PartyMember partyMember, EnemyMob enemy, int npChainPosition, Function npFunction);
+        Task<float> BaseNpDamage(PartyMember partyMember, EnemyMob enemy, Sval svalNp);
         int Overcharge(float npCharge, int npChainPosition);
         Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage);
         Task<float> ChancesToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage);
