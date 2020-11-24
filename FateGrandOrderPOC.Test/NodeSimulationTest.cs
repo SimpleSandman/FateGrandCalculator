@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 
 using Autofac;
 
-using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Enums;
 using FateGrandOrderPOC.Shared.Models;
 using FateGrandOrderPOC.Test.Fixture;
@@ -19,28 +18,6 @@ namespace FateGrandOrderPOC.Test
 {
     public class NodeSimulationTest : IClassFixture<WireMockFixture>
     {
-        const string REGION = "NA";
-
-        const string IMAGINARY_ELEMENT_CE = "9400280";
-        const string KSCOPE_CE = "9400340";
-        const string HOLY_NIGHT_SUPPER_CE = "9402090";
-        const string AERIAL_DRIVE_CE = "9402750";
-
-        const string GILGAMESH_ARCHER = "200200";
-        const string ARASH_ARCHER = "201300";
-        const string ASTOLFO_RIDER = "400400";
-        const string WAVER_CASTER = "501900";
-        const string SKADI_CASTER = "503900";
-        const string JACK_ASSASSIN = "600500";
-        const string LANCELOT_BERSERKER = "700200";
-        const string SPARTACUS_BERSERKER = "700500";
-        const string RAIKOU_BERSERKER = "702300";
-        const string DANTES_AVENGER = "1100200";
-
-        const string PLUGSUIT_ID = "20";
-        const string FRAGMENT_2004_ID = "100";
-        const string ARTIC_ID = "110";
-
         private readonly WireMockFixture _wiremockFixture;
         private readonly IContainer _container;
         private readonly ITestOutputHelper _output;
@@ -49,14 +26,14 @@ namespace FateGrandOrderPOC.Test
         {
             _wiremockFixture = wiremockFixture;
             _output = output;
-            _container = ContainerBuilderInit.Create(REGION);
+            _container = ContainerBuilderInit.Create(WireMockUtility.REGION);
         }
 
         [Fact]
         public async Task FlamingMansionLB2Dantes()
         {
             _wiremockFixture.CheckIfMockServerInUse();
-            AddStubs();
+            WireMockUtility.AddStubs(_wiremockFixture);
 
             using (var scope = _container.BeginLifetimeScope())
             {
@@ -69,10 +46,10 @@ namespace FateGrandOrderPOC.Test
                 {
                     CraftEssenceLevel = 100,
                     Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(KSCOPE_CE)
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                Servant chaldeaAttackServant = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, DANTES_AVENGER, 1, false);
+                Servant chaldeaAttackServant = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.DANTES_AVENGER, 1, false);
 
                 PartyMember partyMemberAttacker = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAttackServant, chaldeaKscope);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyMemberAttacker);
@@ -81,7 +58,7 @@ namespace FateGrandOrderPOC.Test
                 #endregion
 
                 #region Party Member 2
-                Servant chaldeaCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, SKADI_CASTER, 1, false);
+                Servant chaldeaCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, false);
 
                 PartyMember partyMemberCaster = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaCaster);
 
@@ -89,7 +66,7 @@ namespace FateGrandOrderPOC.Test
                 #endregion
 
                 #region Party Member Support
-                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, SKADI_CASTER, 1, true);
+                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
 
                 PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
 
@@ -99,7 +76,7 @@ namespace FateGrandOrderPOC.Test
                 MysticCode mysticCode = new MysticCode
                 {
                     MysticCodeLevel = 4,
-                    MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(ARTIC_ID)
+                    MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.ARTIC_ID)
                 };
 
                 /* Enemy node data */
@@ -311,7 +288,7 @@ namespace FateGrandOrderPOC.Test
         public async Task CastleSnowIceLB2ArashZerkalotJack()
         {
             _wiremockFixture.CheckIfMockServerInUse();
-            AddStubs();
+            WireMockUtility.AddStubs(_wiremockFixture);
 
             using (var scope = _container.BeginLifetimeScope())
             {
@@ -324,10 +301,10 @@ namespace FateGrandOrderPOC.Test
                 {
                     CraftEssenceLevel = 100,
                     Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(KSCOPE_CE)
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                Servant chaldeaLancelot = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, LANCELOT_BERSERKER, 5, false);
+                Servant chaldeaLancelot = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.LANCELOT_BERSERKER, 5, false);
 
                 PartyMember partyLancelot = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaLancelot, chaldeaSuperscope);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyLancelot);
@@ -340,10 +317,10 @@ namespace FateGrandOrderPOC.Test
                 {
                     CraftEssenceLevel = 36,
                     Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(IMAGINARY_ELEMENT_CE)
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.IMAGINARY_ELEMENT_CE)
                 };
 
-                Servant chaldeaArash = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, ARASH_ARCHER, 5, false);
+                Servant chaldeaArash = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.ARASH_ARCHER, 5, false);
 
                 PartyMember partyArash = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaArash, chaldeaImaginaryElement);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyArash);
@@ -356,10 +333,10 @@ namespace FateGrandOrderPOC.Test
                 {
                     CraftEssenceLevel = 30,
                     Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(KSCOPE_CE)
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                Servant chaldeaJack = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, JACK_ASSASSIN, 1, false);
+                Servant chaldeaJack = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.JACK_ASSASSIN, 1, false);
 
                 PartyMember partyJack = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaJack, chaldeaMlbKscope);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyJack);
@@ -368,7 +345,7 @@ namespace FateGrandOrderPOC.Test
                 #endregion
 
                 #region Skadi Support
-                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, SKADI_CASTER, 1, true);
+                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
 
                 PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
 
@@ -378,7 +355,7 @@ namespace FateGrandOrderPOC.Test
                 MysticCode mysticCode = new MysticCode
                 {
                     MysticCodeLevel = 10,
-                    MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(FRAGMENT_2004_ID)
+                    MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.FRAGMENT_2004_ID)
                 };
 
                 #region First Wave
@@ -579,7 +556,7 @@ namespace FateGrandOrderPOC.Test
         public async Task PlugsuitWaverAstolfoDailyDoors()
         {
             _wiremockFixture.CheckIfMockServerInUse();
-            AddStubs();
+            WireMockUtility.AddStubs(_wiremockFixture);
 
             using (var scope = _container.BeginLifetimeScope())
             {
@@ -588,7 +565,7 @@ namespace FateGrandOrderPOC.Test
 
                 /* Party data */
                 #region Waver
-                Servant chaldeaWaver = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WAVER_CASTER, 2, false);
+                Servant chaldeaWaver = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.WAVER_CASTER, 2, false);
 
                 PartyMember partyWaver = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaWaver);
 
@@ -600,10 +577,10 @@ namespace FateGrandOrderPOC.Test
                 {
                     CraftEssenceLevel = 33,
                     Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(HOLY_NIGHT_SUPPER_CE)
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.HOLY_NIGHT_SUPPER_CE)
                 };
 
-                Servant chaldeaAstolfo = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, ASTOLFO_RIDER, 5, false, 100);
+                Servant chaldeaAstolfo = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.ASTOLFO_RIDER, 5, false, 100);
 
                 PartyMember partyAstolfo = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAstolfo, chaldeaHolyNightSupper);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyAstolfo);
@@ -616,10 +593,10 @@ namespace FateGrandOrderPOC.Test
                 {
                     CraftEssenceLevel = 100,
                     Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(KSCOPE_CE)
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                Servant chaldeaSpartacus = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, SPARTACUS_BERSERKER, 5, false);
+                Servant chaldeaSpartacus = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SPARTACUS_BERSERKER, 5, false);
 
                 PartyMember partySpartacus = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaSpartacus, chaldeaSuperscope);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partySpartacus);
@@ -628,7 +605,7 @@ namespace FateGrandOrderPOC.Test
                 #endregion
 
                 #region Waver Support
-                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WAVER_CASTER, 1, true);
+                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.WAVER_CASTER, 1, true);
 
                 PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
 
@@ -638,7 +615,7 @@ namespace FateGrandOrderPOC.Test
                 MysticCode mysticCode = new MysticCode
                 {
                     MysticCodeLevel = 10,
-                    MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(PLUGSUIT_ID)
+                    MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.PLUGSUIT_ID)
                 };
 
                 #region First Wave
@@ -820,113 +797,6 @@ namespace FateGrandOrderPOC.Test
             }
         }
 
-        #region Private Methods
-        /// <summary>
-        /// Add all the WireMock stubs
-        /// </summary>
-        private void AddStubs()
-        {
-            AddExportStubs();
-            AddServantStubs();
-            AddCraftEssenceStubs();
-            AddMysticCodeStubs();
-        }
-
-        /// <summary>
-        /// Create constant game data endpoints as WireMock stubs
-        /// </summary>
-        private void AddExportStubs()
-        {
-            const string CONSTANT_RATE_JSON = "NiceConstant.json";
-            const string CLASS_ATTACK_RATE_JSON = "NiceClassAttackRate.json";
-            const string CLASS_RELATION_JSON = "NiceClassRelation.json";
-            const string ATTRIBUTE_RELATION_JSON = "NiceAttributeRelation.json";
-
-            // build necessary export mock responses
-            ConstantNiceJson mockConstantRateResponse = LoadTestData.DeserializeExportJson<ConstantNiceJson>(REGION, CONSTANT_RATE_JSON);
-            LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, CONSTANT_RATE_JSON, mockConstantRateResponse);
-
-            ClassAttackRateNiceJson mockClassAttackRateResponse = LoadTestData.DeserializeExportJson<ClassAttackRateNiceJson>(REGION, CLASS_ATTACK_RATE_JSON);
-            LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, CLASS_ATTACK_RATE_JSON, mockClassAttackRateResponse);
-
-            ClassRelationNiceJson mockClassRelationResponse = LoadTestData.DeserializeExportJson<ClassRelationNiceJson>(REGION, CLASS_RELATION_JSON);
-            LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, CLASS_RELATION_JSON, mockClassRelationResponse);
-
-            AttributeRelationNiceJson mockAttributeRelationResponse = LoadTestData.DeserializeExportJson<AttributeRelationNiceJson>(REGION, ATTRIBUTE_RELATION_JSON);
-            LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, ATTRIBUTE_RELATION_JSON, mockAttributeRelationResponse);
-        }
-
-        /// <summary>
-        /// Create servant game data endpoints as WireMock stubs
-        /// </summary>
-        private void AddServantStubs()
-        {
-            // build mock servant responses
-            ServantNiceJson mockResponse = LoadTestData.DeserializeServantJson(REGION, "Avenger", $"{DANTES_AVENGER}-EdmondDantesAvenger.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", DANTES_AVENGER, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Caster", $"{SKADI_CASTER}-ScathachSkadiCaster.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", SKADI_CASTER, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Berserker", $"{LANCELOT_BERSERKER}-LancelotBerserker.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", LANCELOT_BERSERKER, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Caster", $"{WAVER_CASTER}-ZhugeLiangCaster.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", WAVER_CASTER, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Berserker", $"{SPARTACUS_BERSERKER}-SpartacusBerserker.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", SPARTACUS_BERSERKER, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Archer", $"{GILGAMESH_ARCHER}-GilgameshArcher.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", GILGAMESH_ARCHER, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Archer", $"{ARASH_ARCHER}-ArashArcher.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", ARASH_ARCHER, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Berserker", $"{RAIKOU_BERSERKER}-RaikouBerserker.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", RAIKOU_BERSERKER, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Rider", $"{ASTOLFO_RIDER}-AstolfoRider.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", ASTOLFO_RIDER, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Assassin", $"{JACK_ASSASSIN}-JackAssassin.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", JACK_ASSASSIN, mockResponse);
-        }
-
-        /// <summary>
-        /// Create craft essence game data endpoints as WireMock stubs
-        /// </summary>
-        private void AddCraftEssenceStubs()
-        {
-            // build mock craft essence response
-            EquipNiceJson mockResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{KSCOPE_CE}-Kaleidoscope.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", KSCOPE_CE, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{IMAGINARY_ELEMENT_CE}-ImaginaryElement.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", IMAGINARY_ELEMENT_CE, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{AERIAL_DRIVE_CE}-AerialDrive.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", AERIAL_DRIVE_CE, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{HOLY_NIGHT_SUPPER_CE}-HolyNightSupper.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", HOLY_NIGHT_SUPPER_CE, mockResponse);
-        }
-
-        /// <summary>
-        /// Create mystic code game data endpoints as WireMock stubs
-        /// </summary>
-        private void AddMysticCodeStubs()
-        {
-            // build mock mystic code response
-            MysticCodeNiceJson mockResponse = LoadTestData.DeserializeMysticCodeJson(REGION, $"{ARTIC_ID}-Artic.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", ARTIC_ID, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeMysticCodeJson(REGION, $"{PLUGSUIT_ID}-CombatUniform.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", PLUGSUIT_ID, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeMysticCodeJson(REGION, $"{FRAGMENT_2004_ID}-Fragment2004.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", FRAGMENT_2004_ID, mockResponse);
-        }
-        #endregion
+        
     }
 }

@@ -18,15 +18,13 @@ namespace FateGrandOrderPOC.Test
 {
     public class PartyCompositionTest : IClassFixture<WireMockFixture>
     {
-        const string REGION = "NA";
-
         private readonly WireMockFixture _wiremockFixture;
         private readonly IContainer _container;
 
         public PartyCompositionTest(WireMockFixture wiremockFixture)
         {
             _wiremockFixture = wiremockFixture;
-            _container = ContainerBuilderInit.Create(REGION);
+            _container = ContainerBuilderInit.Create(WireMockUtility.REGION);
         }
 
         [Fact]
@@ -51,19 +49,9 @@ namespace FateGrandOrderPOC.Test
         public async Task CreatePartyMemberWithCraftEssence()
         {
             _wiremockFixture.CheckIfMockServerInUse();
-
-            const string KSCOPE_CE = "9400340";
-            const string DANTES_AVENGER = "1100200";
+            WireMockUtility.AddStubs(_wiremockFixture);
 
             List<PartyMember> party = new List<PartyMember>();
-
-            // build mock servant response
-            ServantNiceJson mockServantResponse = LoadTestData.DeserializeServantJson(REGION, "Avenger", $"{DANTES_AVENGER}-EdmondDantesAvenger.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", DANTES_AVENGER, mockServantResponse);
-
-            // build mock craft essence response
-            EquipNiceJson mockCraftEssenceResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{KSCOPE_CE}-Kaleidoscope.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", KSCOPE_CE, mockCraftEssenceResponse);
 
             using (var scope = _container.BeginLifetimeScope())
             {
@@ -73,10 +61,10 @@ namespace FateGrandOrderPOC.Test
                 {
                     CraftEssenceLevel = 100,
                     Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(KSCOPE_CE)
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                Servant chaldeaServant = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, DANTES_AVENGER, 1, false);
+                Servant chaldeaServant = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.DANTES_AVENGER, 1, false);
 
                 PartyMember partyMember = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaServant, chaldeaKscope);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyMember);
@@ -93,12 +81,7 @@ namespace FateGrandOrderPOC.Test
         public async Task SetMysticCode()
         {
             _wiremockFixture.CheckIfMockServerInUse();
-
-            const string ARTIC_ID = "110";
-
-            // build mock mystic code response
-            MysticCodeNiceJson mockMysticCodeResponse = LoadTestData.DeserializeMysticCodeJson(REGION, $"{ARTIC_ID}-Artic.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", ARTIC_ID, mockMysticCodeResponse);
+            WireMockUtility.AddStubs(_wiremockFixture);
 
             using (var scope = _container.BeginLifetimeScope())
             {
@@ -107,7 +90,7 @@ namespace FateGrandOrderPOC.Test
                 MysticCode mysticCode = new MysticCode
                 {
                     MysticCodeLevel = 4,
-                    MysticCodeInfo = await aaClient.GetMysticCodeInfo(ARTIC_ID)
+                    MysticCodeInfo = await aaClient.GetMysticCodeInfo(WireMockUtility.ARTIC_ID)
                 };
 
                 mysticCode.MysticCodeInfo.Id.Should().Be(110);

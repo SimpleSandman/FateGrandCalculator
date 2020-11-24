@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 using Autofac;
 
-using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
 using FateGrandOrderPOC.Shared.Enums;
 using FateGrandOrderPOC.Shared.Models;
 using FateGrandOrderPOC.Test.Fixture;
@@ -20,8 +19,6 @@ namespace FateGrandOrderPOC.Test
 {
     public class SkillActivationTest : IClassFixture<WireMockFixture>
     {
-        const string REGION = "NA";
-
         private readonly WireMockFixture _wiremockFixture;
         private readonly IContainer _container;
         private readonly ITestOutputHelper _output;
@@ -30,23 +27,14 @@ namespace FateGrandOrderPOC.Test
         {
             _wiremockFixture = wiremockFixture;
             _output = output;
-            _container = ContainerBuilderInit.Create(REGION);
+            _container = ContainerBuilderInit.Create(WireMockUtility.REGION);
         }
 
         [Fact]
         public async Task ActivatePartyMemberSkills()
         {
             _wiremockFixture.CheckIfMockServerInUse();
-
-            const string SKADI_CASTER = "503900";
-            const string DANTES_AVENGER = "1100200";
-
-            // build mock servant responses
-            ServantNiceJson mockSkadiResponse = LoadTestData.DeserializeServantJson(REGION, "Caster", "503900-ScathachSkadiCaster.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", SKADI_CASTER, mockSkadiResponse);
-
-            ServantNiceJson mockDantesResponse = LoadTestData.DeserializeServantJson(REGION, "Avenger", "1100200-EdmondDantesAvenger.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", DANTES_AVENGER, mockDantesResponse);
+            WireMockUtility.AddStubs(_wiremockFixture);
 
             List<PartyMember> party = new List<PartyMember>();
 
@@ -56,7 +44,7 @@ namespace FateGrandOrderPOC.Test
 
                 /* Party data */
                 #region Party Member
-                Servant chaldeaAttackServant = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, DANTES_AVENGER, 1, false);
+                Servant chaldeaAttackServant = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.DANTES_AVENGER, 1, false);
 
                 PartyMember partyMemberAttacker = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAttackServant);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyMemberAttacker);
@@ -65,7 +53,7 @@ namespace FateGrandOrderPOC.Test
                 #endregion
 
                 #region Party Member 2
-                Servant chaldeaCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, SKADI_CASTER, 1, false);
+                Servant chaldeaCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, false);
 
                 PartyMember partyMemberCaster = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaCaster);
 
@@ -73,7 +61,7 @@ namespace FateGrandOrderPOC.Test
                 #endregion
 
                 #region Party Member Support
-                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, SKADI_CASTER, 1, true);
+                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
 
                 PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
 
