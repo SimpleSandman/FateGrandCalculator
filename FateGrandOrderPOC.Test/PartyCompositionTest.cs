@@ -58,11 +58,11 @@ namespace FateGrandOrderPOC.Test
             List<PartyMember> party = new List<PartyMember>();
 
             // build mock servant response
-            ServantNiceJson mockServantResponse = LoadTestData.DeserializeServantJson(REGION, "Avenger", "1100200-EdmondDantesAvenger.json");
+            ServantNiceJson mockServantResponse = LoadTestData.DeserializeServantJson(REGION, "Avenger", $"{DANTES_AVENGER}-EdmondDantesAvenger.json");
             LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", DANTES_AVENGER, mockServantResponse);
 
             // build mock craft essence response
-            EquipNiceJson mockCraftEssenceResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, "9400340-Kaleidoscope.json");
+            EquipNiceJson mockCraftEssenceResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{KSCOPE_CE}-Kaleidoscope.json");
             LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", KSCOPE_CE, mockCraftEssenceResponse);
 
             using (var scope = _container.BeginLifetimeScope())
@@ -97,7 +97,7 @@ namespace FateGrandOrderPOC.Test
             const string ARTIC_ID = "110";
 
             // build mock mystic code response
-            MysticCodeNiceJson mockMysticCodeResponse = LoadTestData.DeserializeMysticCodeJson(REGION, "110-Artic.json");
+            MysticCodeNiceJson mockMysticCodeResponse = LoadTestData.DeserializeMysticCodeJson(REGION, $"{ARTIC_ID}-Artic.json");
             LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", ARTIC_ID, mockMysticCodeResponse);
 
             using (var scope = _container.BeginLifetimeScope())

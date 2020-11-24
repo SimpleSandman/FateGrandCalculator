@@ -37,6 +37,12 @@
     <None Update="Json\JP\CraftEssenceData\9400340-KaleidoscopeEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\JP\CraftEssenceData\9402090-HolyNightSupperEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\JP\CraftEssenceData\9402750-AerialDriveEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\JP\Export\basic_servant.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -61,6 +67,12 @@
     <None Update="Json\JP\MysticCodeData\110-Artic.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\JP\MysticCodeData\20-CombatUniform.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\JP\ServantData\Archer\200200-GilgameshArcherEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\JP\ServantData\Archer\201300-ArashArcherEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -68,6 +80,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\JP\ServantData\Berserker\700200-LancelotBerserkerEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\JP\ServantData\Berserker\700500-SpartacusBerserkerEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\JP\ServantData\Berserker\702300-RaikouBerserkerEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\JP\ServantData\Caster\500300-TamamoNoMaeCasterEN.json">
@@ -100,6 +118,9 @@
     <None Update="Json\JP\ServantData\Caster\504500-AltriaCasterEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\JP\ServantData\Rider\400400-AstolfoRiderEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\JP\ServantData\Rider\403200-SimaYiReinesRiderEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -110,6 +131,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\NA\CraftEssenceData\9400340-Kaleidoscope.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\NA\CraftEssenceData\9402090-HolyNightSupper.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\NA\CraftEssenceData\9402750-AerialDrive.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\NA\Export\basic_servant.json">
@@ -136,6 +163,12 @@
     <None Update="Json\NA\MysticCodeData\110-Artic.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\NA\MysticCodeData\20-CombatUniform.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\NA\ServantData\Archer\200200-GilgameshArcher.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\NA\ServantData\Archer\201300-ArashArcher.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -146,6 +179,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\NA\ServantData\Berserker\700200-LancelotBerserker.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\NA\ServantData\Berserker\700500-SpartacusBerserker.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\NA\ServantData\Berserker\702300-RaikouBerserker.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\NA\ServantData\Caster\500300-TamamoNoMaeCaster.json">
@@ -175,6 +214,9 @@
     <None Update="Json\NA\ServantData\Caster\503900-ScathachSkadiCaster.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\NA\ServantData\Rider\400400-AstolfoRider.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\NA\ServantData\Saber\100600-NeroClaudiusBrideSaber.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -194,7 +236,6 @@
     <Folder Include="Json\NA\ServantData\Foreigner\" />
     <Folder Include="Json\NA\ServantData\Lancer\" />
     <Folder Include="Json\NA\ServantData\MoonCancer\" />
-    <Folder Include="Json\NA\ServantData\Rider\" />
     <Folder Include="Json\NA\ServantData\Ruler\" />
     <Folder Include="Json\NA\ServantData\Shielder\" />
   </ItemGroup>

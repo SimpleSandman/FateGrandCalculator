@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
+using FateGrandOrderPOC.Shared.Extensions;
 using FateGrandOrderPOC.Shared.Models;
 
 namespace FateGrandOrderPOC.Shared.ApplyStatuses
@@ -10,7 +10,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
     public static class ApplyServantStatus
     {
         /// <summary>
-        /// Apply Noble Phantasm buffs/debuffs
+        /// Apply "noble phantasm" buffs/debuffs
         /// </summary>
         /// <param name="partyMemberActor"></param>
         /// <param name="servantNpFunction"></param>
@@ -40,7 +40,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
         }
 
         /// <summary>
-        /// Apply servant party buffs/debuffs
+        /// Apply "servant party" buffs/debuffs
         /// </summary>
         /// <param name="partyMemberPosition"></param>
         /// <param name="partyMemberActor"></param>
@@ -77,27 +77,32 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
         }
 
         /// <summary>
-        /// Apply mystic code party buffs/debuffs
+        /// Apply "mystic code" party buffs/debuffs
         /// </summary>
         /// <param name="partyMemberPosition"></param>
         /// <param name="mysticCode"></param>
         /// <param name="mysticCodeFunction"></param>
         /// <param name="partyMemberTargets"></param>
-        public static void ApplyFuncTargetType(int partyMemberPosition, MysticCode mysticCode, Function mysticCodeFunction, List<PartyMember> partyMemberTargets)
+        /// <param name="reservePartyMemberIndex"></param>
+        public static void ApplyFuncTargetType(int partyMemberPosition, MysticCode mysticCode, Function mysticCodeFunction, List<PartyMember> partyMemberTargets, 
+            int reservePartyMemberIndex)
         {
             switch (mysticCodeFunction.FuncTargetType)
             {
-                case "ptAll":         // party
-                case "ptOther":       // party except self
+                case "ptAll":           // party
+                case "ptOther":         // party except self
                     ApplyStatus(mysticCode, mysticCodeFunction, partyMemberTargets.Take(3).ToList());
                     break;
-                case "ptFull":        // party (including reserve)
-                case "ptOtherFull":   // party except self (including reserve)
+                case "ptFull":          // party (including reserve)
+                case "ptOtherFull":     // party except self (including reserve)
                     ApplyStatus(mysticCode, mysticCodeFunction, partyMemberTargets);
                     break;
-                case "ptOne":         // party member
-                case "ptselectSub":   // reserve party member
+                case "ptOne":           // party member
+                case "ptselectSub":     // reserve party member
                     ApplyStatus(mysticCode, mysticCodeFunction, partyMemberTargets[partyMemberPosition - 1]);
+                    break;
+                case "ptselectOneSub":  // one reserve party member
+                    SwapPartyMemberFunction(mysticCodeFunction, partyMemberTargets, partyMemberPosition - 1, reservePartyMemberIndex - 1);
                     break;
                 default:
                     break;
@@ -158,12 +163,7 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
             {
                 case "gainNp":
                     partyMemberTarget.NpCharge += mysticCodeFunction.Svals[mysticCode.MysticCodeLevel - 1].Value / 100.0f;
-
                     PityNpGain(partyMemberTarget);
-
-                    Console.WriteLine($"{mysticCode.MysticCodeInfo.Name} has buffed " +
-                        $"{partyMemberTarget.Servant.ServantInfo.Name}'s NP charge by " +
-                        $"{mysticCodeFunction.Svals[mysticCode.MysticCodeLevel - 1].Value / 100.0f}% and is now at {partyMemberTarget.NpCharge}%\n");
                     break;
                 default:
                     partyMemberTarget.ActiveStatuses.Add(new ActiveStatus
@@ -173,6 +173,18 @@ namespace FateGrandOrderPOC.Shared.ApplyStatuses
                         ActiveTurnCount = mysticCodeFunction.Svals[mysticCode.MysticCodeLevel - 1].Turn
                     });
                     break;
+            }
+        }
+
+        private static void SwapPartyMemberFunction(Function function, List<PartyMember> party, int activePartyMemberIndex, int reservePartyMemberIndex)
+        {
+            if (activePartyMemberIndex > -1
+                && reservePartyMemberIndex > -1
+                && function.FuncType == "replaceMember"
+                && function.FuncTargetType == "ptselectOneSub"
+                && function.FuncTargetTeam == "player")
+            {
+                party.Swap(activePartyMemberIndex, reservePartyMemberIndex);
             }
         }
         #endregion

@@ -14,6 +14,7 @@ using FluentAssertions;
 using FluentAssertions.Execution;
 
 using Xunit;
+using Xunit.Abstractions;
 
 namespace FateGrandOrderPOC.Test
 {
@@ -23,10 +24,12 @@ namespace FateGrandOrderPOC.Test
 
         private readonly WireMockFixture _wiremockFixture;
         private readonly IContainer _container;
+        private readonly ITestOutputHelper _output;
 
-        public SkillActivationTest(WireMockFixture wiremockFixture)
+        public SkillActivationTest(WireMockFixture wiremockFixture, ITestOutputHelper output)
         {
             _wiremockFixture = wiremockFixture;
+            _output = output;
             _container = ContainerBuilderInit.Create(REGION);
         }
 
@@ -92,7 +95,7 @@ namespace FateGrandOrderPOC.Test
                         IsSpecial = false,
                         Traits = new List<string>
                         {
-                            "Divine", "Humanoid", "Female"
+                            "divine", "humanoid", "genderFemale"
                         }
                     }
                 };
@@ -107,6 +110,12 @@ namespace FateGrandOrderPOC.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 2, party, 1, enemyMobs, 1); // Skadi (support) enemy defense down
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberCaster, 2, party, 1, enemyMobs, 1); // Skadi enemy defense down
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberAttacker, 1, party, 1, enemyMobs, 1); // Dante's 1st skill
+
+                _output.WriteLine("--- Dantes's active status effects ---");
+                foreach (ActiveStatus activeStatus in partyMemberAttacker.ActiveStatuses)
+                {
+                    _output.WriteLine($"{activeStatus.StatusEffect.FuncPopupText.Replace("\n", " ")}");
+                }
 
                 using (new AssertionScope())
                 {

@@ -21,6 +21,26 @@ namespace FateGrandOrderPOC.Test
     {
         const string REGION = "NA";
 
+        const string IMAGINARY_ELEMENT_CE = "9400280";
+        const string KSCOPE_CE = "9400340";
+        const string HOLY_NIGHT_SUPPER_CE = "9402090";
+        const string AERIAL_DRIVE_CE = "9402750";
+
+        const string GILGAMESH_ARCHER = "200200";
+        const string ARASH_ARCHER = "201300";
+        const string ASTOLFO_RIDER = "400400";
+        const string WAVER_CASTER = "501900";
+        const string SKADI_CASTER = "503900";
+        const string JACK_ASSASSIN = "600500";
+        const string LANCELOT_BERSERKER = "700200";
+        const string SPARTACUS_BERSERKER = "700500";
+        const string RAIKOU_BERSERKER = "702300";
+        const string DANTES_AVENGER = "1100200";
+
+        const string PLUGSUIT_ID = "20";
+        const string FRAGMENT_2004_ID = "100";
+        const string ARTIC_ID = "110";
+
         private readonly WireMockFixture _wiremockFixture;
         private readonly IContainer _container;
         private readonly ITestOutputHelper _output;
@@ -36,30 +56,7 @@ namespace FateGrandOrderPOC.Test
         public async Task FlamingMansionLB2Dantes()
         {
             _wiremockFixture.CheckIfMockServerInUse();
-
-            const string KSCOPE_CE = "9400340";
-            const string DANTES_AVENGER = "1100200";
-            const string SKADI_CASTER = "503900";
-            const string ARTIC_ID = "110";
-
-            #region Mock Responses
-            // build mock servant responses
-            ServantNiceJson mockSkadiResponse = LoadTestData.DeserializeServantJson(REGION, "Caster", "503900-ScathachSkadiCaster.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", SKADI_CASTER, mockSkadiResponse);
-
-            ServantNiceJson mockDantesResponse = LoadTestData.DeserializeServantJson(REGION, "Avenger", "1100200-EdmondDantesAvenger.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", DANTES_AVENGER, mockDantesResponse);
-
-            // build mock craft essence response
-            EquipNiceJson mockCraftEssenceResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, "9400340-Kaleidoscope.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", KSCOPE_CE, mockCraftEssenceResponse);
-
-            // build mock mystic code response
-            MysticCodeNiceJson mockMysticCodeResponse = LoadTestData.DeserializeMysticCodeJson(REGION, "110-Artic.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", ARTIC_ID, mockMysticCodeResponse);
-
-            AddExportStubs();
-            #endregion
+            AddStubs();
 
             using (var scope = _container.BeginLifetimeScope())
             {
@@ -314,42 +311,7 @@ namespace FateGrandOrderPOC.Test
         public async Task CastleSnowIceLB2ArashZerkalotJack()
         {
             _wiremockFixture.CheckIfMockServerInUse();
-
-            const string KSCOPE_CE = "9400340";
-            const string IMAGINARY_ELEMENT_CE = "9400280";
-            const string ARASH_ARCHER = "201300";
-            const string JACK_ASSASSIN = "600500";
-            const string LANCELOT_BERSERKER = "700200";
-            const string SKADI_CASTER = "503900";
-            const string FRAGMENT_2004_ID = "100";
-
-            #region Mock Responses
-            // build mock servant responses
-            ServantNiceJson mockSkadiResponse = LoadTestData.DeserializeServantJson(REGION, "Caster", $"{SKADI_CASTER}-ScathachSkadiCaster.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", SKADI_CASTER, mockSkadiResponse);
-
-            ServantNiceJson mockLancelotBerserkerResponse = LoadTestData.DeserializeServantJson(REGION, "Berserker", $"{LANCELOT_BERSERKER}-LancelotBerserker.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", LANCELOT_BERSERKER, mockLancelotBerserkerResponse);
-
-            ServantNiceJson mockArashResponse = LoadTestData.DeserializeServantJson(REGION, "Archer", $"{ARASH_ARCHER}-ArashArcher.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", ARASH_ARCHER, mockArashResponse);
-
-            ServantNiceJson mockJackResponse = LoadTestData.DeserializeServantJson(REGION, "Assassin", $"{JACK_ASSASSIN}-JackAssassin.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", JACK_ASSASSIN, mockJackResponse);
-
-            // build mock craft essence response
-            EquipNiceJson mockKaleidoscopeResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{KSCOPE_CE}-Kaleidoscope.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", KSCOPE_CE, mockKaleidoscopeResponse);
-
-            EquipNiceJson mockImaginaryElementResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{IMAGINARY_ELEMENT_CE}-ImaginaryElement.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", IMAGINARY_ELEMENT_CE, mockImaginaryElementResponse);
-
-            // build mock mystic code response
-            MysticCodeNiceJson mockMysticCodeResponse = LoadTestData.DeserializeMysticCodeJson(REGION, $"{FRAGMENT_2004_ID}-Fragment2004.json");
-            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", FRAGMENT_2004_ID, mockMysticCodeResponse);
-
-            AddExportStubs();
-            #endregion
+            AddStubs();
 
             using (var scope = _container.BeginLifetimeScope())
             {
@@ -522,7 +484,7 @@ namespace FateGrandOrderPOC.Test
                 #region Third Wave
                 EnemyMob walkure7 = new EnemyMob
                 {
-                    Id = 3,
+                    Id = 6,
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
@@ -538,7 +500,7 @@ namespace FateGrandOrderPOC.Test
 
                 EnemyMob walkure8 = new EnemyMob
                 {
-                    Id = 4,
+                    Id = 7,
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
@@ -554,7 +516,7 @@ namespace FateGrandOrderPOC.Test
 
                 EnemyMob walkure9 = new EnemyMob
                 {
-                    Id = 5,
+                    Id = 8,
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
@@ -613,7 +575,263 @@ namespace FateGrandOrderPOC.Test
             }
         }
 
+        [Fact]
+        public async Task PlugsuitWaverAstolfoDailyDoors()
+        {
+            _wiremockFixture.CheckIfMockServerInUse();
+            AddStubs();
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                List<PartyMember> party = new List<PartyMember>();
+
+                /* Party data */
+                #region Waver
+                Servant chaldeaWaver = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WAVER_CASTER, 2, false);
+
+                PartyMember partyWaver = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaWaver);
+
+                party.Add(partyWaver);
+                #endregion
+
+                #region Astolfo Rider
+                CraftEssence chaldeaHolyNightSupper = new CraftEssence
+                {
+                    CraftEssenceLevel = 33,
+                    Mlb = true,
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(HOLY_NIGHT_SUPPER_CE)
+                };
+
+                Servant chaldeaAstolfo = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, ASTOLFO_RIDER, 5, false, 100);
+
+                PartyMember partyAstolfo = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAstolfo, chaldeaHolyNightSupper);
+                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyAstolfo);
+
+                party.Add(partyAstolfo);
+                #endregion
+
+                #region Spartacus Berserker
+                CraftEssence chaldeaSuperscope = new CraftEssence
+                {
+                    CraftEssenceLevel = 100,
+                    Mlb = true,
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(KSCOPE_CE)
+                };
+
+                Servant chaldeaSpartacus = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, SPARTACUS_BERSERKER, 5, false);
+
+                PartyMember partySpartacus = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaSpartacus, chaldeaSuperscope);
+                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partySpartacus);
+
+                party.Add(partySpartacus);
+                #endregion
+
+                #region Waver Support
+                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WAVER_CASTER, 1, true);
+
+                PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
+
+                party.Add(partyMemberSupportCaster);
+                #endregion
+
+                MysticCode mysticCode = new MysticCode
+                {
+                    MysticCodeLevel = 10,
+                    MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(PLUGSUIT_ID)
+                };
+
+                #region First Wave
+                EnemyMob doorSaint1 = new EnemyMob
+                {
+                    Id = 0,
+                    Name = "Door of the Saint",
+                    ClassName = ClassRelationEnum.Caster,
+                    AttributeName = AttributeRelationEnum.Sky,
+                    Gender = GenderRelationEnum.Unknown,
+                    WaveNumber = WaveNumberEnum.First,
+                    Health = 14464.0f,
+                    IsSpecial = false,
+                    Traits = new List<string>()
+                };
+
+                EnemyMob doorChampion1 = new EnemyMob
+                {
+                    Id = 1,
+                    Name = "Door of the Champion",
+                    ClassName = ClassRelationEnum.Rider,
+                    AttributeName = AttributeRelationEnum.Sky,
+                    Gender = GenderRelationEnum.Female,
+                    WaveNumber = WaveNumberEnum.First,
+                    Health = 23716.0f,
+                    IsSpecial = false,
+                    Traits = new List<string>()
+                };
+
+                EnemyMob doorSaint2 = new EnemyMob
+                {
+                    Id = 2,
+                    Name = "Door of the Saint",
+                    ClassName = ClassRelationEnum.Rider,
+                    AttributeName = AttributeRelationEnum.Sky,
+                    Gender = GenderRelationEnum.Female,
+                    WaveNumber = WaveNumberEnum.First,
+                    Health = 14464.0f,
+                    IsSpecial = false,
+                    Traits = new List<string>()
+                };
+                #endregion
+
+                #region Second Wave
+                EnemyMob doorSaint3 = new EnemyMob
+                {
+                    Id = 3,
+                    Name = "Door of the Saint",
+                    ClassName = ClassRelationEnum.Caster,
+                    AttributeName = AttributeRelationEnum.Sky,
+                    Gender = GenderRelationEnum.Unknown,
+                    WaveNumber = WaveNumberEnum.Second,
+                    Health = 14464.0f,
+                    IsSpecial = false,
+                    Traits = new List<string>()
+                };
+
+                EnemyMob doorChampion2 = new EnemyMob
+                {
+                    Id = 4,
+                    Name = "Door of the Champion",
+                    ClassName = ClassRelationEnum.Rider,
+                    AttributeName = AttributeRelationEnum.Sky,
+                    Gender = GenderRelationEnum.Female,
+                    WaveNumber = WaveNumberEnum.Second,
+                    Health = 23716.0f,
+                    IsSpecial = false,
+                    Traits = new List<string>()
+                };
+
+                EnemyMob doorChampion3 = new EnemyMob
+                {
+                    Id = 5,
+                    Name = "Door of the Champion",
+                    ClassName = ClassRelationEnum.Rider,
+                    AttributeName = AttributeRelationEnum.Sky,
+                    Gender = GenderRelationEnum.Female,
+                    WaveNumber = WaveNumberEnum.Second,
+                    Health = 23716.0f,
+                    IsSpecial = false,
+                    Traits = new List<string>()
+                };
+                #endregion
+
+                #region Third Wave
+                EnemyMob doorChampion4 = new EnemyMob
+                {
+                    Id = 6,
+                    Name = "Door of the Champion",
+                    ClassName = ClassRelationEnum.Rider,
+                    AttributeName = AttributeRelationEnum.Sky,
+                    Gender = GenderRelationEnum.Female,
+                    WaveNumber = WaveNumberEnum.Third,
+                    Health = 29596.0f,
+                    IsSpecial = false,
+                    Traits = new List<string>()
+                };
+
+                EnemyMob doorChampion5 = new EnemyMob
+                {
+                    Id = 7,
+                    Name = "Door of the Champion",
+                    ClassName = ClassRelationEnum.Rider,
+                    AttributeName = AttributeRelationEnum.Sky,
+                    Gender = GenderRelationEnum.Female,
+                    WaveNumber = WaveNumberEnum.Third,
+                    Health = 23716.0f,
+                    IsSpecial = false,
+                    Traits = new List<string>()
+                };
+
+                EnemyMob doorChampion6 = new EnemyMob
+                {
+                    Id = 8,
+                    Name = "Door of the Champion",
+                    ClassName = ClassRelationEnum.Rider,
+                    AttributeName = AttributeRelationEnum.Sky,
+                    Gender = GenderRelationEnum.Female,
+                    WaveNumber = WaveNumberEnum.Third,
+                    Health = 23716.0f,
+                    IsSpecial = false,
+                    Traits = new List<string>()
+                };
+                #endregion
+
+                List<EnemyMob> enemyMobs = new List<EnemyMob>
+                {
+                    doorSaint1, doorChampion1, doorSaint2,       // wave 1
+                    doorSaint3, doorChampion2, doorChampion3,    // wave 2
+                    doorChampion4, doorChampion5, doorChampion6  // wave 3
+                };
+
+                /* Simulate node combat */
+                // Fight 1/3
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partySpartacus);
+                await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First, 3);
+
+                // Fight 2/3
+                resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyAstolfo, 3, party, 1, enemyMobs, 1); // Astolfo charge & crit stars & crit damage
+
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyAstolfo);
+                await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, 3);
+
+                // Fight 3/3
+                resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyWaver, 1, party, 2, enemyMobs, 3); // Waver crit damage on Astolfo with 30% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyWaver, 2, party, 2, enemyMobs, 3); // Waver defense up to party with 10% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyWaver, 3, party, 2, enemyMobs, 3); // Waver attack up to party with 10% charge
+
+                _output.WriteLine("--- Before party swap ---");
+                foreach (PartyMember partyMember in party)
+                {
+                    _output.WriteLine(partyMember.Servant.ServantInfo.Name);
+                }
+
+                resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 3, party, 3, enemyMobs, 3, 4); // Swap spartacus with Waver
+
+                _output.WriteLine("\n--- After party swap ---");
+                foreach (PartyMember partyMember in party)
+                {
+                    _output.WriteLine(partyMember.Servant.ServantInfo.Name);
+                }
+
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, 2, enemyMobs, 3); // Waver crit damage on Astolfo with 30% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 2, party, 2, enemyMobs, 3); // Waver defense up to party with 10% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 3, party, 2, enemyMobs, 3); // Waver attack up to party with 10% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 2, party, 2, enemyMobs, 3); // Stun 3rd enemy on the field with plugsuit
+
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyAstolfo);
+                await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third, 3);
+
+                using (new AssertionScope())
+                {
+                    enemyMobs.Count.Should().Be(0);
+                    party.IndexOf(partyMemberSupportCaster).Should().Be(2);
+                    party.IndexOf(partySpartacus).Should().Be(3);
+                }
+            }
+        }
+
         #region Private Methods
+        /// <summary>
+        /// Add all the WireMock stubs
+        /// </summary>
+        private void AddStubs()
+        {
+            AddExportStubs();
+            AddServantStubs();
+            AddCraftEssenceStubs();
+            AddMysticCodeStubs();
+        }
+
         /// <summary>
         /// Create constant game data endpoints as WireMock stubs
         /// </summary>
@@ -636,6 +854,78 @@ namespace FateGrandOrderPOC.Test
 
             AttributeRelationNiceJson mockAttributeRelationResponse = LoadTestData.DeserializeExportJson<AttributeRelationNiceJson>(REGION, ATTRIBUTE_RELATION_JSON);
             LoadTestData.CreateExportWireMockStub(_wiremockFixture, REGION, ATTRIBUTE_RELATION_JSON, mockAttributeRelationResponse);
+        }
+
+        /// <summary>
+        /// Create servant game data endpoints as WireMock stubs
+        /// </summary>
+        private void AddServantStubs()
+        {
+            // build mock servant responses
+            ServantNiceJson mockResponse = LoadTestData.DeserializeServantJson(REGION, "Avenger", $"{DANTES_AVENGER}-EdmondDantesAvenger.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", DANTES_AVENGER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Caster", $"{SKADI_CASTER}-ScathachSkadiCaster.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", SKADI_CASTER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Berserker", $"{LANCELOT_BERSERKER}-LancelotBerserker.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", LANCELOT_BERSERKER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Caster", $"{WAVER_CASTER}-ZhugeLiangCaster.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", WAVER_CASTER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Berserker", $"{SPARTACUS_BERSERKER}-SpartacusBerserker.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", SPARTACUS_BERSERKER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Archer", $"{GILGAMESH_ARCHER}-GilgameshArcher.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", GILGAMESH_ARCHER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Archer", $"{ARASH_ARCHER}-ArashArcher.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", ARASH_ARCHER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Berserker", $"{RAIKOU_BERSERKER}-RaikouBerserker.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", RAIKOU_BERSERKER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Rider", $"{ASTOLFO_RIDER}-AstolfoRider.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", ASTOLFO_RIDER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Assassin", $"{JACK_ASSASSIN}-JackAssassin.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "servant", JACK_ASSASSIN, mockResponse);
+        }
+
+        /// <summary>
+        /// Create craft essence game data endpoints as WireMock stubs
+        /// </summary>
+        private void AddCraftEssenceStubs()
+        {
+            // build mock craft essence response
+            EquipNiceJson mockResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{KSCOPE_CE}-Kaleidoscope.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", KSCOPE_CE, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{IMAGINARY_ELEMENT_CE}-ImaginaryElement.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", IMAGINARY_ELEMENT_CE, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{AERIAL_DRIVE_CE}-AerialDrive.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", AERIAL_DRIVE_CE, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{HOLY_NIGHT_SUPPER_CE}-HolyNightSupper.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "equip", HOLY_NIGHT_SUPPER_CE, mockResponse);
+        }
+
+        /// <summary>
+        /// Create mystic code game data endpoints as WireMock stubs
+        /// </summary>
+        private void AddMysticCodeStubs()
+        {
+            // build mock mystic code response
+            MysticCodeNiceJson mockResponse = LoadTestData.DeserializeMysticCodeJson(REGION, $"{ARTIC_ID}-Artic.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", ARTIC_ID, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeMysticCodeJson(REGION, $"{PLUGSUIT_ID}-CombatUniform.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", PLUGSUIT_ID, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeMysticCodeJson(REGION, $"{FRAGMENT_2004_ID}-Fragment2004.json");
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "MC", FRAGMENT_2004_ID, mockResponse);
         }
         #endregion
     }

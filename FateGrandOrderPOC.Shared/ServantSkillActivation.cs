@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using FateGrandOrderPOC.Shared.ApplyStatuses;
@@ -22,11 +21,10 @@ namespace FateGrandOrderPOC.Shared
         public void SkillActivation(PartyMember partyMemberActor, int actorSkillPositionNumber, List<PartyMember> party, int partyMemberPosition, 
             List<EnemyMob> enemies, int enemyPosition)
         {
-            if (partyMemberActor.SkillCooldowns.Exists(s => s.SkillId == actorSkillPositionNumber))
+            if (partyMemberActor.SkillCooldowns.Exists(s => s.SkillId == actorSkillPositionNumber) 
+                || party.IndexOf(partyMemberActor) > 2 
+                || party.IndexOf(partyMemberActor) == -1)
             {
-#if DEBUG
-                Console.WriteLine($"WARNING: Cannot buff using {partyMemberActor.Servant.ServantInfo.Name}'s #{actorSkillPositionNumber} skill because of cooldown!");
-#endif
                 return; // don't activate again
             }
 
@@ -80,14 +78,12 @@ namespace FateGrandOrderPOC.Shared
         /// <param name="partyMemberPosition">The position the selected party member is currently sitting (1-6)</param>
         /// <param name="enemies">The targeted enemies that are receiving the status effect</param>
         /// <param name="enemyPosition">The position the selected enemy is currently sitting (1-3)</param>
+        /// <param name="reservePartyMemberIndex">The position of the reserved (4-6) party member when selection the party roster</param>
         public void SkillActivation(MysticCode mysticCode, int mysticCodeSkillPositionNumber, List<PartyMember> party, int partyMemberPosition,
-            List<EnemyMob> enemies, int enemyPosition)
+            List<EnemyMob> enemies, int enemyPosition, int reservePartyMemberIndex = -1)
         {
             if (mysticCode.SkillCooldowns.Exists(s => s.SkillId == mysticCodeSkillPositionNumber))
             {
-#if DEBUG
-                Console.WriteLine($"WARNING: Cannot buff using {mysticCode.MysticCodeInfo.Name}'s #{mysticCodeSkillPositionNumber} skill because of cooldown!");
-#endif
                 return; // don't activate again
             }
 
@@ -98,7 +94,7 @@ namespace FateGrandOrderPOC.Shared
             {
                 foreach (Function mysticCodeFunction in mysticCodePartyBuffFunctions)
                 {
-                    ApplyServantStatus.ApplyFuncTargetType(partyMemberPosition, mysticCode, mysticCodeFunction, party);
+                    ApplyServantStatus.ApplyFuncTargetType(partyMemberPosition, mysticCode, mysticCodeFunction, party, reservePartyMemberIndex);
                 }
             }
 
@@ -165,20 +161,31 @@ namespace FateGrandOrderPOC.Shared
             }
         }
 
+        /// <summary>
+        /// Grab skill functions targeted towards the party
+        /// </summary>
+        /// <param name="skill"></param>
+        /// <returns></returns>
         private List<Function> GetPartyBuffServantFunctions(Skill skill)
         {
             return (from f in skill.Functions
                     where (f.FuncTargetType == "self"
-                        || f.FuncTargetType == "ptOne"         // party member
-                        || f.FuncTargetType == "ptAll"         // party
-                        || f.FuncTargetType == "ptFull"        // party (including reserve)
-                        || f.FuncTargetType == "ptOther"       // party except self
-                        || f.FuncTargetType == "ptOtherFull"   // party except self (including reserve)
-                        || f.FuncTargetType == "ptselectSub")  // reserve party member
+                        || f.FuncTargetType == "ptOne"            // party member
+                        || f.FuncTargetType == "ptAll"            // party
+                        || f.FuncTargetType == "ptFull"           // party (including reserve)
+                        || f.FuncTargetType == "ptOther"          // party except self
+                        || f.FuncTargetType == "ptOtherFull"      // party except self (including reserve)
+                        || f.FuncTargetType == "ptselectSub"      // reserve party member
+                        || f.FuncTargetType == "ptselectOneSub")  // one reserve party member
                         && f.FuncTargetTeam != "enemy"
                     select f).ToList();
         }
 
+        /// <summary>
+        /// Grab skill functions targeted towards the enemy team
+        /// </summary>
+        /// <param name="skill"></param>
+        /// <returns></returns>
         private List<Function> GetEnemyServantFunctions(Skill skill)
         {
             return (from f in skill.Functions
