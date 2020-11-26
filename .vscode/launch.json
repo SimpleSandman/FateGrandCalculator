@@ -1,7 +1,4 @@
 {
-   // Use IntelliSense to find out which attributes exist for C# debugging
-   // Use hover for the description of the existing attributes
-   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
    "version": "0.2.0",
    "configurations": [
         {
@@ -10,18 +7,10 @@
             "request": "launch",
             "preLaunchTask": "build",
             "justMyCode": false,
-            // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/FateGrandOrderPOC/bin/Debug/netcoreapp3.1/FateGrandOrderPOC.dll",
+            "program": "${workspaceFolder}/FateGrandCalculator/bin/Debug/netcoreapp3.1/FateGrandCalculator.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/FateGrandOrderPOC",
-            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "cwd": "${workspaceFolder}/FateGrandCalculator",
             "console": "internalConsole",
-            //"pipeTransport": {
-            //    "pipeCwd": "${workspaceFolder}",
-            //    "pipeProgram": "/usr/bin/bash",
-            //    "pipeArgs": ["-c"],
-            //    "debuggerPath": "/usr/bin/netcoredbg"
-            //},
             "stopAtEntry": false,
             "logging": {
                 "moduleLoad": false

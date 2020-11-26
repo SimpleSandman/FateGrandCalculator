@@ -8,4 +8,4 @@ build:
   verbosity: quiet
 test_script:
   - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
-  - codecov -f "FateGrandOrderPOC.Test/coverage.cobertura.xml"
+  - codecov -f "FateGrandCalculator.Test/coverage.cobertura.xml"
