@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using Autofac;
 
-using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
+using FateGrandOrderPOC.AtlasAcademy.Json;
 using FateGrandOrderPOC.Test.Fixture;
 using FateGrandOrderPOC.Test.Utility;
 

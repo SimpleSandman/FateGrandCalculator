@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FateGrandOrderPOC.Shared\FateGrandOrderPOC.Shared.csproj" />
+    <ProjectReference Include="..\FateGrandOrderPOC\FateGrandOrderPOC.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 using Autofac;
 
-using FateGrandOrderPOC.Shared.Enums;
-using FateGrandOrderPOC.Shared.Models;
+using FateGrandOrderPOC.Enums;
+using FateGrandOrderPOC.Models;
 using FateGrandOrderPOC.Test.Fixture;
 using FateGrandOrderPOC.Test.Utility;
 

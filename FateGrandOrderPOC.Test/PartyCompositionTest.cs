@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 using Autofac;
 
-using FateGrandOrderPOC.Shared.AtlasAcademy;
-using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
-using FateGrandOrderPOC.Shared.Models;
+using FateGrandOrderPOC.AtlasAcademy;
+using FateGrandOrderPOC.AtlasAcademy.Json;
+using FateGrandOrderPOC.Models;
 using FateGrandOrderPOC.Test.Fixture;
 using FateGrandOrderPOC.Test.Utility;
 

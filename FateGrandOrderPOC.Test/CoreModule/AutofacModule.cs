@@ -1,7 +1,7 @@
 ﻿using Autofac;
 
-using FateGrandOrderPOC.Shared;
-using FateGrandOrderPOC.Shared.AtlasAcademy;
+using FateGrandOrderPOC;
+using FateGrandOrderPOC.AtlasAcademy;
 
 namespace FateGrandOrderPOC.Test.CoreModule
 {

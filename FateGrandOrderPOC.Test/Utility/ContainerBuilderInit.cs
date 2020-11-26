@@ -1,6 +1,6 @@
 ﻿using Autofac;
 
-using FateGrandOrderPOC.Shared.AtlasAcademy;
+using FateGrandOrderPOC.AtlasAcademy;
 using FateGrandOrderPOC.Test.CoreModule;
 using FateGrandOrderPOC.Test.Fixture;
 

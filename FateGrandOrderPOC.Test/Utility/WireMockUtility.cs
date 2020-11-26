@@ -1,4 +1,4 @@
-﻿using FateGrandOrderPOC.Shared.AtlasAcademy.Json;
+﻿using FateGrandOrderPOC.AtlasAcademy.Json;
 using FateGrandOrderPOC.Test.Fixture;
 
 namespace FateGrandOrderPOC.Test.Utility

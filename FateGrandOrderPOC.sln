@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FateGrandOrderPOC.Shared", "FateGrandOrderPOC.Shared\FateGrandOrderPOC.Shared.csproj", "{C4792564-EABD-4E8F-AC32-7192D1C64AC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FateGrandOrderPOC", "FateGrandOrderPOC\FateGrandOrderPOC.csproj", "{C4792564-EABD-4E8F-AC32-7192D1C64AC4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FateGrandOrderPOC.Test", "FateGrandOrderPOC.Test\FateGrandOrderPOC.Test.csproj", "{AF334469-78A6-428C-915F-5BD1E86E43D5}"
 EndProject
