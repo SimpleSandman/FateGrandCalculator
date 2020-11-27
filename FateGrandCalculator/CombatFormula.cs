@@ -44,6 +44,7 @@ namespace FateGrandCalculator
                 .ToList();
 
             enemyPosition--; // set to zero-based
+            int npChainPosition = 0; // used to calculate overcharge
 
             // Go through each party member's NP attack in the order of the NP chain provided
             foreach (PartyMember partyMember in npChainList)
@@ -53,8 +54,6 @@ namespace FateGrandCalculator
                 {
                     return;
                 }
-
-                int npChainPosition = 0; // used to calculate overcharge
 
                 // Determine active party member buffs
                 float totalNpRefund = 0.0f, cardNpTypeUp = 0.0f, attackUp = 0.0f, powerModifier = 0.0f, npGainUp = 0.0f;
@@ -80,7 +79,7 @@ namespace FateGrandCalculator
                                 : enemyTargets.Last();
 
                             totalNpRefund += await DamagePhase(partyMember, enemyTarget, powerModifier, npChainPosition, 
-                                attackUp, cardNpTypeUp, npGainUp, partyMemberFunction);
+                                attackUp, cardNpTypeUp, npGainUp, partyMemberFunction).ConfigureAwait(false);
                         }
                         else
                         {
@@ -88,7 +87,7 @@ namespace FateGrandCalculator
                             for (int i = 0; i < enemyTargets.Count; i++)
                             {
                                 totalNpRefund += await DamagePhase(partyMember, enemyTargets[i], powerModifier, npChainPosition, 
-                                    attackUp, cardNpTypeUp, npGainUp, partyMemberFunction);
+                                    attackUp, cardNpTypeUp, npGainUp, partyMemberFunction).ConfigureAwait(false);
                             }
                         }
                     }
@@ -140,8 +139,6 @@ namespace FateGrandCalculator
                 }
                 party.Remove(scapegoat);
             }
-
-            return;
         }
 
         /// <summary>
@@ -479,8 +476,6 @@ namespace FateGrandCalculator
                     }
                 }
             }
-
-            return;
         }
 
         /// <summary>
