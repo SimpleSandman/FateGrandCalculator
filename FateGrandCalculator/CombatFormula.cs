@@ -546,7 +546,7 @@ namespace FateGrandCalculator
 
             float baseNpDamage = await BaseNpDamage(partyMember, enemyMob, svalNp).ConfigureAwait(false);
 
-            if (baseNpDamage == 0.0f)
+            if (baseNpDamage.NearlyEqual(0.0f))
             {
                 return 0.0f; // skip unnecessary calculations
             }
