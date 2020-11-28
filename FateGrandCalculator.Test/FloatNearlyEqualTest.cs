@@ -7,11 +7,11 @@ using Xunit;
 
 namespace FateGrandCalculator.Test
 {
+    // Reference: https://floating-point-gui.de/errors/NearlyEqualsTest.java
+    // Note: Tests were tweaked because Java and C# handle certain comparisons differently.
+    //       The prime example would be "NaN"s when using ".Equals()" versus "=="
     public class FloatNearlyEqualTest
     {
-        // Reference: https://floating-point-gui.de/errors/NearlyEqualsTest.java
-        public FloatNearlyEqualTest() { }
-
         /** Regular large numbers - generally not problematic */
         [Fact]
         public void Big()
@@ -36,7 +36,6 @@ namespace FateGrandCalculator.Test
                 FloatExtensions.NearlyEqual(-10000f, -10001f).Should().BeFalse();
                 FloatExtensions.NearlyEqual(-10001f, -10000f).Should().BeFalse();
             }
-            
         }
 
         /** Numbers around 1 */
@@ -50,7 +49,6 @@ namespace FateGrandCalculator.Test
                 FloatExtensions.NearlyEqual(1.0002f, 1.0001f).Should().BeFalse();
                 FloatExtensions.NearlyEqual(1.0001f, 1.0002f).Should().BeFalse();
             }
-            
         }
 
         /** Numbers around -1 */
@@ -64,7 +62,6 @@ namespace FateGrandCalculator.Test
                 FloatExtensions.NearlyEqual(-1.0001f, -1.0002f).Should().BeFalse();
                 FloatExtensions.NearlyEqual(-1.0002f, -1.0001f).Should().BeFalse();
             }
-            
         }
 
         /** Numbers between 1 and 0 */
@@ -128,7 +125,6 @@ namespace FateGrandCalculator.Test
                 FloatExtensions.NearlyEqual(-1e-40f, 0.0f, 0.00000001f).Should().BeFalse();
                 FloatExtensions.NearlyEqual(0.0f, -1e-40f, 0.00000001f).Should().BeFalse();
             }
-            
         }
 
         /**
