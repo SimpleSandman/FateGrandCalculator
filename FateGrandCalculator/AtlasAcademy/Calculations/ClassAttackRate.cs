@@ -8,7 +8,6 @@ namespace FateGrandCalculator.AtlasAcademy.Calculations
     public class ClassAttackRate : IBaseRelation
     {
         private const float CLASS_ATTACK_RATE_DENOMINATOR = 1000.0f;
-
         private readonly IAtlasAcademyClient _aaClient;
 
         public ClassAttackRate(IAtlasAcademyClient client)

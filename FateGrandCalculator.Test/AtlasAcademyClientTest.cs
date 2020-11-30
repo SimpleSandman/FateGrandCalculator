@@ -196,5 +196,57 @@ namespace FateGrandCalculator.Test
                 traitName.Should().Be("genderMale");
             }
         }
+
+        [Fact]
+        public async Task GetAttributeRelationInfo()
+        {
+            _wiremockFixture.CheckIfMockServerInUse();
+
+            AttributeRelationNiceJson mockResponse = new AttributeRelationNiceJson
+            {
+                Human = new Human
+                {
+                    HumanMultiplier = 1000
+                }
+            };
+
+            _wiremockFixture.MockServer
+                .Given(Request.Create().WithPath($"/export/{REGION}/NiceAttributeRelation.json").UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                AttributeRelationNiceJson response = await resolvedClasses.AtlasAcademyClient.GetAttributeRelationInfo();
+
+                response.Human.HumanMultiplier.Should().Be(1000);
+            }
+        }
+
+        [Fact]
+        public async Task GetClassRelationInfo()
+        {
+            _wiremockFixture.CheckIfMockServerInUse();
+
+            ClassRelationNiceJson mockResponse = new ClassRelationNiceJson
+            {
+                Saber = new Saber
+                {
+                    SaberMultiplier = 1000
+                }
+            };
+
+            _wiremockFixture.MockServer
+                .Given(Request.Create().WithPath($"/export/{REGION}/NiceClassRelation.json").UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ClassRelationNiceJson response = await resolvedClasses.AtlasAcademyClient.GetClassRelationInfo();
+
+                response.Saber.SaberMultiplier.Should().Be(1000);
+            }
+        }
     }
 }

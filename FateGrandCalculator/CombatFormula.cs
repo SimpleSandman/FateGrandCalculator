@@ -17,8 +17,8 @@ namespace FateGrandCalculator
     public class CombatFormula : ICombatFormula
     {
         private readonly IAtlasAcademyClient _aaClient;
-        private readonly AttributeRelation _attributeRelation = new AttributeRelation();
-        private readonly ClassRelation _classRelation = new ClassRelation();
+        private readonly AttributeRelation _attributeRelation;
+        private readonly ClassRelation _classRelation;
         private readonly ClassAttackRate _classAttackRate;
         private readonly ConstantRate _constantRate;
 
@@ -27,6 +27,8 @@ namespace FateGrandCalculator
             _aaClient = client;
             _constantRate = new ConstantRate(client);
             _classAttackRate = new ClassAttackRate(client);
+            _attributeRelation = new AttributeRelation(client);
+            _classRelation = new ClassRelation(client);
         }
 
         /// <summary>

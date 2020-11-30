@@ -9,6 +9,12 @@ namespace FateGrandCalculator.AtlasAcademy.Calculations
     public class AttributeRelation : IBaseRelation
     {
         private const float ATTRIBUTE_DENOMINATOR = 1000.0f;
+        private readonly IAtlasAcademyClient _aaClient;
+
+        public AttributeRelation(IAtlasAcademyClient client)
+        {
+            _aaClient = client;
+        }
 
         public async Task<float> GetAttackMultiplier(string attack)
         {
@@ -17,10 +23,9 @@ namespace FateGrandCalculator.AtlasAcademy.Calculations
 
         public async Task<float> GetAttackMultiplier(string atkAttribute, string defAttribute)
         {
-            // TODO: Put this in AtlasAcademyClient.cs
-            AttributeRelationNiceJson attributeRelations = await ApiRequest.GetDeserializeObjectAsync<AttributeRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceAttributeRelation.json");
+            AttributeRelationNiceJson attributeRelations = await _aaClient.GetAttributeRelationInfo();
 
-             // Reference: https://fategrandorder.fandom.com/wiki/Attributes
+            // Reference: https://fategrandorder.fandom.com/wiki/Attributes
             float[,] damageMultiplier =
             {
                 { attributeRelations.Human.HumanMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Human.SkyMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Human.EarthMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Human.StarMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Human.BeastMultiplier / ATTRIBUTE_DENOMINATOR },

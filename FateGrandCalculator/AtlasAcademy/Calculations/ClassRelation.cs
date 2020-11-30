@@ -9,6 +9,12 @@ namespace FateGrandCalculator.AtlasAcademy.Calculations
     public class ClassRelation : IBaseRelation
     {
         private const float CLASS_DENOMINATOR = 1000.0f;
+        private readonly IAtlasAcademyClient _aaClient;
+
+        public ClassRelation(IAtlasAcademyClient client)
+        {
+            _aaClient = client;
+        }
 
         public async Task<float> GetAttackMultiplier(string attack)
         {
@@ -36,8 +42,7 @@ namespace FateGrandCalculator.AtlasAcademy.Calculations
         /// <returns></returns>
         private async Task<float[,]> GetListDamageMultiplier()
         {
-            // TODO: Put this in AtlasAcademyClient.cs
-            ClassRelationNiceJson classRelations = await ApiRequest.GetDeserializeObjectAsync<ClassRelationNiceJson>("https://api.atlasacademy.io/export/NA/NiceClassRelation.json");
+            ClassRelationNiceJson classRelations = await _aaClient.GetClassRelationInfo();
 
             return new float[,]
             {

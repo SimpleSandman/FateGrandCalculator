@@ -16,5 +16,7 @@ namespace FateGrandCalculator.AtlasAcademy
         Task<List<ServantBasicJson>> GetListBasicServantInfo();
         Task<MysticCodeNiceJson> GetMysticCodeInfo(string mcId);
         Task<JObject> GetTraitEnumInfo();
+        Task<AttributeRelationNiceJson> GetAttributeRelationInfo();
+        Task<ClassRelationNiceJson> GetClassRelationInfo();
     }
 }

@@ -52,5 +52,15 @@ namespace FateGrandCalculator.AtlasAcademy
         {
             return await ApiRequest.GetDeserializeObjectAsync<JObject>($"{_baseApiUrl}/export/JP/nice_trait.json"); // same for both NA and JP
         }
+
+        public async Task<AttributeRelationNiceJson> GetAttributeRelationInfo()
+        {
+            return await ApiRequest.GetDeserializeObjectAsync<AttributeRelationNiceJson>($"{_baseApiUrl}/export/{_region}/NiceAttributeRelation.json");
+        }
+
+        public async Task<ClassRelationNiceJson> GetClassRelationInfo()
+        {
+            return await ApiRequest.GetDeserializeObjectAsync<ClassRelationNiceJson>($"{_baseApiUrl}/export/{_region}/NiceClassRelation.json");
+        }
     }
 }
