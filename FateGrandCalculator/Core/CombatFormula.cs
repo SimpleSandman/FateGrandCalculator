@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using FateGrandCalculator.AtlasAcademy;
 using FateGrandCalculator.AtlasAcademy.Calculations;
 using FateGrandCalculator.AtlasAcademy.Json;
+using FateGrandCalculator.Core.Interfaces;
 using FateGrandCalculator.Enums;
 using FateGrandCalculator.Extensions;
 using FateGrandCalculator.Models;
 
 using Newtonsoft.Json.Linq;
 
-namespace FateGrandCalculator
+namespace FateGrandCalculator.Core
 {
     public class CombatFormula : ICombatFormula
     {

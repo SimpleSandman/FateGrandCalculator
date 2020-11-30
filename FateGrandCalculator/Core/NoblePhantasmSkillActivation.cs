@@ -4,7 +4,7 @@ using FateGrandCalculator.ApplyStatuses;
 using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Models;
 
-namespace FateGrandCalculator
+namespace FateGrandCalculator.Core
 {
     public static class NoblePhantasmSkillActivation
     {

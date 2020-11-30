@@ -1,5 +1,5 @@
-﻿using FateGrandCalculator;
-using FateGrandCalculator.AtlasAcademy;
+﻿using FateGrandCalculator.AtlasAcademy;
+using FateGrandCalculator.Core;
 
 namespace FateGrandCalculator.Test.Utility
 {

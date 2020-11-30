@@ -6,7 +6,7 @@ using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Enums;
 using FateGrandCalculator.Models;
 
-namespace FateGrandCalculator
+namespace FateGrandCalculator.Core.Interfaces
 {
     public interface ICombatFormula
     {
