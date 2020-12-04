@@ -21,9 +21,5 @@ namespace FateGrandCalculator.Models
         /// The wave number an enemy is assigned to
         /// </summary>
         public WaveNumberEnum WaveNumber { get; set; }
-        /// <summary>
-        /// The placement where the enemy spawns on the field (0 = left, 1 = middle, 2 = right)
-        /// </summary>
-        public WavePlacementEnum WavePlacement { get; set; }
     }
 }
