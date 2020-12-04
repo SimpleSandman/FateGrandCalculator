@@ -161,45 +161,6 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         public string Name { get; set; }
     }
 
-    public partial class Buff
-    {
-        [JsonProperty("script")]
-        public Script Script { get; set; }
-    }
-
-    public partial class Sval
-    {
-        [JsonProperty("OnField")]
-        public int OnField { get; set; }
-
-        [JsonProperty("Value2")]
-        public int? Value2 { get; set; }
-
-        [JsonProperty("UseRate")]
-        public int? UseRate { get; set; }
-
-        [JsonProperty("AddCount")]
-        public int? AddCount { get; set; }
-
-        [JsonProperty("ShowState")]
-        public int? ShowState { get; set; }
-
-        [JsonProperty("Individuality")]
-        public int? Individuality { get; set; }
-
-        [JsonProperty("EventId")]
-        public int? EventId { get; set; }
-
-        [JsonProperty("RateCount")]
-        public int? RateCount { get; set; }
-
-        [JsonProperty("ParamAdd")]
-        public int? ParamAdd { get; set; }
-
-        [JsonProperty("ParamMax")]
-        public int? ParamMax { get; set; }
-    }
-
     public class TraitVal
     {
         [JsonProperty("id")]
@@ -213,15 +174,6 @@ namespace FateGrandCalculator.AtlasAcademy.Json
     {
         [JsonProperty("RateCount")]
         public int RateCount { get; set; }
-    }
-
-    public partial class Function
-    {
-        [JsonProperty("traitVals")]
-        public List<TraitVal> TraitVals { get; set; }
-
-        [JsonProperty("followerVals")]
-        public List<FollowerVal> FollowerVals { get; set; }
     }
 
     public class Costume { }

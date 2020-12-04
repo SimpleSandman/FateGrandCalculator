@@ -15,7 +15,6 @@ namespace FateGrandCalculator.Models
         public bool IsSpecial { get; set; }
         public List<string> Traits { get; set; }
         public List<ActiveStatus> ActiveStatuses { get; set; } = new List<ActiveStatus>();
-        public GenderRelationEnum Gender { get; set; }
         public AttributeRelationEnum AttributeName { get; set; }
         public ClassRelationEnum ClassName { get; set; }
         /// <summary>

@@ -2,6 +2,7 @@
 
 using System.Threading.Tasks;
 
+using FateGrandCalculator.AtlasAcademy.Interfaces;
 using FateGrandCalculator.AtlasAcademy.Json;
 
 namespace FateGrandCalculator.AtlasAcademy.Calculations

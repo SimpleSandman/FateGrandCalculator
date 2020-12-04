@@ -8,7 +8,7 @@ namespace FateGrandCalculator.Models
     public class PartyMember
     {
         public int Id { get; set; }
-        public Servant Servant { get; set; }
+        public ChaldeaServant Servant { get; set; }
         public CraftEssence EquippedCraftEssence { get; set; }
         public int TotalAttack { get; set; }
         public int TotalHealth { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace FateGrandCalculator.AtlasAcademy
+namespace FateGrandCalculator.AtlasAcademy.Interfaces
 {
     public interface IBaseRelation
     {

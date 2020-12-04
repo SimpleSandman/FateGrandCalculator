@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using FateGrandCalculator.AtlasAcademy.Interfaces;
 using FateGrandCalculator.AtlasAcademy.Json;
 
 using Newtonsoft.Json.Linq;
@@ -61,6 +62,11 @@ namespace FateGrandCalculator.AtlasAcademy
         public async Task<ClassRelationNiceJson> GetClassRelationInfo()
         {
             return await ApiRequest.GetDeserializeObjectAsync<ClassRelationNiceJson>($"{_baseApiUrl}/export/{_region}/NiceClassRelation.json");
+        }
+
+        public async Task<ServantNiceJson> GetEnemyCollectionServantInfo(string servantId)
+        {
+            return await ApiRequest.GetDeserializeObjectAsync<ServantNiceJson>($"{_baseApiUrl}/nice/{_region}/svt/{servantId}");
         }
     }
 }

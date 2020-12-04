@@ -248,5 +248,28 @@ namespace FateGrandCalculator.Test
                 response.Saber.SaberMultiplier.Should().Be(1000);
             }
         }
+
+        [Fact]
+        public async Task GetEnemyCollectionServantInfo()
+        {
+            _wiremockFixture.CheckIfMockServerInUse();
+
+            // build mock response
+            ServantNiceJson mockResponse = new ServantNiceJson
+            {
+                Id = 1,
+                AtkBase = 1000
+            };
+
+            LoadTestData.CreateNiceWireMockStub(_wiremockFixture, REGION, "svt", "1", mockResponse);
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ServantNiceJson response = await resolvedClasses.AtlasAcademyClient.GetEnemyCollectionServantInfo("1");
+
+                response.AtkBase.Should().Be(1000);
+            }
+        }
     }
 }

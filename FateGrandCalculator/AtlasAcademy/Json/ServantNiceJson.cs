@@ -353,7 +353,7 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         public string Name { get; set; }
     }
 
-    public partial class Buff
+    public class Buff
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -387,6 +387,9 @@ namespace FateGrandCalculator.AtlasAcademy.Json
 
         [JsonProperty("maxRate")]
         public int MaxRate { get; set; }
+
+        [JsonProperty("script")]
+        public Script Script { get; set; }
     }    
 
     public partial class Function
@@ -440,6 +443,12 @@ namespace FateGrandCalculator.AtlasAcademy.Json
 
         [JsonProperty("svals5")]
         public List<Sval> Svals5 { get; set; }
+
+        [JsonProperty("traitVals")]
+        public List<TraitVal> TraitVals { get; set; }
+
+        [JsonProperty("followerVals")]
+        public List<FollowerVal> FollowerVals { get; set; }
     }
 
     public class Skill
@@ -610,7 +619,7 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         public string Name { get; set; }
     }
 
-    public partial class Sval
+    public class Sval
     {
         [JsonProperty("Rate")]
         public int Rate { get; set; }
@@ -632,5 +641,35 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         /// </summary>
         [JsonProperty("Target")]
         public int Target { get; set; }
+
+        [JsonProperty("OnField")]
+        public int OnField { get; set; }
+
+        [JsonProperty("Value2")]
+        public int? Value2 { get; set; }
+
+        [JsonProperty("UseRate")]
+        public int? UseRate { get; set; }
+
+        [JsonProperty("AddCount")]
+        public int? AddCount { get; set; }
+
+        [JsonProperty("ShowState")]
+        public int? ShowState { get; set; }
+
+        [JsonProperty("Individuality")]
+        public int? Individuality { get; set; }
+
+        [JsonProperty("EventId")]
+        public int? EventId { get; set; }
+
+        [JsonProperty("RateCount")]
+        public int? RateCount { get; set; }
+
+        [JsonProperty("ParamAdd")]
+        public int? ParamAdd { get; set; }
+
+        [JsonProperty("ParamMax")]
+        public int? ParamMax { get; set; }
     }
 }

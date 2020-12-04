@@ -2,7 +2,7 @@
 
 namespace FateGrandCalculator.Models
 {
-    public class Servant
+    public class ChaldeaServant
     {
         public int ServantLevel { get; set; }
         /// <summary>

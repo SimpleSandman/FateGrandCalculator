@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using FateGrandCalculator.AtlasAcademy;
 using FateGrandCalculator.AtlasAcademy.Calculations;
+using FateGrandCalculator.AtlasAcademy.Interfaces;
 using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Core.Interfaces;
 using FateGrandCalculator.Enums;
@@ -419,7 +419,7 @@ namespace FateGrandCalculator.Core
         /// <param name="chaldeaServant"></param>
         /// <param name="chaldeaCraftEssence"></param>
         /// <returns></returns>
-        public PartyMember AddPartyMember(List<PartyMember> party, Servant chaldeaServant, CraftEssence chaldeaCraftEssence = null)
+        public PartyMember AddPartyMember(List<PartyMember> party, ChaldeaServant chaldeaServant, CraftEssence chaldeaCraftEssence = null)
         {
             int servantTotalAtk = chaldeaServant.ServantInfo.AtkGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouAttack;
             int servantTotalHp = chaldeaServant.ServantInfo.HpGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouHealth;

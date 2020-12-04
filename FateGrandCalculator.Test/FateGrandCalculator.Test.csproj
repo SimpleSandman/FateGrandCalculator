@@ -226,18 +226,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Json\JP\EnemyServantData\" />
+    <Folder Include="Json\JP\Event\" />
     <Folder Include="Json\JP\ServantData\Lancer\" />
     <Folder Include="Json\JP\ServantData\AlterEgo\" />
     <Folder Include="Json\JP\ServantData\MoonCancer\" />
     <Folder Include="Json\JP\ServantData\Foreigner\" />
     <Folder Include="Json\JP\ServantData\Ruler\" />
     <Folder Include="Json\JP\ServantData\Shielder\" />
+    <Folder Include="Json\JP\War\" />
+    <Folder Include="Json\NA\EnemyServantData\" />
+    <Folder Include="Json\NA\Event\" />
     <Folder Include="Json\NA\ServantData\AlterEgo\" />
     <Folder Include="Json\NA\ServantData\Foreigner\" />
     <Folder Include="Json\NA\ServantData\Lancer\" />
     <Folder Include="Json\NA\ServantData\MoonCancer\" />
     <Folder Include="Json\NA\ServantData\Ruler\" />
     <Folder Include="Json\NA\ServantData\Shielder\" />
+    <Folder Include="Json\NA\War\" />
   </ItemGroup>
 
 </Project>

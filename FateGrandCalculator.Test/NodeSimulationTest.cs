@@ -49,7 +49,7 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                Servant chaldeaAttackServant = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.DANTES_AVENGER, 1, false);
+                ChaldeaServant chaldeaAttackServant = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.DANTES_AVENGER, 1, false);
 
                 PartyMember partyMemberAttacker = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAttackServant, chaldeaKscope);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyMemberAttacker);
@@ -58,7 +58,7 @@ namespace FateGrandCalculator.Test
                 #endregion
 
                 #region Party Member 2
-                Servant chaldeaCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, false);
+                ChaldeaServant chaldeaCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, false);
 
                 PartyMember partyMemberCaster = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaCaster);
 
@@ -66,7 +66,7 @@ namespace FateGrandCalculator.Test
                 #endregion
 
                 #region Party Member Support
-                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
+                ChaldeaServant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
 
                 PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
 
@@ -87,7 +87,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 13933.0f,
                     IsSpecial = false,
@@ -103,7 +102,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 14786.0f,
                     IsSpecial = false,
@@ -119,7 +117,6 @@ namespace FateGrandCalculator.Test
                     Name = "Muspell",
                     ClassName = ClassRelationEnum.Berserker,
                     AttributeName = AttributeRelationEnum.Earth,
-                    Gender = GenderRelationEnum.Male,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 23456.0f,
                     IsSpecial = false,
@@ -137,7 +134,6 @@ namespace FateGrandCalculator.Test
                     Name = "Muspell",
                     ClassName = ClassRelationEnum.Berserker,
                     AttributeName = AttributeRelationEnum.Earth,
-                    Gender = GenderRelationEnum.Male,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 25554.0f,
                     IsSpecial = false,
@@ -153,7 +149,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 19047.0f,
                     IsSpecial = false,
@@ -169,7 +164,6 @@ namespace FateGrandCalculator.Test
                     Name = "Muspell",
                     ClassName = ClassRelationEnum.Berserker,
                     AttributeName = AttributeRelationEnum.Earth,
-                    Gender = GenderRelationEnum.Male,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 26204.0f,
                     IsSpecial = false,
@@ -187,7 +181,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 42926.0f,
                     IsSpecial = false,
@@ -203,7 +196,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 180753.0f,
                     IsSpecial = false,
@@ -219,7 +211,6 @@ namespace FateGrandCalculator.Test
                     Name = "Muspell",
                     ClassName = ClassRelationEnum.Berserker,
                     AttributeName = AttributeRelationEnum.Earth,
-                    Gender = GenderRelationEnum.Male,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 61289.0f,
                     IsSpecial = false,
@@ -304,7 +295,7 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                Servant chaldeaLancelot = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.LANCELOT_BERSERKER, 5, false);
+                ChaldeaServant chaldeaLancelot = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.LANCELOT_BERSERKER, 5, false);
 
                 PartyMember partyLancelot = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaLancelot, chaldeaSuperscope);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyLancelot);
@@ -320,7 +311,7 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.IMAGINARY_ELEMENT_CE)
                 };
 
-                Servant chaldeaArash = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.ARASH_ARCHER, 5, false);
+                ChaldeaServant chaldeaArash = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.ARASH_ARCHER, 5, false);
 
                 PartyMember partyArash = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaArash, chaldeaImaginaryElement);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyArash);
@@ -336,7 +327,7 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                Servant chaldeaJack = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.JACK_ASSASSIN, 1, false);
+                ChaldeaServant chaldeaJack = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.JACK_ASSASSIN, 1, false);
 
                 PartyMember partyJack = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaJack, chaldeaMlbKscope);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyJack);
@@ -345,7 +336,7 @@ namespace FateGrandCalculator.Test
                 #endregion
 
                 #region Skadi Support
-                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
+                ChaldeaServant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
 
                 PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
 
@@ -365,7 +356,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 9884.0f,
                     IsSpecial = false,
@@ -381,7 +371,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 10889.0f,
                     IsSpecial = false,
@@ -397,7 +386,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 10664.0f,
                     IsSpecial = false,
@@ -415,7 +403,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 30279.0f,
                     IsSpecial = false,
@@ -431,7 +418,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 24599.0f,
                     IsSpecial = false,
@@ -447,7 +433,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 33264.0f,
                     IsSpecial = false,
@@ -465,7 +450,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 41136.0f,
                     IsSpecial = false,
@@ -481,7 +465,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 49586.0f,
                     IsSpecial = false,
@@ -497,7 +480,6 @@ namespace FateGrandCalculator.Test
                     Name = "Walkure",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 180432.0f,
                     IsSpecial = false,
@@ -565,7 +547,7 @@ namespace FateGrandCalculator.Test
 
                 /* Party data */
                 #region Waver
-                Servant chaldeaWaver = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.WAVER_CASTER, 2, false);
+                ChaldeaServant chaldeaWaver = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.WAVER_CASTER, 2, false);
 
                 PartyMember partyWaver = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaWaver);
 
@@ -580,7 +562,7 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.HOLY_NIGHT_SUPPER_CE)
                 };
 
-                Servant chaldeaAstolfo = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.ASTOLFO_RIDER, 5, false, 100);
+                ChaldeaServant chaldeaAstolfo = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.ASTOLFO_RIDER, 5, false, 100);
 
                 PartyMember partyAstolfo = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAstolfo, chaldeaHolyNightSupper);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyAstolfo);
@@ -596,7 +578,7 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                Servant chaldeaSpartacus = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SPARTACUS_BERSERKER, 5, false);
+                ChaldeaServant chaldeaSpartacus = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SPARTACUS_BERSERKER, 5, false);
 
                 PartyMember partySpartacus = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaSpartacus, chaldeaSuperscope);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partySpartacus);
@@ -605,7 +587,7 @@ namespace FateGrandCalculator.Test
                 #endregion
 
                 #region Waver Support
-                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.WAVER_CASTER, 1, true);
+                ChaldeaServant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.WAVER_CASTER, 1, true);
 
                 PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
 
@@ -625,7 +607,6 @@ namespace FateGrandCalculator.Test
                     Name = "Door of the Saint",
                     ClassName = ClassRelationEnum.Caster,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Unknown,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 14464.0f,
                     IsSpecial = false,
@@ -638,7 +619,6 @@ namespace FateGrandCalculator.Test
                     Name = "Door of the Champion",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 23716.0f,
                     IsSpecial = false,
@@ -651,7 +631,6 @@ namespace FateGrandCalculator.Test
                     Name = "Door of the Saint",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 14464.0f,
                     IsSpecial = false,
@@ -666,7 +645,6 @@ namespace FateGrandCalculator.Test
                     Name = "Door of the Saint",
                     ClassName = ClassRelationEnum.Caster,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Unknown,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 14464.0f,
                     IsSpecial = false,
@@ -679,7 +657,6 @@ namespace FateGrandCalculator.Test
                     Name = "Door of the Champion",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 23716.0f,
                     IsSpecial = false,
@@ -692,7 +669,6 @@ namespace FateGrandCalculator.Test
                     Name = "Door of the Champion",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 23716.0f,
                     IsSpecial = false,
@@ -707,7 +683,6 @@ namespace FateGrandCalculator.Test
                     Name = "Door of the Champion",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 29596.0f,
                     IsSpecial = false,
@@ -720,7 +695,6 @@ namespace FateGrandCalculator.Test
                     Name = "Door of the Champion",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 23716.0f,
                     IsSpecial = false,
@@ -733,7 +707,6 @@ namespace FateGrandCalculator.Test
                     Name = "Door of the Champion",
                     ClassName = ClassRelationEnum.Rider,
                     AttributeName = AttributeRelationEnum.Sky,
-                    Gender = GenderRelationEnum.Female,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 23716.0f,
                     IsSpecial = false,

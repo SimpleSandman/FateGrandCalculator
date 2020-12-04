@@ -2,7 +2,7 @@
 
 namespace FateGrandCalculator.Models
 {
-    public sealed class EnemyServant : EnemyMob
+    public sealed class EnemyCollectionServant : EnemyMob
     {
         public ServantNiceJson ServantInfo { get; private set; }
     }

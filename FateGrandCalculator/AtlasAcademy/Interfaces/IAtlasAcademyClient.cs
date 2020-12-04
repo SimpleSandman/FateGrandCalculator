@@ -5,7 +5,7 @@ using FateGrandCalculator.AtlasAcademy.Json;
 
 using Newtonsoft.Json.Linq;
 
-namespace FateGrandCalculator.AtlasAcademy
+namespace FateGrandCalculator.AtlasAcademy.Interfaces
 {
     public interface IAtlasAcademyClient
     {
@@ -18,5 +18,6 @@ namespace FateGrandCalculator.AtlasAcademy
         Task<JObject> GetTraitEnumInfo();
         Task<AttributeRelationNiceJson> GetAttributeRelationInfo();
         Task<ClassRelationNiceJson> GetClassRelationInfo();
+        Task<ServantNiceJson> GetEnemyCollectionServantInfo(string servantId);
     }
 }

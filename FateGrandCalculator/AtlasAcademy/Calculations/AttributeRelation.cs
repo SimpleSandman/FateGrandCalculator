@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using FateGrandCalculator.AtlasAcademy.Interfaces;
 using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Enums;
 

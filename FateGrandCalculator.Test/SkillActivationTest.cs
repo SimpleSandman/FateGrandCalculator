@@ -44,7 +44,7 @@ namespace FateGrandCalculator.Test
 
                 /* Party data */
                 #region Party Member
-                Servant chaldeaAttackServant = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.DANTES_AVENGER, 1, false);
+                ChaldeaServant chaldeaAttackServant = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.DANTES_AVENGER, 1, false);
 
                 PartyMember partyMemberAttacker = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAttackServant);
                 resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyMemberAttacker);
@@ -53,7 +53,7 @@ namespace FateGrandCalculator.Test
                 #endregion
 
                 #region Party Member 2
-                Servant chaldeaCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, false);
+                ChaldeaServant chaldeaCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, false);
 
                 PartyMember partyMemberCaster = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaCaster);
 
@@ -61,7 +61,7 @@ namespace FateGrandCalculator.Test
                 #endregion
 
                 #region Party Member Support
-                Servant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
+                ChaldeaServant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
 
                 PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
 
@@ -77,7 +77,6 @@ namespace FateGrandCalculator.Test
                         Name = "Walkure",
                         ClassName = ClassRelationEnum.Rider,
                         AttributeName = AttributeRelationEnum.Sky,
-                        Gender = GenderRelationEnum.Female,
                         WaveNumber = WaveNumberEnum.First,
                         Health = 13933.0f,
                         IsSpecial = false,

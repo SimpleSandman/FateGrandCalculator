@@ -23,7 +23,7 @@ namespace FateGrandCalculator.Core.Interfaces
         Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage);
         Task<float> ChancesToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage);
         void AddPartyMemberToNpChain(List<PartyMember> party, PartyMember partyMember);
-        PartyMember AddPartyMember(List<PartyMember> party, Servant chaldeaServant, CraftEssence chaldeaCraftEssence = null);
+        PartyMember AddPartyMember(List<PartyMember> party, ChaldeaServant chaldeaServant, CraftEssence chaldeaCraftEssence = null);
         void ApplyCraftEssenceEffects(PartyMember partyMember);
     }
 }
