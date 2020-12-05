@@ -43,6 +43,9 @@
     <None Update="Json\JP\CraftEssenceData\9402750-AerialDriveEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\JP\CraftEssenceData\9403600-HolyMaidenTeachingEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\JP\Export\basic_servant.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -70,61 +73,67 @@
     <None Update="Json\JP\MysticCodeData\20-CombatUniform.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Archer\200200-GilgameshArcherEN.json">
+    <None Update="Json\JP\ServantData\Archer\200200-GilgameshEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Archer\201300-ArashArcherEN.json">
+    <None Update="Json\JP\ServantData\Archer\201300-ArashEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Assassin\600500-JackAssassinEN.json">
+    <None Update="Json\JP\ServantData\Assassin\600500-JackEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Berserker\700200-LancelotBerserkerEN.json">
+    <None Update="Json\JP\ServantData\Avenger\1100200-EdmondDantesEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Berserker\700500-SpartacusBerserkerEN.json">
+    <None Update="Json\JP\ServantData\Berserker\700200-LancelotEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Berserker\702300-RaikouBerserkerEN.json">
+    <None Update="Json\JP\ServantData\Berserker\700500-SpartacusEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Caster\500300-TamamoNoMaeCasterEN.json">
+    <None Update="Json\JP\ServantData\Berserker\702300-RaikouEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Caster\500700-WilliamShakespeareCasterEN.json">
+    <None Update="Json\JP\ServantData\Caster\500300-TamamoNoMaeEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Caster\500800-MerlinCasterEN.json">
+    <None Update="Json\JP\ServantData\Caster\500700-WilliamShakespeareEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Caster\501000-ParacelsusCasterEN.json">
+    <None Update="Json\JP\ServantData\Caster\500800-MerlinEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Caster\501500-WolfgangMozartCasterEN.json">
+    <None Update="Json\JP\ServantData\Caster\501000-ParacelsusEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Caster\501800-GilgameshCasterEN.json">
+    <None Update="Json\JP\ServantData\Caster\501500-WolfgangMozartEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Caster\501900-ZhugeLiangCasterEN.json">
+    <None Update="Json\JP\ServantData\Caster\501800-GilgameshEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Caster\502300-HelenaBlavatskyCasterEN.json">
+    <None Update="Json\JP\ServantData\Caster\501900-ZhugeLiangEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Caster\503900-ScathachSkadiCasterEN.json">
+    <None Update="Json\JP\ServantData\Caster\502300-HelenaBlavatskyEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Caster\504500-AltriaCasterEN.json">
+    <None Update="Json\JP\ServantData\Caster\503900-ScathachSkadiEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Rider\400400-AstolfoRiderEN.json">
+    <None Update="Json\JP\ServantData\Caster\504500-AltriaEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Rider\403200-SimaYiReinesRiderEN.json">
+    <None Update="Json\JP\ServantData\Lancer\303000-ParvatiEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Saber\100600-NeroClaudiusBrideSaberEN.json">
+    <None Update="Json\JP\ServantData\Rider\400400-AstolfoEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\JP\ServantData\Rider\403200-SimaYiReinesEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\JP\ServantData\Saber\100600-NeroClaudiusBrideEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\NA\CraftEssenceData\9400280-ImaginaryElement.json">
@@ -166,58 +175,61 @@
     <None Update="Json\NA\MysticCodeData\20-CombatUniform.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Archer\200200-GilgameshArcher.json">
+    <None Update="Json\NA\ServantData\Archer\200200-Gilgamesh.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Archer\201300-ArashArcher.json">
+    <None Update="Json\NA\ServantData\Archer\201300-Arash.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Assassin\600500-JackAssassin.json">
+    <None Update="Json\NA\ServantData\Assassin\600500-Jack.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Avenger\1100200-EdmondDantesAvenger.json">
+    <None Update="Json\NA\ServantData\Avenger\1100200-EdmondDantes.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Berserker\700200-LancelotBerserker.json">
+    <None Update="Json\NA\ServantData\Berserker\700200-Lancelot.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Berserker\700500-SpartacusBerserker.json">
+    <None Update="Json\NA\ServantData\Berserker\700500-Spartacus.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Berserker\702300-RaikouBerserker.json">
+    <None Update="Json\NA\ServantData\Berserker\702300-Raikou.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Caster\500300-TamamoNoMaeCaster.json">
+    <None Update="Json\NA\ServantData\Caster\500300-TamamoNoMae.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Caster\500700-WilliamShakespeareCaster.json">
+    <None Update="Json\NA\ServantData\Caster\500700-WilliamShakespeare.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Caster\500800-MerlinCaster.json">
+    <None Update="Json\NA\ServantData\Caster\500800-Merlin.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Caster\501000-ParacelsusCaster.json">
+    <None Update="Json\NA\ServantData\Caster\501000-Paracelsus.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Caster\501500-WolfgangMozartCaster.json">
+    <None Update="Json\NA\ServantData\Caster\501500-WolfgangMozart.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Caster\501800-GilgameshCaster.json">
+    <None Update="Json\NA\ServantData\Caster\501800-Gilgamesh.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Caster\501900-ZhugeLiangCaster.json">
+    <None Update="Json\NA\ServantData\Caster\501900-ZhugeLiang.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Caster\502300-HelenaBlavatskyCaster.json">
+    <None Update="Json\NA\ServantData\Caster\502300-HelenaBlavatsky.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Caster\503900-ScathachSkadiCaster.json">
+    <None Update="Json\NA\ServantData\Caster\503900-ScathachSkadi.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Rider\400400-AstolfoRider.json">
+    <None Update="Json\NA\ServantData\Lancer\303000-Parvati.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\NA\ServantData\Saber\100600-NeroClaudiusBrideSaber.json">
+    <None Update="Json\NA\ServantData\Rider\400400-Astolfo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\NA\ServantData\Saber\100600-NeroClaudiusBride.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="xunit.runner.json">
@@ -228,7 +240,6 @@
   <ItemGroup>
     <Folder Include="Json\JP\EnemyServantData\" />
     <Folder Include="Json\JP\Event\" />
-    <Folder Include="Json\JP\ServantData\Lancer\" />
     <Folder Include="Json\JP\ServantData\AlterEgo\" />
     <Folder Include="Json\JP\ServantData\MoonCancer\" />
     <Folder Include="Json\JP\ServantData\Foreigner\" />
@@ -239,7 +250,6 @@
     <Folder Include="Json\NA\Event\" />
     <Folder Include="Json\NA\ServantData\AlterEgo\" />
     <Folder Include="Json\NA\ServantData\Foreigner\" />
-    <Folder Include="Json\NA\ServantData\Lancer\" />
     <Folder Include="Json\NA\ServantData\MoonCancer\" />
     <Folder Include="Json\NA\ServantData\Ruler\" />
     <Folder Include="Json\NA\ServantData\Shielder\" />

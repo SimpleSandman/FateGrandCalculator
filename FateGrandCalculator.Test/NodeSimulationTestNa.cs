@@ -16,24 +16,26 @@ using Xunit.Abstractions;
 
 namespace FateGrandCalculator.Test
 {
-    public class NodeSimulationTest : IClassFixture<WireMockFixture>
+    public class NodeSimulationTestNa : IClassFixture<WireMockFixture>
     {
-        private readonly WireMockFixture _wiremockFixture;
+        private readonly WireMockFixture _wireMockFixture;
+        private readonly WireMockUtility _wireMockUtility;
         private readonly IContainer _container;
         private readonly ITestOutputHelper _output;
 
-        public NodeSimulationTest(WireMockFixture wiremockFixture, ITestOutputHelper output)
+        public NodeSimulationTestNa(WireMockFixture wireMockFixture, ITestOutputHelper output)
         {
-            _wiremockFixture = wiremockFixture;
+            _wireMockFixture = wireMockFixture;
             _output = output;
-            _container = ContainerBuilderInit.Create(WireMockUtility.REGION);
+            _wireMockUtility = new WireMockUtility("NA");
+            _container = ContainerBuilderInit.Create("NA");
         }
 
         [Fact]
         public async Task FlamingMansionLB2Dantes()
         {
-            _wiremockFixture.CheckIfMockServerInUse();
-            WireMockUtility.AddStubs(_wiremockFixture);
+            _wireMockFixture.CheckIfMockServerInUse();
+            _wireMockUtility.AddStubs(_wireMockFixture);
 
             using (var scope = _container.BeginLifetimeScope())
             {
@@ -89,7 +91,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 13933.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -104,7 +105,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 14786.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -119,7 +119,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Earth,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 23456.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "giant", "humanoid", "genderMale", "superGiant"
@@ -136,7 +135,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Earth,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 25554.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "giant", "humanoid", "genderMale", "superGiant"
@@ -151,7 +149,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 19047.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -166,7 +163,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Earth,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 26204.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "giant", "humanoid", "genderMale", "superGiant"
@@ -183,7 +179,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 42926.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -198,7 +193,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 180753.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -213,7 +207,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Earth,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 61289.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "giant", "humanoid", "genderMale", "superGiant"
@@ -278,8 +271,8 @@ namespace FateGrandCalculator.Test
         [Fact]
         public async Task CastleSnowIceLB2ArashZerkalotJack()
         {
-            _wiremockFixture.CheckIfMockServerInUse();
-            WireMockUtility.AddStubs(_wiremockFixture);
+            _wireMockFixture.CheckIfMockServerInUse();
+            _wireMockUtility.AddStubs(_wireMockFixture);
 
             using (var scope = _container.BeginLifetimeScope())
             {
@@ -358,7 +351,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 9884.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -373,7 +365,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 10889.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -388,7 +379,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 10664.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -405,7 +395,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 30279.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -420,7 +409,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 24599.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -435,7 +423,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 33264.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -452,7 +439,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 41136.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -467,7 +453,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 49586.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -482,7 +467,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 180432.0f,
-                    IsSpecial = false,
                     Traits = new List<string>
                     {
                         "divine", "humanoid", "genderFemale"
@@ -537,8 +521,8 @@ namespace FateGrandCalculator.Test
         [Fact]
         public async Task PlugsuitWaverAstolfoDailyDoors()
         {
-            _wiremockFixture.CheckIfMockServerInUse();
-            WireMockUtility.AddStubs(_wiremockFixture);
+            _wireMockFixture.CheckIfMockServerInUse();
+            _wireMockUtility.AddStubs(_wireMockFixture);
 
             using (var scope = _container.BeginLifetimeScope())
             {
@@ -609,7 +593,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 14464.0f,
-                    IsSpecial = false,
                     Traits = new List<string>()
                 };
 
@@ -621,7 +604,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 23716.0f,
-                    IsSpecial = false,
                     Traits = new List<string>()
                 };
 
@@ -633,7 +615,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 14464.0f,
-                    IsSpecial = false,
                     Traits = new List<string>()
                 };
                 #endregion
@@ -647,7 +628,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 14464.0f,
-                    IsSpecial = false,
                     Traits = new List<string>()
                 };
 
@@ -659,7 +639,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 23716.0f,
-                    IsSpecial = false,
                     Traits = new List<string>()
                 };
 
@@ -671,7 +650,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 23716.0f,
-                    IsSpecial = false,
                     Traits = new List<string>()
                 };
                 #endregion
@@ -685,7 +663,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 29596.0f,
-                    IsSpecial = false,
                     Traits = new List<string>()
                 };
 
@@ -697,7 +674,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 23716.0f,
-                    IsSpecial = false,
                     Traits = new List<string>()
                 };
 
@@ -709,7 +685,6 @@ namespace FateGrandCalculator.Test
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 23716.0f,
-                    IsSpecial = false,
                     Traits = new List<string>()
                 };
                 #endregion
@@ -769,7 +744,5 @@ namespace FateGrandCalculator.Test
                 }
             }
         }
-
-        
     }
 }

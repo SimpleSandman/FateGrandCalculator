@@ -18,20 +18,22 @@ namespace FateGrandCalculator.Test
 {
     public class PartyCompositionTest : IClassFixture<WireMockFixture>
     {
-        private readonly WireMockFixture _wiremockFixture;
+        private readonly WireMockFixture _wireMockFixture;
+        private readonly WireMockUtility _wireMockUtility;
         private readonly IContainer _container;
 
-        public PartyCompositionTest(WireMockFixture wiremockFixture)
+        public PartyCompositionTest(WireMockFixture wireMockFixture)
         {
-            _wiremockFixture = wiremockFixture;
-            _container = ContainerBuilderInit.Create(WireMockUtility.REGION);
+            _wireMockFixture = wireMockFixture;
+            _wireMockUtility = new WireMockUtility("NA");
+            _container = ContainerBuilderInit.Create("NA");
         }
 
         [Fact]
         public void ConfirmJsonDeserializationServantJP()
         {
             // Set "Copy to Output Directory" to "Copy if newer" for JSON files
-            ServantNiceJson testServant = LoadTestData.DeserializeServantJson("JP", "Caster", "500300-TamamoNoMaeCasterEN.json");
+            ServantNiceJson testServant = LoadTestData.DeserializeServantJson("JP", "Caster", "500300-TamamoNoMaeEN.json");
 
             testServant.Name.Should().Be("Tamamo-no-Mae");
         }
@@ -40,7 +42,7 @@ namespace FateGrandCalculator.Test
         public void ConfirmJsonDeserializationServantNA()
         {
             // Set "Copy to Output Directory" to "Copy if newer" for JSON files
-            ServantNiceJson testServant = LoadTestData.DeserializeServantJson("NA", "Caster", "500800-MerlinCaster.json");
+            ServantNiceJson testServant = LoadTestData.DeserializeServantJson("NA", "Caster", "500800-Merlin.json");
 
             testServant.Name.Should().Be("Merlin");
         }
@@ -48,8 +50,8 @@ namespace FateGrandCalculator.Test
         [Fact]
         public async Task CreatePartyMemberWithCraftEssence()
         {
-            _wiremockFixture.CheckIfMockServerInUse();
-            WireMockUtility.AddStubs(_wiremockFixture);
+            _wireMockFixture.CheckIfMockServerInUse();
+            _wireMockUtility.AddStubs(_wireMockFixture);
 
             List<PartyMember> party = new List<PartyMember>();
 
@@ -80,8 +82,8 @@ namespace FateGrandCalculator.Test
         [Fact]
         public async Task SetMysticCode()
         {
-            _wiremockFixture.CheckIfMockServerInUse();
-            WireMockUtility.AddStubs(_wiremockFixture);
+            _wireMockFixture.CheckIfMockServerInUse();
+            _wireMockUtility.AddStubs(_wireMockFixture);
 
             using (var scope = _container.BeginLifetimeScope())
             {

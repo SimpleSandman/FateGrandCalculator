@@ -3,34 +3,43 @@ using FateGrandCalculator.Test.Fixture;
 
 namespace FateGrandCalculator.Test.Utility
 {
-    public static class WireMockUtility
+    public class WireMockUtility
     {
-        public static readonly string REGION = "NA";
+        public const string IMAGINARY_ELEMENT_CE = "9400280";
+        public const string KSCOPE_CE = "9400340";
+        public const string HOLY_NIGHT_SUPPER_CE = "9402090";
+        public const string AERIAL_DRIVE_CE = "9402750";
+        public const string HOLY_MAIDEN_TEACHING_CE = "9403600";
 
-        public static readonly string IMAGINARY_ELEMENT_CE = "9400280";
-        public static readonly string KSCOPE_CE = "9400340";
-        public static readonly string HOLY_NIGHT_SUPPER_CE = "9402090";
-        public static readonly string AERIAL_DRIVE_CE = "9402750";
+        public const string GILGAMESH_ARCHER = "200200";
+        public const string ARASH_ARCHER = "201300";
+        public const string PARVATI_LANCER = "303000";
+        public const string ASTOLFO_RIDER = "400400";
+        public const string WAVER_CASTER = "501900";
+        public const string SKADI_CASTER = "503900";
+        public const string JACK_ASSASSIN = "600500";
+        public const string LANCELOT_BERSERKER = "700200";
+        public const string SPARTACUS_BERSERKER = "700500";
+        public const string RAIKOU_BERSERKER = "702300";
+        public const string DANTES_AVENGER = "1100200";
 
-        public static readonly string GILGAMESH_ARCHER = "200200";
-        public static readonly string ARASH_ARCHER = "201300";
-        public static readonly string ASTOLFO_RIDER = "400400";
-        public static readonly string WAVER_CASTER = "501900";
-        public static readonly string SKADI_CASTER = "503900";
-        public static readonly string JACK_ASSASSIN = "600500";
-        public static readonly string LANCELOT_BERSERKER = "700200";
-        public static readonly string SPARTACUS_BERSERKER = "700500";
-        public static readonly string RAIKOU_BERSERKER = "702300";
-        public static readonly string DANTES_AVENGER = "1100200";
+        public const string PLUGSUIT_ID = "20";
+        public const string FRAGMENT_2004_ID = "100";
+        public const string ARTIC_ID = "110";
 
-        public static readonly string PLUGSUIT_ID = "20";
-        public static readonly string FRAGMENT_2004_ID = "100";
-        public static readonly string ARTIC_ID = "110";
+        private readonly string _langSuffix;
+        private readonly string _region;
+
+        public WireMockUtility(string langSuffix)
+        {
+            _region = langSuffix;
+            _langSuffix = langSuffix == "NA" ? "" : "EN";
+        }
 
         /// <summary>
         /// Add all the WireMock stubs
         /// </summary>
-        public static void AddStubs(WireMockFixture wiremockFixture)
+        public void AddStubs(WireMockFixture wiremockFixture)
         {
             AddExportStubs(wiremockFixture);
             AddServantStubs(wiremockFixture);
@@ -42,7 +51,7 @@ namespace FateGrandCalculator.Test.Utility
         /// <summary>
         /// Create constant game data endpoints as WireMock stubs
         /// </summary>
-        private static void AddExportStubs(WireMockFixture wiremockFixture)
+        private void AddExportStubs(WireMockFixture wiremockFixture)
         {
             const string CONSTANT_RATE_JSON = "NiceConstant.json";
             const string CLASS_ATTACK_RATE_JSON = "NiceClassAttackRate.json";
@@ -50,89 +59,95 @@ namespace FateGrandCalculator.Test.Utility
             const string ATTRIBUTE_RELATION_JSON = "NiceAttributeRelation.json";
 
             // build necessary export mock responses
-            ConstantNiceJson mockConstantRateResponse = LoadTestData.DeserializeExportJson<ConstantNiceJson>(REGION, CONSTANT_RATE_JSON);
-            LoadTestData.CreateExportWireMockStub(wiremockFixture, REGION, CONSTANT_RATE_JSON, mockConstantRateResponse);
+            ConstantNiceJson mockConstantRateResponse = LoadTestData.DeserializeExportJson<ConstantNiceJson>(_region, CONSTANT_RATE_JSON);
+            LoadTestData.CreateExportWireMockStub(wiremockFixture, _region, CONSTANT_RATE_JSON, mockConstantRateResponse);
 
-            ClassAttackRateNiceJson mockClassAttackRateResponse = LoadTestData.DeserializeExportJson<ClassAttackRateNiceJson>(REGION, CLASS_ATTACK_RATE_JSON);
-            LoadTestData.CreateExportWireMockStub(wiremockFixture, REGION, CLASS_ATTACK_RATE_JSON, mockClassAttackRateResponse);
+            ClassAttackRateNiceJson mockClassAttackRateResponse = LoadTestData.DeserializeExportJson<ClassAttackRateNiceJson>(_region, CLASS_ATTACK_RATE_JSON);
+            LoadTestData.CreateExportWireMockStub(wiremockFixture, _region, CLASS_ATTACK_RATE_JSON, mockClassAttackRateResponse);
 
-            ClassRelationNiceJson mockClassRelationResponse = LoadTestData.DeserializeExportJson<ClassRelationNiceJson>(REGION, CLASS_RELATION_JSON);
-            LoadTestData.CreateExportWireMockStub(wiremockFixture, REGION, CLASS_RELATION_JSON, mockClassRelationResponse);
+            ClassRelationNiceJson mockClassRelationResponse = LoadTestData.DeserializeExportJson<ClassRelationNiceJson>(_region, CLASS_RELATION_JSON);
+            LoadTestData.CreateExportWireMockStub(wiremockFixture, _region, CLASS_RELATION_JSON, mockClassRelationResponse);
 
-            AttributeRelationNiceJson mockAttributeRelationResponse = LoadTestData.DeserializeExportJson<AttributeRelationNiceJson>(REGION, ATTRIBUTE_RELATION_JSON);
-            LoadTestData.CreateExportWireMockStub(wiremockFixture, REGION, ATTRIBUTE_RELATION_JSON, mockAttributeRelationResponse);
+            AttributeRelationNiceJson mockAttributeRelationResponse = LoadTestData.DeserializeExportJson<AttributeRelationNiceJson>(_region, ATTRIBUTE_RELATION_JSON);
+            LoadTestData.CreateExportWireMockStub(wiremockFixture, _region, ATTRIBUTE_RELATION_JSON, mockAttributeRelationResponse);
         }
 
         /// <summary>
         /// Create servant game data endpoints as WireMock stubs
         /// </summary>
-        private static void AddServantStubs(WireMockFixture wiremockFixture)
+        private void AddServantStubs(WireMockFixture wiremockFixture)
         {
             // build mock servant responses
-            ServantNiceJson mockResponse = LoadTestData.DeserializeServantJson(REGION, "Avenger", $"{DANTES_AVENGER}-EdmondDantesAvenger.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "servant", DANTES_AVENGER, mockResponse);
+            ServantNiceJson mockResponse = LoadTestData.DeserializeServantJson(_region, "Archer", $"{ARASH_ARCHER}-Arash{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", ARASH_ARCHER, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Caster", $"{SKADI_CASTER}-ScathachSkadiCaster.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "servant", SKADI_CASTER, mockResponse);
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Archer", $"{GILGAMESH_ARCHER}-Gilgamesh{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", GILGAMESH_ARCHER, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Berserker", $"{LANCELOT_BERSERKER}-LancelotBerserker.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "servant", LANCELOT_BERSERKER, mockResponse);
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Assassin", $"{JACK_ASSASSIN}-Jack{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", JACK_ASSASSIN, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Caster", $"{WAVER_CASTER}-ZhugeLiangCaster.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "servant", WAVER_CASTER, mockResponse);
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Avenger", $"{DANTES_AVENGER}-EdmondDantes{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", DANTES_AVENGER, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Berserker", $"{SPARTACUS_BERSERKER}-SpartacusBerserker.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "servant", SPARTACUS_BERSERKER, mockResponse);
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Berserker", $"{LANCELOT_BERSERKER}-Lancelot{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", LANCELOT_BERSERKER, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Archer", $"{GILGAMESH_ARCHER}-GilgameshArcher.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "servant", GILGAMESH_ARCHER, mockResponse);
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Berserker", $"{RAIKOU_BERSERKER}-Raikou{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", RAIKOU_BERSERKER, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Archer", $"{ARASH_ARCHER}-ArashArcher.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "servant", ARASH_ARCHER, mockResponse);
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Berserker", $"{SPARTACUS_BERSERKER}-Spartacus{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", SPARTACUS_BERSERKER, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Berserker", $"{RAIKOU_BERSERKER}-RaikouBerserker.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "servant", RAIKOU_BERSERKER, mockResponse);
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Caster", $"{SKADI_CASTER}-ScathachSkadi{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", SKADI_CASTER, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Rider", $"{ASTOLFO_RIDER}-AstolfoRider.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "servant", ASTOLFO_RIDER, mockResponse);
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Caster", $"{WAVER_CASTER}-ZhugeLiang{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", WAVER_CASTER, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeServantJson(REGION, "Assassin", $"{JACK_ASSASSIN}-JackAssassin.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "servant", JACK_ASSASSIN, mockResponse);
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Lancer", $"{PARVATI_LANCER}-Parvati{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", PARVATI_LANCER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Rider", $"{ASTOLFO_RIDER}-Astolfo{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", ASTOLFO_RIDER, mockResponse);
         }
 
         /// <summary>
         /// Create craft essence game data endpoints as WireMock stubs
         /// </summary>
-        private static void AddCraftEssenceStubs(WireMockFixture wiremockFixture)
+        private void AddCraftEssenceStubs(WireMockFixture wiremockFixture)
         {
             // build mock craft essence response
-            EquipNiceJson mockResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{KSCOPE_CE}-Kaleidoscope.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "equip", KSCOPE_CE, mockResponse);
+            EquipNiceJson mockResponse = LoadTestData.DeserializeCraftEssenceJson(_region, $"{KSCOPE_CE}-Kaleidoscope{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "equip", KSCOPE_CE, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{IMAGINARY_ELEMENT_CE}-ImaginaryElement.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "equip", IMAGINARY_ELEMENT_CE, mockResponse);
+            mockResponse = LoadTestData.DeserializeCraftEssenceJson(_region, $"{IMAGINARY_ELEMENT_CE}-ImaginaryElement{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "equip", IMAGINARY_ELEMENT_CE, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{AERIAL_DRIVE_CE}-AerialDrive.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "equip", AERIAL_DRIVE_CE, mockResponse);
+            mockResponse = LoadTestData.DeserializeCraftEssenceJson(_region, $"{AERIAL_DRIVE_CE}-AerialDrive{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "equip", AERIAL_DRIVE_CE, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeCraftEssenceJson(REGION, $"{HOLY_NIGHT_SUPPER_CE}-HolyNightSupper.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "equip", HOLY_NIGHT_SUPPER_CE, mockResponse);
+            mockResponse = LoadTestData.DeserializeCraftEssenceJson(_region, $"{HOLY_NIGHT_SUPPER_CE}-HolyNightSupper{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "equip", HOLY_NIGHT_SUPPER_CE, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeCraftEssenceJson("JP", $"{HOLY_MAIDEN_TEACHING_CE}-HolyMaidenTeachingEN.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, "JP", "equip", HOLY_MAIDEN_TEACHING_CE, mockResponse);
         }
 
         /// <summary>
         /// Create mystic code game data endpoints as WireMock stubs
         /// </summary>
-        private static void AddMysticCodeStubs(WireMockFixture wiremockFixture)
+        private void AddMysticCodeStubs(WireMockFixture wiremockFixture)
         {
             // build mock mystic code response
-            MysticCodeNiceJson mockResponse = LoadTestData.DeserializeMysticCodeJson(REGION, $"{ARTIC_ID}-Artic.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "MC", ARTIC_ID, mockResponse);
+            MysticCodeNiceJson mockResponse = LoadTestData.DeserializeMysticCodeJson(_region, $"{ARTIC_ID}-Artic.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "MC", ARTIC_ID, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeMysticCodeJson(REGION, $"{PLUGSUIT_ID}-CombatUniform.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "MC", PLUGSUIT_ID, mockResponse);
+            mockResponse = LoadTestData.DeserializeMysticCodeJson(_region, $"{PLUGSUIT_ID}-CombatUniform.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "MC", PLUGSUIT_ID, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeMysticCodeJson(REGION, $"{FRAGMENT_2004_ID}-Fragment2004.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, REGION, "MC", FRAGMENT_2004_ID, mockResponse);
+            mockResponse = LoadTestData.DeserializeMysticCodeJson(_region, $"{FRAGMENT_2004_ID}-Fragment2004.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "MC", FRAGMENT_2004_ID, mockResponse);
         }
         #endregion
     }

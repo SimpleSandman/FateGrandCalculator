@@ -239,10 +239,13 @@ namespace FateGrandCalculator.Core
 
         public float CalculatedNpPerHit(PartyMember partyMember, EnemyMob enemyMob, float cardNpTypeUp, float npGainUp)
         {
+            float specialBonusEnemyMod = enemyMob.Traits.Contains("undead") ? 1.2f : 1.0f;
+
             return EnemyClassModifier(enemyMob.ClassName.ToString())
                 * partyMember.NoblePhantasm.NpGain.Np[partyMember.Servant.NpLevel - 1]
                 * (1.0f + cardNpTypeUp)
-                * (1.0f + npGainUp);
+                * (1.0f + npGainUp)
+                * specialBonusEnemyMod;
         }
 
         public List<float> NpDistributionPercentages(PartyMember partyMember)
@@ -292,7 +295,7 @@ namespace FateGrandCalculator.Core
             float classModifier = await _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName).ConfigureAwait(false);
             float npTypeModifier = await _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}").ConfigureAwait(false);
 
-            // Base NP damage = ATTACK_RATE * Servant total attack * Class modifier * NP type modifier * NP damage
+            // Base NP damage = ATTACK_RATE * Servant total attack * Class modifier * NP type modifier * (20% bonus if undead enemy) * NP damage
             float baseNpDamage = constantAttackRate
                 * partyMember.TotalAttack
                 * classModifier

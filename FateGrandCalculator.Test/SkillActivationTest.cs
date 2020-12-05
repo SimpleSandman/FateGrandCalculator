@@ -19,22 +19,24 @@ namespace FateGrandCalculator.Test
 {
     public class SkillActivationTest : IClassFixture<WireMockFixture>
     {
-        private readonly WireMockFixture _wiremockFixture;
+        private readonly WireMockFixture _wireMockFixture;
+        private readonly WireMockUtility _wireMockUtility;
         private readonly IContainer _container;
         private readonly ITestOutputHelper _output;
 
-        public SkillActivationTest(WireMockFixture wiremockFixture, ITestOutputHelper output)
+        public SkillActivationTest(WireMockFixture wireMockFixture, ITestOutputHelper output)
         {
-            _wiremockFixture = wiremockFixture;
+            _wireMockFixture = wireMockFixture;
             _output = output;
-            _container = ContainerBuilderInit.Create(WireMockUtility.REGION);
+            _wireMockUtility = new WireMockUtility("NA");
+            _container = ContainerBuilderInit.Create("NA");
         }
 
         [Fact]
         public async Task ActivatePartyMemberSkills()
         {
-            _wiremockFixture.CheckIfMockServerInUse();
-            WireMockUtility.AddStubs(_wiremockFixture);
+            _wireMockFixture.CheckIfMockServerInUse();
+            _wireMockUtility.AddStubs(_wireMockFixture);
 
             List<PartyMember> party = new List<PartyMember>();
 
@@ -79,7 +81,6 @@ namespace FateGrandCalculator.Test
                         AttributeName = AttributeRelationEnum.Sky,
                         WaveNumber = WaveNumberEnum.First,
                         Health = 13933.0f,
-                        IsSpecial = false,
                         Traits = new List<string>
                         {
                             "divine", "humanoid", "genderFemale"
