@@ -39,7 +39,7 @@ namespace FateGrandCalculator.Core
         /// <param name="enemyMobs"></param>
         /// <param name="waveNumber">The wave the node simulation is currently on</param>
         /// <param name="enemyPosition">Set the cursor of an enemy's position from left to right (1-3)</param>
-        public async Task NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, int enemyPosition)
+        public async Task NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, int enemyPosition = 3)
         {
             List<PartyMember> npChainList = party
                 .FindAll(p => p.NpChainOrder != NpChainOrderEnum.None)

@@ -20,7 +20,7 @@ namespace FateGrandCalculator.Core
         /// <param name="enemies">The targeted enemies that are receiving the status effect</param>
         /// <param name="enemyPosition">The position the selected enemy is currently sitting (1-3)</param>
         public void SkillActivation(PartyMember partyMemberActor, int actorSkillPositionNumber, List<PartyMember> party, int partyMemberPosition, 
-            List<EnemyMob> enemies, int enemyPosition)
+            List<EnemyMob> enemies, int enemyPosition = 3)
         {
             if (partyMemberActor.SkillCooldowns.Exists(s => s.SkillId == actorSkillPositionNumber) 
                 || party.IndexOf(partyMemberActor) > 2 
@@ -81,7 +81,7 @@ namespace FateGrandCalculator.Core
         /// <param name="enemyPosition">The position the selected enemy is currently sitting (1-3)</param>
         /// <param name="reservePartyMemberIndex">The position of the reserved (4-6) party member when selection the party roster</param>
         public void SkillActivation(MysticCode mysticCode, int mysticCodeSkillPositionNumber, List<PartyMember> party, int partyMemberPosition,
-            List<EnemyMob> enemies, int enemyPosition, int reservePartyMemberIndex = -1)
+            List<EnemyMob> enemies, int enemyPosition = 3, int reservePartyMemberIndex = -1)
         {
             if (mysticCode.SkillCooldowns.Exists(s => s.SkillId == mysticCodeSkillPositionNumber))
             {
