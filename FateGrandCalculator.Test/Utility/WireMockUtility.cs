@@ -5,27 +5,27 @@ namespace FateGrandCalculator.Test.Utility
 {
     public class WireMockUtility
     {
-        public const string IMAGINARY_ELEMENT_CE = "9400280";
-        public const string KSCOPE_CE = "9400340";
-        public const string HOLY_NIGHT_SUPPER_CE = "9402090";
-        public const string AERIAL_DRIVE_CE = "9402750";
-        public const string HOLY_MAIDEN_TEACHING_CE = "9403600";
+        public static readonly string IMAGINARY_ELEMENT_CE = "9400280";
+        public static readonly string KSCOPE_CE = "9400340";
+        public static readonly string GOLDEN_SUMO_CE = "9401640";
+        public static readonly string HOLY_NIGHT_SUPPER_CE = "9402090";
+        public static readonly string AERIAL_DRIVE_CE = "9402750";
 
-        public const string GILGAMESH_ARCHER = "200200";
-        public const string ARASH_ARCHER = "201300";
-        public const string PARVATI_LANCER = "303000";
-        public const string ASTOLFO_RIDER = "400400";
-        public const string WAVER_CASTER = "501900";
-        public const string SKADI_CASTER = "503900";
-        public const string JACK_ASSASSIN = "600500";
-        public const string LANCELOT_BERSERKER = "700200";
-        public const string SPARTACUS_BERSERKER = "700500";
-        public const string RAIKOU_BERSERKER = "702300";
-        public const string DANTES_AVENGER = "1100200";
+        public static readonly string GILGAMESH_ARCHER = "200200";
+        public static readonly string ARASH_ARCHER = "201300";
+        public static readonly string PARVATI_LANCER = "303000";
+        public static readonly string ASTOLFO_RIDER = "400400";
+        public static readonly string WAVER_CASTER = "501900";
+        public static readonly string SKADI_CASTER = "503900";
+        public static readonly string JACK_ASSASSIN = "600500";
+        public static readonly string LANCELOT_BERSERKER = "700200";
+        public static readonly string SPARTACUS_BERSERKER = "700500";
+        public static readonly string RAIKOU_BERSERKER = "702300";
+        public static readonly string DANTES_AVENGER = "1100200";
 
-        public const string PLUGSUIT_ID = "20";
-        public const string FRAGMENT_2004_ID = "100";
-        public const string ARTIC_ID = "110";
+        public static readonly string PLUGSUIT_ID = "20";
+        public static readonly string FRAGMENT_2004_ID = "100";
+        public static readonly string ARTIC_ID = "110";
 
         private readonly string _langSuffix;
         private readonly string _region;
@@ -129,9 +129,6 @@ namespace FateGrandCalculator.Test.Utility
 
             mockResponse = LoadTestData.DeserializeCraftEssenceJson(_region, $"{HOLY_NIGHT_SUPPER_CE}-HolyNightSupper{_langSuffix}.json");
             LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "equip", HOLY_NIGHT_SUPPER_CE, mockResponse);
-
-            mockResponse = LoadTestData.DeserializeCraftEssenceJson("JP", $"{HOLY_MAIDEN_TEACHING_CE}-HolyMaidenTeachingEN.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, "JP", "equip", HOLY_MAIDEN_TEACHING_CE, mockResponse);
         }
 
         /// <summary>

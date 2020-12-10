@@ -43,9 +43,6 @@
     <None Update="Json\JP\CraftEssenceData\9402750-AerialDriveEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\CraftEssenceData\9403600-HolyMaidenTeachingEN.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="Json\JP\Export\basic_servant.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

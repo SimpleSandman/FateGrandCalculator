@@ -131,6 +131,9 @@ namespace FateGrandCalculator.ApplyStatuses
                     partyMemberTarget.NpCharge += servantFunction.Svals[level - 1].Value / 100.0f;
                     PityNpGain(partyMemberTarget);
                     break;
+                case "lossNp":
+                    partyMemberTarget.NpCharge -= servantFunction.Svals[level - 1].Value / 100.0f;
+                    break;
                 default:
                     partyMemberTarget.ActiveStatuses.Add(new ActiveStatus 
                     { 

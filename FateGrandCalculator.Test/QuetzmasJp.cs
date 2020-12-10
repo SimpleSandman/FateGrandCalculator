@@ -17,14 +17,14 @@ using Xunit.Abstractions;
 
 namespace FateGrandCalculator.Test
 {
-    public class NodeSimulationTestJp : IClassFixture<WireMockFixture>
+    public class QuetzmasJp : IClassFixture<WireMockFixture>
     {
         private readonly WireMockFixture _wireMockFixture;
         private readonly WireMockUtility _wireMockUtility;
         private readonly IContainer _container;
         private readonly ITestOutputHelper _output;
 
-        public NodeSimulationTestJp(WireMockFixture wireMockFixture, ITestOutputHelper output)
+        public QuetzmasJp(WireMockFixture wireMockFixture, ITestOutputHelper output)
         {
             _wireMockFixture = wireMockFixture;
             _output = output;
@@ -33,7 +33,7 @@ namespace FateGrandCalculator.Test
         }
 
         [Fact]
-        public async Task ChristmasJP2018ArcherNodeByReference()
+        public async Task ArcherNodeParvatiDoubleSkadiByReference()
         {
             _wireMockFixture.CheckIfMockServerInUse();
             _wireMockUtility.AddStubs(_wireMockFixture);
@@ -42,60 +42,28 @@ namespace FateGrandCalculator.Test
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
                 List<PartyMember> party = new List<PartyMember>();
-
-                #region Lotto CEs
-                CraftEssence chaldeaHolyMaidenTeachingMlb = new CraftEssence
-                {
-                    CraftEssenceLevel = 16,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.HOLY_MAIDEN_TEACHING_CE)
-                };
-
-                CraftEssence chaldeaHolyMaidenTeaching = new CraftEssence
-                {
-                    CraftEssenceLevel = 1,
-                    Mlb = false,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.HOLY_MAIDEN_TEACHING_CE)
-                };
-                #endregion
-
-                CraftEssence chaldeaSuperscope = new CraftEssence
-                {
-                    CraftEssenceLevel = 100,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
-                };
+                CraftEssence chaldeaSuperscope = await FrequentlyUsed.CraftEssenceAsync(resolvedClasses, WireMockUtility.KSCOPE_CE, 100, true);
 
                 /* Party data */
                 // Reference: https://www.youtube.com/watch?v=oBs_YT1ac-Y
                 #region Parvati
-                ChaldeaServant chaldeaParvati = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.PARVATI_LANCER, 2, false);
-
-                PartyMember partyParvati = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaParvati, chaldeaSuperscope);
-                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyParvati);
-
+                PartyMember partyParvati = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.PARVATI_LANCER, party, resolvedClasses, 2, false, chaldeaSuperscope);
                 partyParvati.Servant.SkillLevels = new int[] { 10, 4, 4 }; // adjust to the reference video
 
                 party.Add(partyParvati);
                 #endregion
 
                 #region Skadi
-                ChaldeaServant chaldeaSkadi = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, false);
-
-                PartyMember partySkadi = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaSkadi, chaldeaHolyMaidenTeachingMlb);
-                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partySkadi);
-
+                PartyMember partySkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses);
                 partySkadi.Servant.SkillLevels = new int[] { 7, 7, 8 }; // adjust to the reference video
 
                 party.Add(partySkadi);
                 #endregion
 
                 #region Skadi Support
-                ChaldeaServant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
+                PartyMember partySupportSkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
 
-                PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster, chaldeaHolyMaidenTeachingMlb);
-
-                party.Add(partyMemberSupportCaster);
+                party.Add(partySupportSkadi);
                 #endregion
 
                 MysticCode mysticCode = new MysticCode
@@ -109,7 +77,7 @@ namespace FateGrandCalculator.Test
                 /* Simulate node combat */
                 // Fight 1/3
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 1, party, 1, enemyMobs); // Skadi quick up buff
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, 1, enemyMobs); // Skadi (support) quick up buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 1, party, 1, enemyMobs); // Skadi (support) quick up buff
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 1, party, 1, enemyMobs); // Parvati quick up buff
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
@@ -127,10 +95,7 @@ namespace FateGrandCalculator.Test
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
 
                 List<EnemyMob> waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Second);
-                foreach (EnemyMob enemy in waveSurvivors)
-                {
-                    _output.WriteLine($"{enemy.Name} has {enemy.Health} HP left");
-                }
+                ShowSurvivingEnemyHealth(waveSurvivors);
 
                 waveSurvivors.Count.Should().Be(1);
                 waveSurvivors.Any(h => h.Health < 30000.0f).Should().BeTrue();
@@ -142,19 +107,16 @@ namespace FateGrandCalculator.Test
                 // Fight 3/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 2, party, 1, enemyMobs); // Parvati ATK, DEF, Star Drop Rate, & Crit Rate Up
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 3, party, 1, enemyMobs); // Skadi (support) NP buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 3, party, 1, enemyMobs); // Skadi (support) NP buff
                 resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 2, party, 1, enemyMobs); // Artic ATK & NP STR up
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 2, party, 1, enemyMobs); // Skadi enemy defense down
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 2, party, 1, enemyMobs); // Skadi (support) enemy defense down
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 2, party, 1, enemyMobs); // Skadi (support) enemy defense down
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
 
                 waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Third);
-                foreach (EnemyMob enemy in waveSurvivors)
-                {
-                    _output.WriteLine($"{enemy.Name} has {enemy.Health} HP left");
-                }
+                ShowSurvivingEnemyHealth(waveSurvivors);
 
                 using (new AssertionScope())
                 {
@@ -165,7 +127,7 @@ namespace FateGrandCalculator.Test
         }
 
         [Fact]
-        public async Task ChristmasJP2018ArcherNodeNoCard()
+        public async Task ArcherNodeParvatiDoubleSkadiNoCard()
         {
             _wireMockFixture.CheckIfMockServerInUse();
             _wireMockUtility.AddStubs(_wireMockFixture);
@@ -174,57 +136,26 @@ namespace FateGrandCalculator.Test
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
                 List<PartyMember> party = new List<PartyMember>();
-
-                #region Lotto CEs
-                CraftEssence chaldeaHolyMaidenTeachingMlb = new CraftEssence
-                {
-                    CraftEssenceLevel = 16,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.HOLY_MAIDEN_TEACHING_CE)
-                };
-
-                CraftEssence chaldeaHolyMaidenTeaching = new CraftEssence
-                {
-                    CraftEssenceLevel = 1,
-                    Mlb = false,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.HOLY_MAIDEN_TEACHING_CE)
-                };
-                #endregion
-
-                CraftEssence chaldeaSuperscope = new CraftEssence
-                {
-                    CraftEssenceLevel = 100,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
-                };
+                CraftEssence chaldeaSuperscope = await FrequentlyUsed.CraftEssenceAsync(resolvedClasses, WireMockUtility.KSCOPE_CE, 100, true);
 
                 /* Party data */
                 #region Parvati
-                ChaldeaServant chaldeaParvati = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.PARVATI_LANCER, 4, false);
-
-                PartyMember partyParvati = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaParvati, chaldeaSuperscope);
-                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyParvati);
-
+                PartyMember partyParvati = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.PARVATI_LANCER, party, resolvedClasses, 4, false, chaldeaSuperscope);
                 partyParvati.Servant.SkillLevels = new int[] { 9, 8, 10 };
 
                 party.Add(partyParvati);
                 #endregion
 
                 #region Skadi
-                ChaldeaServant chaldeaSkadi = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, false);
-
-                PartyMember partySkadi = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaSkadi, chaldeaHolyMaidenTeachingMlb);
-                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partySkadi);
+                PartyMember partySkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses);
 
                 party.Add(partySkadi);
                 #endregion
 
                 #region Skadi Support
-                ChaldeaServant supportCaster = await FrequentlyUsed.ServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
+                PartyMember partySupportSkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
 
-                PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster, chaldeaHolyMaidenTeachingMlb);
-
-                party.Add(partyMemberSupportCaster);
+                party.Add(partySupportSkadi);
                 #endregion
 
                 MysticCode mysticCode = new MysticCode
@@ -238,7 +169,7 @@ namespace FateGrandCalculator.Test
                 /* Simulate node combat */
                 // Fight 1/3
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 1, party, 1, enemyMobs); // Skadi quick up buff
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, 1, enemyMobs); // Skadi (support) quick up buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 1, party, 1, enemyMobs); // Skadi (support) quick up buff
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 1, party, 1, enemyMobs); // Parvati quick up buff
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
@@ -258,10 +189,10 @@ namespace FateGrandCalculator.Test
 
                 // Fight 3/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 3, party, 1, enemyMobs); // Skadi (support) NP buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 3, party, 1, enemyMobs); // Skadi (support) NP buff
                 resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 1, party, 1, enemyMobs); // Fragment of 2004 NP STR up
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 2, party, 1, enemyMobs); // Skadi enemy defense down
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 2, party, 1, enemyMobs); // Skadi (support) enemy defense down
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 2, party, 1, enemyMobs); // Skadi (support) enemy defense down
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
@@ -270,7 +201,110 @@ namespace FateGrandCalculator.Test
             }
         }
 
+        [Fact]
+        public async Task ArcherNodeParvatiDoubleSkadiWaver5CraftEssence()
+        {
+            _wireMockFixture.CheckIfMockServerInUse();
+            _wireMockUtility.AddStubs(_wireMockFixture);
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                List<PartyMember> party = new List<PartyMember>();
+                CraftEssence chaldeaHolyNightSupper = await FrequentlyUsed.CraftEssenceAsync(resolvedClasses, WireMockUtility.HOLY_NIGHT_SUPPER_CE, 100, true);
+
+                /* Party data */
+                #region Parvati
+                PartyMember partyParvati = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.PARVATI_LANCER, party, resolvedClasses, 2, false, chaldeaHolyNightSupper);
+
+                party.Add(partyParvati);
+                #endregion
+
+                #region Skadi
+                PartyMember partySkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses);
+
+                party.Add(partySkadi);
+                #endregion
+
+                #region Skadi Support
+                PartyMember partySupportSkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
+
+                party.Add(partySupportSkadi);
+                #endregion
+
+                #region Waver
+                PartyMember partyWaver = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.WAVER_CASTER, party, resolvedClasses);
+
+                party.Add(partyWaver);
+                #endregion
+
+                MysticCode mysticCode = new MysticCode
+                {
+                    MysticCodeLevel = 10,
+                    MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.PLUGSUIT_ID)
+                };
+
+                List<EnemyMob> enemyMobs = GetEnemyChristmas2018();
+
+                /* Simulate node combat */
+                // Fight 1/3
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 1, party, 1, enemyMobs); // Skadi quick up buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 1, party, 1, enemyMobs); // Skadi (support) quick up buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 3, party, 1, enemyMobs); // Skadi (support) NP buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 1, party, 1, enemyMobs); // Parvati quick up buff
+
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
+                await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
+
+                _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight");
+
+                // Fight 2/3
+                resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 2, party, 1, enemyMobs); // Skadi (support) enemy defense down
+                resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 3, party, 3, enemyMobs, 3, 4); // Plugsuit swap Skadi (support) for Waver
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyWaver, 1, party, 1, enemyMobs); // Waver crit damage on Parvati with 30% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyWaver, 2, party, 1, enemyMobs); // Waver defense up to party with 10% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyWaver, 3, party, 1, enemyMobs); // Waver attack up to party with 10% charge
+
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
+                await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
+
+                _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
+
+                List<EnemyMob> waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Second);
+                ShowSurvivingEnemyHealth(waveSurvivors);
+
+                // Fight 3/3
+                resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
+                resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(mysticCode);
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 2, party, 1, enemyMobs); // Skadi enemy defense down
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 3, party, 1, enemyMobs); // Skadi NP buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 2, party, 1, enemyMobs); // Parvati ATK, DEF, Star Drop Rate, & Crit Rate Up
+                resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 1, party, 1, enemyMobs); // Plugsuit ATK up
+
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
+                await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
+
+                waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Third);
+                ShowSurvivingEnemyHealth(waveSurvivors);
+
+                using (new AssertionScope())
+                {
+                    enemyMobs.Count.Should().Be(1);
+                    waveSurvivors.Any(h => h.Health < 4000.0f).Should().BeTrue();
+                }
+            }
+        }
+
         #region Private Methods
+        private void ShowSurvivingEnemyHealth(List<EnemyMob> waveSurvivors)
+        {
+            foreach (EnemyMob enemy in waveSurvivors)
+            {
+                _output.WriteLine($"{enemy.Name} has {enemy.Health} HP left");
+            }
+        }
+
         private List<EnemyMob> GetEnemyChristmas2018()
         {
             #region First Wave
