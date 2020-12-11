@@ -383,14 +383,14 @@ namespace FateGrandCalculator.Core
         /// <summary>
         /// Check if party member has enough NP charge for an attack. If so, add them to the queue
         /// </summary>
+        /// <param name="party"></param>
         /// <param name="partyMember"></param>
-        public void AddPartyMemberToNpChain(List<PartyMember> party, PartyMember partyMember)
+        /// <returns></returns>
+        public bool AddPartyMemberToNpChain(List<PartyMember> party, PartyMember partyMember)
         {
             if (partyMember.NpCharge < 100.0f)
             {
-#if DEBUG
-                Console.WriteLine($"{partyMember.Servant.ServantInfo.Name} only has {partyMember.NpCharge}% charge");
-#endif
+                return false;
             }
             else
             {
@@ -408,11 +408,11 @@ namespace FateGrandCalculator.Core
                 }
                 else
                 {
-#if DEBUG
-                    Console.WriteLine("Error: Max NP chain limit is 3");
-#endif
+                    return false; // max NP chain limit is 3
                 }
             }
+
+            return true;
         }
 
         /// <summary>

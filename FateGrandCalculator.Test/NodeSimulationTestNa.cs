@@ -227,7 +227,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, 1, enemyMobs); // Skadi (support) quick up buff
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberAttacker, 2, party, 1, enemyMobs); // Dante's 2nd skill
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyMemberAttacker);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyMemberAttacker).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
 
                 _output.WriteLine($"{partyMemberAttacker.Servant.ServantInfo.Name} has {partyMemberAttacker.NpCharge}% charge after the 1st fight");
@@ -236,7 +236,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberCaster, 3, party, 1, enemyMobs); // Skadi NP buff
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyMemberAttacker);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyMemberAttacker).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
 
                 _output.WriteLine($"{partyMemberAttacker.Servant.ServantInfo.Name} has {partyMemberAttacker.NpCharge}% charge after the 2nd fight");
@@ -249,7 +249,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberAttacker, 1, party, 1, enemyMobs); // Dante's 1st skill
                 resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 2, party, 1, enemyMobs); // Artic mystic code ATK and NP damage up
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyMemberAttacker);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyMemberAttacker).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
 
                 foreach (EnemyMob enemyMob in enemyMobs.FindAll(e => e.Health > 0.0f))
@@ -485,7 +485,7 @@ namespace FateGrandCalculator.Test
                 // Fight 1/3
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyArash, 3, party, 1, enemyMobs); // Arash NP charge
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyArash);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyArash).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
 
                 // Fight 2/3
@@ -493,7 +493,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyLancelot, 3, party, 1, enemyMobs); // Zerkalot NP gain up
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, 1, enemyMobs); // Skadi quick buff up
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyLancelot);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyLancelot).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
 
                 _output.WriteLine($"{partyLancelot.Servant.ServantInfo.Name} has {partyLancelot.NpCharge}% charge after the 2nd fight");
@@ -503,8 +503,8 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 2, party, 1, enemyMobs); // Skadi (support) enemy defense down
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 3, party, 1, enemyMobs); // Skadi (support) NP buff
                 resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 1, party, 1, enemyMobs); // Fragment of 2004's NP strength buff
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyLancelot);
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyJack);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyLancelot).Should().BeTrue();
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyJack).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
 
                 _output.WriteLine($"{partyLancelot.Servant.ServantInfo.Name} has {partyLancelot.NpCharge}% charge after the 3rd fight");
@@ -698,14 +698,14 @@ namespace FateGrandCalculator.Test
 
                 /* Simulate node combat */
                 // Fight 1/3
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partySpartacus);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partySpartacus).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
 
                 // Fight 2/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyAstolfo, 3, party, 1, enemyMobs); // Astolfo charge & crit stars & crit damage
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyAstolfo);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyAstolfo).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
 
                 // Fight 3/3
@@ -733,7 +733,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 3, party, 2, enemyMobs); // Waver attack up to party with 10% charge
                 resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 2, party, 2, enemyMobs, 3); // Stun 3rd enemy on the field with plugsuit
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyAstolfo);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyAstolfo).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
 
                 using (new AssertionScope())

@@ -80,7 +80,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 1, party, 1, enemyMobs); // Skadi (support) quick up buff
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 1, party, 1, enemyMobs); // Parvati quick up buff
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight\n");
@@ -89,7 +89,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 3, party, 1, enemyMobs); // Skadi NP buff
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
@@ -112,7 +112,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 2, party, 1, enemyMobs); // Skadi enemy defense down
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 2, party, 1, enemyMobs); // Skadi (support) enemy defense down
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
 
                 waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Third);
@@ -172,7 +172,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 1, party, 1, enemyMobs); // Skadi (support) quick up buff
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 1, party, 1, enemyMobs); // Parvati quick up buff
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight");
@@ -182,7 +182,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 3, party, 1, enemyMobs); // Skadi NP buff
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 2, party, 1, enemyMobs); // Parvati ATK, DEF, Star Drop Rate, & Crit Rate Up
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
@@ -194,7 +194,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 2, party, 1, enemyMobs); // Skadi enemy defense down
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 2, party, 1, enemyMobs); // Skadi (support) enemy defense down
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
 
                 enemyMobs.Count.Should().Be(0);
@@ -253,7 +253,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 3, party, 1, enemyMobs); // Skadi (support) NP buff
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 1, party, 1, enemyMobs); // Parvati quick up buff
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight");
@@ -266,7 +266,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyWaver, 2, party, 1, enemyMobs); // Waver defense up to party with 10% charge
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyWaver, 3, party, 1, enemyMobs); // Waver attack up to party with 10% charge
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
@@ -282,7 +282,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 2, party, 1, enemyMobs); // Parvati ATK, DEF, Star Drop Rate, & Crit Rate Up
                 resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 1, party, 1, enemyMobs); // Plugsuit ATK up
 
-                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati);
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
 
                 waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Third);

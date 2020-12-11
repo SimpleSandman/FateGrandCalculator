@@ -1,0 +1,4525 @@
+﻿{
+  "id": 501200,
+  "collectionNo": 120,
+  "name": "Nitocris",
+  "className": "caster",
+  "type": "normal",
+  "flag": "normal",
+  "rarity": 4,
+  "cost": 12,
+  "lvMax": 80,
+  "extraAssets": {
+    "charaGraph": {
+      "ascension": {
+        "1": "https://assets.atlasacademy.io/GameData/JP/CharaGraph/501200/501200a@1.png",
+        "2": "https://assets.atlasacademy.io/GameData/JP/CharaGraph/501200/501200a@2.png",
+        "3": "https://assets.atlasacademy.io/GameData/JP/CharaGraph/501200/501200b@1.png",
+        "4": "https://assets.atlasacademy.io/GameData/JP/CharaGraph/501200/501200b@2.png"
+      }
+    },
+    "faces": {
+      "ascension": {
+        "1": "https://assets.atlasacademy.io/GameData/JP/Faces/f_5012000.png",
+        "2": "https://assets.atlasacademy.io/GameData/JP/Faces/f_5012001.png",
+        "3": "https://assets.atlasacademy.io/GameData/JP/Faces/f_5012002.png",
+        "4": "https://assets.atlasacademy.io/GameData/JP/Faces/f_5012003.png"
+      }
+    },
+    "narrowFigure": {
+      "ascension": {
+        "1": "https://assets.atlasacademy.io/GameData/JP/NarrowFigure/501200/501200@0.png",
+        "2": "https://assets.atlasacademy.io/GameData/JP/NarrowFigure/501200/501200@1.png",
+        "3": "https://assets.atlasacademy.io/GameData/JP/NarrowFigure/501200/501200@2.png",
+        "4": "https://assets.atlasacademy.io/GameData/JP/NarrowFigure/501200/501200_2@0.png"
+      }
+    },
+    "charaFigure": {
+      "ascension": {
+        "1": "https://assets.atlasacademy.io/GameData/JP/CharaFigure/5012000/5012000_merged.png",
+        "2": "https://assets.atlasacademy.io/GameData/JP/CharaFigure/5012001/5012001_merged.png",
+        "3": "https://assets.atlasacademy.io/GameData/JP/CharaFigure/5012002/5012002_merged.png"
+      }
+    },
+    "charaFigureForm": {},
+    "commands": {
+      "ascension": {
+        "1": "https://assets.atlasacademy.io/GameData/JP/Servants/Commands/501200/card_servant_1.png",
+        "2": "https://assets.atlasacademy.io/GameData/JP/Servants/Commands/501200/card_servant_2.png",
+        "3": "https://assets.atlasacademy.io/GameData/JP/Servants/Commands/501200/card_servant_3.png"
+      }
+    },
+    "status": {
+      "ascension": {
+        "1": "https://assets.atlasacademy.io/GameData/JP/Servants/Status/501200/status_servant_1.png",
+        "2": "https://assets.atlasacademy.io/GameData/JP/Servants/Status/501200/status_servant_2.png",
+        "3": "https://assets.atlasacademy.io/GameData/JP/Servants/Status/501200/status_servant_3.png"
+      }
+    },
+    "equipFace": {}
+  },
+  "gender": "female",
+  "attribute": "earth",
+  "traits": [
+    {
+      "id": 2,
+      "name": "genderFemale"
+    },
+    {
+      "id": 104,
+      "name": "classCaster"
+    },
+    {
+      "id": 201,
+      "name": "attributeEarth"
+    },
+    {
+      "id": 300,
+      "name": "alignmentLawful"
+    },
+    {
+      "id": 303,
+      "name": "alignmentGood"
+    },
+    {
+      "id": 1000,
+      "name": "basedOnServant"
+    },
+    {
+      "id": 2000,
+      "name": "divine"
+    },
+    {
+      "id": 2001,
+      "name": "humanoid"
+    },
+    {
+      "id": 2008,
+      "name": "weakToEnumaElish"
+    },
+    {
+      "id": 2011,
+      "name": "skyOrEarth"
+    },
+    {
+      "id": 2037,
+      "name": "skyOrEarthExceptPseudoAndDemi"
+    },
+    {
+      "id": 2040,
+      "name": "divineOrDaemonOrUndead"
+    },
+    {
+      "id": 2113,
+      "name": "king"
+    },
+    {
+      "id": 2631,
+      "name": "hominidaeServant"
+    },
+    {
+      "id": 5000,
+      "name": "canBeInBattle"
+    },
+    {
+      "id": 501200,
+      "name": "unknown"
+    }
+  ],
+  "starAbsorb": 50,
+  "starGen": 108,
+  "instantDeathChance": 360,
+  "cards": [
+    "quick",
+    "arts",
+    "arts",
+    "arts",
+    "buster"
+  ],
+  "hitsDistribution": {
+    "arts": [
+      16,
+      33,
+      51
+    ],
+    "buster": [
+      16,
+      33,
+      51
+    ],
+    "quick": [
+      10,
+      20,
+      30,
+      40
+    ],
+    "extra": [
+      6,
+      13,
+      20,
+      26,
+      35
+    ]
+  },
+  "atkBase": 1510,
+  "atkMax": 9060,
+  "hpBase": 1806,
+  "hpMax": 11288,
+  "relateQuestIds": [
+    91501201
+  ],
+  "growthCurve": 9,
+  "atkGrowth": [
+    1510,
+    1653,
+    1804,
+    1955,
+    2106,
+    2249,
+    2400,
+    2544,
+    2687,
+    2831,
+    2967,
+    3103,
+    3238,
+    3374,
+    3503,
+    3624,
+    3752,
+    3865,
+    3986,
+    4092,
+    4205,
+    4303,
+    4401,
+    4499,
+    4582,
+    4673,
+    4748,
+    4824,
+    4892,
+    4960,
+    5013,
+    5066,
+    5111,
+    5156,
+    5194,
+    5224,
+    5247,
+    5262,
+    5277,
+    5285,
+    5292,
+    5300,
+    5307,
+    5315,
+    5337,
+    5368,
+    5405,
+    5451,
+    5496,
+    5549,
+    5602,
+    5670,
+    5738,
+    5813,
+    5889,
+    5979,
+    6062,
+    6160,
+    6258,
+    6357,
+    6470,
+    6576,
+    6696,
+    6810,
+    6938,
+    7059,
+    7187,
+    7323,
+    7459,
+    7595,
+    7731,
+    7874,
+    8018,
+    8161,
+    8312,
+    8456,
+    8607,
+    8758,
+    8909,
+    9060,
+    9150,
+    9248,
+    9339,
+    9437,
+    9535,
+    9626,
+    9724,
+    9822,
+    9913,
+    10011,
+    10109,
+    10200,
+    10298,
+    10396,
+    10486,
+    10585,
+    10683,
+    10773,
+    10872,
+    10970
+  ],
+  "hpGrowth": [
+    1806,
+    1986,
+    2175,
+    2365,
+    2555,
+    2735,
+    2924,
+    3105,
+    3285,
+    3465,
+    3636,
+    3806,
+    3977,
+    4148,
+    4309,
+    4460,
+    4622,
+    4764,
+    4916,
+    5048,
+    5191,
+    5314,
+    5437,
+    5560,
+    5665,
+    5778,
+    5873,
+    5968,
+    6053,
+    6139,
+    6205,
+    6272,
+    6328,
+    6385,
+    6433,
+    6471,
+    6499,
+    6518,
+    6537,
+    6547,
+    6556,
+    6565,
+    6575,
+    6584,
+    6613,
+    6651,
+    6698,
+    6755,
+    6812,
+    6878,
+    6945,
+    7030,
+    7115,
+    7210,
+    7305,
+    7419,
+    7523,
+    7646,
+    7770,
+    7893,
+    8035,
+    8168,
+    8320,
+    8462,
+    8623,
+    8775,
+    8936,
+    9107,
+    9277,
+    9448,
+    9619,
+    9799,
+    9979,
+    10159,
+    10349,
+    10529,
+    10719,
+    10908,
+    11098,
+    11288,
+    11401,
+    11525,
+    11638,
+    11762,
+    11885,
+    11999,
+    12122,
+    12245,
+    12359,
+    12482,
+    12605,
+    12719,
+    12843,
+    12966,
+    13080,
+    13203,
+    13326,
+    13440,
+    13563,
+    13686
+  ],
+  "bondGrowth": [
+    4000,
+    16000,
+    19000,
+    32000,
+    35000,
+    190000,
+    530000,
+    840000,
+    1200000,
+    1530000,
+    2620000,
+    3850000,
+    5210000,
+    6710000,
+    8350000
+  ],
+  "expGrowth": [
+    0,
+    100,
+    400,
+    1000,
+    2000,
+    3500,
+    5600,
+    8400,
+    12000,
+    16500,
+    22000,
+    28600,
+    36400,
+    45500,
+    56000,
+    68000,
+    81600,
+    96900,
+    114000,
+    133000,
+    154000,
+    177100,
+    202400,
+    230000,
+    260000,
+    292500,
+    327600,
+    365400,
+    406000,
+    449500,
+    496000,
+    545600,
+    598400,
+    654500,
+    714000,
+    777000,
+    843600,
+    913900,
+    988000,
+    1066000,
+    1148000,
+    1234100,
+    1324400,
+    1419000,
+    1518000,
+    1621500,
+    1729600,
+    1842400,
+    1960000,
+    2082500,
+    2210000,
+    2342600,
+    2480400,
+    2623500,
+    2772000,
+    2926000,
+    3085600,
+    3250900,
+    3422000,
+    3599000,
+    3782000,
+    3971100,
+    4166400,
+    4368000,
+    4576000,
+    4790500,
+    5011600,
+    5239400,
+    5474000,
+    5715500,
+    5964000,
+    6219600,
+    6482400,
+    6752500,
+    7030000,
+    7315000,
+    7607600,
+    7907900,
+    8216000,
+    8532000,
+    8856000,
+    9188100,
+    9528400,
+    9877000,
+    10234000,
+    10599500,
+    10973600,
+    11356400,
+    11748000,
+    12148500,
+    12567000,
+    13021900,
+    13532000,
+    14116500,
+    14795000,
+    15587500,
+    16514400,
+    17596500,
+    18855000,
+    20311500
+  ],
+  "expFeed": [
+    12000,
+    12010,
+    12020,
+    12030,
+    12040,
+    12050,
+    12060,
+    12070,
+    12080,
+    12090,
+    12100,
+    12110,
+    12120,
+    12130,
+    12140,
+    12150,
+    12160,
+    12170,
+    12180,
+    12190,
+    12200,
+    12210,
+    12220,
+    12230,
+    12240,
+    12250,
+    12260,
+    12270,
+    12280,
+    12290,
+    12300,
+    12310,
+    12320,
+    12330,
+    12340,
+    12350,
+    12360,
+    12370,
+    12380,
+    12390,
+    12400,
+    12410,
+    12420,
+    12430,
+    12440,
+    12450,
+    12460,
+    12470,
+    12480,
+    12490,
+    12500,
+    12510,
+    12520,
+    12530,
+    12540,
+    12550,
+    12560,
+    12570,
+    12580,
+    12590,
+    12600,
+    12610,
+    12620,
+    12630,
+    12640,
+    12650,
+    12660,
+    12670,
+    12680,
+    12690,
+    12700,
+    12710,
+    12720,
+    12730,
+    12740,
+    12750,
+    12760,
+    12770,
+    12780,
+    12790,
+    12800,
+    12810,
+    12820,
+    12830,
+    12840,
+    12850,
+    12860,
+    12870,
+    12880,
+    12890,
+    12900,
+    12910,
+    12920,
+    12930,
+    12940,
+    12950,
+    12960,
+    12970,
+    12980,
+    12990
+  ],
+  "bondEquip": 9301250,
+  "ascensionAdd": {
+    "individuality": {
+      "ascension": {},
+      "costume": {}
+    },
+    "voicePrefix": {
+      "ascension": {},
+      "costume": {}
+    }
+  },
+  "svtChange": [],
+  "ascensionMaterials": {
+    "0": {
+      "items": [
+        {
+          "item": {
+            "id": 7005,
+            "name": "キャスターピース",
+            "type": "tdLvUp",
+            "detail": "【霊基再臨素材】\nキャスタークラスを象徴するピース",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/7005.png",
+            "background": "silver"
+          },
+          "amount": 4
+        }
+      ],
+      "qp": 50000
+    },
+    "1": {
+      "items": [
+        {
+          "item": {
+            "id": 7005,
+            "name": "キャスターピース",
+            "type": "tdLvUp",
+            "detail": "【霊基再臨素材】\nキャスタークラスを象徴するピース",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/7005.png",
+            "background": "silver"
+          },
+          "amount": 10
+        },
+        {
+          "item": {
+            "id": 6511,
+            "name": "禁断の頁",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n何人も読んではならない頁。\nたいていは最初か最後にまぎれている。",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6511.png",
+            "background": "silver"
+          },
+          "amount": 6
+        }
+      ],
+      "qp": 150000
+    },
+    "2": {
+      "items": [
+        {
+          "item": {
+            "id": 7105,
+            "name": "キャスターモニュメント",
+            "type": "tdLvUp",
+            "detail": "【霊基再臨素材】\nキャスタークラスを称えるモニュメント",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/7105.png",
+            "background": "gold"
+          },
+          "amount": 4
+        },
+        {
+          "item": {
+            "id": 6522,
+            "name": "愚者の鎖",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n天に召されゆく儚き魂を\n現世に繋ぎ留めようとして造られた鎖。",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6522.png",
+            "background": "bronze"
+          },
+          "amount": 24
+        },
+        {
+          "item": {
+            "id": 6525,
+            "name": "智慧のスカラベ",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n再生と復活の象徴たる聖なる虫の飾り物。\n難題を解きし真に聡しき者にのみ与えられる。",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6525.png",
+            "background": "gold"
+          },
+          "amount": 2
+        }
+      ],
+      "qp": 500000
+    },
+    "3": {
+      "items": [
+        {
+          "item": {
+            "id": 7105,
+            "name": "キャスターモニュメント",
+            "type": "tdLvUp",
+            "detail": "【霊基再臨素材】\nキャスタークラスを称えるモニュメント",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/7105.png",
+            "background": "gold"
+          },
+          "amount": 10
+        },
+        {
+          "item": {
+            "id": 6525,
+            "name": "智慧のスカラベ",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n再生と復活の象徴たる聖なる虫の飾り物。\n難題を解きし真に聡しき者にのみ与えられる。",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6525.png",
+            "background": "gold"
+          },
+          "amount": 4
+        },
+        {
+          "item": {
+            "id": 6523,
+            "name": "封魔のランプ",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n強大な魔力を持つ精霊が\n封じこめられているという妖艶なランプ。",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6523.png",
+            "background": "gold"
+          },
+          "amount": 6
+        }
+      ],
+      "qp": 1500000
+    }
+  },
+  "skillMaterials": {
+    "1": {
+      "items": [
+        {
+          "item": {
+            "id": 6005,
+            "name": "術の輝石",
+            "type": "skillLvUp",
+            "detail": "【スキル強化素材】\n魔術師の力が宿った光輝く石",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6005.png",
+            "background": "bronze"
+          },
+          "amount": 4
+        }
+      ],
+      "qp": 100000
+    },
+    "2": {
+      "items": [
+        {
+          "item": {
+            "id": 6005,
+            "name": "術の輝石",
+            "type": "skillLvUp",
+            "detail": "【スキル強化素材】\n魔術師の力が宿った光輝く石",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6005.png",
+            "background": "bronze"
+          },
+          "amount": 10
+        }
+      ],
+      "qp": 200000
+    },
+    "3": {
+      "items": [
+        {
+          "item": {
+            "id": 6105,
+            "name": "術の魔石",
+            "type": "skillLvUp",
+            "detail": "【スキル強化素材】\n魔術師の強い力が宿った魔法石",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6105.png",
+            "background": "silver"
+          },
+          "amount": 4
+        }
+      ],
+      "qp": 600000
+    },
+    "4": {
+      "items": [
+        {
+          "item": {
+            "id": 6105,
+            "name": "術の魔石",
+            "type": "skillLvUp",
+            "detail": "【スキル強化素材】\n魔術師の強い力が宿った魔法石",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6105.png",
+            "background": "silver"
+          },
+          "amount": 10
+        },
+        {
+          "item": {
+            "id": 6522,
+            "name": "愚者の鎖",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n天に召されゆく儚き魂を\n現世に繋ぎ留めようとして造られた鎖。",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6522.png",
+            "background": "bronze"
+          },
+          "amount": 12
+        }
+      ],
+      "qp": 800000
+    },
+    "5": {
+      "items": [
+        {
+          "item": {
+            "id": 6205,
+            "name": "術の秘石",
+            "type": "skillLvUp",
+            "detail": "【スキル強化素材】\n魔術師の強大な力が宿った宝石",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6205.png",
+            "background": "gold"
+          },
+          "amount": 4
+        },
+        {
+          "item": {
+            "id": 6522,
+            "name": "愚者の鎖",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n天に召されゆく儚き魂を\n現世に繋ぎ留めようとして造られた鎖。",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6522.png",
+            "background": "bronze"
+          },
+          "amount": 24
+        }
+      ],
+      "qp": 2000000
+    },
+    "6": {
+      "items": [
+        {
+          "item": {
+            "id": 6205,
+            "name": "術の秘石",
+            "type": "skillLvUp",
+            "detail": "【スキル強化素材】\n魔術師の強大な力が宿った宝石",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6205.png",
+            "background": "gold"
+          },
+          "amount": 10
+        },
+        {
+          "item": {
+            "id": 6511,
+            "name": "禁断の頁",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n何人も読んではならない頁。\nたいていは最初か最後にまぎれている。",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6511.png",
+            "background": "silver"
+          },
+          "amount": 4
+        }
+      ],
+      "qp": 2500000
+    },
+    "7": {
+      "items": [
+        {
+          "item": {
+            "id": 6511,
+            "name": "禁断の頁",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n何人も読んではならない頁。\nたいていは最初か最後にまぎれている。",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6511.png",
+            "background": "silver"
+          },
+          "amount": 8
+        },
+        {
+          "item": {
+            "id": 6517,
+            "name": "蛮神の心臓",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n荒ぶるデミゴッドの心臓。\n偽りとはいえ神は神。\nその鼓動は多くの呪いを放つ。",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6517.png",
+            "background": "gold"
+          },
+          "amount": 2
+        }
+      ],
+      "qp": 5000000
+    },
+    "8": {
+      "items": [
+        {
+          "item": {
+            "id": 6517,
+            "name": "蛮神の心臓",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n荒ぶるデミゴッドの心臓。\n偽りとはいえ神は神。\nその鼓動は多くの呪いを放つ。",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6517.png",
+            "background": "gold"
+          },
+          "amount": 6
+        },
+        {
+          "item": {
+            "id": 6516,
+            "name": "凶骨",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n呪いを纏った禍々しい骨",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6516.png",
+            "background": "bronze"
+          },
+          "amount": 60
+        }
+      ],
+      "qp": 6000000
+    },
+    "9": {
+      "items": [
+        {
+          "item": {
+            "id": 6999,
+            "name": "伝承結晶",
+            "type": "skillLvUp",
+            "detail": "【スキル強化＆霊基再臨素材】\n人類史とマナの奔流が交差する事で\n産み出される高純度の魔力結晶。\n物質化した英霊の素材とも言える。",
+            "icon": "https://assets.atlasacademy.io/GameData/JP/Items/6999.png",
+            "background": "gold"
+          },
+          "amount": 1
+        }
+      ],
+      "qp": 10000000
+    }
+  },
+  "costumeMaterials": {},
+  "script": {},
+  "skills": [
+    {
+      "id": 238550,
+      "num": 1,
+      "name": "エジプト魔術 A",
+      "detail": "自身の即死付与成功率をアップ(3ターン)＆HPを回復",
+      "type": "active",
+      "strengthStatus": 0,
+      "priority": 1,
+      "condQuestId": 0,
+      "condQuestPhase": 0,
+      "icon": "https://assets.atlasacademy.io/GameData/JP/SkillIcons/skill_00522.png",
+      "coolDown": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        6,
+        6,
+        6,
+        6,
+        5
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 878,
+          "funcType": "addStateShort",
+          "funcTargetType": "self",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "即死付与率アップ",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_337.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 248,
+              "name": "即死付与率アップ",
+              "detail": "即死付与率をアップ",
+              "icon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_337.png",
+              "type": "upGrantInstantdeath",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 550
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 600
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 650
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 700
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 750
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 800
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 850
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 900
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 1000
+            }
+          ]
+        },
+        {
+          "funcId": 440,
+          "funcType": "gainHp",
+          "funcTargetType": "self",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Value": 1200
+            },
+            {
+              "Rate": 1000,
+              "Value": 1400
+            },
+            {
+              "Rate": 1000,
+              "Value": 1600
+            },
+            {
+              "Rate": 1000,
+              "Value": 1800
+            },
+            {
+              "Rate": 1000,
+              "Value": 2000
+            },
+            {
+              "Rate": 1000,
+              "Value": 2200
+            },
+            {
+              "Rate": 1000,
+              "Value": 2400
+            },
+            {
+              "Rate": 1000,
+              "Value": 2600
+            },
+            {
+              "Rate": 1000,
+              "Value": 3000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 89450,
+      "num": 2,
+      "name": "高速神言 B",
+      "detail": "自身のNPをものすごく増やす",
+      "type": "active",
+      "strengthStatus": 0,
+      "priority": 1,
+      "condQuestId": 0,
+      "condQuestPhase": 0,
+      "icon": "https://assets.atlasacademy.io/GameData/JP/SkillIcons/skill_00601.png",
+      "coolDown": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        8,
+        8,
+        8,
+        8,
+        7
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 461,
+          "funcType": "gainNp",
+          "funcTargetType": "self",
+          "funcTargetTeam": "player",
+          "funcPopupText": "NP増加",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 6600
+            },
+            {
+              "Rate": 1000,
+              "Value": 7200
+            },
+            {
+              "Rate": 1000,
+              "Value": 7800
+            },
+            {
+              "Rate": 1000,
+              "Value": 8400
+            },
+            {
+              "Rate": 1000,
+              "Value": 9000
+            },
+            {
+              "Rate": 1000,
+              "Value": 9600
+            },
+            {
+              "Rate": 1000,
+              "Value": 10200
+            },
+            {
+              "Rate": 1000,
+              "Value": 10800
+            },
+            {
+              "Rate": 1000,
+              "Value": 12000
+            }
+          ]
+        },
+        {
+          "funcId": 470,
+          "funcType": "hastenNpturn",
+          "funcTargetType": "self",
+          "funcTargetTeam": "enemy",
+          "funcPopupText": "チャージ増加",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Value": 2
+            },
+            {
+              "Rate": 1000,
+              "Value": 2
+            },
+            {
+              "Rate": 1000,
+              "Value": 2
+            },
+            {
+              "Rate": 1000,
+              "Value": 2
+            },
+            {
+              "Rate": 1000,
+              "Value": 2
+            },
+            {
+              "Rate": 1000,
+              "Value": 2
+            },
+            {
+              "Rate": 1000,
+              "Value": 2
+            },
+            {
+              "Rate": 1000,
+              "Value": 2
+            },
+            {
+              "Rate": 1000,
+              "Value": 2
+            },
+            {
+              "Rate": 1000,
+              "Value": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 239450,
+      "num": 3,
+      "name": "天空神の寵愛 B",
+      "detail": "自身にガッツ状態を付与(1回・3ターン)＆弱体状態を解除",
+      "type": "active",
+      "strengthStatus": 0,
+      "priority": 1,
+      "condQuestId": 0,
+      "condQuestPhase": 0,
+      "icon": "https://assets.atlasacademy.io/GameData/JP/SkillIcons/skill_00404.png",
+      "coolDown": [
+        7,
+        7,
+        7,
+        7,
+        7,
+        6,
+        6,
+        6,
+        6,
+        5
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 292,
+          "funcType": "addState",
+          "funcTargetType": "self",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "ガッツ",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_304.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 180,
+              "name": "ガッツ",
+              "detail": "HPが0になった時、HPを回復して耐える",
+              "icon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_304.png",
+              "type": "guts",
+              "buffGroup": 600,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                },
+                {
+                  "id": 3024,
+                  "name": "buffGuts"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 0
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": 1,
+              "Value": 1000
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": 1,
+              "Value": 1100
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": 1,
+              "Value": 1200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": 1,
+              "Value": 1300
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": 1,
+              "Value": 1400
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": 1,
+              "Value": 1500
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": 1,
+              "Value": 1600
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": 1,
+              "Value": 1700
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": 1,
+              "Value": 1800
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": 1,
+              "Value": 2000
+            }
+          ]
+        },
+        {
+          "funcId": 434,
+          "funcType": "subState",
+          "funcTargetType": "self",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "弱体解除",
+          "functvals": [],
+          "funcquestTvals": [],
+          "traitVals": [
+            {
+              "id": 3005,
+              "name": "buffNegativeEffect"
+            }
+          ],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "classPassive": [
+    {
+      "id": 83550,
+      "name": "陣地作成 A",
+      "detail": "自身のArtsカードの性能をアップ",
+      "type": "passive",
+      "icon": "https://assets.atlasacademy.io/GameData/JP/SkillIcons/skill_00104.png",
+      "coolDown": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 109,
+          "funcType": "addStateShort",
+          "funcTargetType": "self",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "アーツアップ",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_313.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 101,
+              "name": "Artsアップ",
+              "detail": "Artsカードの性能をアップ",
+              "icon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_313.png",
+              "type": "upCommandall",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                },
+                {
+                  "id": 3006,
+                  "name": "buffIncreaseDamage"
+                }
+              ],
+              "tvals": [
+                {
+                  "id": 5000,
+                  "name": "canBeInBattle"
+                },
+                {
+                  "id": 4001,
+                  "name": "cardArts"
+                }
+              ],
+              "ckSelfIndv": [
+                {
+                  "id": 4001,
+                  "name": "cardArts"
+                }
+              ],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 80451,
+      "name": "道具作成 B+",
+      "detail": "自身の弱体付与成功率をアップ",
+      "type": "passive",
+      "icon": "https://assets.atlasacademy.io/GameData/JP/SkillIcons/skill_00103.png",
+      "coolDown": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 373,
+          "funcType": "addStateShort",
+          "funcTargetType": "self",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "弱体付与アップ",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_307.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 158,
+              "name": "弱体付与アップ",
+              "detail": "弱体付与率をアップ",
+              "icon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_307.png",
+              "type": "upGrantstate",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                }
+              ],
+              "tvals": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                }
+              ],
+              "ckSelfIndv": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                }
+              ],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 90
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 90
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 90
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 90
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 90
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 90
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 90
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 90
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 90
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 90
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 62450,
+      "name": "神性 B",
+      "detail": "自身に与ダメージプラス状態を付与",
+      "type": "passive",
+      "icon": "https://assets.atlasacademy.io/GameData/JP/SkillIcons/skill_00326.png",
+      "coolDown": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "actIndividuality": [],
+      "script": {},
+      "functions": [
+        {
+          "funcId": 265,
+          "funcType": "addStateShort",
+          "funcTargetType": "self",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "アタックプラス",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_302.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 136,
+              "name": "ダメージプラス",
+              "detail": "与えるダメージを増やす",
+              "icon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_302.png",
+              "type": "addDamage",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3004,
+                  "name": "buffPositiveEffect"
+                },
+                {
+                  "id": 3006,
+                  "name": "buffIncreaseDamage"
+                },
+                {
+                  "id": 3029,
+                  "name": "buffDamagePlus"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 0
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 175
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 175
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 175
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 175
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 175
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 175
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 175
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 175
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 175
+            },
+            {
+              "Rate": 1000,
+              "Turn": -1,
+              "Count": -1,
+              "Value": 175
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "noblePhantasms": [
+    {
+      "id": 501201,
+      "num": 1,
+      "card": "arts",
+      "name": "冥鏡宝典",
+      "icon": "https://assets.atlasacademy.io/GameData/JP/Servants/Commands/501200/card_servant_np.png",
+      "rank": "B+",
+      "type": "対軍宝具",
+      "detail": "敵全体に確率で即死<オーバーチャージで確率アップ>＆強力な攻撃",
+      "npGain": {
+        "buster": [
+          54,
+          54,
+          54,
+          54,
+          54
+        ],
+        "arts": [
+          54,
+          54,
+          54,
+          54,
+          54
+        ],
+        "quick": [
+          54,
+          54,
+          54,
+          54,
+          54
+        ],
+        "extra": [
+          54,
+          54,
+          54,
+          54,
+          54
+        ],
+        "defence": [
+          300,
+          300,
+          300,
+          300,
+          300
+        ],
+        "np": [
+          54,
+          54,
+          54,
+          54,
+          54
+        ]
+      },
+      "npDistribution": [
+        16,
+        33,
+        51
+      ],
+      "strengthStatus": 1,
+      "priority": 101,
+      "condQuestId": 0,
+      "condQuestPhase": 0,
+      "individuality": [
+        {
+          "id": 3002,
+          "name": "normalAttack2"
+        },
+        {
+          "id": 4001,
+          "name": "cardArts"
+        },
+        {
+          "id": 4007,
+          "name": "cardNP"
+        },
+        {
+          "id": 4101,
+          "name": "aoeNP"
+        }
+      ],
+      "functions": [
+        {
+          "funcId": 632,
+          "funcType": "instantDeath",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "即死",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 500
+            },
+            {
+              "Rate": 500
+            },
+            {
+              "Rate": 500
+            },
+            {
+              "Rate": 500
+            },
+            {
+              "Rate": 500
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 625
+            },
+            {
+              "Rate": 625
+            },
+            {
+              "Rate": 625
+            },
+            {
+              "Rate": 625
+            },
+            {
+              "Rate": 625
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 750
+            },
+            {
+              "Rate": 750
+            },
+            {
+              "Rate": 750
+            },
+            {
+              "Rate": 750
+            },
+            {
+              "Rate": 750
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 875
+            },
+            {
+              "Rate": 875
+            },
+            {
+              "Rate": 875
+            },
+            {
+              "Rate": 875
+            },
+            {
+              "Rate": 875
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            }
+          ]
+        },
+        {
+          "funcId": 13,
+          "funcType": "damageNp",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "なし",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Value": 4500
+            },
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 6750
+            },
+            {
+              "Rate": 1000,
+              "Value": 7125
+            },
+            {
+              "Rate": 1000,
+              "Value": 7500
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 1000,
+              "Value": 4500
+            },
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 6750
+            },
+            {
+              "Rate": 1000,
+              "Value": 7125
+            },
+            {
+              "Rate": 1000,
+              "Value": 7500
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 1000,
+              "Value": 4500
+            },
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 6750
+            },
+            {
+              "Rate": 1000,
+              "Value": 7125
+            },
+            {
+              "Rate": 1000,
+              "Value": 7500
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 1000,
+              "Value": 4500
+            },
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 6750
+            },
+            {
+              "Rate": 1000,
+              "Value": 7125
+            },
+            {
+              "Rate": 1000,
+              "Value": 7500
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000,
+              "Value": 4500
+            },
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 6750
+            },
+            {
+              "Rate": 1000,
+              "Value": 7125
+            },
+            {
+              "Rate": 1000,
+              "Value": 7500
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 501202,
+      "num": 1,
+      "card": "arts",
+      "name": "冥鏡宝典",
+      "icon": "https://assets.atlasacademy.io/GameData/JP/Servants/Commands/501200/card_servant_np.png",
+      "rank": "B++",
+      "type": "対軍宝具",
+      "detail": "敵全体に確率で即死<オーバーチャージで確率アップ>＆強力な攻撃▲＆クリティカル発生率をダウン(3ターン)▲",
+      "npGain": {
+        "buster": [
+          54,
+          54,
+          54,
+          54,
+          54
+        ],
+        "arts": [
+          54,
+          54,
+          54,
+          54,
+          54
+        ],
+        "quick": [
+          54,
+          54,
+          54,
+          54,
+          54
+        ],
+        "extra": [
+          54,
+          54,
+          54,
+          54,
+          54
+        ],
+        "defence": [
+          300,
+          300,
+          300,
+          300,
+          300
+        ],
+        "np": [
+          54,
+          54,
+          54,
+          54,
+          54
+        ]
+      },
+      "npDistribution": [
+        16,
+        33,
+        51
+      ],
+      "strengthStatus": 2,
+      "priority": 102,
+      "condQuestId": 91501201,
+      "condQuestPhase": 1,
+      "individuality": [
+        {
+          "id": 3002,
+          "name": "normalAttack2"
+        },
+        {
+          "id": 4001,
+          "name": "cardArts"
+        },
+        {
+          "id": 4007,
+          "name": "cardNP"
+        },
+        {
+          "id": 4101,
+          "name": "aoeNP"
+        }
+      ],
+      "functions": [
+        {
+          "funcId": 632,
+          "funcType": "instantDeath",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "即死",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 500
+            },
+            {
+              "Rate": 500
+            },
+            {
+              "Rate": 500
+            },
+            {
+              "Rate": 500
+            },
+            {
+              "Rate": 500
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 625
+            },
+            {
+              "Rate": 625
+            },
+            {
+              "Rate": 625
+            },
+            {
+              "Rate": 625
+            },
+            {
+              "Rate": 625
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 750
+            },
+            {
+              "Rate": 750
+            },
+            {
+              "Rate": 750
+            },
+            {
+              "Rate": 750
+            },
+            {
+              "Rate": 750
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 875
+            },
+            {
+              "Rate": 875
+            },
+            {
+              "Rate": 875
+            },
+            {
+              "Rate": 875
+            },
+            {
+              "Rate": 875
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            },
+            {
+              "Rate": 1000
+            }
+          ]
+        },
+        {
+          "funcId": 13,
+          "funcType": "damageNp",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "playerAndEnemy",
+          "funcPopupText": "なし",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 7500
+            },
+            {
+              "Rate": 1000,
+              "Value": 8250
+            },
+            {
+              "Rate": 1000,
+              "Value": 8625
+            },
+            {
+              "Rate": 1000,
+              "Value": 9000
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 7500
+            },
+            {
+              "Rate": 1000,
+              "Value": 8250
+            },
+            {
+              "Rate": 1000,
+              "Value": 8625
+            },
+            {
+              "Rate": 1000,
+              "Value": 9000
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 7500
+            },
+            {
+              "Rate": 1000,
+              "Value": 8250
+            },
+            {
+              "Rate": 1000,
+              "Value": 8625
+            },
+            {
+              "Rate": 1000,
+              "Value": 9000
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 7500
+            },
+            {
+              "Rate": 1000,
+              "Value": 8250
+            },
+            {
+              "Rate": 1000,
+              "Value": 8625
+            },
+            {
+              "Rate": 1000,
+              "Value": 9000
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000,
+              "Value": 6000
+            },
+            {
+              "Rate": 1000,
+              "Value": 7500
+            },
+            {
+              "Rate": 1000,
+              "Value": 8250
+            },
+            {
+              "Rate": 1000,
+              "Value": 8625
+            },
+            {
+              "Rate": 1000,
+              "Value": 9000
+            }
+          ]
+        },
+        {
+          "funcId": 227,
+          "funcType": "addState",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "enemy",
+          "funcPopupText": "クリティカル発生ダウン",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_523.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 145,
+              "name": "クリティカル発生ダウン",
+              "detail": "クリティカルの発生率をダウン",
+              "icon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_523.png",
+              "type": "downCriticalrate",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                },
+                {
+                  "id": 3008,
+                  "name": "buffDecreaseDamage"
+                },
+                {
+                  "id": 3038,
+                  "name": "buffCritRateDown"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            }
+          ]
+        },
+        {
+          "funcId": 308,
+          "funcType": "addState",
+          "funcTargetType": "enemyAll",
+          "funcTargetTeam": "player",
+          "funcPopupText": "スター発生ダウン",
+          "funcPopupIcon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_510.png",
+          "functvals": [],
+          "funcquestTvals": [],
+          "buffs": [
+            {
+              "id": 118,
+              "name": "スター発生ダウン",
+              "detail": "スター発生率をダウン",
+              "icon": "https://assets.atlasacademy.io/GameData/JP/BuffIcons/bufficon_510.png",
+              "type": "downCriticalpoint",
+              "buffGroup": 0,
+              "script": {},
+              "vals": [
+                {
+                  "id": 3005,
+                  "name": "buffNegativeEffect"
+                }
+              ],
+              "tvals": [],
+              "ckSelfIndv": [],
+              "ckOpIndv": [],
+              "maxRate": 5000
+            }
+          ],
+          "svals": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            }
+          ],
+          "svals2": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            }
+          ],
+          "svals3": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            }
+          ],
+          "svals4": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            }
+          ],
+          "svals5": [
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            },
+            {
+              "Rate": 1000,
+              "Turn": 3,
+              "Count": -1,
+              "Value": 200
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "profile": {
+    "cv": "田中美海",
+    "illustrator": "縞うどん",
+    "stats": {
+      "strength": "E",
+      "endurance": "E",
+      "agility": "C",
+      "magic": "A",
+      "luck": "B+",
+      "np": "B+"
+    },
+    "costume": {},
+    "comments": [
+      {
+        "id": 1,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "古代エジプト第六王朝にて、\n僅かな時期とはいえ玉座に在った魔術女王。\n奇しくもバビロンの古き女王と同じ名を有する。\n愛しき兄弟を謀殺した有力者たちのすべてを\n溺死させ、復讐を果たした後に自死したとされる。",
+        "condType": "none",
+        "condValues": [
+          0
+        ],
+        "condValue2": 0
+      },
+      {
+        "id": 2,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "身長／体重：162cm・51kg\n出典：史実\n地域：エジプト\n属性：秩序・善　　　性別：女性\n彼女が作成する道具には必ず神聖文字が刻まれる。",
+        "condType": "svtFriendship",
+        "condValues": [
+          1
+        ],
+        "condValue2": 0
+      },
+      {
+        "id": 3,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "基本的には楚々とした聡明な人物であり、危険や危機に対しても常に冷静に、最善手を導き出すことが可能な知性と精神力を有している……はずなのだが、しばしば短気と早とちりを繰り返す事には理由がある。\n心の裡に、燃え盛る激しい意思が在るからだ。",
+        "condType": "svtFriendship",
+        "condValues": [
+          2
+        ],
+        "condValue2": 0
+      },
+      {
+        "id": 4,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "傀儡として押し上げられた女王であっても、\n神の子であり、神へと至る王であるファラオ\nとしての自覚をきちんと有している――のだが、\n太陽王オジマンディアスや征服王イスカンダル\nといった偉大なファラオの前では竦んでしまう。",
+        "condType": "svtFriendship",
+        "condValues": [
+          3
+        ],
+        "condValue2": 0
+      },
+      {
+        "id": 5,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "○神性：Ｂ\n民を統べ地に君臨する支配者であると同時に、\n神へと至る者こそがファラオである。\nファラオは時代等によって神性が変化するが、\n彼女は天空神ホルスの子であり、化身とされる。",
+        "condType": "svtFriendship",
+        "condValues": [
+          4
+        ],
+        "condValue2": 0
+      },
+      {
+        "id": 6,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "『冥鏡宝典』\nランク：Ｂ＋　種別：対軍宝具\nアンプゥ・ネブ・タ・ジェセル。\n冥界、あるいは暗黒の異界の姿を映す鏡であるとニトクリスは語るが、詳細は不明。彼女の精神を映し出している、という可能性もある。",
+        "condType": "svtFriendship",
+        "condValues": [
+          5
+        ],
+        "condValue2": 0
+      },
+      {
+        "id": 7,
+        "priority": 0,
+        "condMessage": "",
+        "comment": "聖杯にかける願いは「兄弟たちが永遠の国で\n安らかに暮らしますように」。\n英霊となった彼女には、謀殺された兄弟たちが\n無事に死後の世界“永遠の国”へ辿り着けたか\n分からず、祈るしかないが故に――",
+        "condType": "questClear",
+        "condValues": [
+          91501201
+        ],
+        "condValue2": 0
+      }
+    ],
+    "voices": [
+      {
+        "svtId": 501200,
+        "voicePrefix": 0,
+        "type": "home",
+        "voiceLines": [
+          {
+            "name": "誕生日",
+            "condType": "birthDay",
+            "condValue": 0,
+            "priority": 7960,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H010",
+              "0_H011"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H010.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H011.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1
+            ],
+            "face": [
+              0,
+              0
+            ],
+            "form": [
+              0,
+              0
+            ],
+            "text": [
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "birthDay",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "イベント開催中",
+            "condType": "flag",
+            "condValue": 11,
+            "priority": 7980,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H020",
+              "0_H021"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H020.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H021.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.3
+            ],
+            "face": [
+              6,
+              9
+            ],
+            "form": [
+              0,
+              0
+            ],
+            "text": [
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "event",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "会話 1",
+            "condType": "flag",
+            "condValue": 12,
+            "priority": 8690,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H030",
+              "0_H031",
+              "0_H032"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H030.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H031.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H032.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1
+            ],
+            "face": [
+              6,
+              6,
+              0
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "会話 2",
+            "condType": "flag",
+            "condValue": 13,
+            "priority": 8680,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H040",
+              "0_H041",
+              "0_H042"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H040.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H041.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H042.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1
+            ],
+            "face": [
+              4,
+              9,
+              0
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "会話 3",
+            "condType": "flag",
+            "condValue": 14,
+            "priority": 8670,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H050",
+              "0_H051"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H050.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H051.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1
+            ],
+            "face": [
+              6,
+              6
+            ],
+            "form": [
+              0,
+              0
+            ],
+            "text": [
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "好きなこと",
+            "condType": "flag",
+            "condValue": 15,
+            "priority": 8090,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H060",
+              "0_H061",
+              "0_H062",
+              "0_H063"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H060.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H061.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H062.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H063.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.3,
+              0.1,
+              0.1
+            ],
+            "face": [
+              4,
+              0,
+              6,
+              6
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "嫌いなこと",
+            "condType": "flag",
+            "condValue": 16,
+            "priority": 8060,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H070",
+              "0_H071",
+              "0_H072",
+              "0_H073"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H070.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H071.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H072.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H073.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.3,
+              0.3,
+              0.3
+            ],
+            "face": [
+              4,
+              7,
+              7,
+              7
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "聖杯について",
+            "condType": "flag",
+            "condValue": 17,
+            "priority": 8020,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H080",
+              "0_H081",
+              "0_H082"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H080.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H081.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H082.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1
+            ],
+            "face": [
+              8,
+              7,
+              7
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "絆Lv.1",
+            "condType": "svtFriendship",
+            "condValue": 1,
+            "priority": 8790,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H090",
+              "0_H091",
+              "0_H092"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H090.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H091.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H092.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.3
+            ],
+            "face": [
+              6,
+              8,
+              7
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "friendship",
+                "value": 1,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "絆Lv.2",
+            "condType": "svtFriendship",
+            "condValue": 2,
+            "priority": 8783,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H100",
+              "0_H101",
+              "0_H102",
+              "0_H103",
+              "0_H104"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H100.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H101.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H102.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H103.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H104.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1,
+              0.1,
+              0.1
+            ],
+            "face": [
+              9,
+              9,
+              5,
+              4,
+              3
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "friendship",
+                "value": 2,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "絆Lv.3",
+            "condType": "svtFriendship",
+            "condValue": 3,
+            "priority": 8776,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H110",
+              "0_H111",
+              "0_H112",
+              "0_H113"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H110.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H111.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H112.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H113.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.3,
+              0.1
+            ],
+            "face": [
+              5,
+              9,
+              4,
+              0
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "friendship",
+                "value": 3,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "絆Lv.4",
+            "condType": "svtFriendship",
+            "condValue": 4,
+            "priority": 8769,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H120",
+              "0_H121",
+              "0_H122",
+              "0_H123",
+              "0_H124"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H120.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H121.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H122.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H123.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H124.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1,
+              0.1,
+              0.1
+            ],
+            "face": [
+              0,
+              1,
+              6,
+              6,
+              0
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "friendship",
+                "value": 4,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "絆Lv.5",
+            "condType": "svtFriendship",
+            "condValue": 5,
+            "priority": 8762,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H130",
+              "0_H131",
+              "0_H132",
+              "0_H133",
+              "0_H134"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H130.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H131.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H132.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H133.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H134.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1,
+              0.1,
+              0.1
+            ],
+            "face": [
+              7,
+              6,
+              6,
+              6,
+              6
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "friendship",
+                "value": 5,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "会話 4",
+            "condType": "flag",
+            "condValue": 18,
+            "priority": 8660,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H140",
+              "0_H141"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H140.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H141.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1
+            ],
+            "face": [
+              6,
+              6
+            ],
+            "form": [
+              0,
+              0
+            ],
+            "text": [
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "svtGet",
+                "value": 401200,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "会話 5",
+            "condType": "flag",
+            "condValue": 19,
+            "priority": 8600,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H150",
+              "0_H151"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H150.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H151.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1
+            ],
+            "face": [
+              9,
+              5
+            ],
+            "form": [
+              0,
+              0
+            ],
+            "text": [
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "svtGet",
+                "value": 502200,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "会話 6",
+            "condType": "flag",
+            "condValue": 20,
+            "priority": 8540,
+            "svtVoiceType": "home",
+            "overwriteName": "",
+            "id": [
+              "0_H160",
+              "0_H161",
+              "0_H162",
+              "0_H163"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H160.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H161.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H162.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_H163.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1,
+              0.1
+            ],
+            "face": [
+              4,
+              4,
+              7,
+              8
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "svtGroup",
+                "value": 1025,
+                "valueList": [
+                  101000,
+                  300500,
+                  502600
+                ],
+                "eventId": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "svtId": 501200,
+        "voicePrefix": 0,
+        "type": "groeth",
+        "voiceLines": [
+          {
+            "name": "レベルアップ",
+            "condType": "svtLevel",
+            "condValue": 2,
+            "priority": 8990,
+            "svtVoiceType": "groeth",
+            "overwriteName": "",
+            "id": [
+              "0_G010"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_G010.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "levelUp",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "霊基再臨 2",
+            "condType": "svtLimit",
+            "condValue": 2,
+            "priority": 8880,
+            "svtVoiceType": "groeth",
+            "overwriteName": "",
+            "id": [
+              "0_G020"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_G020.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              6
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "limitCountCommon",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "霊基再臨 1",
+            "condType": "svtLimit",
+            "condValue": 1,
+            "priority": 8890,
+            "svtVoiceType": "groeth",
+            "overwriteName": "",
+            "id": [
+              "0_G030",
+              "0_G031",
+              "0_G032",
+              "0_G033"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_G030.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_G031.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_G032.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_G033.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1,
+              0.1
+            ],
+            "face": [
+              6,
+              0,
+              4,
+              3
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "limitCount",
+                "value": 1,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "霊基再臨 3",
+            "condType": "svtLimit",
+            "condValue": 3,
+            "priority": 8870,
+            "svtVoiceType": "groeth",
+            "overwriteName": "",
+            "id": [
+              "0_G040",
+              "0_G041",
+              "0_G042"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_G040.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_G041.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_G042.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.3,
+              0.1
+            ],
+            "face": [
+              8,
+              6,
+              6
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "limitCount",
+                "value": 3,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          },
+          {
+            "name": "霊基再臨 4",
+            "condType": "svtCountStop",
+            "condValue": 0,
+            "priority": 8860,
+            "svtVoiceType": "groeth",
+            "overwriteName": "",
+            "id": [
+              "0_G050",
+              "0_G051",
+              "0_G052"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_G050.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_G051.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_G052.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.1,
+              0.1
+            ],
+            "face": [
+              6,
+              6,
+              1
+            ],
+            "form": [
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "countStop",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "svtId": 501200,
+        "voicePrefix": 0,
+        "type": "firstGet",
+        "voiceLines": [
+          {
+            "name": "召喚",
+            "condType": "svtGet",
+            "condValue": 0,
+            "priority": 7920,
+            "svtVoiceType": "firstGet",
+            "overwriteName": "",
+            "id": [
+              "0_S010",
+              "0_S011",
+              "0_S012",
+              "0_S013",
+              "0_S014",
+              "0_S015"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_S010.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_S011.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_S012.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_S013.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_S014.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/ChrVoice_501200/0_S015.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.0,
+              0.0,
+              0.3,
+              0.1,
+              0.1
+            ],
+            "face": [
+              6,
+              6,
+              6,
+              9,
+              9,
+              2
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "サーヴァント・キャスター。[r]\n天空の神ホルスの化身、ニトクリス、召喚に応じました。[r]",
+              "\nこのようにファラオではありますが、私はあまりに未熟の身。[r]",
+              "\n故に、今回だけ特別に貴方を「同盟」の相手と認めましょう。[r]",
+              "\n……ですがその前に、言うべき事は言っておきます。[r]",
+              "\n",
+              "頭を垂れなさい。不敬ですよ！[r]"
+            ],
+            "subtitle": "",
+            "conds": []
+          }
+        ]
+      },
+      {
+        "svtId": 501200,
+        "voicePrefix": 0,
+        "type": "battle",
+        "voiceLines": [
+          {
+            "name": "アタック 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9590,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B010"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B010.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "アタック 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9580,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B020"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B020.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "アタック 3",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9570,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B030"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B030.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "エクストラアタック",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9490,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B040"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B040.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "スキル 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9890,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B080"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B080.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "スキル 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9880,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B090"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B090.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "開始 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9990,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B100"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B100.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "開始 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9980,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B110"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B110.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "勝利 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9090,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B120"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B120.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "勝利 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9080,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B130"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B130.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "ダメージ 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9280,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B140"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B140.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "ダメージ 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9290,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B150"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B150.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "戦闘不能 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9190,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B160"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B160.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "戦闘不能 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9180,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B170"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B170.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "コマンドカード 1",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9790,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B180"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B180.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "コマンドカード 2",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9780,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B190"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B190.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "コマンドカード 3",
+            "condType": "none",
+            "condValue": 0,
+            "priority": 9770,
+            "svtVoiceType": "battle",
+            "overwriteName": "",
+            "id": [
+              "0_B200"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B200.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "宝具カード",
+            "condType": "flag",
+            "condValue": 4,
+            "priority": 9690,
+            "svtVoiceType": "battle",
+            "overwriteName": "宝具カード {0}",
+            "id": [
+              "0_B210"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B210.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          },
+          {
+            "name": "宝具カード",
+            "condType": "flag",
+            "condValue": 5,
+            "priority": 9680,
+            "svtVoiceType": "battle",
+            "overwriteName": "宝具カード {0}",
+            "id": [
+              "0_B220"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/Servants_501200/0_B220.mp3"
+            ],
+            "delay": [
+              0.0
+            ],
+            "face": [
+              0
+            ],
+            "form": [
+              0
+            ],
+            "text": [
+              ""
+            ],
+            "subtitle": "",
+            "conds": []
+          }
+        ]
+      },
+      {
+        "svtId": 501200,
+        "voicePrefix": 0,
+        "type": "treasureDevice",
+        "voiceLines": [
+          {
+            "name": "宝具",
+            "condType": "flag",
+            "condValue": 1,
+            "priority": 9390,
+            "svtVoiceType": "treasureDevice",
+            "overwriteName": "",
+            "id": [
+              "0_B050",
+              "0_B051",
+              "0_B052",
+              "0_B053",
+              "0_B054"
+            ],
+            "audioAssets": [
+              "https://assets.atlasacademy.io/GameData/JP/Audio/NoblePhantasm_501200/0_B050.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/NoblePhantasm_501200/0_B051.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/NoblePhantasm_501200/0_B052.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/NoblePhantasm_501200/0_B053.mp3",
+              "https://assets.atlasacademy.io/GameData/JP/Audio/NoblePhantasm_501200/0_B054.mp3"
+            ],
+            "delay": [
+              0.0,
+              0.6300442,
+              2.146293,
+              0.7277836,
+              4.244669
+            ],
+            "face": [
+              4,
+              4,
+              4,
+              4,
+              4
+            ],
+            "form": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "text": [
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            "subtitle": "",
+            "conds": [
+              {
+                "condType": "eventEnd",
+                "value": 0,
+                "valueList": [],
+                "eventId": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -22,7 +22,7 @@ namespace FateGrandCalculator.Core.Interfaces
         int Overcharge(float npCharge, int npChainPosition);
         Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage);
         Task<float> ChancesToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage);
-        void AddPartyMemberToNpChain(List<PartyMember> party, PartyMember partyMember);
+        bool AddPartyMemberToNpChain(List<PartyMember> party, PartyMember partyMember);
         PartyMember AddPartyMember(List<PartyMember> party, ChaldeaServant chaldeaServant, CraftEssence chaldeaCraftEssence = null);
         void ApplyCraftEssenceEffects(PartyMember partyMember);
     }
