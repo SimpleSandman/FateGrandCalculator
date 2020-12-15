@@ -16,11 +16,11 @@ namespace FateGrandCalculator.Core
         /// <param name="partyMemberActor">The acting party member that is giving the status effect</param>
         /// <param name="actorSkillPositionNumber">Skill position number (left = 1, middle = 2, right = 3)</param>
         /// <param name="party">The targeted party members that are receiving the status effect</param>
-        /// <param name="partyMemberPosition">The position the selected party member is currently sitting (1-6)</param>
         /// <param name="enemies">The targeted enemies that are receiving the status effect</param>
+        /// <param name="partyMemberPosition">The position the selected party member is currently sitting (1-6)</param>
         /// <param name="enemyPosition">The position the selected enemy is currently sitting (1-3)</param>
-        public void SkillActivation(PartyMember partyMemberActor, int actorSkillPositionNumber, List<PartyMember> party, int partyMemberPosition, 
-            List<EnemyMob> enemies, int enemyPosition = 3)
+        public void SkillActivation(PartyMember partyMemberActor, int actorSkillPositionNumber, List<PartyMember> party, 
+            List<EnemyMob> enemies, int partyMemberPosition, int enemyPosition = 3)
         {
             if (partyMemberActor.SkillCooldowns.Exists(s => s.SkillId == actorSkillPositionNumber) 
                 || party.IndexOf(partyMemberActor) > 2 
@@ -76,12 +76,12 @@ namespace FateGrandCalculator.Core
         /// <param name="mysticCode">The acting mystic code skill that is giving the buff</param>
         /// <param name="mysticCodeSkillPositionNumber">Skill position number (left = 1, middle = 2, right = 3)</param>
         /// <param name="party">The targeted party members that are receiving the buff</param>
-        /// <param name="partyMemberPosition">The position the selected party member is currently sitting (1-6)</param>
         /// <param name="enemies">The targeted enemies that are receiving the status effect</param>
+        /// <param name="partyMemberPosition">The position the selected party member is currently sitting (1-6)</param>
         /// <param name="enemyPosition">The position the selected enemy is currently sitting (1-3)</param>
         /// <param name="reservePartyMemberIndex">The position of the reserved (4-6) party member when selection the party roster</param>
-        public void SkillActivation(MysticCode mysticCode, int mysticCodeSkillPositionNumber, List<PartyMember> party, int partyMemberPosition,
-            List<EnemyMob> enemies, int enemyPosition = 3, int reservePartyMemberIndex = -1)
+        public void SkillActivation(MysticCode mysticCode, int mysticCodeSkillPositionNumber, List<PartyMember> party, 
+            List<EnemyMob> enemies, int partyMemberPosition = 3, int enemyPosition = 3, int reservePartyMemberIndex = -1)
         {
             if (mysticCode.SkillCooldowns.Exists(s => s.SkillId == mysticCodeSkillPositionNumber))
             {

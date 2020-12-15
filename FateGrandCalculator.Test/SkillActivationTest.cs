@@ -88,16 +88,16 @@ namespace FateGrandCalculator.Test
                     }
                 };
 
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberCaster, 1, party, 1, enemyMobs); // Skadi quick up buff
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, 1, enemyMobs); // Skadi (support) quick up buff
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberAttacker, 2, party, 1, enemyMobs); // Dante's 2nd skill
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberCaster, 1, party, enemyMobs, 1); // Skadi quick up buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, enemyMobs, 1); // Skadi (support) quick up buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberAttacker, 2, party, enemyMobs, 1); // Dante's 2nd skill
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party); // before next turn
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberCaster, 3, party, 1, enemyMobs); // Skadi NP buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberCaster, 3, party, enemyMobs, 1); // Skadi NP buff
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party); // before next turn
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 3, party, 1, enemyMobs); // Skadi (support) NP buff
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 2, party, 1, enemyMobs); // Skadi (support) enemy defense down
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberCaster, 2, party, 1, enemyMobs); // Skadi enemy defense down
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberAttacker, 1, party, 1, enemyMobs); // Dante's 1st skill
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 3, party, enemyMobs, 1); // Skadi (support) NP buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 2, party, enemyMobs, 1); // Skadi (support) enemy defense down
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberCaster, 2, party, enemyMobs, 1); // Skadi enemy defense down
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberAttacker, 1, party, enemyMobs, 1); // Dante's 1st skill
 
                 _output.WriteLine("--- Dantes's active status effects ---");
                 foreach (ActiveStatus activeStatus in partyMemberAttacker.ActiveStatuses)
