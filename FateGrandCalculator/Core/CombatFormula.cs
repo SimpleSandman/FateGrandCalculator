@@ -145,277 +145,6 @@ namespace FateGrandCalculator.Core
         }
 
         /// <summary>
-        /// Set necessary party member status effects for NP damage
-        /// </summary>
-        /// <param name="partyMember"></param>
-        /// <param name="cardNpTypeUp"></param>
-        /// <param name="attackUp"></param>
-        /// <param name="powerModifier"></param>
-        /// <param name="npGainUp"></param>
-        public Tuple<float, float, float, float> SetStatusEffects(PartyMember partyMember, float cardNpTypeUp, float attackUp, float powerModifier, float npGainUp)
-        {
-            const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
-
-            foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
-            {
-                Buff buff = GetBuff(activeStatus);
-                if (buff != null)
-                {
-                    if (buff.Type == "upCommandall" && buff.CkSelfIndv.Any(f => f.Name == ($"card{partyMember.NoblePhantasm.Card.ToUpperFirstChar()}")))
-                    {
-                        // Calculate card buff for NP if same card type
-                        cardNpTypeUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
-                    }
-                    else if (buff.Type == "upAtk")
-                    {
-                        attackUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
-                    }
-                    else if (buff.Type == "upDropnp")
-                    {
-                        npGainUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
-                    }
-                    else if (buff.Type == "upNpdamage")
-                    {
-                        powerModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
-                    }
-                }
-            }
-
-            return new Tuple<float, float, float, float>(cardNpTypeUp, attackUp, powerModifier, npGainUp);
-        }
-
-        /// <summary>
-        /// Set necessary enemy status effects for NP damage
-        /// </summary>
-        /// <param name="enemy"></param>
-        /// <param name="partyMember"></param>
-        /// <param name="defenseDownModifier"></param>
-        /// <param name="cardDefenseDownModifier"></param>
-        public Tuple<float, float> SetStatusEffects(EnemyMob enemy, PartyMember partyMember, float defenseDownModifier, float cardDefenseDownModifier)
-        {
-            const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
-
-            foreach (ActiveStatus activeStatus in enemy.ActiveStatuses)
-            {
-                Buff buff = GetBuff(activeStatus);
-                if (buff != null)
-                {
-                    if (buff.Type == "downDefence")
-                    {
-                        defenseDownModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
-                    }
-                    else if (buff.Type == "downDefencecommandall" && buff.CkOpIndv.Any(f => f.Name == ($"card{partyMember.NoblePhantasm.Card.ToUpperFirstChar()}")))
-                    {
-                        cardDefenseDownModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
-                    }
-                }
-            }
-
-            return new Tuple<float, float>(defenseDownModifier, cardDefenseDownModifier);
-        }
-
-        public float NpGainedFromEnemy(PartyMember partyMember, EnemyMob enemyMob, float npGainUp, float cardNpTypeUp,
-            float npDamageForEnemyMob, List<float> npDistributionPercentages)
-        {
-            float effectiveHitModifier, npRefund = 0.0f;
-
-            foreach (float npHitPerc in npDistributionPercentages)
-            {
-                if (0.9f * npDamageForEnemyMob * npHitPerc / 100.0f > enemyMob.Health)
-                {
-                    effectiveHitModifier = 1.5f; // overkill (includes killing blow)
-                }
-                else
-                {
-                    effectiveHitModifier = 1.0f; // regular hit
-                }
-
-                float calcNpPerHit = CalculatedNpPerHit(partyMember, enemyMob, cardNpTypeUp, npGainUp);
-                npRefund += (float)Math.Floor(effectiveHitModifier * calcNpPerHit);
-            }
-
-            return npRefund;
-        }
-
-        public float CalculatedNpPerHit(PartyMember partyMember, EnemyMob enemyMob, float cardNpTypeUp, float npGainUp)
-        {
-            float specialBonusEnemyMod = enemyMob.Traits.Contains("undead") ? 1.2f : 1.0f;
-
-            return EnemyClassModifier(enemyMob.ClassName.ToString())
-                * partyMember.NoblePhantasm.NpGain.Np[partyMember.Servant.NpLevel - 1]
-                * (1.0f + cardNpTypeUp)
-                * (1.0f + npGainUp)
-                * specialBonusEnemyMod;
-        }
-
-        public List<float> NpDistributionPercentages(PartyMember partyMember)
-        {
-            float perc, lastNpHitPerc = 0.0f;
-            List<float> percNpHitDistribution = new List<float>();
-
-            /* Get NP distribution values and percentages */
-            foreach (int npHit in partyMember.NoblePhantasm.NpDistribution)
-            {
-                perc = npHit + lastNpHitPerc;
-                percNpHitDistribution.Add(perc);
-                lastNpHitPerc = perc;
-            }
-
-            return percNpHitDistribution;
-        }
-
-        public float AttemptToKillEnemy(EnemyMob enemyMob, float npDamageForEnemyMob)
-        {
-            float healthRemaining = enemyMob.Health - (npDamageForEnemyMob * 0.9f);
-            if (healthRemaining < 0.0f)
-            {
-                healthRemaining = 0.0f;
-            }
-
-            return healthRemaining;
-        }
-
-        public async Task<float> BaseNpDamage(PartyMember partyMember, EnemyMob enemy, Sval svalNp)
-        {
-            int npValue = svalNp.Value;
-            int targetBonusNpDamage = 0;
-
-            // Add additional NP damage if there is a special target ID
-            if (svalNp.Target > 0)
-            {
-                JObject traits = await _aaClient.GetTraitEnumInfo();
-                string traitName = traits.Property(svalNp.Target.ToString())?.Value.ToString() ?? "";
-                if (enemy.Traits.Contains(traitName))
-                {
-                    targetBonusNpDamage = svalNp.Correction;
-                }
-            }
-
-            float constantAttackRate = await _constantRate.GetAttackMultiplier("ATTACK_RATE").ConfigureAwait(false);
-            float classModifier = await _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName).ConfigureAwait(false);
-            float npTypeModifier = await _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}").ConfigureAwait(false);
-
-            // Base NP damage = ATTACK_RATE * Servant total attack * Class modifier * NP type modifier * (20% bonus if undead enemy) * NP damage
-            float baseNpDamage = constantAttackRate
-                * partyMember.TotalAttack
-                * classModifier
-                * npTypeModifier
-                * (npValue / 1000.0f);
-
-            if (targetBonusNpDamage != 0)
-            {
-                baseNpDamage *= targetBonusNpDamage / 1000.0f;
-            }
-
-            return baseNpDamage;
-        }
-
-        /// <summary>
-        /// Return the overcharge in decimal (non-percent) format based on NP charge and the position in the NP chain
-        /// </summary>
-        /// <param name="npCharge"></param>
-        /// <param name="npChainPosition"></param>
-        /// <returns></returns>
-        public int Overcharge(float npCharge, int npChainPosition)
-        {
-            int overcharge = 0;
-
-            // Set overcharge based on the level of NP charge
-            if (npCharge == 300.0f)
-            {
-                overcharge = 3;
-            }
-            else if (npCharge >= 200.0f)
-            {
-                overcharge = 2;
-            }
-
-            // Add additional overcharge depending on the position in the NP chain
-            if (npChainPosition == 1) // 2nd NP in the chain
-            {
-                overcharge += 1;
-            }
-            else if (npChainPosition == 2) // 3rd NP in the chain
-            {
-                overcharge += 2;
-            }
-
-            return overcharge;
-        }
-
-        /// <summary>
-        /// Multiply the modified NP damage passed in and the attribute and class modifiers between the party member and enemy
-        /// </summary>
-        /// <param name="partyMember"></param>
-        /// <param name="enemyMob"></param>
-        /// <param name="modifiedNpDamage"></param>
-        /// <returns></returns>
-        public async Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
-        {
-            return modifiedNpDamage 
-                * await AttributeModifier(partyMember, enemyMob).ConfigureAwait(false) 
-                * await ClassModifier(partyMember, enemyMob).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Return the chance to kill an enemy based on 90% and 110% NP damage RNG
-        /// </summary>
-        /// <param name="partyMember"></param>
-        /// <param name="enemyMob"></param>
-        /// <param name="modifiedNpDamage"></param>
-        /// <returns></returns>
-        public async Task<float> ChancesToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
-        {
-            if (0.9f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false) > enemyMob.Health)
-            {
-                return 100.0f; // perfect clear, even with the worst RNG
-            }
-            else if (1.1f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false) < enemyMob.Health)
-            {
-                return 0.0f; // never clear, even with the best RNG
-            }
-            else // show chance of success
-            {
-                return (1.0f - ((enemyMob.Health / await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false) - 0.9f) / 0.2f)) * 100.0f;
-            }
-        }
-
-        /// <summary>
-        /// Check if party member has enough NP charge for an attack. If so, add them to the queue
-        /// </summary>
-        /// <param name="party"></param>
-        /// <param name="partyMember"></param>
-        /// <returns></returns>
-        public bool AddPartyMemberToNpChain(List<PartyMember> party, PartyMember partyMember)
-        {
-            if (partyMember.NpCharge < 100.0f)
-            {
-                return false;
-            }
-            else
-            {
-                if (!party.Exists(p => p.NpChainOrder == NpChainOrderEnum.First))
-                {
-                    partyMember.NpChainOrder = NpChainOrderEnum.First;
-                }
-                else if (!party.Exists(p => p.NpChainOrder == NpChainOrderEnum.Second))
-                {
-                    partyMember.NpChainOrder = NpChainOrderEnum.Second;
-                }
-                else if (!party.Exists(p => p.NpChainOrder == NpChainOrderEnum.Third))
-                {
-                    partyMember.NpChainOrder = NpChainOrderEnum.Third;
-                }
-                else
-                {
-                    return false; // max NP chain limit is 3
-                }
-            }
-
-            return true;
-        }
-
-        /// <summary>
         /// Add a servant from the player's Chaldea to the battle party and equip the specified CE (if available)
         /// </summary>
         /// <param name="party"></param>
@@ -485,12 +214,284 @@ namespace FateGrandCalculator.Core
         }
 
         /// <summary>
+        /// Check if party member has enough NP charge for an attack. If so, add them to the queue
+        /// </summary>
+        /// <param name="party"></param>
+        /// <param name="partyMember"></param>
+        /// <returns></returns>
+        public bool AddPartyMemberToNpChain(List<PartyMember> party, PartyMember partyMember)
+        {
+            if (partyMember.NpCharge < 100.0f)
+            {
+                return false;
+            }
+            else
+            {
+                if (!party.Exists(p => p.NpChainOrder == NpChainOrderEnum.First))
+                {
+                    partyMember.NpChainOrder = NpChainOrderEnum.First;
+                }
+                else if (!party.Exists(p => p.NpChainOrder == NpChainOrderEnum.Second))
+                {
+                    partyMember.NpChainOrder = NpChainOrderEnum.Second;
+                }
+                else if (!party.Exists(p => p.NpChainOrder == NpChainOrderEnum.Third))
+                {
+                    partyMember.NpChainOrder = NpChainOrderEnum.Third;
+                }
+                else
+                {
+                    return false; // max NP chain limit is 3
+                }
+            }
+
+            return true;
+        }
+
+        #region Private Methods
+        /// <summary>
+        /// Set necessary party member status effects for NP damage
+        /// </summary>
+        /// <param name="partyMember"></param>
+        /// <param name="cardNpTypeUp"></param>
+        /// <param name="attackUp"></param>
+        /// <param name="powerModifier"></param>
+        /// <param name="npGainUp"></param>
+        private Tuple<float, float, float, float> SetStatusEffects(PartyMember partyMember, float cardNpTypeUp, float attackUp, float powerModifier, float npGainUp)
+        {
+            const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
+
+            foreach (ActiveStatus activeStatus in partyMember.ActiveStatuses)
+            {
+                Buff buff = GetBuff(activeStatus);
+                if (buff != null)
+                {
+                    if (buff.Type == "upCommandall" && buff.CkSelfIndv.Any(f => f.Name == ($"card{partyMember.NoblePhantasm.Card.ToUpperFirstChar()}")))
+                    {
+                        // Calculate card buff for NP if same card type
+                        cardNpTypeUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                    }
+                    else if (buff.Type == "upAtk")
+                    {
+                        attackUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                    }
+                    else if (buff.Type == "upDropnp")
+                    {
+                        npGainUp += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                    }
+                    else if (buff.Type == "upNpdamage")
+                    {
+                        powerModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                    }
+                }
+            }
+
+            return new Tuple<float, float, float, float>(cardNpTypeUp, attackUp, powerModifier, npGainUp);
+        }
+
+        /// <summary>
+        /// Set necessary enemy status effects for NP damage
+        /// </summary>
+        /// <param name="enemy"></param>
+        /// <param name="partyMember"></param>
+        /// <param name="defenseDownModifier"></param>
+        /// <param name="cardDefenseDownModifier"></param>
+        private Tuple<float, float> SetStatusEffects(EnemyMob enemy, PartyMember partyMember, float defenseDownModifier, float cardDefenseDownModifier)
+        {
+            const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
+
+            foreach (ActiveStatus activeStatus in enemy.ActiveStatuses)
+            {
+                Buff buff = GetBuff(activeStatus);
+                if (buff != null)
+                {
+                    if (buff.Type == "downDefence")
+                    {
+                        defenseDownModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                    }
+                    else if (buff.Type == "downDefencecommandall" && buff.CkOpIndv.Any(f => f.Name == ($"card{partyMember.NoblePhantasm.Card.ToUpperFirstChar()}")))
+                    {
+                        cardDefenseDownModifier += activeStatus.StatusEffect.Svals[activeStatus.AppliedSkillLevel - 1].Value / STATUS_EFFECT_DENOMINATOR;
+                    }
+                }
+            }
+
+            return new Tuple<float, float>(defenseDownModifier, cardDefenseDownModifier);
+        }
+
+        private float NpGainedFromEnemy(PartyMember partyMember, EnemyMob enemyMob, float npGainUp, float cardNpTypeUp,
+            float npDamageForEnemyMob, List<float> npDistributionPercentages)
+        {
+            float effectiveHitModifier, npRefund = 0.0f;
+
+            foreach (float npHitPerc in npDistributionPercentages)
+            {
+                if (0.9f * npDamageForEnemyMob * npHitPerc / 100.0f > enemyMob.Health)
+                {
+                    effectiveHitModifier = 1.5f; // overkill (includes killing blow)
+                }
+                else
+                {
+                    effectiveHitModifier = 1.0f; // regular hit
+                }
+
+                float calcNpPerHit = CalculatedNpPerHit(partyMember, enemyMob, cardNpTypeUp, npGainUp);
+                npRefund += (float)Math.Floor(effectiveHitModifier * calcNpPerHit);
+            }
+
+            return npRefund;
+        }
+
+        private float CalculatedNpPerHit(PartyMember partyMember, EnemyMob enemyMob, float cardNpTypeUp, float npGainUp)
+        {
+            float specialBonusEnemyMod = enemyMob.Traits.Contains("undead") ? 1.2f : 1.0f;
+
+            return EnemyClassModifier(enemyMob.ClassName.ToString())
+                * partyMember.NoblePhantasm.NpGain.Np[partyMember.Servant.NpLevel - 1]
+                * (1.0f + cardNpTypeUp)
+                * (1.0f + npGainUp)
+                * specialBonusEnemyMod;
+        }
+
+        private List<float> NpDistributionPercentages(PartyMember partyMember)
+        {
+            float perc, lastNpHitPerc = 0.0f;
+            List<float> percNpHitDistribution = new List<float>();
+
+            /* Get NP distribution values and percentages */
+            foreach (int npHit in partyMember.NoblePhantasm.NpDistribution)
+            {
+                perc = npHit + lastNpHitPerc;
+                percNpHitDistribution.Add(perc);
+                lastNpHitPerc = perc;
+            }
+
+            return percNpHitDistribution;
+        }
+
+        private float AttemptToKillEnemy(EnemyMob enemyMob, float npDamageForEnemyMob)
+        {
+            float healthRemaining = enemyMob.Health - (npDamageForEnemyMob * 0.9f);
+            if (healthRemaining < 0.0f)
+            {
+                healthRemaining = 0.0f;
+            }
+
+            return healthRemaining;
+        }
+
+        private async Task<float> BaseNpDamage(PartyMember partyMember, EnemyMob enemy, Sval svalNp)
+        {
+            int npValue = svalNp.Value;
+            int targetBonusNpDamage = 0;
+
+            // Add additional NP damage if there is a special target ID
+            if (svalNp.Target > 0)
+            {
+                JObject traits = await _aaClient.GetTraitEnumInfo();
+                string traitName = traits.Property(svalNp.Target.ToString())?.Value.ToString() ?? "";
+                if (enemy.Traits.Contains(traitName))
+                {
+                    targetBonusNpDamage = svalNp.Correction;
+                }
+            }
+
+            float constantAttackRate = await _constantRate.GetAttackMultiplier("ATTACK_RATE").ConfigureAwait(false);
+            float classModifier = await _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName).ConfigureAwait(false);
+            float npTypeModifier = await _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}").ConfigureAwait(false);
+
+            // Base NP damage = ATTACK_RATE * Servant total attack * Class modifier * NP type modifier * (20% bonus if undead enemy) * NP damage
+            float baseNpDamage = constantAttackRate
+                * partyMember.TotalAttack
+                * classModifier
+                * npTypeModifier
+                * (npValue / 1000.0f);
+
+            if (targetBonusNpDamage != 0)
+            {
+                baseNpDamage *= targetBonusNpDamage / 1000.0f;
+            }
+
+            return baseNpDamage;
+        }
+
+        /// <summary>
+        /// Return the overcharge in decimal (non-percent) format based on NP charge and the position in the NP chain
+        /// </summary>
+        /// <param name="npCharge"></param>
+        /// <param name="npChainPosition"></param>
+        /// <returns></returns>
+        private int Overcharge(float npCharge, int npChainPosition)
+        {
+            int overcharge = 0;
+
+            // Set overcharge based on the level of NP charge
+            if (npCharge == 300.0f)
+            {
+                overcharge = 3;
+            }
+            else if (npCharge >= 200.0f)
+            {
+                overcharge = 2;
+            }
+
+            // Add additional overcharge depending on the position in the NP chain
+            if (npChainPosition == 1) // 2nd NP in the chain
+            {
+                overcharge += 1;
+            }
+            else if (npChainPosition == 2) // 3rd NP in the chain
+            {
+                overcharge += 2;
+            }
+
+            return overcharge;
+        }
+
+        /// <summary>
+        /// Multiply the modified NP damage passed in and the attribute and class modifiers between the party member and enemy
+        /// </summary>
+        /// <param name="partyMember"></param>
+        /// <param name="enemyMob"></param>
+        /// <param name="modifiedNpDamage"></param>
+        /// <returns></returns>
+        private async Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
+        {
+            return modifiedNpDamage 
+                * await AttributeModifier(partyMember, enemyMob).ConfigureAwait(false) 
+                * await ClassModifier(partyMember, enemyMob).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Return the chance to kill an enemy based on 90% and 110% NP damage RNG
+        /// </summary>
+        /// <param name="partyMember"></param>
+        /// <param name="enemyMob"></param>
+        /// <param name="modifiedNpDamage"></param>
+        /// <returns></returns>
+        private async Task<float> ChancesToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
+        {
+            if (0.9f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false) > enemyMob.Health)
+            {
+                return 100.0f; // perfect clear, even with the worst RNG
+            }
+            else if (1.1f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false) < enemyMob.Health)
+            {
+                return 0.0f; // never clear, even with the best RNG
+            }
+            else // show chance of success
+            {
+                return (1.0f - ((enemyMob.Health / await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false) - 0.9f) / 0.2f)) * 100.0f;
+            }
+        }
+
+        /// <summary>
         /// Find special damage up buff versus an enemy trait
         /// </summary>
         /// <param name="partyMember"></param>
         /// <param name="enemy"></param>
         /// <returns></returns>
-        public float SpecialAttackUp(PartyMember partyMember, EnemyMob enemy)
+        private float SpecialAttackUp(PartyMember partyMember, EnemyMob enemy)
         {
             float powerModifier = 0.0f;
             const float STATUS_EFFECT_DENOMINATOR = 1000.0f;
@@ -512,7 +513,6 @@ namespace FateGrandCalculator.Core
             return powerModifier;
         }
 
-        #region Private Methods
         private bool IsPowerMod(Buff buff, EnemyMob enemy)
         {
             if (buff.Type == "upDamage"
