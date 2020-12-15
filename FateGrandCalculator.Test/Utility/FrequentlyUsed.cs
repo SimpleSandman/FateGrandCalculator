@@ -39,14 +39,7 @@ namespace FateGrandCalculator.Test.Utility
             int npLevel = 1, bool isSupport = false, CraftEssence craftEssence = null)
         {
             ChaldeaServant chaldeaServant = await ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, servantId, npLevel, isSupport);
-            PartyMember partyMember = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaServant, craftEssence);
-
-            if (craftEssence != null)
-            {
-                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyMember);
-            }
-
-            return partyMember;
+            return resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaServant, craftEssence);
         }
 
         public static async Task<CraftEssence> CraftEssenceAsync(ScopedClasses resolvedClasses, string ceId, int level = 1, bool isMlb = false)

@@ -54,7 +54,6 @@ namespace FateGrandCalculator.Test
                 ChaldeaServant chaldeaAttackServant = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.DANTES_AVENGER, 1, false);
 
                 PartyMember partyMemberAttacker = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAttackServant, chaldeaKscope);
-                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyMemberAttacker);
 
                 party.Add(partyMemberAttacker);
                 #endregion
@@ -291,7 +290,6 @@ namespace FateGrandCalculator.Test
                 ChaldeaServant chaldeaLancelot = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.LANCELOT_BERSERKER, 5, false);
 
                 PartyMember partyLancelot = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaLancelot, chaldeaSuperscope);
-                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyLancelot);
 
                 party.Add(partyLancelot);
                 #endregion
@@ -307,7 +305,6 @@ namespace FateGrandCalculator.Test
                 ChaldeaServant chaldeaArash = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.ARASH_ARCHER, 5, false);
 
                 PartyMember partyArash = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaArash, chaldeaImaginaryElement);
-                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyArash);
 
                 party.Add(partyArash);
                 #endregion
@@ -323,7 +320,6 @@ namespace FateGrandCalculator.Test
                 ChaldeaServant chaldeaJack = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.JACK_ASSASSIN, 1, false);
 
                 PartyMember partyJack = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaJack, chaldeaMlbKscope);
-                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyJack);
 
                 party.Add(partyJack);
                 #endregion
@@ -549,7 +545,6 @@ namespace FateGrandCalculator.Test
                 ChaldeaServant chaldeaAstolfo = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.ASTOLFO_RIDER, 5, false, 100);
 
                 PartyMember partyAstolfo = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAstolfo, chaldeaHolyNightSupper);
-                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyAstolfo);
 
                 party.Add(partyAstolfo);
                 #endregion
@@ -565,7 +560,6 @@ namespace FateGrandCalculator.Test
                 ChaldeaServant chaldeaSpartacus = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SPARTACUS_BERSERKER, 5, false);
 
                 PartyMember partySpartacus = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaSpartacus, chaldeaSuperscope);
-                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partySpartacus);
 
                 party.Add(partySpartacus);
                 #endregion

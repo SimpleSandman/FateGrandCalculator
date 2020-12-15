@@ -69,7 +69,6 @@ namespace FateGrandCalculator.Test
                 ChaldeaServant chaldeaServant = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.DANTES_AVENGER, 1, false);
 
                 PartyMember partyMember = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaServant, chaldeaKscope);
-                resolvedClasses.CombatFormula.ApplyCraftEssenceEffects(partyMember);
 
                 using (new AssertionScope())
                 {

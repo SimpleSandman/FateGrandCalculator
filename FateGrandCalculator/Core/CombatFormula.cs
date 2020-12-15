@@ -156,13 +156,7 @@ namespace FateGrandCalculator.Core
             int servantTotalAtk = chaldeaServant.ServantInfo.AtkGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouAttack;
             int servantTotalHp = chaldeaServant.ServantInfo.HpGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouHealth;
 
-            if (chaldeaCraftEssence != null)
-            {
-                servantTotalAtk += chaldeaCraftEssence.CraftEssenceInfo.AtkGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
-                servantTotalHp += chaldeaCraftEssence.CraftEssenceInfo.HpGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
-            }
-
-            return new PartyMember
+            PartyMember partyMember = new PartyMember
             {
                 Id = party.Count,
                 Servant = chaldeaServant,
@@ -175,42 +169,16 @@ namespace FateGrandCalculator.Core
                     .Aggregate((agg, next) =>
                         next.Priority >= agg.Priority ? next : agg)
             };
-        }
 
-        public void ApplyCraftEssenceEffects(PartyMember partyMember)
-        {
-            if (partyMember.EquippedCraftEssence == null)
+            if (chaldeaCraftEssence != null)
             {
-                return;
+                partyMember.TotalAttack += chaldeaCraftEssence.CraftEssenceInfo.AtkGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
+                partyMember.TotalHealth += chaldeaCraftEssence.CraftEssenceInfo.HpGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
+
+                ApplyCraftEssenceEffects(partyMember);
             }
 
-            int priority = 1;
-            if (partyMember.EquippedCraftEssence.Mlb)
-            {
-                priority = 2;
-            }
-
-            List<Skill> skills = partyMember.EquippedCraftEssence.CraftEssenceInfo.Skills.FindAll(s => s.Priority == priority);
-
-            foreach (Skill skill in skills)
-            {
-                foreach (Function function in skill.Functions)
-                {
-                    if (function.FuncType == "gainNp")
-                    {
-                        partyMember.NpCharge += function.Svals[0].Value / 100.0f;
-                    }
-                    else
-                    {
-                        partyMember.ActiveStatuses.Add(new ActiveStatus
-                        {
-                            StatusEffect = function,
-                            AppliedSkillLevel = 1,
-                            ActiveTurnCount = function.Svals[0].Turn
-                        });
-                    }
-                }
-            }
+            return partyMember;
         }
 
         /// <summary>
@@ -249,6 +217,42 @@ namespace FateGrandCalculator.Core
         }
 
         #region Private Methods
+        private void ApplyCraftEssenceEffects(PartyMember partyMember)
+        {
+            if (partyMember.EquippedCraftEssence == null)
+            {
+                return;
+            }
+
+            int priority = 1;
+            if (partyMember.EquippedCraftEssence.Mlb)
+            {
+                priority = 2;
+            }
+
+            List<Skill> skills = partyMember.EquippedCraftEssence.CraftEssenceInfo.Skills.FindAll(s => s.Priority == priority);
+
+            foreach (Skill skill in skills)
+            {
+                foreach (Function function in skill.Functions)
+                {
+                    if (function.FuncType == "gainNp")
+                    {
+                        partyMember.NpCharge += function.Svals[0].Value / 100.0f;
+                    }
+                    else
+                    {
+                        partyMember.ActiveStatuses.Add(new ActiveStatus
+                        {
+                            StatusEffect = function,
+                            AppliedSkillLevel = 1,
+                            ActiveTurnCount = function.Svals[0].Turn
+                        });
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Set necessary party member status effects for NP damage
         /// </summary>
