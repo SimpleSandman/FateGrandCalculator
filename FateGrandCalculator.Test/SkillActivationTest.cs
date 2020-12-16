@@ -46,26 +46,17 @@ namespace FateGrandCalculator.Test
 
                 /* Party data */
                 #region Dantes
-                ChaldeaServant chaldeaAttackServant = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.DANTES_AVENGER, 1, false);
-
-                PartyMember partyMemberAttacker = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAttackServant);
-
+                PartyMember partyMemberAttacker = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.DANTES_AVENGER, party, resolvedClasses);
                 party.Add(partyMemberAttacker);
                 #endregion
 
                 #region Skadi
-                ChaldeaServant chaldeaCaster = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, false);
-
-                PartyMember partyMemberCaster = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaCaster);
-
+                PartyMember partyMemberCaster = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses);
                 party.Add(partyMemberCaster);
                 #endregion
 
                 #region Skadi Support
-                ChaldeaServant supportCaster = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
-
-                PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
-
+                PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
                 party.Add(partyMemberSupportCaster);
                 #endregion
 

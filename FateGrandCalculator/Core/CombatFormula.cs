@@ -323,10 +323,10 @@ namespace FateGrandCalculator.Core
             return new Tuple<float, float>(defenseDownModifier, cardDefenseDownModifier);
         }
 
-        private float NpGainedFromEnemy(PartyMember partyMember, EnemyMob enemyMob, float npGainUp, float cardNpTypeUp,
-            float npDamageForEnemyMob, List<float> npDistributionPercentages)
+        private float NpGainedFromEnemy(PartyMember partyMember, EnemyMob enemyMob, float npGainUp, float cardNpTypeUp, float npDamageForEnemyMob)
         {
             float effectiveHitModifier, npRefund = 0.0f;
+            List<float> npDistributionPercentages = NpDistributionPercentages(partyMember);
 
             foreach (float npHitPerc in npDistributionPercentages)
             {
@@ -469,23 +469,22 @@ namespace FateGrandCalculator.Core
         /// <summary>
         /// Return the chance to kill an enemy based on 90% and 110% NP damage RNG
         /// </summary>
-        /// <param name="partyMember"></param>
         /// <param name="enemyMob"></param>
-        /// <param name="modifiedNpDamage"></param>
+        /// <param name="npDamageForEnemyMob"></param>
         /// <returns></returns>
-        private async Task<float> ChancesToKill(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
+        private float ChancesToKill(EnemyMob enemyMob, float npDamageForEnemyMob)
         {
-            if (0.9f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false) > enemyMob.Health)
+            if (0.9f * npDamageForEnemyMob > enemyMob.Health)
             {
                 return 100.0f; // perfect clear, even with the worst RNG
             }
-            else if (1.1f * await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false) < enemyMob.Health)
+            else if (1.1f * npDamageForEnemyMob < enemyMob.Health)
             {
                 return 0.0f; // never clear, even with the best RNG
             }
             else // show chance of success
             {
-                return (1.0f - ((enemyMob.Health / await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false) - 0.9f) / 0.2f)) * 100.0f;
+                return (1.0f - ((enemyMob.Health / npDamageForEnemyMob - 0.9f) / 0.2f)) * 100.0f;
             }
         }
 
@@ -567,12 +566,9 @@ namespace FateGrandCalculator.Core
 
             float modifiedNpDamage = baseNpDamage * totalPowerDamageModifier;
             float npDamageForEnemyMob = await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false);
+            float npRefund = NpGainedFromEnemy(partyMember, enemyMob, npGainUp, cardNpTypeUp, npDamageForEnemyMob);
 
-            List<float> npDistributionPercentages = NpDistributionPercentages(partyMember);
-
-            float npRefund = NpGainedFromEnemy(partyMember, enemyMob, npGainUp, cardNpTypeUp, npDamageForEnemyMob, npDistributionPercentages);
-
-            await ChancesToKill(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false);
+            ChancesToKill(enemyMob, npDamageForEnemyMob);
             enemyMob.Health = AttemptToKillEnemy(enemyMob, npDamageForEnemyMob);
 
             return npRefund;

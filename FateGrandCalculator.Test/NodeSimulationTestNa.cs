@@ -51,26 +51,17 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                ChaldeaServant chaldeaAttackServant = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.DANTES_AVENGER, 1, false);
-
-                PartyMember partyMemberAttacker = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAttackServant, chaldeaKscope);
-
+                PartyMember partyMemberAttacker = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.DANTES_AVENGER, party, resolvedClasses, 1, false, chaldeaKscope);
                 party.Add(partyMemberAttacker);
                 #endregion
 
                 #region Skadi
-                ChaldeaServant chaldeaCaster = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, false);
-
-                PartyMember partyMemberCaster = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaCaster);
-
+                PartyMember partyMemberCaster = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses);
                 party.Add(partyMemberCaster);
                 #endregion
 
                 #region Skadi Support
-                ChaldeaServant supportCaster = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
-
-                PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
-
+                PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
                 party.Add(partyMemberSupportCaster);
                 #endregion
 
@@ -287,10 +278,7 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                ChaldeaServant chaldeaLancelot = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.LANCELOT_BERSERKER, 5, false);
-
-                PartyMember partyLancelot = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaLancelot, chaldeaSuperscope);
-
+                PartyMember partyLancelot = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.LANCELOT_BERSERKER, party, resolvedClasses, 5, false, chaldeaSuperscope);
                 party.Add(partyLancelot);
                 #endregion
 
@@ -302,10 +290,7 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.IMAGINARY_ELEMENT_CE)
                 };
 
-                ChaldeaServant chaldeaArash = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.ARASH_ARCHER, 5, false);
-
-                PartyMember partyArash = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaArash, chaldeaImaginaryElement);
-
+                PartyMember partyArash = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.ARASH_ARCHER, party, resolvedClasses, 5, false, chaldeaImaginaryElement);
                 party.Add(partyArash);
                 #endregion
 
@@ -317,18 +302,12 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                ChaldeaServant chaldeaJack = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.JACK_ASSASSIN, 1, false);
-
-                PartyMember partyJack = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaJack, chaldeaMlbKscope);
-
+                PartyMember partyJack = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.JACK_ASSASSIN, party, resolvedClasses, 1, false, chaldeaMlbKscope);
                 party.Add(partyJack);
                 #endregion
 
                 #region Skadi Support
-                ChaldeaServant supportCaster = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SKADI_CASTER, 1, true);
-
-                PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
-
+                PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, false);
                 party.Add(partyMemberSupportCaster);
                 #endregion
 
@@ -527,10 +506,7 @@ namespace FateGrandCalculator.Test
 
                 /* Party data */
                 #region Waver
-                ChaldeaServant chaldeaWaver = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.WAVER_CASTER, 2, false);
-
-                PartyMember partyWaver = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaWaver);
-
+                PartyMember partyWaver = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.WAVER_CASTER, party, resolvedClasses, 2);
                 party.Add(partyWaver);
                 #endregion
 
@@ -542,9 +518,8 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.HOLY_NIGHT_SUPPER_CE)
                 };
 
-                ChaldeaServant chaldeaAstolfo = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.ASTOLFO_RIDER, 5, false, 100);
-
-                PartyMember partyAstolfo = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaAstolfo, chaldeaHolyNightSupper);
+                PartyMember partyAstolfo = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.ASTOLFO_RIDER, party, resolvedClasses, 5, false, chaldeaHolyNightSupper);
+                partyAstolfo.Servant.ServantLevel = 100;
 
                 party.Add(partyAstolfo);
                 #endregion
@@ -557,18 +532,12 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                ChaldeaServant chaldeaSpartacus = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.SPARTACUS_BERSERKER, 5, false);
-
-                PartyMember partySpartacus = resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaSpartacus, chaldeaSuperscope);
-
+                PartyMember partySpartacus = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SPARTACUS_BERSERKER, party, resolvedClasses, 5, false, chaldeaSuperscope);
                 party.Add(partySpartacus);
                 #endregion
 
                 #region Waver Support
-                ChaldeaServant supportCaster = await FrequentlyUsed.ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, WireMockUtility.WAVER_CASTER, 1, true);
-
-                PartyMember partyMemberSupportCaster = resolvedClasses.CombatFormula.AddPartyMember(party, supportCaster);
-
+                PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.WAVER_CASTER, party, resolvedClasses, 1, true);
                 party.Add(partyMemberSupportCaster);
                 #endregion
 
@@ -594,7 +563,7 @@ namespace FateGrandCalculator.Test
                 {
                     Id = 1,
                     Name = "Door of the Champion",
-                    ClassName = ClassRelationEnum.Rider,
+                    ClassName = ClassRelationEnum.Caster,
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 23716.0f,
@@ -605,7 +574,7 @@ namespace FateGrandCalculator.Test
                 {
                     Id = 2,
                     Name = "Door of the Saint",
-                    ClassName = ClassRelationEnum.Rider,
+                    ClassName = ClassRelationEnum.Caster,
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.First,
                     Health = 14464.0f,
@@ -629,7 +598,7 @@ namespace FateGrandCalculator.Test
                 {
                     Id = 4,
                     Name = "Door of the Champion",
-                    ClassName = ClassRelationEnum.Rider,
+                    ClassName = ClassRelationEnum.Caster,
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 23716.0f,
@@ -640,7 +609,7 @@ namespace FateGrandCalculator.Test
                 {
                     Id = 5,
                     Name = "Door of the Champion",
-                    ClassName = ClassRelationEnum.Rider,
+                    ClassName = ClassRelationEnum.Caster,
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Second,
                     Health = 23716.0f,
@@ -653,7 +622,7 @@ namespace FateGrandCalculator.Test
                 {
                     Id = 6,
                     Name = "Door of the Champion",
-                    ClassName = ClassRelationEnum.Rider,
+                    ClassName = ClassRelationEnum.Caster,
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 29596.0f,
@@ -664,7 +633,7 @@ namespace FateGrandCalculator.Test
                 {
                     Id = 7,
                     Name = "Door of the Champion",
-                    ClassName = ClassRelationEnum.Rider,
+                    ClassName = ClassRelationEnum.Caster,
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 23716.0f,
@@ -675,7 +644,7 @@ namespace FateGrandCalculator.Test
                 {
                     Id = 8,
                     Name = "Door of the Champion",
-                    ClassName = ClassRelationEnum.Rider,
+                    ClassName = ClassRelationEnum.Caster,
                     AttributeName = AttributeRelationEnum.Sky,
                     WaveNumber = WaveNumberEnum.Third,
                     Health = 23716.0f,
@@ -697,7 +666,7 @@ namespace FateGrandCalculator.Test
 
                 // Fight 2/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyAstolfo, 3, party, enemyMobs, 1); // Astolfo charge & crit stars & crit damage
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyAstolfo, 3, party, enemyMobs, 1); // Astolfo NP charge & crit stars & crit damage
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyAstolfo).Should().BeTrue();
                 await resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
@@ -722,9 +691,9 @@ namespace FateGrandCalculator.Test
                     _output.WriteLine(partyMember.Servant.ServantInfo.Name);
                 }
 
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, enemyMobs, 2); // Waver crit damage on Astolfo with 30% charge
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 2, party, enemyMobs, 2); // Waver defense up to party with 10% charge
-                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 3, party, enemyMobs, 2); // Waver attack up to party with 10% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, enemyMobs, 2); // Waver (support) crit damage on Astolfo with 30% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 2, party, enemyMobs, 2); // Waver (support) defense up to party with 10% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 3, party, enemyMobs, 2); // Waver (support) attack up to party with 10% charge
                 resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 2, party, enemyMobs, 2, 3); // Stun 3rd enemy on the field with plugsuit
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyAstolfo).Should().BeTrue();
