@@ -20,7 +20,7 @@ namespace FateGrandCalculator.Core
         /// <param name="partyMemberPosition">The position the selected party member is currently sitting (1-6)</param>
         /// <param name="enemyPosition">The position the selected enemy is currently sitting (1-3)</param>
         public void SkillActivation(PartyMember partyMemberActor, int actorSkillPositionNumber, List<PartyMember> party, 
-            List<EnemyMob> enemies, int partyMemberPosition, int enemyPosition = 3)
+            List<EnemyMob> enemies, int partyMemberPosition = 3, int enemyPosition = 3)
         {
             if (partyMemberActor.SkillCooldowns.Exists(s => s.SkillId == actorSkillPositionNumber) 
                 || party.IndexOf(partyMemberActor) > 2 
