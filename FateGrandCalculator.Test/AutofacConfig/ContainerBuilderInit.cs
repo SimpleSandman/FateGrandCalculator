@@ -1,10 +1,9 @@
 ﻿using Autofac;
 
 using FateGrandCalculator.AtlasAcademy;
-using FateGrandCalculator.Test.CoreModule;
 using FateGrandCalculator.Test.Fixture;
 
-namespace FateGrandCalculator.Test.Utility
+namespace FateGrandCalculator.Test.AutofacConfig
 {
     public static class ContainerBuilderInit
     {

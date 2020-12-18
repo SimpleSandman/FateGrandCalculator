@@ -6,6 +6,7 @@ using Autofac;
 
 using FateGrandCalculator.Enums;
 using FateGrandCalculator.Models;
+using FateGrandCalculator.Test.AutofacConfig;
 using FateGrandCalculator.Test.Fixture;
 using FateGrandCalculator.Test.Utility;
 

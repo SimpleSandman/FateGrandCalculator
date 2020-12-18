@@ -91,7 +91,7 @@ namespace FateGrandCalculator.AtlasAcademy
                 try
                 {
                     IRestResponse<T> response = await client.ExecuteAsync<T>(request, cancellationToken.Token);
-                    if (response.IsSuccessful)
+                    if ((int)response.StatusCode == 200)
                     {
                         return JsonConvert.DeserializeObject<T>(response.Content);
                     }

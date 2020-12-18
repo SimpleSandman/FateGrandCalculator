@@ -3,7 +3,7 @@
 using FateGrandCalculator.AtlasAcademy;
 using FateGrandCalculator.Core;
 
-namespace FateGrandCalculator.Test.Utility
+namespace FateGrandCalculator.Test.AutofacConfig
 {
     public static class AutofacUtility
     {

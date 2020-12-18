@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 
 using FateGrandCalculator.AtlasAcademy.Interfaces;
 using FateGrandCalculator.AtlasAcademy.Json;
@@ -10,30 +9,28 @@ namespace FateGrandCalculator.AtlasAcademy.Calculations
     public class AttributeRelation : IBaseRelation
     {
         private const float ATTRIBUTE_DENOMINATOR = 1000.0f;
-        private readonly IAtlasAcademyClient _aaClient;
+        private readonly AttributeRelationNiceJson _attributeRelations;
 
-        public AttributeRelation(IAtlasAcademyClient client)
+        public AttributeRelation(AttributeRelationNiceJson attributeRelations) 
         {
-            _aaClient = client;
+            _attributeRelations = attributeRelations;
         }
 
-        public async Task<float> GetAttackMultiplier(string attack)
+        public float GetAttackMultiplier(string attack)
         {
-            return await Task.FromException<float>(new NotImplementedException()).ConfigureAwait(false);
+            throw new NotImplementedException();
         }
 
-        public async Task<float> GetAttackMultiplier(string atkAttribute, string defAttribute)
+        public float GetAttackMultiplier(string atkAttribute, string defAttribute)
         {
-            AttributeRelationNiceJson attributeRelations = await _aaClient.GetAttributeRelationInfo();
-
             // Reference: https://fategrandorder.fandom.com/wiki/Attributes
             float[,] damageMultiplier =
             {
-                { attributeRelations.Human.HumanMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Human.SkyMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Human.EarthMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Human.StarMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Human.BeastMultiplier / ATTRIBUTE_DENOMINATOR },
-                { attributeRelations.Sky.HumanMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Sky.SkyMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Sky.EarthMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Sky.StarMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Sky.BeastMultiplier / ATTRIBUTE_DENOMINATOR },
-                { attributeRelations.Earth.HumanMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Earth.SkyMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Earth.EarthMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Earth.StarMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Earth.BeastMultiplier / ATTRIBUTE_DENOMINATOR },
-                { attributeRelations.Star.HumanMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Star.SkyMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Star.EarthMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Star.StarMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Star.BeastMultiplier / ATTRIBUTE_DENOMINATOR },
-                { attributeRelations.Beast.HumanMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Beast.SkyMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Beast.EarthMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Beast.StarMultiplier / ATTRIBUTE_DENOMINATOR, attributeRelations.Beast.BeastMultiplier / ATTRIBUTE_DENOMINATOR }
+                { _attributeRelations.Human.HumanMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Human.SkyMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Human.EarthMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Human.StarMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Human.BeastMultiplier / ATTRIBUTE_DENOMINATOR },
+                { _attributeRelations.Sky.HumanMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Sky.SkyMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Sky.EarthMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Sky.StarMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Sky.BeastMultiplier / ATTRIBUTE_DENOMINATOR },
+                { _attributeRelations.Earth.HumanMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Earth.SkyMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Earth.EarthMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Earth.StarMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Earth.BeastMultiplier / ATTRIBUTE_DENOMINATOR },
+                { _attributeRelations.Star.HumanMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Star.SkyMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Star.EarthMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Star.StarMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Star.BeastMultiplier / ATTRIBUTE_DENOMINATOR },
+                { _attributeRelations.Beast.HumanMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Beast.SkyMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Beast.EarthMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Beast.StarMultiplier / ATTRIBUTE_DENOMINATOR, _attributeRelations.Beast.BeastMultiplier / ATTRIBUTE_DENOMINATOR }
             };
 
             bool validAtkAttribute = Enum.TryParse(atkAttribute, true, out AttributeRelationEnum atkServantAttribute);
@@ -41,7 +38,7 @@ namespace FateGrandCalculator.AtlasAcademy.Calculations
 
             if (!validAtkAttribute || !validDefAttribute)
             {
-                return 0.0f;  // invalid attribute found
+                return 0.0f; // invalid attribute found
             }
 
             return damageMultiplier[(int)atkServantAttribute, (int)defServantAttribute];

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 using FateGrandCalculator.AtlasAcademy.Calculations;
 using FateGrandCalculator.AtlasAcademy.Interfaces;
@@ -18,18 +17,15 @@ namespace FateGrandCalculator.Core
     public class CombatFormula : ICombatFormula
     {
         private readonly IAtlasAcademyClient _aaClient;
-        private readonly AttributeRelation _attributeRelation;
-        private readonly ClassRelation _classRelation;
-        private readonly ClassAttackRate _classAttackRate;
-        private readonly ConstantRate _constantRate;
+        private AttributeRelation _attributeRelation;
+        private ClassRelation _classRelation;
+        private ClassAttackRate _classAttackRate;
+        private ConstantRate _constantRate;
+        private JObject _traitEnumInfo;
 
         public CombatFormula(IAtlasAcademyClient client)
         {
             _aaClient = client;
-            _constantRate = new ConstantRate(client);
-            _classAttackRate = new ClassAttackRate(client);
-            _attributeRelation = new AttributeRelation(client);
-            _classRelation = new ClassRelation(client);
         }
 
         /// <summary>
@@ -39,12 +35,19 @@ namespace FateGrandCalculator.Core
         /// <param name="enemyMobs"></param>
         /// <param name="waveNumber">The wave the node simulation is currently on</param>
         /// <param name="enemyPosition">Set the cursor of an enemy's position from left to right (1-3)</param>
-        public async Task NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, int enemyPosition = 3)
+        public void NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, int enemyPosition = 3)
         {
             List<PartyMember> npChainList = party
                 .FindAll(p => p.NpChainOrder != NpChainOrderEnum.None)
                 .OrderBy(p => p.NpChainOrder)
                 .ToList();
+
+            if (npChainList.Count == 0)
+            {
+                return;
+            }
+
+            ConfigureExportJson();
 
             enemyPosition--; // set to zero-based
             int npChainPosition = 0; // used to calculate overcharge
@@ -81,16 +84,16 @@ namespace FateGrandCalculator.Core
                                 ? enemyTargets[enemyPosition] 
                                 : enemyTargets.Last();
 
-                            totalNpRefund += await DamagePhase(partyMember, enemyTarget, powerModifier, npChainPosition, 
-                                attackUp, cardNpTypeUp, npGainUp, partyMemberFunction).ConfigureAwait(false);
+                            totalNpRefund += DamagePhase(partyMember, enemyTarget, powerModifier, npChainPosition, 
+                                attackUp, cardNpTypeUp, npGainUp, partyMemberFunction);
                         }
                         else
                         {
                             // Go through each enemy mob grouped by their wave number
                             for (int i = 0; i < enemyTargets.Count; i++)
                             {
-                                totalNpRefund += await DamagePhase(partyMember, enemyTargets[i], powerModifier, npChainPosition, 
-                                    attackUp, cardNpTypeUp, npGainUp, partyMemberFunction).ConfigureAwait(false);
+                                totalNpRefund += DamagePhase(partyMember, enemyTargets[i], powerModifier, npChainPosition, 
+                                    attackUp, cardNpTypeUp, npGainUp, partyMemberFunction);
                             }
                         }
                     }
@@ -217,6 +220,18 @@ namespace FateGrandCalculator.Core
         }
 
         #region Private Methods
+        /// <summary>
+        /// Set Atlas Academy's export JSON dataset
+        /// </summary>
+        private void ConfigureExportJson()
+        {
+            _attributeRelation = new AttributeRelation(_aaClient.GetAttributeRelationInfo().Result);
+            _classAttackRate = new ClassAttackRate(_aaClient.GetClassAttackRateInfo().Result);
+            _classRelation = new ClassRelation(_aaClient.GetClassRelationInfo().Result);
+            _constantRate = new ConstantRate(_aaClient.GetConstantGameInfo().Result);
+            _traitEnumInfo = _aaClient.GetTraitEnumInfo().Result;
+        }
+
         private void ApplyCraftEssenceEffects(PartyMember partyMember)
         {
             if (partyMember.EquippedCraftEssence == null)
@@ -384,7 +399,7 @@ namespace FateGrandCalculator.Core
             return healthRemaining;
         }
 
-        private async Task<float> BaseNpDamage(PartyMember partyMember, EnemyMob enemy, Sval svalNp)
+        private float BaseNpDamage(PartyMember partyMember, EnemyMob enemy, Sval svalNp)
         {
             int npValue = svalNp.Value;
             int targetBonusNpDamage = 0;
@@ -392,17 +407,17 @@ namespace FateGrandCalculator.Core
             // Add additional NP damage if there is a special target ID
             if (svalNp.Target > 0)
             {
-                JObject traits = await _aaClient.GetTraitEnumInfo();
-                string traitName = traits.Property(svalNp.Target.ToString())?.Value.ToString() ?? "";
+                string traitName = _traitEnumInfo.Property(svalNp.Target.ToString())?.Value.ToString() ?? "";
+
                 if (enemy.Traits.Contains(traitName))
                 {
                     targetBonusNpDamage = svalNp.Correction;
                 }
             }
 
-            float constantAttackRate = await _constantRate.GetAttackMultiplier("ATTACK_RATE").ConfigureAwait(false);
-            float classModifier = await _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName).ConfigureAwait(false);
-            float npTypeModifier = await _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}").ConfigureAwait(false);
+            float constantAttackRate = _constantRate.GetAttackMultiplier("ATTACK_RATE");
+            float classModifier = _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName);
+            float npTypeModifier = _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}");
 
             // Base NP damage = ATTACK_RATE * Servant total attack * Class modifier * NP type modifier * (20% bonus if undead enemy) * NP damage
             float baseNpDamage = constantAttackRate
@@ -459,11 +474,11 @@ namespace FateGrandCalculator.Core
         /// <param name="enemyMob"></param>
         /// <param name="modifiedNpDamage"></param>
         /// <returns></returns>
-        private async Task<float> AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
+        private float AverageNpDamage(PartyMember partyMember, EnemyMob enemyMob, float modifiedNpDamage)
         {
             return modifiedNpDamage 
-                * await AttributeModifier(partyMember, enemyMob).ConfigureAwait(false) 
-                * await ClassModifier(partyMember, enemyMob).ConfigureAwait(false);
+                * AttributeModifier(partyMember, enemyMob) 
+                * ClassModifier(partyMember, enemyMob);
         }
 
         /// <summary>
@@ -541,7 +556,7 @@ namespace FateGrandCalculator.Core
             };
         }
 
-        private async Task<float> DamagePhase(PartyMember partyMember, EnemyMob enemyMob, float powerModifier, int npChainPosition, float attackUp, 
+        private float DamagePhase(PartyMember partyMember, EnemyMob enemyMob, float powerModifier, int npChainPosition, float attackUp, 
             float cardNpTypeUp, float npGainUp, Function npFunction)
         {
             Sval svalNp = GetSvalNp(partyMember, npFunction, npChainPosition);
@@ -553,7 +568,7 @@ namespace FateGrandCalculator.Core
             defenseDownModifier = enemyEffects.Item1;
             cardDefenseDebuffModifier = enemyEffects.Item2;
 
-            float baseNpDamage = await BaseNpDamage(partyMember, enemyMob, svalNp).ConfigureAwait(false);
+            float baseNpDamage = BaseNpDamage(partyMember, enemyMob, svalNp);
 
             if (baseNpDamage.NearlyEqual(0.0f))
             {
@@ -565,7 +580,7 @@ namespace FateGrandCalculator.Core
                 * (1.0f + powerModifier);
 
             float modifiedNpDamage = baseNpDamage * totalPowerDamageModifier;
-            float npDamageForEnemyMob = await AverageNpDamage(partyMember, enemyMob, modifiedNpDamage).ConfigureAwait(false);
+            float npDamageForEnemyMob = AverageNpDamage(partyMember, enemyMob, modifiedNpDamage);
             float npRefund = NpGainedFromEnemy(partyMember, enemyMob, npGainUp, cardNpTypeUp, npDamageForEnemyMob);
 
             ChancesToKill(enemyMob, npDamageForEnemyMob);
@@ -628,9 +643,9 @@ namespace FateGrandCalculator.Core
         /// <param name="partyMember"></param>
         /// <param name="enemyMob"></param>
         /// <returns></returns>
-        private async Task<float> AttributeModifier(PartyMember partyMember, EnemyMob enemyMob)
+        private float AttributeModifier(PartyMember partyMember, EnemyMob enemyMob)
         {
-            return await _attributeRelation.GetAttackMultiplier(partyMember.Servant.ServantInfo.Attribute, enemyMob.AttributeName.ToString().ToLower());
+            return _attributeRelation.GetAttackMultiplier(partyMember.Servant.ServantInfo.Attribute, enemyMob.AttributeName.ToString().ToLower());
         }
 
         /// <summary>
@@ -639,9 +654,9 @@ namespace FateGrandCalculator.Core
         /// <param name="partyMember"></param>
         /// <param name="enemyMob"></param>
         /// <returns></returns>
-        private async Task<float> ClassModifier(PartyMember partyMember, EnemyMob enemyMob)
+        private float ClassModifier(PartyMember partyMember, EnemyMob enemyMob)
         {
-            return await _classRelation.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName, enemyMob.ClassName.ToString().ToLower());
+            return _classRelation.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName, enemyMob.ClassName.ToString().ToLower());
         }
         #endregion
     }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using FateGrandCalculator.AtlasAcademy;
 using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Models;
+using FateGrandCalculator.Test.AutofacConfig;
 
 namespace FateGrandCalculator.Test.Utility
 {

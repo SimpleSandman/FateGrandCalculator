@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Autofac;
 
 using FateGrandCalculator.AtlasAcademy.Json;
+using FateGrandCalculator.Test.AutofacConfig;
 using FateGrandCalculator.Test.Fixture;
 using FateGrandCalculator.Test.Utility;
 
