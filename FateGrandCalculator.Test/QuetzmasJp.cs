@@ -388,6 +388,91 @@ namespace FateGrandCalculator.Test
             }
         }
 
+        [Fact]
+        public async Task ArcherNodeValkyrieSkadiWaver()
+        {
+            _wireMockFixture.CheckIfMockServerInUse();
+            _wireMockUtility.AddStubs(_wireMockFixture);
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                List<PartyMember> party = new List<PartyMember>();
+                CraftEssence chaldeaHolyNightSupper = await FrequentlyUsed.CraftEssenceAsync(resolvedClasses, WireMockUtility.HOLY_NIGHT_SUPPER_CE, 85, true);
+
+                /* Party data */
+                #region Valkyrie
+                PartyMember partyValkyrie = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.VALKYRIE_LANCER, party, resolvedClasses, 2, false, chaldeaHolyNightSupper);
+
+                party.Add(partyValkyrie);
+                #endregion
+
+                #region Skadi
+                PartyMember partySkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses);
+
+                party.Add(partySkadi);
+                #endregion
+
+                #region Waver
+                PartyMember partyWaver = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.WAVER_CASTER, party, resolvedClasses);
+
+                party.Add(partyWaver);
+                #endregion
+
+                #region Skadi Support
+                PartyMember partySupportSkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
+
+                party.Add(partySupportSkadi);
+                #endregion
+
+                MysticCode mysticCode = new MysticCode
+                {
+                    MysticCodeLevel = 10,
+                    MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.PLUGSUIT_ID)
+                };
+
+                List<EnemyMob> enemyMobs = GetEnemyChristmas2018();
+
+                /* Simulate node combat */
+                // Fight 1/3
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyValkyrie, 1, party, enemyMobs); // Valkyrie quick and NP STR up
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyWaver, 1, party, enemyMobs, 1); // Waver crit damage on Valkyrie with 30% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyWaver, 2, party, enemyMobs, 1); // Waver defense up to party with 10% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(partyWaver, 3, party, enemyMobs, 1); // Waver attack up to party with 10% charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 3, party, enemyMobs, 3, 3, 4); // Plugsuit swap Waver for Skadi (support)
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 1, party, enemyMobs, 1); // Skadi quick buff
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 1, party, enemyMobs, 1); // Skadi quick up buff
+
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyValkyrie).Should().BeTrue();
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
+
+                _output.WriteLine($"{partyValkyrie.Servant.ServantInfo.Name} has {partyValkyrie.NpCharge}% charge after the 1st fight");
+
+                // Fight 2/3
+                resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
+                resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(mysticCode);
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 3, party, enemyMobs, 1); // Skadi NP charge
+
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyValkyrie).Should().BeTrue();
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
+
+                _output.WriteLine($"{partyValkyrie.Servant.ServantInfo.Name} has {partyValkyrie.NpCharge}% charge after the 2nd fight");
+
+                // Fight 3/3
+                resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
+                resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(mysticCode);
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 2, party, enemyMobs); // Skadi enemy defense down
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 2, party, enemyMobs); // Skadi enemy defense down
+                resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 3, party, enemyMobs, 1); // Skadi (support) NP charge
+                resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 1, party, enemyMobs, 1); // Plugsuit ATK up
+
+                resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyValkyrie).Should().BeTrue();
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
+
+                enemyMobs.Count.Should().Be(0);
+            }
+        }
+
         #region Private Methods
         private void ShowSurvivingEnemyHealth(List<EnemyMob> waveSurvivors)
         {
