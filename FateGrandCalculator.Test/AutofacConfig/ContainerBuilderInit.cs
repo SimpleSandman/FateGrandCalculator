@@ -1,6 +1,5 @@
 ﻿using Autofac;
 
-using FateGrandCalculator.AtlasAcademy;
 using FateGrandCalculator.Test.Fixture;
 
 namespace FateGrandCalculator.Test.AutofacConfig
@@ -18,7 +17,6 @@ namespace FateGrandCalculator.Test.AutofacConfig
             builder.RegisterModule(new AutofacModule
             {
                 BaseApiUrl = new NamedParameter("baseApiUrl", WireMockFixture.ServerUrl),
-                AtlasAcademyClient = new NamedParameter("client", new AtlasAcademyClient(WireMockFixture.ServerUrl, region)),
                 Region = new NamedParameter("region", region)
             });
 

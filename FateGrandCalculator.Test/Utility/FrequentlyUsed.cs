@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 
 using FateGrandCalculator.AtlasAcademy;
+using FateGrandCalculator.AtlasAcademy.Calculations;
 using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Models;
 using FateGrandCalculator.Test.AutofacConfig;
@@ -45,6 +46,19 @@ namespace FateGrandCalculator.Test.Utility
             };
         }
 
+        public static ConstantExportJson GetConstantExportJson(AtlasAcademyClient atlasAcademyClient)
+        {
+            return new ConstantExportJson
+            {
+                AttributeRelation = new AttributeRelation(atlasAcademyClient.GetAttributeRelationInfo().Result),
+                ClassAttackRate = new ClassAttackRate(atlasAcademyClient.GetClassAttackRateInfo().Result),
+                ClassRelation = new ClassRelation(atlasAcademyClient.GetClassRelationInfo().Result),
+                ConstantRate = new ConstantRate(atlasAcademyClient.GetConstantGameInfo().Result),
+                TraitEnumInfo = atlasAcademyClient.GetTraitEnumInfo().Result
+            };
+        }
+
+        #region Private Methods
         /// <summary>
         /// Get pre-defined servant info alongside NP level and if this is a support servant
         /// </summary>
@@ -70,5 +84,6 @@ namespace FateGrandCalculator.Test.Utility
                 ServantInfo = json
             };
         }
+        #endregion
     }
 }

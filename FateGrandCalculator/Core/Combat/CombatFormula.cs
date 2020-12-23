@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 using FateGrandCalculator.AtlasAcademy.Calculations;
-using FateGrandCalculator.AtlasAcademy.Interfaces;
 using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Core.Combat.Interfaces;
 using FateGrandCalculator.Enums;
@@ -16,17 +15,11 @@ namespace FateGrandCalculator.Core.Combat
 {
     public class CombatFormula : ICombatFormula
     {
-        private readonly IAtlasAcademyClient _aaClient;
         private AttributeRelation _attributeRelation;
         private ClassRelation _classRelation;
         private ClassAttackRate _classAttackRate;
         private ConstantRate _constantRate;
         private JObject _traitEnumInfo;
-
-        public CombatFormula(IAtlasAcademyClient client)
-        {
-            _aaClient = client;
-        }
 
         /// <summary>
         /// Simulate noble phantasms against a wave of enemies
@@ -34,8 +27,10 @@ namespace FateGrandCalculator.Core.Combat
         /// <param name="party"></param>
         /// <param name="enemyMobs"></param>
         /// <param name="waveNumber">The wave the node simulation is currently on</param>
+        /// <param name="constantExportJson">Holds the constant dataset from Atlas Academy in JSON format</param>
         /// <param name="enemyPosition">Set the cursor of an enemy's position from left to right (1-3)</param>
-        public void NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, int enemyPosition = 3)
+        public void NoblePhantasmChainSimulator(List<PartyMember> party, List<EnemyMob> enemyMobs, WaveNumberEnum waveNumber, ConstantExportJson constantExportJson, 
+            int enemyPosition = 3)
         {
             List<PartyMember> npChainList = party
                 .FindAll(p => p.NpChainOrder != NpChainOrderEnum.None)
@@ -47,7 +42,7 @@ namespace FateGrandCalculator.Core.Combat
                 return;
             }
 
-            ConfigureExportJson();
+            ConfigureExportJson(constantExportJson);
 
             enemyPosition--; // set to zero-based
             int npChainPosition = 0; // used to calculate overcharge
@@ -223,13 +218,13 @@ namespace FateGrandCalculator.Core.Combat
         /// <summary>
         /// Set Atlas Academy's export JSON dataset
         /// </summary>
-        private void ConfigureExportJson()
+        private void ConfigureExportJson(ConstantExportJson constantExportJson)
         {
-            _attributeRelation = new AttributeRelation(_aaClient.GetAttributeRelationInfo().Result);
-            _classAttackRate = new ClassAttackRate(_aaClient.GetClassAttackRateInfo().Result);
-            _classRelation = new ClassRelation(_aaClient.GetClassRelationInfo().Result);
-            _constantRate = new ConstantRate(_aaClient.GetConstantGameInfo().Result);
-            _traitEnumInfo = _aaClient.GetTraitEnumInfo().Result;
+            _attributeRelation = constantExportJson.AttributeRelation;
+            _classAttackRate = constantExportJson.ClassAttackRate;
+            _classRelation = constantExportJson.ClassRelation;
+            _constantRate = constantExportJson.ConstantRate;
+            _traitEnumInfo = constantExportJson.TraitEnumInfo;
         }
 
         private void ApplyCraftEssenceEffects(PartyMember partyMember)

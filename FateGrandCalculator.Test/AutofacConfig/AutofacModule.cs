@@ -8,7 +8,6 @@ namespace FateGrandCalculator.Test.AutofacConfig
     public class AutofacModule : Module
     {
         public Autofac.Core.Parameter BaseApiUrl { get; set; }
-        public Autofac.Core.Parameter AtlasAcademyClient { get; set; }
         public Autofac.Core.Parameter Region { get; set; }
 
         protected override void Load(ContainerBuilder builder)
@@ -17,9 +16,7 @@ namespace FateGrandCalculator.Test.AutofacConfig
                 .WithParameter(BaseApiUrl)
                 .WithParameter(Region);
 
-            builder.RegisterType<CombatFormula>()
-                .WithParameter(AtlasAcademyClient);
-
+            builder.RegisterType<CombatFormula>();
             builder.RegisterType<ServantSkillActivation>();
         }
     }

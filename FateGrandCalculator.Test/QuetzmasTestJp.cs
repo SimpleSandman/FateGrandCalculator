@@ -75,6 +75,7 @@ namespace FateGrandCalculator.Test
                 };
 
                 List<EnemyMob> enemyMobs = GetEnemyChristmas2018();
+                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
 
                 /* Simulate node combat */
                 // Fight 1/3
@@ -83,7 +84,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 1, party, enemyMobs, 1); // Parvati quick up buff
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First, constantExportJson);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight\n");
 
@@ -92,7 +93,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 3, party, enemyMobs, 1); // Skadi NP buff
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, constantExportJson);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
 
@@ -115,7 +116,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 2, party, enemyMobs, 1); // Skadi (support) enemy defense down
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third, constantExportJson);
 
                 waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Third);
                 ShowSurvivingEnemyHealth(waveSurvivors);
@@ -167,6 +168,7 @@ namespace FateGrandCalculator.Test
                 };
 
                 List<EnemyMob> enemyMobs = GetEnemyChristmas2018();
+                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
 
                 /* Simulate node combat */
                 // Fight 1/3
@@ -175,7 +177,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 1, party, enemyMobs, 1); // Parvati quick up buff
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First, constantExportJson);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight");
 
@@ -185,7 +187,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 2, party, enemyMobs, 1); // Parvati ATK, DEF, Star Drop Rate, & Crit Rate Up
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, constantExportJson);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
 
@@ -197,7 +199,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 2, party, enemyMobs, 1); // Skadi (support) enemy defense down
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third, constantExportJson);
 
                 enemyMobs.Count.Should().Be(0);
             }
@@ -247,6 +249,7 @@ namespace FateGrandCalculator.Test
                 };
 
                 List<EnemyMob> enemyMobs = GetEnemyChristmas2018();
+                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
 
                 /* Simulate node combat */
                 // Fight 1/3
@@ -256,7 +259,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyParvati, 1, party, enemyMobs, 1); // Parvati quick up buff
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First, constantExportJson);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight");
 
@@ -269,7 +272,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyWaver, 3, party, enemyMobs, 1); // Waver attack up to party with 10% charge
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, constantExportJson);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
 
@@ -285,7 +288,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 1, party, enemyMobs, 1); // Plugsuit ATK up
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third, constantExportJson);
 
                 waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Third);
                 ShowSurvivingEnemyHealth(waveSurvivors);
@@ -340,6 +343,7 @@ namespace FateGrandCalculator.Test
                 };
 
                 List<EnemyMob> enemyMobs = GetEnemyChristmas2018();
+                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
 
                 /* Simulate node combat */
                 // Fight 1/3
@@ -347,7 +351,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMerlin, 1, party, enemyMobs); // Merlin ATK UP and NP charge
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyArash).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First, constantExportJson);
 
                 // Fight 2/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
@@ -356,7 +360,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 3, party, enemyMobs, 2); // Fragment NP gain buff
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, constantExportJson);
 
                 _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
 
@@ -375,7 +379,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 1, party, enemyMobs, 2); // Fragment NP STR up
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third, constantExportJson);
 
                 waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Third);
                 ShowSurvivingEnemyHealth(waveSurvivors);
@@ -432,6 +436,7 @@ namespace FateGrandCalculator.Test
                 };
 
                 List<EnemyMob> enemyMobs = GetEnemyChristmas2018();
+                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
 
                 /* Simulate node combat */
                 // Fight 1/3
@@ -444,7 +449,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySupportSkadi, 1, party, enemyMobs, 1); // Skadi quick up buff
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyValkyrie).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First, constantExportJson);
 
                 _output.WriteLine($"{partyValkyrie.Servant.ServantInfo.Name} has {partyValkyrie.NpCharge}% charge after the 1st fight");
 
@@ -454,7 +459,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(partySkadi, 3, party, enemyMobs, 1); // Skadi NP charge
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyValkyrie).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, constantExportJson);
 
                 _output.WriteLine($"{partyValkyrie.Servant.ServantInfo.Name} has {partyValkyrie.NpCharge}% charge after the 2nd fight");
 
@@ -467,7 +472,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 1, party, enemyMobs, 1); // Plugsuit ATK up
 
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyValkyrie).Should().BeTrue();
-                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third);
+                resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third, constantExportJson);
 
                 enemyMobs.Count.Should().Be(0);
             }
