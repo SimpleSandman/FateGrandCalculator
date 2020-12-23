@@ -19,14 +19,14 @@ using Xunit.Abstractions;
 
 namespace FateGrandCalculator.Test
 {
-    public class QuetzmasJp : IClassFixture<WireMockFixture>
+    public class QuetzmasTestJp : IClassFixture<WireMockFixture>
     {
         private readonly WireMockFixture _wireMockFixture;
         private readonly WireMockUtility _wireMockUtility;
         private readonly IContainer _container;
         private readonly ITestOutputHelper _output;
 
-        public QuetzmasJp(WireMockFixture wireMockFixture, ITestOutputHelper output)
+        public QuetzmasTestJp(WireMockFixture wireMockFixture, ITestOutputHelper output)
         {
             _wireMockFixture = wireMockFixture;
             _output = output;
