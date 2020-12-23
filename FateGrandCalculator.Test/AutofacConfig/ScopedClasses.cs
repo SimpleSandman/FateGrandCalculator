@@ -1,5 +1,5 @@
 ﻿using FateGrandCalculator.AtlasAcademy;
-using FateGrandCalculator.Core;
+using FateGrandCalculator.Core.Combat;
 
 namespace FateGrandCalculator.Test.AutofacConfig
 {

@@ -3,10 +3,10 @@ using System.Linq;
 
 using FateGrandCalculator.ApplyStatuses;
 using FateGrandCalculator.AtlasAcademy.Json;
-using FateGrandCalculator.Core.Interfaces;
+using FateGrandCalculator.Core.Combat.Interfaces;
 using FateGrandCalculator.Models;
 
-namespace FateGrandCalculator.Core
+namespace FateGrandCalculator.Core.Combat
 {
     public class ServantSkillActivation : IServantSkillActivation
     {

@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 
 using FateGrandCalculator.Enums;
 using FateGrandCalculator.Models;
 
-namespace FateGrandCalculator.Core.Interfaces
+namespace FateGrandCalculator.Core.Combat.Interfaces
 {
     public interface ICombatFormula
     {

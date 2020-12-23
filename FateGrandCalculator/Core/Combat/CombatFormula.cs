@@ -5,14 +5,14 @@ using System.Linq;
 using FateGrandCalculator.AtlasAcademy.Calculations;
 using FateGrandCalculator.AtlasAcademy.Interfaces;
 using FateGrandCalculator.AtlasAcademy.Json;
-using FateGrandCalculator.Core.Interfaces;
+using FateGrandCalculator.Core.Combat.Interfaces;
 using FateGrandCalculator.Enums;
 using FateGrandCalculator.Extensions;
 using FateGrandCalculator.Models;
 
 using Newtonsoft.Json.Linq;
 
-namespace FateGrandCalculator.Core
+namespace FateGrandCalculator.Core.Combat
 {
     public class CombatFormula : ICombatFormula
     {

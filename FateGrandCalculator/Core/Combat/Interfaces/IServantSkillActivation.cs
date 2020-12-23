@@ -2,7 +2,7 @@
 
 using FateGrandCalculator.Models;
 
-namespace FateGrandCalculator.Core.Interfaces
+namespace FateGrandCalculator.Core.Combat.Interfaces
 {
     public interface IServantSkillActivation
     {
