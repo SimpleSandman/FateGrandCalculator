@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using FateGrandCalculator.ApplyStatuses;
 using FateGrandCalculator.AtlasAcademy.Json;
+using FateGrandCalculator.Core.Combat.ApplyStatuses;
 using FateGrandCalculator.Core.Combat.Interfaces;
 using FateGrandCalculator.Models;
 

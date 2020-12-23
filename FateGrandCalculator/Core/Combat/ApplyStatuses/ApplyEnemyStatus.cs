@@ -4,7 +4,7 @@ using System.Linq;
 using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Models;
 
-namespace FateGrandCalculator.ApplyStatuses
+namespace FateGrandCalculator.Core.Combat.ApplyStatuses
 {
     public static class ApplyEnemyStatus
     {

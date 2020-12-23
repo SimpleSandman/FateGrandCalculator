@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
-using FateGrandCalculator.ApplyStatuses;
 using FateGrandCalculator.AtlasAcademy.Json;
+using FateGrandCalculator.Core.Combat.ApplyStatuses;
 using FateGrandCalculator.Models;
 
 namespace FateGrandCalculator.Core.Combat

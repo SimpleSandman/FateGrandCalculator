@@ -5,7 +5,7 @@ using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Extensions;
 using FateGrandCalculator.Models;
 
-namespace FateGrandCalculator.ApplyStatuses
+namespace FateGrandCalculator.Core.Combat.ApplyStatuses
 {
     public static class ApplyServantStatus
     {
