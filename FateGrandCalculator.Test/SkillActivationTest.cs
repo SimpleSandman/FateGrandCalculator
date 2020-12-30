@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using Autofac;
 
+using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Enums;
 using FateGrandCalculator.Models;
 using FateGrandCalculator.Test.AutofacConfig;
@@ -44,20 +45,21 @@ namespace FateGrandCalculator.Test
             using (var scope = _container.BeginLifetimeScope())
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                List<ServantBasicJson> basicJsonList = await resolvedClasses.AtlasAcademyClient.GetListBasicServantInfo();
 
-                /* Party data */
-                #region Dantes
-                PartyMember partyMemberAttacker = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.DANTES_AVENGER, party, resolvedClasses);
+                #region Party Data
+                // Dantes
+                ServantBasicJson basicJson = basicJsonList.Find(s => s.Id.ToString() == WireMockUtility.DANTES_AVENGER);
+                PartyMember partyMemberAttacker = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses);
                 party.Add(partyMemberAttacker);
-                #endregion
 
-                #region Skadi
-                PartyMember partyMemberCaster = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses);
+                // Skadi
+                basicJson = basicJsonList.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                PartyMember partyMemberCaster = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses);
                 party.Add(partyMemberCaster);
-                #endregion
 
-                #region Skadi Support
-                PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
+                // Skadi Support
+                PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, true);
                 party.Add(partyMemberSupportCaster);
                 #endregion
 

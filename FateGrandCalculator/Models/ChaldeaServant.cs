@@ -13,6 +13,6 @@ namespace FateGrandCalculator.Models
         public int FouAttack { get; set; }
         public int FouHealth { get; set; }
         public bool IsSupportServant { get; set; }
-        public ServantNiceJson ServantInfo { get; set; }
+        public ServantBasicJson ServantBasicInfo { get; set; }
     }
 }

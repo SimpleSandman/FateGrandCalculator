@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using Autofac;
 
+using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Enums;
 using FateGrandCalculator.Extensions;
 using FateGrandCalculator.Models;
@@ -43,30 +44,11 @@ namespace FateGrandCalculator.Test
             using (var scope = _container.BeginLifetimeScope())
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
                 List<PartyMember> party = new List<PartyMember>();
-                CraftEssence chaldeaSuperscope = await FrequentlyUsed.CraftEssenceAsync(resolvedClasses, WireMockUtility.KSCOPE_CE, 100, true);
 
-                /* Party data */
                 // Reference: https://www.youtube.com/watch?v=oBs_YT1ac-Y
-                #region Parvati
-                PartyMember partyParvati = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.PARVATI_LANCER, party, resolvedClasses, 2, false, chaldeaSuperscope);
-                partyParvati.Servant.SkillLevels = new int[] { 10, 4, 4 }; // adjust to the reference video
-
-                party.Add(partyParvati);
-                #endregion
-
-                #region Skadi
-                PartyMember partySkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses);
-                partySkadi.Servant.SkillLevels = new int[] { 7, 7, 8 }; // adjust to the reference video
-
-                party.Add(partySkadi);
-                #endregion
-
-                #region Skadi Support
-                PartyMember partySupportSkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
-
-                party.Add(partySupportSkadi);
-                #endregion
+                CraftEssence chaldeaSuperscope = await FrequentlyUsed.CraftEssenceAsync(resolvedClasses, WireMockUtility.KSCOPE_CE, 100, true);
 
                 MysticCode mysticCode = new MysticCode
                 {
@@ -74,8 +56,29 @@ namespace FateGrandCalculator.Test
                     MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.ARTIC_ID)
                 };
 
+                #region Party data
+                // Parvati
+                ServantBasicJson basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.PARVATI_LANCER);
+                PartyMember partyParvati = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 2, false, chaldeaSuperscope);
+                partyParvati.Servant.SkillLevels = new int[] { 10, 4, 4 }; // adjust to the reference video
+
+                party.Add(partyParvati);
+
+                // Skadi
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                PartyMember partySkadi = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses);
+                partySkadi.Servant.SkillLevels = new int[] { 7, 7, 8 }; // adjust to the reference video
+
+                party.Add(partySkadi);
+
+                // Skadi Support
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                PartyMember partySupportSkadi = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, true);
+
+                party.Add(partySupportSkadi);
+                #endregion
+
                 List<EnemyMob> enemyMobs = GetEnemyChristmas2018();
-                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
 
                 /* Simulate node combat */
                 // Fight 1/3
@@ -86,7 +89,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First, constantExportJson);
 
-                _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight\n");
+                _output.WriteLine($"{partyParvati.Servant.ServantBasicInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight\n");
 
                 // Fight 2/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
@@ -95,7 +98,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, constantExportJson);
 
-                _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
+                _output.WriteLine($"{partyParvati.Servant.ServantBasicInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
 
                 List<EnemyMob> waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Second);
                 ShowSurvivingEnemyHealth(waveSurvivors);
@@ -138,28 +141,10 @@ namespace FateGrandCalculator.Test
             using (var scope = _container.BeginLifetimeScope())
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
                 List<PartyMember> party = new List<PartyMember>();
+
                 CraftEssence chaldeaSuperscope = await FrequentlyUsed.CraftEssenceAsync(resolvedClasses, WireMockUtility.KSCOPE_CE, 100, true);
-
-                /* Party data */
-                #region Parvati
-                PartyMember partyParvati = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.PARVATI_LANCER, party, resolvedClasses, 4, false, chaldeaSuperscope);
-                partyParvati.Servant.SkillLevels = new int[] { 9, 8, 10 };
-
-                party.Add(partyParvati);
-                #endregion
-
-                #region Skadi
-                PartyMember partySkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses);
-
-                party.Add(partySkadi);
-                #endregion
-
-                #region Skadi Support
-                PartyMember partySupportSkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
-
-                party.Add(partySupportSkadi);
-                #endregion
 
                 MysticCode mysticCode = new MysticCode
                 {
@@ -167,8 +152,28 @@ namespace FateGrandCalculator.Test
                     MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.FRAGMENT_2004_ID)
                 };
 
+                #region Party data
+                // Parvati
+                ServantBasicJson basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.PARVATI_LANCER);
+                PartyMember partyParvati = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 4, false, chaldeaSuperscope);
+                partyParvati.Servant.SkillLevels = new int[] { 9, 8, 10 };
+
+                party.Add(partyParvati);
+
+                // Skadi
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                PartyMember partySkadi = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses);
+
+                party.Add(partySkadi);
+
+                // Skadi Support
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                PartyMember partySupportSkadi = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, true);
+
+                party.Add(partySupportSkadi);
+                #endregion
+
                 List<EnemyMob> enemyMobs = GetEnemyChristmas2018();
-                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
 
                 /* Simulate node combat */
                 // Fight 1/3
@@ -179,7 +184,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First, constantExportJson);
 
-                _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight");
+                _output.WriteLine($"{partyParvati.Servant.ServantBasicInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight");
 
                 // Fight 2/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
@@ -189,7 +194,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, constantExportJson);
 
-                _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
+                _output.WriteLine($"{partyParvati.Servant.ServantBasicInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
 
                 // Fight 3/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
@@ -214,33 +219,10 @@ namespace FateGrandCalculator.Test
             using (var scope = _container.BeginLifetimeScope())
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
                 List<PartyMember> party = new List<PartyMember>();
+
                 CraftEssence chaldeaHolyNightSupper = await FrequentlyUsed.CraftEssenceAsync(resolvedClasses, WireMockUtility.HOLY_NIGHT_SUPPER_CE, 100, true);
-
-                /* Party data */
-                #region Parvati
-                PartyMember partyParvati = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.PARVATI_LANCER, party, resolvedClasses, 2, false, chaldeaHolyNightSupper);
-
-                party.Add(partyParvati);
-                #endregion
-
-                #region Skadi
-                PartyMember partySkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses);
-
-                party.Add(partySkadi);
-                #endregion
-
-                #region Skadi Support
-                PartyMember partySupportSkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
-
-                party.Add(partySupportSkadi);
-                #endregion
-
-                #region Waver
-                PartyMember partyWaver = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.WAVER_CASTER, party, resolvedClasses);
-
-                party.Add(partyWaver);
-                #endregion
 
                 MysticCode mysticCode = new MysticCode
                 {
@@ -248,8 +230,33 @@ namespace FateGrandCalculator.Test
                     MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.PLUGSUIT_ID)
                 };
 
+                #region Party Data
+                // Parvati
+                ServantBasicJson basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.PARVATI_LANCER);
+                PartyMember partyParvati = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 2, false, chaldeaHolyNightSupper);
+
+                party.Add(partyParvati);
+
+                // Skadi
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                PartyMember partySkadi = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses);
+
+                party.Add(partySkadi);
+
+                // Skadi Support
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                PartyMember partySupportSkadi = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, true);
+
+                party.Add(partySupportSkadi);
+
+                // Waver
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.WAVER_CASTER);
+                PartyMember partyWaver = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses);
+
+                party.Add(partyWaver);
+                #endregion
+
                 List<EnemyMob> enemyMobs = GetEnemyChristmas2018();
-                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
 
                 /* Simulate node combat */
                 // Fight 1/3
@@ -261,7 +268,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First, constantExportJson);
 
-                _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight");
+                _output.WriteLine($"{partyParvati.Servant.ServantBasicInfo.Name} has {partyParvati.NpCharge}% charge after the 1st fight");
 
                 // Fight 2/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
@@ -274,7 +281,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, constantExportJson);
 
-                _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
+                _output.WriteLine($"{partyParvati.Servant.ServantBasicInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
 
                 List<EnemyMob> waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Second);
                 ShowSurvivingEnemyHealth(waveSurvivors);
@@ -310,31 +317,11 @@ namespace FateGrandCalculator.Test
             using (var scope = _container.BeginLifetimeScope())
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
                 List<PartyMember> party = new List<PartyMember>();
+
                 CraftEssence chaldeaHolyNightSupper = await FrequentlyUsed.CraftEssenceAsync(resolvedClasses, WireMockUtility.HOLY_NIGHT_SUPPER_CE, 88, true);
                 CraftEssence chaldeaKscope = await FrequentlyUsed.CraftEssenceAsync(resolvedClasses, WireMockUtility.KSCOPE_CE, 20, false);
-
-                /* Party data */
-                #region Arash
-                PartyMember partyArash = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.ARASH_ARCHER, party, resolvedClasses, 5, false, chaldeaHolyNightSupper);
-                partyArash.Servant.SkillLevels = new int[] { 6, 6, 10 };
-                party.Add(partyArash);
-                #endregion
-
-                #region Parvati
-                PartyMember partyParvati = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.PARVATI_LANCER, party, resolvedClasses, 2, false, chaldeaKscope);
-                party.Add(partyParvati);
-                #endregion
-
-                #region Merlin
-                PartyMember partyMerlin = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.MERLIN_CASTER, party, resolvedClasses);
-                party.Add(partyMerlin);
-                #endregion
-
-                #region Skadi Support
-                PartyMember partySkadiSupport = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
-                party.Add(partySkadiSupport);
-                #endregion
 
                 MysticCode mysticCode = new MysticCode
                 {
@@ -342,8 +329,30 @@ namespace FateGrandCalculator.Test
                     MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.FRAGMENT_2004_ID)
                 };
 
+                #region Party Data
+                // Arash
+                ServantBasicJson basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.ARASH_ARCHER);
+                PartyMember partyArash = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 5, false, chaldeaHolyNightSupper);
+                partyArash.Servant.SkillLevels = new int[] { 6, 6, 10 };
+                party.Add(partyArash);
+
+                // Parvati
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.PARVATI_LANCER);
+                PartyMember partyParvati = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 2, false, chaldeaKscope);
+                party.Add(partyParvati);
+
+                // Merlin
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.MERLIN_CASTER);
+                PartyMember partyMerlin = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses);
+                party.Add(partyMerlin);
+
+                // Skadi Support
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                PartyMember partySkadiSupport = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, true);
+                party.Add(partySkadiSupport);
+                #endregion
+
                 List<EnemyMob> enemyMobs = GetEnemyChristmas2018();
-                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
 
                 /* Simulate node combat */
                 // Fight 1/3
@@ -362,7 +371,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyParvati).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, constantExportJson);
 
-                _output.WriteLine($"{partyParvati.Servant.ServantInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
+                _output.WriteLine($"{partyParvati.Servant.ServantBasicInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
 
                 List<EnemyMob> waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Second);
                 ShowSurvivingEnemyHealth(waveSurvivors);
@@ -401,33 +410,10 @@ namespace FateGrandCalculator.Test
             using (var scope = _container.BeginLifetimeScope())
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
                 List<PartyMember> party = new List<PartyMember>();
+
                 CraftEssence chaldeaHolyNightSupper = await FrequentlyUsed.CraftEssenceAsync(resolvedClasses, WireMockUtility.HOLY_NIGHT_SUPPER_CE, 85, true);
-
-                /* Party data */
-                #region Valkyrie
-                PartyMember partyValkyrie = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.VALKYRIE_LANCER, party, resolvedClasses, 2, false, chaldeaHolyNightSupper);
-
-                party.Add(partyValkyrie);
-                #endregion
-
-                #region Skadi
-                PartyMember partySkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses);
-
-                party.Add(partySkadi);
-                #endregion
-
-                #region Waver
-                PartyMember partyWaver = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.WAVER_CASTER, party, resolvedClasses);
-
-                party.Add(partyWaver);
-                #endregion
-
-                #region Skadi Support
-                PartyMember partySupportSkadi = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
-
-                party.Add(partySupportSkadi);
-                #endregion
 
                 MysticCode mysticCode = new MysticCode
                 {
@@ -435,8 +421,29 @@ namespace FateGrandCalculator.Test
                     MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.PLUGSUIT_ID)
                 };
 
+                #region Party Data
+                // Valkyrie
+                ServantBasicJson basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.VALKYRIE_LANCER);
+                PartyMember partyValkyrie = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 2, false, chaldeaHolyNightSupper);
+                party.Add(partyValkyrie);
+
+                // Skadi
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                PartyMember partySkadi = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses);
+                party.Add(partySkadi);
+
+                // Waver
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.WAVER_CASTER);
+                PartyMember partyWaver = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses);
+                party.Add(partyWaver);
+
+                // Skadi Support
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                PartyMember partySupportSkadi = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, true);
+                party.Add(partySupportSkadi);
+                #endregion
+
                 List<EnemyMob> enemyMobs = GetEnemyChristmas2018();
-                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
 
                 /* Simulate node combat */
                 // Fight 1/3
@@ -451,7 +458,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyValkyrie).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First, constantExportJson);
 
-                _output.WriteLine($"{partyValkyrie.Servant.ServantInfo.Name} has {partyValkyrie.NpCharge}% charge after the 1st fight");
+                _output.WriteLine($"{partyValkyrie.Servant.ServantBasicInfo.Name} has {partyValkyrie.NpCharge}% charge after the 1st fight");
 
                 // Fight 2/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
@@ -461,7 +468,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyValkyrie).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, constantExportJson);
 
-                _output.WriteLine($"{partyValkyrie.Servant.ServantInfo.Name} has {partyValkyrie.NpCharge}% charge after the 2nd fight");
+                _output.WriteLine($"{partyValkyrie.Servant.ServantBasicInfo.Name} has {partyValkyrie.NpCharge}% charge after the 2nd fight");
 
                 // Fight 3/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);

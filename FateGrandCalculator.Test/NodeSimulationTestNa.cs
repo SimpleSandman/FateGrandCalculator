@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 using Autofac;
 
+using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Enums;
 using FateGrandCalculator.Models;
 using FateGrandCalculator.Test.AutofacConfig;
@@ -41,36 +42,37 @@ namespace FateGrandCalculator.Test
             using (var scope = _container.BeginLifetimeScope())
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
                 List<PartyMember> party = new List<PartyMember>();
-
-                /* Party data */
-                #region Dantes
-                CraftEssence chaldeaKscope = new CraftEssence
+                
+                CraftEssence chaldeaSuperscope = new CraftEssence
                 {
                     CraftEssenceLevel = 100,
                     Mlb = true,
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                PartyMember partyMemberAttacker = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.DANTES_AVENGER, party, resolvedClasses, 1, false, chaldeaKscope);
-                party.Add(partyMemberAttacker);
-                #endregion
-
-                #region Skadi
-                PartyMember partyMemberCaster = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses);
-                party.Add(partyMemberCaster);
-                #endregion
-
-                #region Skadi Support
-                PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, true);
-                party.Add(partyMemberSupportCaster);
-                #endregion
-
                 MysticCode mysticCode = new MysticCode
                 {
                     MysticCodeLevel = 4,
                     MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.ARTIC_ID)
                 };
+
+                #region Party Data
+                // Dantes
+                ServantBasicJson basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.DANTES_AVENGER);
+                PartyMember partyMemberAttacker = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, false, chaldeaSuperscope);
+                party.Add(partyMemberAttacker);
+
+                // Skadi
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                PartyMember partyMemberCaster = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses);
+                party.Add(partyMemberCaster);
+
+                // Skadi Support
+                PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, true);
+                party.Add(partyMemberSupportCaster);
+                #endregion
 
                 /* Enemy node data */
                 #region First Wave
@@ -212,8 +214,6 @@ namespace FateGrandCalculator.Test
                     walkure4, walkure5, muspell4  // 3rd wave
                 };
 
-                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
-
                 /* Simulate node combat */
                 // Fight 1/3
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberCaster, 1, party, enemyMobs, 1); // Skadi quick up buff
@@ -223,7 +223,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyMemberAttacker).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.First, constantExportJson);
 
-                _output.WriteLine($"{partyMemberAttacker.Servant.ServantInfo.Name} has {partyMemberAttacker.NpCharge}% charge after the 1st fight");
+                _output.WriteLine($"{partyMemberAttacker.Servant.ServantBasicInfo.Name} has {partyMemberAttacker.NpCharge}% charge after the 1st fight");
 
                 // Fight 2/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
@@ -232,7 +232,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyMemberAttacker).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, constantExportJson);
 
-                _output.WriteLine($"{partyMemberAttacker.Servant.ServantInfo.Name} has {partyMemberAttacker.NpCharge}% charge after the 2nd fight");
+                _output.WriteLine($"{partyMemberAttacker.Servant.ServantBasicInfo.Name} has {partyMemberAttacker.NpCharge}% charge after the 2nd fight");
 
                 // Fight 3/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
@@ -250,7 +250,7 @@ namespace FateGrandCalculator.Test
                     _output.WriteLine($"{enemyMob.Name} has {enemyMob.Health} HP left");
                 }
 
-                _output.WriteLine($"{partyMemberAttacker.Servant.ServantInfo.Name} has {partyMemberAttacker.NpCharge}% charge after the 3rd fight");
+                _output.WriteLine($"{partyMemberAttacker.Servant.ServantBasicInfo.Name} has {partyMemberAttacker.NpCharge}% charge after the 3rd fight");
 
                 using (new AssertionScope())
                 {
@@ -270,49 +270,8 @@ namespace FateGrandCalculator.Test
             using (var scope = _container.BeginLifetimeScope())
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
                 List<PartyMember> party = new List<PartyMember>();
-
-                /* Party data */
-                #region Lancelot Berserker
-                CraftEssence chaldeaSuperscope = new CraftEssence
-                {
-                    CraftEssenceLevel = 100,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
-                };
-
-                PartyMember partyLancelot = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.LANCELOT_BERSERKER, party, resolvedClasses, 5, false, chaldeaSuperscope);
-                party.Add(partyLancelot);
-                #endregion
-
-                #region Arash
-                CraftEssence chaldeaImaginaryElement = new CraftEssence
-                {
-                    CraftEssenceLevel = 36,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.IMAGINARY_ELEMENT_CE)
-                };
-
-                PartyMember partyArash = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.ARASH_ARCHER, party, resolvedClasses, 5, false, chaldeaImaginaryElement);
-                party.Add(partyArash);
-                #endregion
-
-                #region Jack
-                CraftEssence chaldeaMlbKscope = new CraftEssence
-                {
-                    CraftEssenceLevel = 30,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
-                };
-
-                PartyMember partyJack = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.JACK_ASSASSIN, party, resolvedClasses, 1, false, chaldeaMlbKscope);
-                party.Add(partyJack);
-                #endregion
-
-                #region Skadi Support
-                PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SKADI_CASTER, party, resolvedClasses, 1, false);
-                party.Add(partyMemberSupportCaster);
-                #endregion
 
                 MysticCode mysticCode = new MysticCode
                 {
@@ -320,6 +279,52 @@ namespace FateGrandCalculator.Test
                     MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.FRAGMENT_2004_ID)
                 };
 
+                #region Craft Essence Data
+                CraftEssence chaldeaSuperscope = new CraftEssence
+                {
+                    CraftEssenceLevel = 100,
+                    Mlb = true,
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
+                };
+
+                CraftEssence chaldeaImaginaryElement = new CraftEssence
+                {
+                    CraftEssenceLevel = 36,
+                    Mlb = true,
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.IMAGINARY_ELEMENT_CE)
+                };
+
+                CraftEssence chaldeaMlbKscope = new CraftEssence
+                {
+                    CraftEssenceLevel = 30,
+                    Mlb = true,
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
+                };
+                #endregion
+
+                #region Party Data
+                // Lancelot Berserker
+                ServantBasicJson basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.LANCELOT_BERSERKER);
+                PartyMember partyLancelot = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 5, false, chaldeaSuperscope);
+                party.Add(partyLancelot);
+
+                // Arash
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.ARASH_ARCHER);
+                PartyMember partyArash = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 5, false, chaldeaImaginaryElement);
+                party.Add(partyArash);
+
+                // Jack
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.JACK_ASSASSIN);
+                PartyMember partyJack = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, false, chaldeaMlbKscope);
+                party.Add(partyJack);
+
+                // Skadi Support
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, false);
+                party.Add(partyMemberSupportCaster);
+                #endregion
+
+                /* Node data */
                 #region First Wave
                 EnemyMob walkure1 = new EnemyMob
                 {
@@ -459,8 +464,6 @@ namespace FateGrandCalculator.Test
                     walkure7, walkure8, walkure9  // 3rd wave
                 };
 
-                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
-
                 /* Simulate node combat */
                 // Fight 1/3
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyArash, 3, party, enemyMobs, 1); // Arash NP charge
@@ -476,7 +479,7 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyLancelot).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Second, constantExportJson);
 
-                _output.WriteLine($"{partyLancelot.Servant.ServantInfo.Name} has {partyLancelot.NpCharge}% charge after the 2nd fight");
+                _output.WriteLine($"{partyLancelot.Servant.ServantBasicInfo.Name} has {partyLancelot.NpCharge}% charge after the 2nd fight");
 
                 // Fight 3/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
@@ -487,8 +490,8 @@ namespace FateGrandCalculator.Test
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partyJack).Should().BeTrue();
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third, constantExportJson);
 
-                _output.WriteLine($"{partyLancelot.Servant.ServantInfo.Name} has {partyLancelot.NpCharge}% charge after the 3rd fight");
-                _output.WriteLine($"{partyJack.Servant.ServantInfo.Name} has {partyJack.NpCharge}% charge after the 3rd fight");
+                _output.WriteLine($"{partyLancelot.Servant.ServantBasicInfo.Name} has {partyLancelot.NpCharge}% charge after the 3rd fight");
+                _output.WriteLine($"{partyJack.Servant.ServantBasicInfo.Name} has {partyJack.NpCharge}% charge after the 3rd fight");
 
                 using (new AssertionScope())
                 {
@@ -507,44 +510,8 @@ namespace FateGrandCalculator.Test
             using (var scope = _container.BeginLifetimeScope())
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
                 List<PartyMember> party = new List<PartyMember>();
-
-                /* Party data */
-                #region Waver
-                PartyMember partyWaver = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.WAVER_CASTER, party, resolvedClasses, 2);
-                party.Add(partyWaver);
-                #endregion
-
-                #region Astolfo Rider
-                CraftEssence chaldeaHolyNightSupper = new CraftEssence
-                {
-                    CraftEssenceLevel = 33,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.HOLY_NIGHT_SUPPER_CE)
-                };
-
-                PartyMember partyAstolfo = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.ASTOLFO_RIDER, party, resolvedClasses, 5, false, chaldeaHolyNightSupper);
-                partyAstolfo.Servant.ServantLevel = 100;
-
-                party.Add(partyAstolfo);
-                #endregion
-
-                #region Spartacus Berserker
-                CraftEssence chaldeaSuperscope = new CraftEssence
-                {
-                    CraftEssenceLevel = 100,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
-                };
-
-                PartyMember partySpartacus = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.SPARTACUS_BERSERKER, party, resolvedClasses, 5, false, chaldeaSuperscope);
-                party.Add(partySpartacus);
-                #endregion
-
-                #region Waver Support
-                PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.WAVER_CASTER, party, resolvedClasses, 1, true);
-                party.Add(partyMemberSupportCaster);
-                #endregion
 
                 MysticCode mysticCode = new MysticCode
                 {
@@ -552,6 +519,47 @@ namespace FateGrandCalculator.Test
                     MysticCodeInfo = await resolvedClasses.AtlasAcademyClient.GetMysticCodeInfo(WireMockUtility.PLUGSUIT_ID)
                 };
 
+                #region Craft Essence Data
+                CraftEssence chaldeaHolyNightSupper = new CraftEssence
+                {
+                    CraftEssenceLevel = 33,
+                    Mlb = true,
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.HOLY_NIGHT_SUPPER_CE)
+                };
+
+                CraftEssence chaldeaSuperscope = new CraftEssence
+                {
+                    CraftEssenceLevel = 100,
+                    Mlb = true,
+                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
+                };
+                #endregion
+
+                #region Party Data
+                // Waver
+                ServantBasicJson basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.WAVER_CASTER);
+                PartyMember partyWaver = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 2);
+                party.Add(partyWaver);
+
+                // Astolfo Rider
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.ASTOLFO_RIDER);
+                PartyMember partyAstolfo = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 5, false, chaldeaHolyNightSupper);
+                partyAstolfo.Servant.ServantLevel = 100;
+
+                party.Add(partyAstolfo);
+
+                // Spartacus Berserker
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SPARTACUS_BERSERKER);
+                PartyMember partySpartacus = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 5, false, chaldeaSuperscope);
+                party.Add(partySpartacus);
+
+                // Waver Support
+                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.WAVER_CASTER);
+                PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, true);
+                party.Add(partyMemberSupportCaster);
+                #endregion
+
+                /* Node data */
                 #region First Wave
                 EnemyMob doorSaint1 = new EnemyMob
                 {
@@ -664,8 +672,6 @@ namespace FateGrandCalculator.Test
                     doorChampion4, doorChampion5, doorChampion6  // wave 3
                 };
 
-                ConstantExportJson constantExportJson = FrequentlyUsed.GetConstantExportJson(resolvedClasses.AtlasAcademyClient);
-
                 /* Simulate node combat */
                 // Fight 1/3
                 resolvedClasses.CombatFormula.AddPartyMemberToNpChain(party, partySpartacus).Should().BeTrue();
@@ -687,7 +693,7 @@ namespace FateGrandCalculator.Test
                 _output.WriteLine("--- Before party swap ---");
                 foreach (PartyMember partyMember in party)
                 {
-                    _output.WriteLine(partyMember.Servant.ServantInfo.Name);
+                    _output.WriteLine(partyMember.Servant.ServantBasicInfo.Name);
                 }
 
                 resolvedClasses.ServantSkillActivation.SkillActivation(mysticCode, 3, party, enemyMobs, 3, 3, 4); // Swap spartacus with Waver
@@ -695,7 +701,7 @@ namespace FateGrandCalculator.Test
                 _output.WriteLine("\n--- After party swap ---");
                 foreach (PartyMember partyMember in party)
                 {
-                    _output.WriteLine(partyMember.Servant.ServantInfo.Name);
+                    _output.WriteLine(partyMember.Servant.ServantBasicInfo.Name);
                 }
 
                 resolvedClasses.ServantSkillActivation.SkillActivation(partyMemberSupportCaster, 1, party, enemyMobs, 2); // Waver (support) crit damage on Astolfo with 30% charge

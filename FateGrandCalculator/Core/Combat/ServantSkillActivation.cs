@@ -31,8 +31,7 @@ namespace FateGrandCalculator.Core.Combat
 
             // Get highest priority skill
             Skill skill = partyMemberActor
-                .Servant
-                .ServantInfo
+                .ServantNiceInfo
                 .Skills
                 .FindAll(s => s.Num == actorSkillPositionNumber)
                 .Aggregate((agg, next) =>

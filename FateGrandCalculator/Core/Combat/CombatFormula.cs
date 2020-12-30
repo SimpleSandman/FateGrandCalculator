@@ -148,22 +148,23 @@ namespace FateGrandCalculator.Core.Combat
         /// <param name="party"></param>
         /// <param name="chaldeaServant"></param>
         /// <param name="chaldeaCraftEssence"></param>
+        /// <param name="servantNiceJson"></param>
         /// <returns></returns>
-        public PartyMember AddPartyMember(List<PartyMember> party, ChaldeaServant chaldeaServant, CraftEssence chaldeaCraftEssence = null)
+        public PartyMember AddPartyMember(List<PartyMember> party, ChaldeaServant chaldeaServant, CraftEssence chaldeaCraftEssence, ServantNiceJson servantNiceJson)
         {
-            int servantTotalAtk = chaldeaServant.ServantInfo.AtkGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouAttack;
-            int servantTotalHp = chaldeaServant.ServantInfo.HpGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouHealth;
+            int servantTotalAtk = servantNiceJson.AtkGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouAttack;
+            int servantTotalHp = servantNiceJson.HpGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouHealth;
 
             PartyMember partyMember = new PartyMember
             {
                 Id = party.Count,
                 Servant = chaldeaServant,
+                ServantNiceInfo = servantNiceJson,
                 EquippedCraftEssence = chaldeaCraftEssence,
                 TotalAttack = servantTotalAtk,
                 TotalHealth = servantTotalHp,
-                NoblePhantasm = chaldeaServant  // Set NP for party member at start of fight
-                    .ServantInfo                // (assume highest upgraded NP by priority)
-                    .NoblePhantasms
+                NoblePhantasm = servantNiceJson  // Set NP for party member at start of fight
+                    .NoblePhantasms              // (assume highest upgraded NP by priority)
                     .Aggregate((agg, next) =>
                         next.Priority >= agg.Priority ? next : agg)
             };
@@ -411,7 +412,7 @@ namespace FateGrandCalculator.Core.Combat
             }
 
             float constantAttackRate = _constantRate.GetAttackMultiplier("ATTACK_RATE");
-            float classModifier = _classAttackRate.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName);
+            float classModifier = _classAttackRate.GetAttackMultiplier(partyMember.ServantNiceInfo.ClassName);
             float npTypeModifier = _constantRate.GetAttackMultiplier($"ENEMY_ATTACK_RATE_{partyMember.NoblePhantasm.Card}");
 
             // Base NP damage = ATTACK_RATE * Servant total attack * Class modifier * NP type modifier * (20% bonus if undead enemy) * NP damage
@@ -640,7 +641,7 @@ namespace FateGrandCalculator.Core.Combat
         /// <returns></returns>
         private float AttributeModifier(PartyMember partyMember, EnemyMob enemyMob)
         {
-            return _attributeRelation.GetAttackMultiplier(partyMember.Servant.ServantInfo.Attribute, enemyMob.AttributeName.ToString().ToLower());
+            return _attributeRelation.GetAttackMultiplier(partyMember.ServantNiceInfo.Attribute, enemyMob.AttributeName.ToString().ToLower());
         }
 
         /// <summary>
@@ -651,7 +652,7 @@ namespace FateGrandCalculator.Core.Combat
         /// <returns></returns>
         private float ClassModifier(PartyMember partyMember, EnemyMob enemyMob)
         {
-            return _classRelation.GetAttackMultiplier(partyMember.Servant.ServantInfo.ClassName, enemyMob.ClassName.ToString().ToLower());
+            return _classRelation.GetAttackMultiplier(partyMember.ServantNiceInfo.ClassName, enemyMob.ClassName.ToString().ToLower());
         }
         #endregion
     }

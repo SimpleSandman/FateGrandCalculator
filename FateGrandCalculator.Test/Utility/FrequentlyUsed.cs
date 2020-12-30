@@ -14,18 +14,30 @@ namespace FateGrandCalculator.Test.Utility
         /// <summary>
         /// Set up party member based on pre-defined servant and craft essence info
         /// </summary>
-        /// <param name="servantId">The actual ID of a servant, not the collection ID</param>
+        /// <param name="basicJson">Basic information for a servant</param>
         /// <param name="party">List of party members</param>
         /// <param name="resolvedClasses">Dependently injected classes that are resolved using Autofac</param>
         /// <param name="npLevel">The Noble Phantasm level of a servant</param>
         /// <param name="isSupport">Declare if this is a support (friend) servant</param>
         /// <param name="craftEssence">The craft being used with the servant</param>
         /// <returns></returns>
-        public static async Task<PartyMember> PartyMemberAsync(string servantId, List<PartyMember> party, ScopedClasses resolvedClasses,
+        public static async Task<PartyMember> PartyMemberAsync(ServantBasicJson basicJson, List<PartyMember> party, ScopedClasses resolvedClasses,
             int npLevel = 1, bool isSupport = false, CraftEssence craftEssence = null)
         {
-            ChaldeaServant chaldeaServant = await ChaldeaServantAsync(resolvedClasses.AtlasAcademyClient, servantId, npLevel, isSupport);
-            return resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaServant, craftEssence);
+            ServantNiceJson json = await resolvedClasses.AtlasAcademyClient.GetServantInfo(basicJson.Id.ToString());
+
+            ChaldeaServant chaldeaServant = new ChaldeaServant
+            {
+                ServantLevel = json.LvMax,
+                NpLevel = npLevel,
+                FouHealth = 1000,
+                FouAttack = 1000,
+                SkillLevels = new int[] { 10, 10, 10 },
+                IsSupportServant = isSupport,
+                ServantBasicInfo = basicJson
+            };
+
+            return resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaServant, craftEssence, json);
         }
 
         /// <summary>
@@ -46,44 +58,17 @@ namespace FateGrandCalculator.Test.Utility
             };
         }
 
-        public static ConstantExportJson GetConstantExportJson(AtlasAcademyClient atlasAcademyClient)
+        public static async Task<ConstantExportJson> GetConstantExportJsonAsync(AtlasAcademyClient atlasAcademyClient)
         {
             return new ConstantExportJson
             {
-                AttributeRelation = new AttributeRelation(atlasAcademyClient.GetAttributeRelationInfo().Result),
-                ClassAttackRate = new ClassAttackRate(atlasAcademyClient.GetClassAttackRateInfo().Result),
-                ClassRelation = new ClassRelation(atlasAcademyClient.GetClassRelationInfo().Result),
-                ConstantRate = new ConstantRate(atlasAcademyClient.GetConstantGameInfo().Result),
-                TraitEnumInfo = atlasAcademyClient.GetTraitEnumInfo().Result
+                AttributeRelation = new AttributeRelation(await atlasAcademyClient.GetAttributeRelationInfo()),
+                ClassAttackRate = new ClassAttackRate(await atlasAcademyClient.GetClassAttackRateInfo()),
+                ClassRelation = new ClassRelation(await atlasAcademyClient.GetClassRelationInfo()),
+                ConstantRate = new ConstantRate(await atlasAcademyClient.GetConstantGameInfo()),
+                ListBasicServantJson = await atlasAcademyClient.GetListBasicServantInfo(),
+                TraitEnumInfo = await atlasAcademyClient.GetTraitEnumInfo()
             };
         }
-
-        #region Private Methods
-        /// <summary>
-        /// Get pre-defined servant info alongside NP level and if this is a support servant
-        /// </summary>
-        /// <param name="atlasAcademyClient">Client needed to pull servant info</param>
-        /// <param name="servantId">The actual ID of a servant, not the collection ID</param>
-        /// <param name="npLevel">The Noble Phantasm level of a servant</param>
-        /// <param name="isSupportServant">Declare if this is a support (friend) servant</param>
-        /// <param name="servantLevel">Set default max level for the servant, unless specified</param>
-        /// <returns>Servant that has Fou HP & ATK 1000, skill levels are 10/10/10, and their max level before grails by default</returns>
-        private static async Task<ChaldeaServant> ChaldeaServantAsync(AtlasAcademyClient atlasAcademyClient, string servantId, int npLevel, bool isSupportServant, int servantLevel = 0)
-        {
-            ServantNiceJson json = await atlasAcademyClient.GetServantInfo(servantId);
-            servantLevel = servantLevel == 0 ? json.LvMax : servantLevel;
-
-            return new ChaldeaServant
-            {
-                ServantLevel = servantLevel,
-                NpLevel = npLevel,
-                FouHealth = 1000,
-                FouAttack = 1000,
-                SkillLevels = new int[] { 10, 10, 10 },
-                IsSupportServant = isSupportServant,
-                ServantInfo = json
-            };
-        }
-        #endregion
     }
 }

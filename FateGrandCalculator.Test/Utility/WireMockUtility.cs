@@ -1,4 +1,6 @@
-﻿using FateGrandCalculator.AtlasAcademy.Json;
+﻿using System.Collections.Generic;
+
+using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Test.Fixture;
 
 namespace FateGrandCalculator.Test.Utility
@@ -60,6 +62,7 @@ namespace FateGrandCalculator.Test.Utility
             const string CLASS_ATTACK_RATE_JSON = "NiceClassAttackRate.json";
             const string CLASS_RELATION_JSON = "NiceClassRelation.json";
             const string ATTRIBUTE_RELATION_JSON = "NiceAttributeRelation.json";
+            const string BASIC_SERVANT_JSON = "basic_servant.json";
 
             // build necessary export mock responses
             ConstantNiceJson mockConstantRateResponse = LoadTestData.DeserializeExportJson<ConstantNiceJson>(_region, CONSTANT_RATE_JSON);
@@ -73,6 +76,9 @@ namespace FateGrandCalculator.Test.Utility
 
             AttributeRelationNiceJson mockAttributeRelationResponse = LoadTestData.DeserializeExportJson<AttributeRelationNiceJson>(_region, ATTRIBUTE_RELATION_JSON);
             LoadTestData.CreateExportWireMockStub(wiremockFixture, _region, ATTRIBUTE_RELATION_JSON, mockAttributeRelationResponse);
+
+            List<ServantBasicJson> mockServantBasicJsonResponse = LoadTestData.DeserializeExportJson<List<ServantBasicJson>>(_region, BASIC_SERVANT_JSON);
+            LoadTestData.CreateExportWireMockStub(wiremockFixture, _region, BASIC_SERVANT_JSON, mockServantBasicJsonResponse);
         }
 
         /// <summary>

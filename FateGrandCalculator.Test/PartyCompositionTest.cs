@@ -67,7 +67,9 @@ namespace FateGrandCalculator.Test
                     CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
                 };
 
-                PartyMember partyMember = await FrequentlyUsed.PartyMemberAsync(WireMockUtility.DANTES_AVENGER, party, resolvedClasses, 1, false, chaldeaKscope);
+                List<ServantBasicJson> basicJsonList = await resolvedClasses.AtlasAcademyClient.GetListBasicServantInfo();
+                ServantBasicJson basicJson = basicJsonList.Find(s => s.Id.ToString() == WireMockUtility.DANTES_AVENGER);
+                PartyMember partyMember = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, false, chaldeaKscope);
 
                 using (new AssertionScope())
                 {
