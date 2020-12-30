@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,9 +44,9 @@ namespace FateGrandCalculator.AtlasAcademy
             return await GetDeserializeObjectAsync<ConstantNiceJson>($"{_baseApiUrl}/export/{_region}/NiceConstant.json");
         }
 
-        public async Task<List<ServantBasicJson>> GetListBasicServantInfo()
+        public async Task<ServantBasicJsonCollection> GetListBasicServantInfo()
         {
-            return await GetDeserializeObjectAsync<List<ServantBasicJson>>($"{_baseApiUrl}/export/{_region}/basic_servant.json");
+            return await GetDeserializeObjectAsync<ServantBasicJsonCollection>($"{_baseApiUrl}/export/{_region}/basic_servant.json");
         }
 
         public async Task<MysticCodeNiceJson> GetMysticCodeInfo(string mcId)

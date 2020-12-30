@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+
+using Newtonsoft.Json;
 
 namespace FateGrandCalculator.AtlasAcademy.Json
 {
@@ -10,11 +12,11 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         [JsonProperty("collectionNo")]
         public int CollectionNo { get; set; }
 
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
         [JsonProperty("className")]
         public string ClassName { get; set; }
@@ -22,7 +24,16 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         [JsonProperty("rarity")]
         public int Rarity { get; set; }
 
+        [JsonProperty("atkMax")]
+        public int AtkMax { get; set; }
+
+        [JsonProperty("hpMax")]
+        public int HpMax { get; set; }
+
         [JsonProperty("face")]
         public string Face { get; set; }
     }
+
+    [JsonArray]
+    public class ServantBasicJsonCollection : List<ServantBasicJson> { }
 }

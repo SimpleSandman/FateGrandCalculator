@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Autofac;
@@ -148,7 +149,7 @@ namespace FateGrandCalculator.Test
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
                 List<ServantBasicJson> response = await resolvedClasses.AtlasAcademyClient.GetListBasicServantInfo();
 
-                response.Should().BeEquivalentTo(json);
+                response.First().Should().BeEquivalentTo(json);
             }
         }
 

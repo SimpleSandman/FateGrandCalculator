@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using FateGrandCalculator.AtlasAcademy.Json;
@@ -13,7 +12,7 @@ namespace FateGrandCalculator.AtlasAcademy.Interfaces
         Task<EquipNiceJson> GetCraftEssenceInfo(string ceId);
         Task<ClassAttackRateNiceJson> GetClassAttackRateInfo();
         Task<ConstantNiceJson> GetConstantGameInfo();        
-        Task<List<ServantBasicJson>> GetListBasicServantInfo();
+        Task<ServantBasicJsonCollection> GetListBasicServantInfo();
         Task<MysticCodeNiceJson> GetMysticCodeInfo(string mcId);
         Task<JObject> GetTraitEnumInfo();
         Task<AttributeRelationNiceJson> GetAttributeRelationInfo();
