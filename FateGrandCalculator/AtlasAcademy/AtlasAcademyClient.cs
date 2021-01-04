@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Net;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -87,36 +87,41 @@ namespace FateGrandCalculator.AtlasAcademy
 
                 var cancellationToken = new CancellationTokenSource();
 
-                try
+                IRestResponse<T> response = await client.ExecuteAsync<T>(request, cancellationToken.Token);
+                if ((int)response.StatusCode == 200)
                 {
-                    IRestResponse<T> response = await client.ExecuteAsync<T>(request, cancellationToken.Token);
-                    if ((int)response.StatusCode == 200)
+                    bool isJsonArray = response
+                        .GetType()
+                        .GenericTypeArguments
+                            .Any(n => n.CustomAttributes
+                                .Any(c => c.AttributeType.FullName == "Newtonsoft.Json.JsonArrayAttribute"));
+
+                    if (isJsonArray)
                     {
-                        return JsonConvert.DeserializeObject<T>(response.Content);
+                        return JArray.Parse(response.Content).ToObject<T>();
                     }
-                    else
-                    {
-                        string message = $"The client threw an exception with the status code \"{response.StatusCode}\"";
 
-                        if (!string.IsNullOrEmpty(response.Content))
-                        {
-                            message += $". The contents of the response is as follows, \"{response.Content}\"";
-                        }
-
-                        if (response.ErrorException != null)
-                        {
-                            throw new ApplicationException(message, response.ErrorException);
-                        }
-
-                        throw new ApplicationException(message);
-                    }
+                    return JsonConvert.DeserializeObject<T>(response.Content);
                 }
-                catch (WebException ex)
+                else
                 {
-                    Console.WriteLine(ex.Message);
+                    string message = $"The client threw an exception with the status code \"{response.StatusCode}\"";
+
+                    if (!string.IsNullOrEmpty(response.Content))
+                    {
+                        message += $". The contents of the response is as follows, \"{response.Content}\"";
+                    }
+
+                    if (response.ErrorException != null)
+                    {
+                        throw new ApplicationException(message, response.ErrorException);
+                    }
+
+                    throw new ApplicationException(message);
                 }
+
             }
-            catch (WebException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
