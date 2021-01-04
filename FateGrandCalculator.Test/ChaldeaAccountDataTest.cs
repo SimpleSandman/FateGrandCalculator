@@ -1,10 +1,13 @@
-﻿using Autofac;
+﻿using System.Collections.Generic;
+
+using Autofac;
 
 using FateGrandCalculator.Models;
 using FateGrandCalculator.Test.Attributes;
 using FateGrandCalculator.Test.AutofacConfig;
 
 using FluentAssertions;
+using FluentAssertions.Execution;
 
 using Xunit;
 
@@ -13,42 +16,50 @@ namespace FateGrandCalculator.Test
     [TestCaseOrderer("FateGrandCalculator.Test.Orderers.PriorityOrderer", "FateGrandCalculator.Test")]
     public class ChaldeaAccountDataTest
     {
-        const string REGION = "NA";
-
-        private readonly IContainer _container;
-
-        public ChaldeaAccountDataTest()
+        [Theory, TestPriority(0)]
+        [InlineData("NA")]
+        [InlineData("JP")]
+        public void SaveDataTest(string region)
         {
-            _container = ContainerBuilderInit.Create(REGION);
-        }
+            IContainer container = ContainerBuilderInit.Create(region);
 
-        [Fact, TestPriority(0)]
-        public void SaveDataTest()
-        {
             MasterChaldeaInfo masterChaldeaInfo = new MasterChaldeaInfo
             {
-                Region = REGION,
+                Region = region,
                 Username = "simple_sandman",
                 AccountLevel = 150,
-                FriendCode = "999,999,999"
+                FriendCode = "999,999,999",
+                ChaldeaServants = new List<ChaldeaServant>(),
+                CraftEssences = new List<CraftEssence>(),
+                MysticCodes = new List<MysticCode>()
             };
 
-            using (var scope = _container.BeginLifetimeScope())
+            using (var scope = container.BeginLifetimeScope())
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
                 resolvedClasses.ChaldeaIO.Save(masterChaldeaInfo);
             }
         }
 
-        [Fact, TestPriority(1)]
-        public void LoadDataTest()
+        [Theory, TestPriority(1)]
+        [InlineData("NA")]
+        [InlineData("JP")]
+        public void LoadDataTest(string region)
         {
-            using (var scope = _container.BeginLifetimeScope())
+            IContainer container = ContainerBuilderInit.Create(region);
+
+            using (var scope = container.BeginLifetimeScope())
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
                 MasterChaldeaInfo masterChaldeaInfo = resolvedClasses.ChaldeaIO.Load();
 
-                masterChaldeaInfo.Username.Should().Be("simple_sandman");
+                using (new AssertionScope())
+                {
+                    masterChaldeaInfo.Region.Should().Be(region);
+                    masterChaldeaInfo.Username.Should().Be("simple_sandman");
+                    masterChaldeaInfo.AccountLevel.Should().Be(150);
+                    masterChaldeaInfo.FriendCode.Should().Be("999,999,999");
+                }
             }
         }
     }
