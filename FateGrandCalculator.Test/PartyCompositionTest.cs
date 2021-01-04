@@ -73,6 +73,7 @@ namespace FateGrandCalculator.Test
 
                 using (new AssertionScope())
                 {
+                    partyMember.Servant.ServantBasicInfo.Id.ToString().Should().Be(WireMockUtility.DANTES_AVENGER);
                     partyMember.EquippedCraftEssence.Mlb.Should().BeTrue();
                     partyMember.NpCharge.Should().Be(100.0f);
                 }
