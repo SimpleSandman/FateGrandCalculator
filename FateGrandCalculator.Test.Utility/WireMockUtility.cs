@@ -1,5 +1,6 @@
 ﻿using FateGrandCalculator.AtlasAcademy.Json;
-using FateGrandCalculator.Test.Fixture;
+
+using FateGrandCalculator.Test.Utility.Fixture;
 
 namespace FateGrandCalculator.Test.Utility
 {

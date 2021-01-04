@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using Autofac;
 
 using FateGrandCalculator.AtlasAcademy.Json;
-using FateGrandCalculator.Test.AutofacConfig;
-using FateGrandCalculator.Test.Fixture;
+
 using FateGrandCalculator.Test.Utility;
+using FateGrandCalculator.Test.Utility.AutofacConfig;
+using FateGrandCalculator.Test.Utility.Fixture;
 
 using FluentAssertions;
 
@@ -18,7 +19,7 @@ using WireMock.ResponseBuilders;
 
 using Xunit;
 
-namespace FateGrandCalculator.Test
+namespace FateGrandCalculator.Test.AtlasAcademy
 {
     public class AtlasAcademyClientTest : IClassFixture<WireMockFixture>
     {

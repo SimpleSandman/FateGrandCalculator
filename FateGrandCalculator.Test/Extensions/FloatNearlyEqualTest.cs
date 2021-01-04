@@ -5,7 +5,7 @@ using FluentAssertions.Execution;
 
 using Xunit;
 
-namespace FateGrandCalculator.Test
+namespace FateGrandCalculator.Test.Extensions
 {
     // Reference: https://floating-point-gui.de/errors/NearlyEqualsTest.java
     // Note: Tests were tweaked because Java and C# handle certain comparisons differently.

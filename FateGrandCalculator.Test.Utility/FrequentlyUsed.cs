@@ -5,7 +5,8 @@ using FateGrandCalculator.AtlasAcademy;
 using FateGrandCalculator.AtlasAcademy.Calculations;
 using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Models;
-using FateGrandCalculator.Test.AutofacConfig;
+
+using FateGrandCalculator.Test.Utility.AutofacConfig;
 
 namespace FateGrandCalculator.Test.Utility
 {

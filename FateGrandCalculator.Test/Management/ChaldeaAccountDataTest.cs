@@ -3,15 +3,16 @@
 using Autofac;
 
 using FateGrandCalculator.Models;
-using FateGrandCalculator.Test.Attributes;
-using FateGrandCalculator.Test.AutofacConfig;
+
+using FateGrandCalculator.Test.Utility.Attributes;
+using FateGrandCalculator.Test.Utility.AutofacConfig;
 
 using FluentAssertions;
 using FluentAssertions.Execution;
 
 using Xunit;
 
-namespace FateGrandCalculator.Test
+namespace FateGrandCalculator.Test.Management
 {
     [TestCaseOrderer("FateGrandCalculator.Test.Orderers.PriorityOrderer", "FateGrandCalculator.Test")]
     public class ChaldeaAccountDataTest

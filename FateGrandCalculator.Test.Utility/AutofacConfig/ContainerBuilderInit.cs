@@ -1,11 +1,11 @@
 ﻿using Autofac;
 
-using FateGrandCalculator.Test.Fixture;
+using FateGrandCalculator.Test.Utility.Fixture;
 
 using System;
 using System.IO;
 
-namespace FateGrandCalculator.Test.AutofacConfig
+namespace FateGrandCalculator.Test.Utility.AutofacConfig
 {
     public static class ContainerBuilderInit
     {

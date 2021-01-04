@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using FateGrandCalculator.Test.Attributes;
+using FateGrandCalculator.Test.Utility.Attributes;
 
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace FateGrandCalculator.Test.Orderers
+namespace FateGrandCalculator.Test
 {
     public class PriorityOrderer : ITestCaseOrderer
     {

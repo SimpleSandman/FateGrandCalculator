@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FateGrandCalculator", "Fate
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FateGrandCalculator.Test", "FateGrandCalculator.Test\FateGrandCalculator.Test.csproj", "{AF334469-78A6-428C-915F-5BD1E86E43D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FateGrandCalculator.Test.Utility", "FateGrandCalculator.Test.Utility\FateGrandCalculator.Test.Utility.csproj", "{05661F23-2FCE-45A9-8381-71E2DBA98D67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AF334469-78A6-428C-915F-5BD1E86E43D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF334469-78A6-428C-915F-5BD1E86E43D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF334469-78A6-428C-915F-5BD1E86E43D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05661F23-2FCE-45A9-8381-71E2DBA98D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05661F23-2FCE-45A9-8381-71E2DBA98D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05661F23-2FCE-45A9-8381-71E2DBA98D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05661F23-2FCE-45A9-8381-71E2DBA98D67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

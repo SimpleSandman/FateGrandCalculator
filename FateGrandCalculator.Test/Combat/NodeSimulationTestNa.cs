@@ -6,9 +6,10 @@ using Autofac;
 using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Enums;
 using FateGrandCalculator.Models;
-using FateGrandCalculator.Test.AutofacConfig;
-using FateGrandCalculator.Test.Fixture;
+
 using FateGrandCalculator.Test.Utility;
+using FateGrandCalculator.Test.Utility.AutofacConfig;
+using FateGrandCalculator.Test.Utility.Fixture;
 
 using FluentAssertions;
 using FluentAssertions.Execution;
@@ -16,7 +17,7 @@ using FluentAssertions.Execution;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace FateGrandCalculator.Test
+namespace FateGrandCalculator.Test.Combat
 {
     public class NodeSimulationTestNa : IClassFixture<WireMockFixture>
     {

@@ -341,4 +341,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-/FateGrandCalculator.Test/Json/ChaldeaSaveData*.json
+
+# User generated JSON
+/FateGrandCalculator.Test.Utility/Json/ChaldeaSaveData*.json

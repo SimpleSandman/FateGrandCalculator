@@ -6,16 +6,17 @@ using Autofac;
 using FateGrandCalculator.AtlasAcademy;
 using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Models;
-using FateGrandCalculator.Test.AutofacConfig;
-using FateGrandCalculator.Test.Fixture;
+
 using FateGrandCalculator.Test.Utility;
+using FateGrandCalculator.Test.Utility.AutofacConfig;
+using FateGrandCalculator.Test.Utility.Fixture;
 
 using FluentAssertions;
 using FluentAssertions.Execution;
 
 using Xunit;
 
-namespace FateGrandCalculator.Test
+namespace FateGrandCalculator.Test.Combat
 {
     public class PartyCompositionTest : IClassFixture<WireMockFixture>
     {

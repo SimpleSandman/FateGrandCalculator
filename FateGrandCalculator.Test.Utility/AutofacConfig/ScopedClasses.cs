@@ -2,7 +2,7 @@
 using FateGrandCalculator.Core.Combat;
 using FateGrandCalculator.Core.Management;
 
-namespace FateGrandCalculator.Test.AutofacConfig
+namespace FateGrandCalculator.Test.Utility.AutofacConfig
 {
     public sealed class ScopedClasses
     {

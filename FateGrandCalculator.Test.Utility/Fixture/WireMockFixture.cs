@@ -6,7 +6,7 @@ using System.Threading;
 using WireMock.Server;
 using WireMock.Settings;
 
-namespace FateGrandCalculator.Test.Fixture
+namespace FateGrandCalculator.Test.Utility.Fixture
 {
     public class WireMockFixture : IDisposable
     {

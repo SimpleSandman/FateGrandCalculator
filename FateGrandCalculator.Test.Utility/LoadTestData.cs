@@ -2,7 +2,8 @@
 using System.IO;
 
 using FateGrandCalculator.AtlasAcademy.Json;
-using FateGrandCalculator.Test.Fixture;
+
+using FateGrandCalculator.Test.Utility.Fixture;
 
 using Newtonsoft.Json;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FateGrandCalculator.Test.Attributes
+namespace FateGrandCalculator.Test.Utility.Attributes
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class TestPriorityAttribute : Attribute
