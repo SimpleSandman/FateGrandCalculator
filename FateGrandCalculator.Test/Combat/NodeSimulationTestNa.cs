@@ -45,13 +45,9 @@ namespace FateGrandCalculator.Test.Combat
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
                 ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
                 List<PartyMember> party = new List<PartyMember>();
-                
-                CraftEssence chaldeaSuperscope = new CraftEssence
-                {
-                    CraftEssenceLevel = 100,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
-                };
+
+                EquipBasicJson equipBasicJson = constantExportJson.ListEquipBasicJson.Find(c => c.Id.ToString() == WireMockUtility.KSCOPE_CE);
+                CraftEssence chaldeaSuperscope = FrequentlyUsed.GetCraftEssence(equipBasicJson, 100, true);
 
                 MysticCode mysticCode = new MysticCode
                 {
@@ -61,12 +57,12 @@ namespace FateGrandCalculator.Test.Combat
 
                 #region Party Data
                 // Dantes
-                ServantBasicJson basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.DANTES_AVENGER);
+                ServantBasicJson basicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id.ToString() == WireMockUtility.DANTES_AVENGER);
                 PartyMember partyMemberAttacker = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, false, chaldeaSuperscope);
                 party.Add(partyMemberAttacker);
 
                 // Skadi
-                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                basicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
                 PartyMember partyMemberCaster = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses);
                 party.Add(partyMemberCaster);
 
@@ -281,46 +277,32 @@ namespace FateGrandCalculator.Test.Combat
                 };
 
                 #region Craft Essence Data
-                CraftEssence chaldeaSuperscope = new CraftEssence
-                {
-                    CraftEssenceLevel = 100,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
-                };
+                EquipBasicJson equipBasicJson = constantExportJson.ListEquipBasicJson.Find(c => c.Id.ToString() == WireMockUtility.KSCOPE_CE);
+                CraftEssence chaldeaSuperscope = FrequentlyUsed.GetCraftEssence(equipBasicJson, 100, true);
+                CraftEssence chaldeaMlbKscope = FrequentlyUsed.GetCraftEssence(equipBasicJson, 30, true);
 
-                CraftEssence chaldeaImaginaryElement = new CraftEssence
-                {
-                    CraftEssenceLevel = 36,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.IMAGINARY_ELEMENT_CE)
-                };
-
-                CraftEssence chaldeaMlbKscope = new CraftEssence
-                {
-                    CraftEssenceLevel = 30,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
-                };
+                equipBasicJson = constantExportJson.ListEquipBasicJson.Find(c => c.Id.ToString() == WireMockUtility.IMAGINARY_ELEMENT_CE);
+                CraftEssence chaldeaImaginaryElement = FrequentlyUsed.GetCraftEssence(equipBasicJson, 36, true);
                 #endregion
 
                 #region Party Data
                 // Lancelot Berserker
-                ServantBasicJson basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.LANCELOT_BERSERKER);
+                ServantBasicJson basicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id.ToString() == WireMockUtility.LANCELOT_BERSERKER);
                 PartyMember partyLancelot = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 5, false, chaldeaSuperscope);
                 party.Add(partyLancelot);
 
                 // Arash
-                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.ARASH_ARCHER);
+                basicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id.ToString() == WireMockUtility.ARASH_ARCHER);
                 PartyMember partyArash = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 5, false, chaldeaImaginaryElement);
                 party.Add(partyArash);
 
                 // Jack
-                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.JACK_ASSASSIN);
+                basicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id.ToString() == WireMockUtility.JACK_ASSASSIN);
                 PartyMember partyJack = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, false, chaldeaMlbKscope);
                 party.Add(partyJack);
 
                 // Skadi Support
-                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
+                basicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id.ToString() == WireMockUtility.SKADI_CASTER);
                 PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, false);
                 party.Add(partyMemberSupportCaster);
                 #endregion
@@ -521,41 +503,33 @@ namespace FateGrandCalculator.Test.Combat
                 };
 
                 #region Craft Essence Data
-                CraftEssence chaldeaHolyNightSupper = new CraftEssence
-                {
-                    CraftEssenceLevel = 33,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.HOLY_NIGHT_SUPPER_CE)
-                };
+                EquipBasicJson equipBasicJson = constantExportJson.ListEquipBasicJson.Find(c => c.Id.ToString() == WireMockUtility.HOLY_NIGHT_SUPPER_CE);
+                CraftEssence chaldeaHolyNightSupper = FrequentlyUsed.GetCraftEssence(equipBasicJson, 33, true);
 
-                CraftEssence chaldeaSuperscope = new CraftEssence
-                {
-                    CraftEssenceLevel = 100,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
-                };
+                equipBasicJson = constantExportJson.ListEquipBasicJson.Find(c => c.Id.ToString() == WireMockUtility.KSCOPE_CE);
+                CraftEssence chaldeaSuperscope = FrequentlyUsed.GetCraftEssence(equipBasicJson, 100, true);
                 #endregion
 
                 #region Party Data
                 // Waver
-                ServantBasicJson basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.WAVER_CASTER);
+                ServantBasicJson basicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id.ToString() == WireMockUtility.WAVER_CASTER);
                 PartyMember partyWaver = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 2);
                 party.Add(partyWaver);
 
                 // Astolfo Rider
-                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.ASTOLFO_RIDER);
+                basicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id.ToString() == WireMockUtility.ASTOLFO_RIDER);
                 PartyMember partyAstolfo = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 5, false, chaldeaHolyNightSupper);
                 partyAstolfo.Servant.ServantLevel = 100;
 
                 party.Add(partyAstolfo);
 
                 // Spartacus Berserker
-                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.SPARTACUS_BERSERKER);
+                basicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id.ToString() == WireMockUtility.SPARTACUS_BERSERKER);
                 PartyMember partySpartacus = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 5, false, chaldeaSuperscope);
                 party.Add(partySpartacus);
 
                 // Waver Support
-                basicJson = constantExportJson.ListBasicServantJson.Find(s => s.Id.ToString() == WireMockUtility.WAVER_CASTER);
+                basicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id.ToString() == WireMockUtility.WAVER_CASTER);
                 PartyMember partyMemberSupportCaster = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, true);
                 party.Add(partyMemberSupportCaster);
                 #endregion

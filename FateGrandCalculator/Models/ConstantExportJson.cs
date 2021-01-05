@@ -11,7 +11,8 @@ namespace FateGrandCalculator.Models
         public ClassRelation ClassRelation { get; set; }
         public ClassAttackRate ClassAttackRate { get; set; }
         public ConstantRate ConstantRate { get; set; }
-        public ServantBasicJsonCollection ListBasicServantJson { get; set; }
+        public EquipBasicJsonCollection ListEquipBasicJson { get; set; }
+        public ServantBasicJsonCollection ListServantBasicJson { get; set; }
         public JObject TraitEnumInfo { get; set; }
     }
 }

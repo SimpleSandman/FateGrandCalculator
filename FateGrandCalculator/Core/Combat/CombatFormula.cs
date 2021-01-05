@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 using FateGrandCalculator.AtlasAcademy.Calculations;
+using FateGrandCalculator.AtlasAcademy.Interfaces;
 using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Core.Combat.Interfaces;
 using FateGrandCalculator.Enums;
@@ -15,11 +17,17 @@ namespace FateGrandCalculator.Core.Combat
 {
     public class CombatFormula : ICombatFormula
     {
+        private readonly IAtlasAcademyClient _aaClient;
         private AttributeRelation _attributeRelation;
         private ClassRelation _classRelation;
         private ClassAttackRate _classAttackRate;
         private ConstantRate _constantRate;
         private JObject _traitEnumInfo;
+
+        public CombatFormula(IAtlasAcademyClient aaClient)
+        {
+            _aaClient = aaClient;
+        }
 
         /// <summary>
         /// Simulate noble phantasms against a wave of enemies
@@ -148,10 +156,11 @@ namespace FateGrandCalculator.Core.Combat
         /// <param name="party"></param>
         /// <param name="chaldeaServant"></param>
         /// <param name="chaldeaCraftEssence"></param>
-        /// <param name="servantNiceJson"></param>
         /// <returns></returns>
-        public PartyMember AddPartyMember(List<PartyMember> party, ChaldeaServant chaldeaServant, CraftEssence chaldeaCraftEssence, ServantNiceJson servantNiceJson)
+        public async Task<PartyMember> AddPartyMember(List<PartyMember> party, ChaldeaServant chaldeaServant, CraftEssence chaldeaCraftEssence)
         {
+            ServantNiceJson servantNiceJson = await _aaClient.GetServantInfo(chaldeaServant.ServantBasicInfo.Id.ToString());
+
             int servantTotalAtk = servantNiceJson.AtkGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouAttack;
             int servantTotalHp = servantNiceJson.HpGrowth[chaldeaServant.ServantLevel - 1] + chaldeaServant.FouHealth;
 
@@ -160,7 +169,6 @@ namespace FateGrandCalculator.Core.Combat
                 Id = party.Count,
                 Servant = chaldeaServant,
                 ServantNiceInfo = servantNiceJson,
-                EquippedCraftEssence = chaldeaCraftEssence,
                 TotalAttack = servantTotalAtk,
                 TotalHealth = servantTotalHp,
                 NoblePhantasm = servantNiceJson  // Set NP for party member at start of fight
@@ -171,8 +179,11 @@ namespace FateGrandCalculator.Core.Combat
 
             if (chaldeaCraftEssence != null)
             {
-                partyMember.TotalAttack += chaldeaCraftEssence.CraftEssenceInfo.AtkGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
-                partyMember.TotalHealth += chaldeaCraftEssence.CraftEssenceInfo.HpGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
+                partyMember.EquippedCraftEssence = chaldeaCraftEssence;
+                partyMember.EquipNiceInfo = await _aaClient.GetCraftEssenceInfo(chaldeaCraftEssence.CraftEssenceInfo.Id.ToString());
+
+                partyMember.TotalAttack += partyMember.EquipNiceInfo.AtkGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
+                partyMember.TotalHealth += partyMember.EquipNiceInfo.HpGrowth[chaldeaCraftEssence.CraftEssenceLevel - 1];
 
                 ApplyCraftEssenceEffects(partyMember);
             }
@@ -241,7 +252,7 @@ namespace FateGrandCalculator.Core.Combat
                 priority = 2;
             }
 
-            List<Skill> skills = partyMember.EquippedCraftEssence.CraftEssenceInfo.Skills.FindAll(s => s.Priority == priority);
+            List<Skill> skills = partyMember.EquipNiceInfo.Skills.FindAll(s => s.Priority == priority);
 
             foreach (Skill skill in skills)
             {

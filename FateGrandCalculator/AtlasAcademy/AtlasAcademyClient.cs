@@ -44,6 +44,11 @@ namespace FateGrandCalculator.AtlasAcademy
             return await GetDeserializeObjectAsync<ConstantNiceJson>($"{_baseApiUrl}/export/{_region}/NiceConstant.json");
         }
 
+        public async Task<EquipBasicJsonCollection> GetListBasicEquipInfo()
+        {
+            return await GetDeserializeObjectAsync<EquipBasicJsonCollection>($"{_baseApiUrl}/export/{_region}/basic_equip.json");
+        }
+
         public async Task<ServantBasicJsonCollection> GetListBasicServantInfo()
         {
             return await GetDeserializeObjectAsync<ServantBasicJsonCollection>($"{_baseApiUrl}/export/{_region}/basic_servant.json");

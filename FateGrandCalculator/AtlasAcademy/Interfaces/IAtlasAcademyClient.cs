@@ -11,7 +11,8 @@ namespace FateGrandCalculator.AtlasAcademy.Interfaces
         Task<ServantNiceJson> GetServantInfo(string servantId);
         Task<EquipNiceJson> GetCraftEssenceInfo(string ceId);
         Task<ClassAttackRateNiceJson> GetClassAttackRateInfo();
-        Task<ConstantNiceJson> GetConstantGameInfo();        
+        Task<ConstantNiceJson> GetConstantGameInfo();
+        Task<EquipBasicJsonCollection> GetListBasicEquipInfo();
         Task<ServantBasicJsonCollection> GetListBasicServantInfo();
         Task<MysticCodeNiceJson> GetMysticCodeInfo(string mcId);
         Task<JObject> GetTraitEnumInfo();

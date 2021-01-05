@@ -8,9 +8,10 @@ namespace FateGrandCalculator.Test.Utility.AutofacConfig
 {
     public class AutofacModule : Module
     {
+        public Autofac.Core.Parameter AtlasAcademyClient { get; set; }
         public Autofac.Core.Parameter BaseApiUrl { get; set; }
-        public Autofac.Core.Parameter Region { get; set; }
         public Autofac.Core.Parameter ChaldeaFileLocation { get; set; }
+        public Autofac.Core.Parameter Region { get; set; }
 
         protected override void Load(ContainerBuilder builder)
         {
@@ -21,7 +22,9 @@ namespace FateGrandCalculator.Test.Utility.AutofacConfig
             builder.RegisterType<ChaldeaIO>()
                 .WithParameter(ChaldeaFileLocation);
 
-            builder.RegisterType<CombatFormula>();
+            builder.RegisterType<CombatFormula>()
+                .WithParameter(AtlasAcademyClient);
+
             builder.RegisterType<ServantSkillActivation>();
         }
     }

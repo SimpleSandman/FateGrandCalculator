@@ -11,6 +11,7 @@ namespace FateGrandCalculator.Models
         public ChaldeaServant Servant { get; set; }
         public ServantNiceJson ServantNiceInfo { get; set; }
         public CraftEssence EquippedCraftEssence { get; set; }
+        public EquipNiceJson EquipNiceInfo { get; set; }
         public int TotalAttack { get; set; }
         public int TotalHealth { get; set; }
         /// <summary>

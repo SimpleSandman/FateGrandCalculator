@@ -6,6 +6,6 @@ namespace FateGrandCalculator.Models
     {
         public int CraftEssenceLevel { get; set; }
         public bool Mlb { get; set; }
-        public EquipNiceJson CraftEssenceInfo { get; set; }
+        public EquipBasicJson CraftEssenceInfo { get; set; }
     }
 }

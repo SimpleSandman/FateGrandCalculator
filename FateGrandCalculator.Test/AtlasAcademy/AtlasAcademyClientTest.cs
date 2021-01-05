@@ -155,6 +155,32 @@ namespace FateGrandCalculator.Test.AtlasAcademy
         }
 
         [Fact]
+        public async Task GetListBasicEquipInfo()
+        {
+            _wiremockFixture.CheckIfMockServerInUse();
+
+            List<EquipBasicJson> mockResponse = new List<EquipBasicJson>();
+            EquipBasicJson json = new EquipBasicJson
+            {
+                Id = 0
+            };
+
+            mockResponse.Add(json);
+
+            _wiremockFixture.MockServer
+                .Given(Request.Create().WithPath($"/export/{REGION}/basic_equip.json").UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                List<EquipBasicJson> response = await resolvedClasses.AtlasAcademyClient.GetListBasicEquipInfo();
+
+                response.First().Should().BeEquivalentTo(json);
+            }
+        }
+
+        [Fact]
         public async Task GetMysticCodeInfo()
         {
             _wiremockFixture.CheckIfMockServerInUse();

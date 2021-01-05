@@ -61,16 +61,13 @@ namespace FateGrandCalculator.Test.Combat
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
 
-                CraftEssence chaldeaKscope = new CraftEssence
-                {
-                    CraftEssenceLevel = 100,
-                    Mlb = true,
-                    CraftEssenceInfo = await resolvedClasses.AtlasAcademyClient.GetCraftEssenceInfo(WireMockUtility.KSCOPE_CE)
-                };
+                List<EquipBasicJson> equipBasicJsonList = await resolvedClasses.AtlasAcademyClient.GetListBasicEquipInfo();
+                EquipBasicJson equipBasicJson = equipBasicJsonList.Find(c => c.Id.ToString() == WireMockUtility.KSCOPE_CE);
+                CraftEssence chaldeaSuperscope = FrequentlyUsed.GetCraftEssence(equipBasicJson, 100, true);
 
                 List<ServantBasicJson> basicJsonList = await resolvedClasses.AtlasAcademyClient.GetListBasicServantInfo();
-                ServantBasicJson basicJson = basicJsonList.Find(s => s.Id.ToString() == WireMockUtility.DANTES_AVENGER);
-                PartyMember partyMember = await FrequentlyUsed.PartyMemberAsync(basicJson, party, resolvedClasses, 1, false, chaldeaKscope);
+                ServantBasicJson servantBasicJson = basicJsonList.Find(s => s.Id.ToString() == WireMockUtility.DANTES_AVENGER);
+                PartyMember partyMember = await FrequentlyUsed.PartyMemberAsync(servantBasicJson, party, resolvedClasses, 1, false, chaldeaSuperscope);
 
                 using (new AssertionScope())
                 {
