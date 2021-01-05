@@ -4,7 +4,7 @@
 
 This is a [Fate/Grand Order](https://fate-go.us/) library dedicated to calculations needed for combat and keeping track of your personal Chaldea.
 
-I've got the fundamental combat calculations in terms of using Noble Phantasms, but this doesn't support raw card combat. Currently, I'm introducing the management side of the calculations to allow users to save their Chaldeas in JSON format.
+I've got the fundamental combat calculations in terms of using Noble Phantasms, but this doesn't support raw card combat. Currently, I'm introducing the management side of the calculations to allow users to save their servants and/or CEs in JSON format.
 
 My personal project after this is to make a node simulator app that takes your servants and puts them to the test to see if your team compositon is worth using in-game. Let's be real here, who wants to waste 40 AP on a bad team comp?
 
