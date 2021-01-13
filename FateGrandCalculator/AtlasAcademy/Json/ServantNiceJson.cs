@@ -114,6 +114,9 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         [JsonProperty("bondGrowth")]
         public List<int> BondGrowth { get; set; }
 
+        [JsonProperty("expGrowth")]
+        public List<int> ExpGrowth { get; set; }
+
         [JsonProperty("bondEquip")]
         public int BondEquip { get; set; }
 
@@ -231,15 +234,24 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         [JsonProperty("items")]
         public List<ItemParent> Items { get; set; }
 
+        /// <summary>
+        /// Amount of QP needed to level up an ascension or skill
+        /// </summary>
         [JsonProperty("qp")]
         public int Qp { get; set; }
     }
 
     public class ItemParent
     {
+        /// <summary>
+        /// Item details
+        /// </summary>
         [JsonProperty("item")]
         public ItemChild ItemObject { get; set; }
 
+        /// <summary>
+        /// Item quantity
+        /// </summary>
         [JsonProperty("amount")]
         public int Amount { get; set; }
     }

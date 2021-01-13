@@ -15,6 +15,7 @@ namespace FateGrandCalculator.Test.Utility.AutofacConfig
                 AtlasAcademyClient = scope.Resolve<AtlasAcademyClient>(),
                 ChaldeaIO = scope.Resolve<ChaldeaIO>(),
                 CombatFormula = scope.Resolve<CombatFormula>(),
+                MaterialCalculation = scope.Resolve<MaterialCalculation>(),
                 ServantSkillActivation = scope.Resolve<ServantSkillActivation>()
             };
         }
