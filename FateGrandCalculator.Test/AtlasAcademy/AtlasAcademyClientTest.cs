@@ -300,5 +300,34 @@ namespace FateGrandCalculator.Test.AtlasAcademy
                 response.AtkBase.Should().Be(1000);
             }
         }
+
+        [Fact]
+        public async Task GetGrailCostInfo()
+        {
+            _wiremockFixture.CheckIfMockServerInUse();
+
+            // build mock response
+            SvtGrailCostNiceJson mockResponse = new SvtGrailCostNiceJson
+            {
+                ZeroStar = new ZeroStar(),
+                OneStar = new OneStar(),
+                TwoStar = new TwoStar(),
+                ThreeStar = new ThreeStar(),
+                FourStar = new FourStar(),
+                FiveStar = new FiveStar()
+            };
+
+            _wiremockFixture.MockServer
+                .Given(Request.Create().WithPath($"/export/{REGION}/NiceSvtGrailCost.json").UsingGet())
+                .RespondWith(Response.Create().WithStatusCode(200).WithHeader(CONTENT_TYPE_HEADER, CONTENT_TYPE_APPLICATION_JSON).WithBodyAsJson(mockResponse));
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                SvtGrailCostNiceJson response = await resolvedClasses.AtlasAcademyClient.GetGrailCostInfo();
+
+                response.Should().BeEquivalentTo(mockResponse);
+            }
+        }
     }
 }

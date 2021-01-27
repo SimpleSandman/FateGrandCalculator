@@ -19,5 +19,6 @@ namespace FateGrandCalculator.AtlasAcademy.Interfaces
         Task<AttributeRelationNiceJson> GetAttributeRelationInfo();
         Task<ClassRelationNiceJson> GetClassRelationInfo();
         Task<ServantNiceJson> GetEnemyCollectionServantInfo(string servantId);
+        Task<SvtGrailCostNiceJson> GetGrailCostInfo();
     }
 }

@@ -63,6 +63,7 @@ namespace FateGrandCalculator.Test.Utility
             const string ATTRIBUTE_RELATION_JSON = "NiceAttributeRelation.json";
             const string BASIC_SERVANT_JSON = "basic_servant.json";
             const string BASIC_EQUIP_JSON = "basic_equip.json";
+            const string SVT_GRAIL_COST_NICE_JSON = "NiceSvtGrailCost.json";
 
             // build necessary export mock responses
             ConstantNiceJson mockConstantRateResponse = LoadTestData.DeserializeExportJson<ConstantNiceJson>(_region, CONSTANT_RATE_JSON);
@@ -82,6 +83,9 @@ namespace FateGrandCalculator.Test.Utility
 
             EquipBasicJsonCollection mockEquipBasicJsonResponse = LoadTestData.DeserializeExportJson<EquipBasicJsonCollection>(_region, BASIC_EQUIP_JSON);
             LoadTestData.CreateExportWireMockStub(wiremockFixture, _region, BASIC_EQUIP_JSON, mockEquipBasicJsonResponse);
+
+            SvtGrailCostNiceJson mockSvtGrailCostNiceResponse = LoadTestData.DeserializeExportJson<SvtGrailCostNiceJson>(_region, SVT_GRAIL_COST_NICE_JSON);
+            LoadTestData.CreateExportWireMockStub(wiremockFixture, _region, SVT_GRAIL_COST_NICE_JSON, mockSvtGrailCostNiceResponse);
         }
 
         /// <summary>
