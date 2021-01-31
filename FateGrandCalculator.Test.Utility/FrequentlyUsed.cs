@@ -66,9 +66,10 @@ namespace FateGrandCalculator.Test.Utility
                 ClassAttackRate = new ClassAttackRate(await atlasAcademyClient.GetClassAttackRateInfo()),
                 ClassRelation = new ClassRelation(await atlasAcademyClient.GetClassRelationInfo()),
                 ConstantRate = new ConstantRate(await atlasAcademyClient.GetConstantGameInfo()),
+                GrailCostNiceJson = await atlasAcademyClient.GetGrailCostInfo(),
                 ListEquipBasicJson = await atlasAcademyClient.GetListBasicEquipInfo(),
                 ListServantBasicJson = await atlasAcademyClient.GetListBasicServantInfo(),
-                TraitEnumInfo = await atlasAcademyClient.GetTraitEnumInfo()
+                TraitEnumInfo = await atlasAcademyClient.GetTraitEnumInfo(),
             };
         }
     }

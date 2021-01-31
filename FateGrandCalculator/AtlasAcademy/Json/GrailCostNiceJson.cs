@@ -2,25 +2,25 @@
 
 namespace FateGrandCalculator.AtlasAcademy.Json
 {
-    public class SvtGrailCostNiceJson
+    public class GrailCostNiceJson
     {
         [JsonProperty("0")]
-        public ZeroStar ZeroStar { get; set; }
+        public ZeroRarity ZeroRarity { get; set; }
 
         [JsonProperty("1")]
-        public OneStar OneStar { get; set; }
+        public OneRarity OneRarity { get; set; }
 
         [JsonProperty("2")]
-        public TwoStar TwoStar { get; set; }
+        public TwoRarity TwoRarity { get; set; }
 
         [JsonProperty("3")]
-        public ThreeStar ThreeStar { get; set; }
+        public ThreeRarity ThreeRarity { get; set; }
 
         [JsonProperty("4")]
-        public FourStar FourStar { get; set; }
+        public FourRarity FourRarity { get; set; }
 
         [JsonProperty("5")]
-        public FiveStar FiveStar { get; set; }
+        public FiveRarity FiveRarity { get; set; }
     }
 
     public class GrailInfo
@@ -35,7 +35,7 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         public string FrameType { get; set; }
     }
 
-    public class ZeroStar
+    public class ZeroRarity
     {
         [JsonProperty("1")]
         public GrailInfo FirstGrail { get; set; }
@@ -68,7 +68,7 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         public GrailInfo TenthGrail { get; set; }
     }
 
-    public class OneStar
+    public class OneRarity
     {
         [JsonProperty("1")]
         public GrailInfo FirstGrail { get; set; }
@@ -101,7 +101,7 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         public GrailInfo TenthGrail { get; set; }
     }
 
-    public class TwoStar
+    public class TwoRarity
     {
         [JsonProperty("1")]
         public GrailInfo FirstGrail { get; set; }
@@ -134,7 +134,7 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         public GrailInfo TenthGrail { get; set; }
     }
 
-    public class ThreeStar
+    public class ThreeRarity
     {
         [JsonProperty("1")]
         public GrailInfo FirstGrail { get; set; }
@@ -164,7 +164,7 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         public GrailInfo NinthGrail { get; set; }
     }
 
-    public class FourStar
+    public class FourRarity
     {
         [JsonProperty("1")]
         public GrailInfo FirstGrail { get; set; }
@@ -188,7 +188,7 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         public GrailInfo SeventhGrail { get; set; }
     }
 
-    public class FiveStar
+    public class FiveRarity
     {
         [JsonProperty("1")]
         public GrailInfo FirstGrail { get; set; }

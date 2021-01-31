@@ -307,14 +307,14 @@ namespace FateGrandCalculator.Test.AtlasAcademy
             _wiremockFixture.CheckIfMockServerInUse();
 
             // build mock response
-            SvtGrailCostNiceJson mockResponse = new SvtGrailCostNiceJson
+            GrailCostNiceJson mockResponse = new GrailCostNiceJson
             {
-                ZeroStar = new ZeroStar(),
-                OneStar = new OneStar(),
-                TwoStar = new TwoStar(),
-                ThreeStar = new ThreeStar(),
-                FourStar = new FourStar(),
-                FiveStar = new FiveStar()
+                ZeroRarity = new ZeroRarity(),
+                OneRarity = new OneRarity(),
+                TwoRarity = new TwoRarity(),
+                ThreeRarity = new ThreeRarity(),
+                FourRarity = new FourRarity(),
+                FiveRarity = new FiveRarity()
             };
 
             _wiremockFixture.MockServer
@@ -324,7 +324,7 @@ namespace FateGrandCalculator.Test.AtlasAcademy
             using (var scope = _container.BeginLifetimeScope())
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
-                SvtGrailCostNiceJson response = await resolvedClasses.AtlasAcademyClient.GetGrailCostInfo();
+                GrailCostNiceJson response = await resolvedClasses.AtlasAcademyClient.GetGrailCostInfo();
 
                 response.Should().BeEquivalentTo(mockResponse);
             }

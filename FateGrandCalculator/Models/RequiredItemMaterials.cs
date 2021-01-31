@@ -11,6 +11,7 @@ namespace FateGrandCalculator.Models
         public int FourStarEmberClassBonus { get; set; }
         public int FiveStarEmber { get; set; }
         public int FiveStarEmberClassBonus { get; set; }
+        public int GrailCount { get; set; }
         public List<ItemParent> Items { get; set; } = new List<ItemParent>();
     }
 }

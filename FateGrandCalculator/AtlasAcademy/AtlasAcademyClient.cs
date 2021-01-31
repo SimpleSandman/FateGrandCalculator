@@ -79,9 +79,9 @@ namespace FateGrandCalculator.AtlasAcademy
             return await GetDeserializeObjectAsync<ServantNiceJson>($"{_baseApiUrl}/nice/{_region}/svt/{servantId}");
         }
 
-        public async Task<SvtGrailCostNiceJson> GetGrailCostInfo()
+        public async Task<GrailCostNiceJson> GetGrailCostInfo()
         {
-            return await GetDeserializeObjectAsync<SvtGrailCostNiceJson>($"{_baseApiUrl}/export/{_region}/NiceSvtGrailCost.json");
+            return await GetDeserializeObjectAsync<GrailCostNiceJson>($"{_baseApiUrl}/export/{_region}/NiceSvtGrailCost.json");
         }
 
         #region Private Method

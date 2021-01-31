@@ -14,5 +14,6 @@ namespace FateGrandCalculator.Models
         public EquipBasicJsonCollection ListEquipBasicJson { get; set; }
         public ServantBasicJsonCollection ListServantBasicJson { get; set; }
         public JObject TraitEnumInfo { get; set; }
+        public GrailCostNiceJson GrailCostNiceJson { get; set; }
     }
 }

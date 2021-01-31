@@ -84,7 +84,7 @@ namespace FateGrandCalculator.Test.Utility
             EquipBasicJsonCollection mockEquipBasicJsonResponse = LoadTestData.DeserializeExportJson<EquipBasicJsonCollection>(_region, BASIC_EQUIP_JSON);
             LoadTestData.CreateExportWireMockStub(wiremockFixture, _region, BASIC_EQUIP_JSON, mockEquipBasicJsonResponse);
 
-            SvtGrailCostNiceJson mockSvtGrailCostNiceResponse = LoadTestData.DeserializeExportJson<SvtGrailCostNiceJson>(_region, SVT_GRAIL_COST_NICE_JSON);
+            GrailCostNiceJson mockSvtGrailCostNiceResponse = LoadTestData.DeserializeExportJson<GrailCostNiceJson>(_region, SVT_GRAIL_COST_NICE_JSON);
             LoadTestData.CreateExportWireMockStub(wiremockFixture, _region, SVT_GRAIL_COST_NICE_JSON, mockSvtGrailCostNiceResponse);
         }
 

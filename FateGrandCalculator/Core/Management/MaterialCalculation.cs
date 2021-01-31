@@ -22,7 +22,7 @@ namespace FateGrandCalculator.Core.Management
         }
 
         public async Task<RequiredItemMaterials> HowMuchIsNeededAsync(ChaldeaServant currentServant, ChaldeaServant goalServant, 
-            ServantNiceJson currentServantNiceJson = null)
+            ConstantExportJson constantExportJson, ServantNiceJson currentServantNiceJson = null)
         {
             // Validate the two servant objects are the same servant
             if (currentServant.ServantBasicInfo != goalServant.ServantBasicInfo)
@@ -39,7 +39,7 @@ namespace FateGrandCalculator.Core.Management
                 _currentServantNiceJson = currentServantNiceJson;
             }
 
-            // Calculate ascension materials, QP, and/or grails
+            /* Calculate ascension materials, QP, and/or grails */
             if (currentServant.ServantLevel < goalServant.ServantLevel)
             {
                 AscensionLevel[] allAscensionLevels = AscensionLevels(currentServant.ServantBasicInfo.Rarity);
@@ -50,6 +50,7 @@ namespace FateGrandCalculator.Core.Management
 
                 await GetCurrentServantNiceInfoAsync(currentServant.ServantBasicInfo.Id.ToString());
 
+                // Ascension materials
                 if (ascensionLevels.Count() > 0)
                 {
                     foreach (AscensionLevel ascensionLevel in ascensionLevels)
@@ -65,15 +66,24 @@ namespace FateGrandCalculator.Core.Management
                     }
                 }
                 
+                // Grails
                 if (goalServant.ServantLevel > allAscensionLevels[^1].LevelCap)
                 {
-                    // TODO: Calculate the grails, QP, and embers
+                    IEnumerable<GrailInfo> grailInfoList = GetGrailRarityInfo(goalServant.ServantBasicInfo.Rarity, constantExportJson.GrailCostNiceJson)
+                        .Where(g => g.AddLevelMax + currentServant.ServantLevel <= goalServant.ServantLevel);
+
+                    foreach (GrailInfo grailInfo in grailInfoList)
+                    {
+                        _requiredItemMaterials.Qp += grailInfo.Qp;
+                        _requiredItemMaterials.GrailCount++;
+                    }
                 }
 
+                // Overall ember count
                 CalculateEmbersNeeded(currentServant, goalServant, _currentServantNiceJson.ExpGrowth);
             }
 
-            // Calculate skill materials and QP
+            /* Calculate skill materials and QP */
             for (int i = 0; i < 2; i++)
             {
                 if (currentServant.SkillLevels[i] < goalServant.SkillLevels[i])
@@ -142,6 +152,83 @@ namespace FateGrandCalculator.Core.Management
             {
                 _currentServantNiceJson = await _aaClient.GetServantInfo(servantId);
             }
+        }
+
+        private List<GrailInfo> GetGrailRarityInfo(int rarity, GrailCostNiceJson grailCost)
+        {
+            List<GrailInfo> grailInfoList = new List<GrailInfo>();
+
+            if (rarity == 0)
+            {
+                grailInfoList.Add(grailCost.ZeroRarity.FirstGrail);
+                grailInfoList.Add(grailCost.ZeroRarity.SecondGrail);
+                grailInfoList.Add(grailCost.ZeroRarity.ThirdGrail);
+                grailInfoList.Add(grailCost.ZeroRarity.FourthGrail);
+                grailInfoList.Add(grailCost.ZeroRarity.FifthGrail);
+                grailInfoList.Add(grailCost.ZeroRarity.SixthGrail);
+                grailInfoList.Add(grailCost.ZeroRarity.SeventhGrail);
+                grailInfoList.Add(grailCost.ZeroRarity.EighthGrail);
+                grailInfoList.Add(grailCost.ZeroRarity.NinthGrail);
+                grailInfoList.Add(grailCost.ZeroRarity.TenthGrail);
+            }
+            else if (rarity == 1)
+            {
+                grailInfoList.Add(grailCost.OneRarity.FirstGrail);
+                grailInfoList.Add(grailCost.OneRarity.SecondGrail);
+                grailInfoList.Add(grailCost.OneRarity.ThirdGrail);
+                grailInfoList.Add(grailCost.OneRarity.FourthGrail);
+                grailInfoList.Add(grailCost.OneRarity.FifthGrail);
+                grailInfoList.Add(grailCost.OneRarity.SixthGrail);
+                grailInfoList.Add(grailCost.OneRarity.SeventhGrail);
+                grailInfoList.Add(grailCost.OneRarity.EighthGrail);
+                grailInfoList.Add(grailCost.OneRarity.NinthGrail);
+                grailInfoList.Add(grailCost.OneRarity.TenthGrail);
+            }
+            else if (rarity == 2)
+            {
+                grailInfoList.Add(grailCost.TwoRarity.FirstGrail);
+                grailInfoList.Add(grailCost.TwoRarity.SecondGrail);
+                grailInfoList.Add(grailCost.TwoRarity.ThirdGrail);
+                grailInfoList.Add(grailCost.TwoRarity.FourthGrail);
+                grailInfoList.Add(grailCost.TwoRarity.FifthGrail);
+                grailInfoList.Add(grailCost.TwoRarity.SixthGrail);
+                grailInfoList.Add(grailCost.TwoRarity.SeventhGrail);
+                grailInfoList.Add(grailCost.TwoRarity.EighthGrail);
+                grailInfoList.Add(grailCost.TwoRarity.NinthGrail);
+                grailInfoList.Add(grailCost.TwoRarity.TenthGrail);
+            }
+            else if (rarity == 3)
+            {
+                grailInfoList.Add(grailCost.ThreeRarity.FirstGrail);
+                grailInfoList.Add(grailCost.ThreeRarity.SecondGrail);
+                grailInfoList.Add(grailCost.ThreeRarity.ThirdGrail);
+                grailInfoList.Add(grailCost.ThreeRarity.FourthGrail);
+                grailInfoList.Add(grailCost.ThreeRarity.FifthGrail);
+                grailInfoList.Add(grailCost.ThreeRarity.SixthGrail);
+                grailInfoList.Add(grailCost.ThreeRarity.SeventhGrail);
+                grailInfoList.Add(grailCost.ThreeRarity.EighthGrail);
+                grailInfoList.Add(grailCost.ThreeRarity.NinthGrail);
+            }
+            else if (rarity == 4)
+            {
+                grailInfoList.Add(grailCost.FourRarity.FirstGrail);
+                grailInfoList.Add(grailCost.FourRarity.SecondGrail);
+                grailInfoList.Add(grailCost.FourRarity.ThirdGrail);
+                grailInfoList.Add(grailCost.FourRarity.FourthGrail);
+                grailInfoList.Add(grailCost.FourRarity.FifthGrail);
+                grailInfoList.Add(grailCost.FourRarity.SixthGrail);
+                grailInfoList.Add(grailCost.FourRarity.SeventhGrail);
+            }
+            else if (rarity == 5)
+            {
+                grailInfoList.Add(grailCost.FiveRarity.FirstGrail);
+                grailInfoList.Add(grailCost.FiveRarity.SecondGrail);
+                grailInfoList.Add(grailCost.FiveRarity.ThirdGrail);
+                grailInfoList.Add(grailCost.FiveRarity.FourthGrail);
+                grailInfoList.Add(grailCost.FiveRarity.FifthGrail);
+            }
+
+            return grailInfoList;
         }
 
         private AscensionLevel[] AscensionLevels(int rarity)
