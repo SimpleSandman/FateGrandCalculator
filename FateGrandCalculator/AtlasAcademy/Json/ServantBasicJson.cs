@@ -6,9 +6,15 @@ namespace FateGrandCalculator.AtlasAcademy.Json
 {
     public class ServantBasicJson
     {
+        /// <summary>
+        /// Unique database ID
+        /// </summary>
         [JsonProperty("id")]
         public int Id { get; set; }
 
+        /// <summary>
+        /// Servant ID
+        /// </summary>
         [JsonProperty("collectionNo")]
         public int CollectionNo { get; set; }
 

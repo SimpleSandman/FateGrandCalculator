@@ -21,8 +21,8 @@ namespace FateGrandCalculator.Core.Management
             _aaClient = aaClient;
         }
 
-        public async Task<RequiredItemMaterials> HowMuchIsNeededAsync(ChaldeaServant currentServant, ChaldeaServant goalServant, 
-            ConstantExportJson constantExportJson, ServantNiceJson currentServantNiceJson = null)
+        public RequiredItemMaterials HowMuchIsNeeded(ChaldeaServant currentServant, ChaldeaServant goalServant, 
+            GrailCostNiceJson grailCostNiceJson, ServantNiceJson currentServantNiceJson)
         {
             // Validate the two servant objects are the same servant
             if (currentServant.ServantBasicInfo != goalServant.ServantBasicInfo)
@@ -38,6 +38,10 @@ namespace FateGrandCalculator.Core.Management
             {
                 _currentServantNiceJson = currentServantNiceJson;
             }
+            else
+            {
+                return _requiredItemMaterials;
+            }
 
             /* Calculate ascension materials, QP, and/or grails */
             if (currentServant.ServantLevel < goalServant.ServantLevel)
@@ -47,8 +51,6 @@ namespace FateGrandCalculator.Core.Management
                 IEnumerable<AscensionLevel> ascensionLevels = allAscensionLevels
                     .Where(i => i.LevelCap > currentServant.ServantLevel)
                     .Where(i => goalServant.ServantLevel <= i.LevelCap);
-
-                await GetCurrentServantNiceInfoAsync(currentServant.ServantBasicInfo.Id.ToString());
 
                 // Ascension materials
                 if (ascensionLevels.Count() > 0)
@@ -69,7 +71,7 @@ namespace FateGrandCalculator.Core.Management
                 // Grails
                 if (goalServant.ServantLevel > allAscensionLevels[^1].LevelCap)
                 {
-                    IEnumerable<GrailInfo> grailInfoList = GetGrailRarityInfo(goalServant.ServantBasicInfo.Rarity, constantExportJson.GrailCostNiceJson)
+                    IEnumerable<GrailInfo> grailInfoList = GetGrailRarityInfo(goalServant.ServantBasicInfo.Rarity, grailCostNiceJson)
                         .Where(g => g.AddLevelMax + currentServant.ServantLevel <= goalServant.ServantLevel);
 
                     foreach (GrailInfo grailInfo in grailInfoList)
@@ -91,8 +93,6 @@ namespace FateGrandCalculator.Core.Management
 
                 if (currentSkillLevel < goalSkillLevel)
                 {
-                    await GetCurrentServantNiceInfoAsync(currentServant.ServantBasicInfo.Id.ToString());
-
                     for (int j = currentSkillLevel; j < goalSkillLevel; j++)
                     {
                         switch (j)
@@ -185,16 +185,6 @@ namespace FateGrandCalculator.Core.Management
             foreach (ItemParent item in items)
             {
                 _requiredItemMaterials.Items.Add(item);
-            }
-        }
-
-        private async Task GetCurrentServantNiceInfoAsync(string servantId)
-        {
-            // Ensures only one API call is needed to get the necessary info
-            // no matter how many times this method is called
-            if (_currentServantNiceJson == null)
-            {
-                _currentServantNiceJson = await _aaClient.GetServantInfo(servantId);
             }
         }
 
