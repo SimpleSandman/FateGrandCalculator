@@ -86,11 +86,55 @@ namespace FateGrandCalculator.Core.Management
             /* Calculate skill materials and QP */
             for (int i = 0; i < 2; i++)
             {
-                if (currentServant.SkillLevels[i] < goalServant.SkillLevels[i])
+                int currentSkillLevel = currentServant.SkillLevels[i];
+                int goalSkillLevel = goalServant.SkillLevels[i];
+
+                if (currentSkillLevel < goalSkillLevel)
                 {
                     await GetCurrentServantNiceInfoAsync(currentServant.ServantBasicInfo.Id.ToString());
 
-
+                    for (int j = currentSkillLevel; j < goalSkillLevel; j++)
+                    {
+                        switch (j)
+                        {
+                            case 1:
+                                AddItemMaterials(_currentServantNiceJson.SkillMaterials.FirstSkill.Items);
+                                _requiredItemMaterials.Qp += _currentServantNiceJson.SkillMaterials.FirstSkill.Qp;
+                                break;
+                            case 2:
+                                AddItemMaterials(_currentServantNiceJson.SkillMaterials.SecondSkill.Items);
+                                _requiredItemMaterials.Qp += _currentServantNiceJson.SkillMaterials.SecondSkill.Qp;
+                                break;
+                            case 3:
+                                AddItemMaterials(_currentServantNiceJson.SkillMaterials.ThirdSkill.Items);
+                                _requiredItemMaterials.Qp += _currentServantNiceJson.SkillMaterials.ThirdSkill.Qp;
+                                break;
+                            case 4:
+                                AddItemMaterials(_currentServantNiceJson.SkillMaterials.FourthSkill.Items);
+                                _requiredItemMaterials.Qp += _currentServantNiceJson.SkillMaterials.FourthSkill.Qp;
+                                break;
+                            case 5:
+                                AddItemMaterials(_currentServantNiceJson.SkillMaterials.FifthSkill.Items);
+                                _requiredItemMaterials.Qp += _currentServantNiceJson.SkillMaterials.FifthSkill.Qp;
+                                break;
+                            case 6:
+                                AddItemMaterials(_currentServantNiceJson.SkillMaterials.SixthSkill.Items);
+                                _requiredItemMaterials.Qp += _currentServantNiceJson.SkillMaterials.SixthSkill.Qp;
+                                break;
+                            case 7:
+                                AddItemMaterials(_currentServantNiceJson.SkillMaterials.SeventhSkill.Items);
+                                _requiredItemMaterials.Qp += _currentServantNiceJson.SkillMaterials.SeventhSkill.Qp;
+                                break;
+                            case 8:
+                                AddItemMaterials(_currentServantNiceJson.SkillMaterials.EighthSkill.Items);
+                                _requiredItemMaterials.Qp += _currentServantNiceJson.SkillMaterials.EighthSkill.Qp;
+                                break;
+                            case 9:
+                                AddItemMaterials(_currentServantNiceJson.SkillMaterials.NinthSkill.Items);
+                                _requiredItemMaterials.Qp += _currentServantNiceJson.SkillMaterials.NinthSkill.Qp;
+                                break;
+                        }
+                    }
                 }
             }
 

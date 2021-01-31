@@ -223,7 +223,7 @@ namespace FateGrandCalculator.AtlasAcademy.Json
         public ItemMaterials SeventhSkill { get; set; }
 
         [JsonProperty("8")]
-        public ItemMaterials EigthSkill { get; set; }
+        public ItemMaterials EighthSkill { get; set; }
 
         [JsonProperty("9")]
         public ItemMaterials NinthSkill { get; set; }
