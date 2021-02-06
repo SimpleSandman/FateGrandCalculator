@@ -141,8 +141,8 @@ namespace FateGrandCalculator.Test.Utility
             mockResponse = LoadTestData.DeserializeServantJson(_region, "Saber", $"{NERO_CLAUDIUS_BRIDE}-NeroClaudiusBride{_langSuffix}.json");
             LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", NERO_CLAUDIUS_BRIDE, mockResponse);
 
-            mockResponse = LoadTestData.DeserializeServantJson(_region, "Saber", $"{TOMOE_GOZEN_SABER}-TomoeGozen{_langSuffix}.json");
-            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", TOMOE_GOZEN_SABER, mockResponse);
+            mockResponse = LoadTestData.DeserializeServantJson("JP", "Saber", $"{TOMOE_GOZEN_SABER}-TomoeGozenEN.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, "JP", "servant", TOMOE_GOZEN_SABER, mockResponse);
         }
 
         /// <summary>
