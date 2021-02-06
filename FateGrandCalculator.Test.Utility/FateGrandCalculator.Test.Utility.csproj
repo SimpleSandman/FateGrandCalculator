@@ -150,6 +150,9 @@
     <None Update="Json\JP\ServantData\Rider\403200-SimaYiReinesEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\JP\ServantData\Saber\104500-TomoeGozenEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\JP\ServantData\Saber\100600-NeroClaudiusBrideEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

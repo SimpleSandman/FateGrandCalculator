@@ -12,6 +12,8 @@ namespace FateGrandCalculator.Test.Utility
         public static readonly string HOLY_NIGHT_SUPPER_CE = "9402090";
         public static readonly string AERIAL_DRIVE_CE = "9402750";
 
+        public static readonly string TOMOE_GOZEN_SABER = "104500";
+        public static readonly string NERO_CLAUDIUS_BRIDE = "100600";
         public static readonly string GILGAMESH_ARCHER = "200200";
         public static readonly string ARASH_ARCHER = "201300";
         public static readonly string PARVATI_LANCER = "303000";
@@ -135,6 +137,12 @@ namespace FateGrandCalculator.Test.Utility
 
             mockResponse = LoadTestData.DeserializeServantJson(_region, "Rider", $"{ASTOLFO_RIDER}-Astolfo{_langSuffix}.json");
             LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", ASTOLFO_RIDER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Saber", $"{NERO_CLAUDIUS_BRIDE}-NeroClaudiusBride{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", NERO_CLAUDIUS_BRIDE, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Saber", $"{TOMOE_GOZEN_SABER}-TomoeGozen{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", TOMOE_GOZEN_SABER, mockResponse);
         }
 
         /// <summary>

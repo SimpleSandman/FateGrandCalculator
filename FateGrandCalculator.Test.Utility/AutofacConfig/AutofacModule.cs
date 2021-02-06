@@ -25,9 +25,7 @@ namespace FateGrandCalculator.Test.Utility.AutofacConfig
             builder.RegisterType<CombatFormula>()
                 .WithParameter(AtlasAcademyClient);
 
-            builder.RegisterType<MaterialCalculation>()
-                .WithParameter(AtlasAcademyClient);
-
+            builder.RegisterType<MaterialCalculation>();
             builder.RegisterType<ServantSkillActivation>();
         }
     }

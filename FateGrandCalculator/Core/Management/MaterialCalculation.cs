@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-using FateGrandCalculator.AtlasAcademy.Interfaces;
 using FateGrandCalculator.AtlasAcademy.Json;
 using FateGrandCalculator.Enums;
 using FateGrandCalculator.Models;
@@ -12,14 +10,10 @@ namespace FateGrandCalculator.Core.Management
 {
     public class MaterialCalculation
     {
-        private readonly IAtlasAcademyClient _aaClient;
         private ServantNiceJson _currentServantNiceJson;
         private RequiredItemMaterials _requiredItemMaterials;
 
-        public MaterialCalculation(IAtlasAcademyClient aaClient)
-        {
-            _aaClient = aaClient;
-        }
+        public MaterialCalculation() { }
 
         public RequiredItemMaterials HowMuchIsNeeded(ChaldeaServant currentServant, ChaldeaServant goalServant, 
             GrailCostNiceJson grailCostNiceJson, ServantNiceJson currentServantNiceJson)
@@ -48,14 +42,17 @@ namespace FateGrandCalculator.Core.Management
             {
                 AscensionLevel[] allAscensionLevels = AscensionLevels(currentServant.ServantBasicInfo.Rarity);
 
-                IEnumerable<AscensionLevel> ascensionLevels = allAscensionLevels
-                    .Where(i => i.LevelCap > currentServant.ServantLevel)
-                    .Where(i => goalServant.ServantLevel <= i.LevelCap);
+                // Find the required ascension levels with removing ascensions above the goal
+                List<AscensionLevel> requiredAscensionLevels = allAscensionLevels
+                    .Where(i => currentServant.ServantLevel < i.LevelCap)
+                    .ToList();
+
+                requiredAscensionLevels.RemoveAll(c => goalServant.ServantLevel < c.LevelCap);
 
                 // Ascension materials
-                if (ascensionLevels.Count() > 0)
+                if (requiredAscensionLevels.Count > 0)
                 {
-                    foreach (AscensionLevel ascensionLevel in ascensionLevels)
+                    foreach (AscensionLevel ascensionLevel in requiredAscensionLevels)
                     {
                         ItemMaterials ascensionItemMaterials = AscensionItemMaterials(ascensionLevel);
                         if (ascensionItemMaterials == null)
