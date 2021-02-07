@@ -32,8 +32,8 @@ namespace FateGrandCalculator.Test.Management
         {
             _wireMockFixture = wireMockFixture;
             _output = output;
-            _wireMockUtility = new WireMockUtility("JP");
-            _container = ContainerBuilderInit.Create("JP");
+            _wireMockUtility = new WireMockUtility("NA");
+            _container = ContainerBuilderInit.Create("NA");
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace FateGrandCalculator.Test.Management
             {
                 ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
                 ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
-                int servantId = 104500;
+                int servantId = 501900;
                 ServantBasicJson servantBasicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id == servantId);
 
                 /* Load servants as if they're already in a save file */
@@ -79,18 +79,18 @@ namespace FateGrandCalculator.Test.Management
                     await resolvedClasses.AtlasAcademyClient.GetServantInfo(servantId.ToString()));
 
                 _output.WriteLine($"QP: {req.Qp}");
-                _output.WriteLine($"Grail Count: {req.GrailCount}\n");
+                _output.WriteLine($"Grail count: {req.GrailCount}\n");
                 _output.WriteLine($"4* Ember: {req.FourStarEmber}");
                 _output.WriteLine($"4* Ember (Class Bonus): {req.FourStarEmberClassBonus}");
                 _output.WriteLine($"5* Ember: {req.FiveStarEmber}");
-                _output.WriteLine($"5* Ember (Class Bonus): {req.FiveStarEmberClassBonus}");
+                _output.WriteLine($"5* Ember (Class Bonus): {req.FiveStarEmberClassBonus}\n");
 
-                var groupedIds = req.Items.GroupBy(i => i.ItemObject.Id);
-
-                //foreach (ItemParent itemParent in req.Items)
-                //{
-                //    _output.WriteLine($"Amount: {itemParent.Amount}");
-                //}
+                // TODO: Create a method dedicated to simplifying the output of items needed
+                foreach (IGrouping<int, ItemParent> ids in req.Items.GroupBy(i => i.ItemObject.Id))
+                {
+                    _output.WriteLine($"Name: {ids.First().ItemObject.Name}");
+                    _output.WriteLine($"Amount (sum): {ids.Sum(i => i.Amount)}\n");
+                }
             }
         }
     }

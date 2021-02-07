@@ -83,7 +83,7 @@ namespace FateGrandCalculator.Core.Management
             }
 
             /* Calculate skill materials and QP */
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 int currentSkillLevel = currentServant.SkillLevels[i];
                 int goalSkillLevel = goalServant.SkillLevels[i];

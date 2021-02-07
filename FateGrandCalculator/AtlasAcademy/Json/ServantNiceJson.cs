@@ -186,16 +186,16 @@ namespace FateGrandCalculator.AtlasAcademy.Json
 
     public class AscensionMaterials
     {
-        [JsonProperty("1")]
+        [JsonProperty("0")]
         public ItemMaterials FirstAsc { get; set; }
 
-        [JsonProperty("2")]
+        [JsonProperty("1")]
         public ItemMaterials SecondAsc { get; set; }
 
-        [JsonProperty("3")]
+        [JsonProperty("2")]
         public ItemMaterials ThirdAsc { get; set; }
 
-        [JsonProperty("4")]
+        [JsonProperty("3")]
         public ItemMaterials FourthAsc { get; set; }
     }
 
