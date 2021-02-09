@@ -78,18 +78,18 @@ namespace FateGrandCalculator.Test.Management
                     constantExportJson.GrailCostNiceJson,
                     await resolvedClasses.AtlasAcademyClient.GetServantInfo(servantId.ToString()));
 
-                _output.WriteLine($"QP: {req.Qp}");
+                _output.WriteLine($"QP: {req.Qp:n0}");
                 _output.WriteLine($"Grail count: {req.GrailCount}\n");
-                _output.WriteLine($"4* Ember: {req.FourStarEmber}");
-                _output.WriteLine($"4* Ember (Class Bonus): {req.FourStarEmberClassBonus}");
-                _output.WriteLine($"5* Ember: {req.FiveStarEmber}");
-                _output.WriteLine($"5* Ember (Class Bonus): {req.FiveStarEmberClassBonus}\n");
+                _output.WriteLine($"4* Ember: {req.FourStarEmber:n0}");
+                _output.WriteLine($"4* Ember (Class Bonus): {req.FourStarEmberClassBonus:n0}");
+                _output.WriteLine($"5* Ember: {req.FiveStarEmber:n0}");
+                _output.WriteLine($"5* Ember (Class Bonus): {req.FiveStarEmberClassBonus:n0}\n");
 
-                // TODO: Create a method dedicated to simplifying the output of items needed
-                foreach (IGrouping<int, ItemParent> ids in req.Items.GroupBy(i => i.ItemObject.Id))
+                Dictionary<string, int> materials = resolvedClasses.MaterialCalculation.GroupItemParents(req);
+                foreach (KeyValuePair<string, int> material in materials.OrderBy(k => k.Key))
                 {
-                    _output.WriteLine($"Name: {ids.First().ItemObject.Name}");
-                    _output.WriteLine($"Amount (sum): {ids.Sum(i => i.Amount)}\n");
+                    _output.WriteLine($"Name: {material.Key}");
+                    _output.WriteLine($"Amount: {material.Value}\n");
                 }
             }
         }
