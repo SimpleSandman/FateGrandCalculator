@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Autofac;
@@ -37,7 +35,7 @@ namespace FateGrandCalculator.Test.Management
         }
 
         [Fact]
-        public async Task FreshWaverMaxLevelNoGrail()
+        public async Task FreshWaverToFullGrailAndSkilled()
         {
             _wireMockFixture.CheckIfMockServerInUse();
             _wireMockUtility.AddStubs(_wireMockFixture);
@@ -78,20 +76,54 @@ namespace FateGrandCalculator.Test.Management
                     constantExportJson.GrailCostNiceJson,
                     await resolvedClasses.AtlasAcademyClient.GetServantInfo(servantId.ToString()));
 
-                _output.WriteLine($"QP: {req.Qp:n0}");
-                _output.WriteLine($"Grail count: {req.GrailCount}\n");
-                _output.WriteLine($"4* Ember: {req.FourStarEmber:n0}");
-                _output.WriteLine($"4* Ember (Class Bonus): {req.FourStarEmberClassBonus:n0}");
-                _output.WriteLine($"5* Ember: {req.FiveStarEmber:n0}");
-                _output.WriteLine($"5* Ember (Class Bonus): {req.FiveStarEmberClassBonus:n0}\n");
+                Dictionary<string, int> materials = resolvedClasses.MaterialCalculation.GroupItemParents(req.Items);
+                MaterialOutput(req, materials);
 
-                Dictionary<string, int> materials = resolvedClasses.MaterialCalculation.GroupItemParents(req);
-                foreach (KeyValuePair<string, int> material in materials.OrderBy(k => k.Key))
+                using (new AssertionScope())
                 {
-                    _output.WriteLine($"Name: {material.Key}");
-                    _output.WriteLine($"Amount: {material.Value}\n");
+                    RequiredItemsShouldBe(req, 222600000, 5, 753, 627, 251, 209);
+                    materials.Should().Contain("Caster Monument", 17);
+                    materials.Should().Contain("Caster Piece", 17);
+                    materials.Should().Contain("Crystallized Lore", 3);
+                    materials.Should().Contain("Eternal Gear", 15);
+                    materials.Should().Contain("Forbidden Page", 55);
+                    materials.Should().Contain("Gem of Caster", 51);
+                    materials.Should().Contain("Heart of the Foreign God", 33);
+                    materials.Should().Contain("Magic Gem of Caster", 51);
+                    materials.Should().Contain("Phoenix Feather", 70);
+                    materials.Should().Contain("Secret Gem of Caster", 51);
+                    materials.Should().Contain("Void's Dust", 105);
                 }
             }
         }
+
+        #region Private Methods
+        private void RequiredItemsShouldBe(RequiredItemMaterials req, int qp, int grailCount, int fourStarEmber, 
+            int fourStarEmberClassBonus, int fiveStarEmber, int fiveStarEmberClassBonus)
+        {
+            req.Qp.Should().Be(qp);
+            req.GrailCount.Should().Be(grailCount);
+            req.FourStarEmber.Should().Be(fourStarEmber);
+            req.FourStarEmberClassBonus.Should().Be(fourStarEmberClassBonus);
+            req.FiveStarEmber.Should().Be(fiveStarEmber);
+            req.FiveStarEmberClassBonus.Should().Be(fiveStarEmberClassBonus);
+        }
+
+        private void MaterialOutput(RequiredItemMaterials req, Dictionary<string, int> materials)
+        {
+            _output.WriteLine($"QP: {req.Qp:n0}");
+            _output.WriteLine($"Grail count: {req.GrailCount}\n");
+            _output.WriteLine($"4* Ember: {req.FourStarEmber:n0}");
+            _output.WriteLine($"4* Ember (Class Bonus): {req.FourStarEmberClassBonus:n0}");
+            _output.WriteLine($"5* Ember: {req.FiveStarEmber:n0}");
+            _output.WriteLine($"5* Ember (Class Bonus): {req.FiveStarEmberClassBonus:n0}\n");
+
+            foreach (KeyValuePair<string, int> material in materials.OrderBy(m => m.Key))
+            {
+                _output.WriteLine($"Name: {material.Key}");
+                _output.WriteLine($"Amount: {material.Value}\n");
+            }
+        }
+        #endregion
     }
 }

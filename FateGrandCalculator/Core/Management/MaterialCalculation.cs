@@ -138,11 +138,11 @@ namespace FateGrandCalculator.Core.Management
             return _requiredItemMaterials;
         }
 
-        public Dictionary<string, int> GroupItemParents(RequiredItemMaterials requiredItemMaterials)
+        public Dictionary<string, int> GroupItemParents(List<ItemParent> itemParents)
         {
             Dictionary<string, int> friendlyList = new Dictionary<string, int>();
 
-            foreach (IGrouping<int, ItemParent> ids in requiredItemMaterials.Items.GroupBy(i => i.ItemObject.Id))
+            foreach (IGrouping<int, ItemParent> ids in itemParents.GroupBy(i => i.ItemObject.Id))
             {
                 friendlyList.Add(ids.First().ItemObject.Name, ids.Sum(i => i.Amount));
             }
