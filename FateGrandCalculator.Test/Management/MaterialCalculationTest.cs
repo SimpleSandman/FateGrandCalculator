@@ -35,7 +35,7 @@ namespace FateGrandCalculator.Test.Management
         }
 
         [Fact]
-        public async Task FreshWaverToFullGrailAndSkilled()
+        public async Task FreshWaverLored100()
         {
             _wireMockFixture.CheckIfMockServerInUse();
             _wireMockUtility.AddStubs(_wireMockFixture);
@@ -93,6 +93,68 @@ namespace FateGrandCalculator.Test.Management
                     materials.Should().Contain("Phoenix Feather", 70);
                     materials.Should().Contain("Secret Gem of Caster", 51);
                     materials.Should().Contain("Void's Dust", 105);
+                }
+            }
+        }
+
+        [Fact]
+        public async Task FreshValkyrieSkilled80()
+        {
+            _wireMockFixture.CheckIfMockServerInUse();
+            _wireMockUtility.AddStubs(_wireMockFixture);
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
+                int servantId = 303300;
+                ServantBasicJson servantBasicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id == servantId);
+
+                /* Load servants as if they're already in a save file */
+                ChaldeaServant currentServant = new ChaldeaServant
+                {
+                    ServantBasicInfo = servantBasicJson,
+                    FouAttack = 1000,
+                    FouHealth = 1000,
+                    IsSupportServant = false,
+                    NpLevel = 1,
+                    ServantLevel = 1,
+                    SkillLevels = new int[] { 1, 1, 1 }
+                };
+
+                ChaldeaServant goalServant = new ChaldeaServant
+                {
+                    ServantBasicInfo = servantBasicJson,
+                    FouAttack = 1000,
+                    FouHealth = 1000,
+                    IsSupportServant = false,
+                    NpLevel = 1,
+                    ServantLevel = 100,
+                    SkillLevels = new int[] { 9, 9, 9 }
+                };
+
+                RequiredItemMaterials req = resolvedClasses.MaterialCalculation.HowMuchIsNeeded(
+                    currentServant,
+                    goalServant,
+                    constantExportJson.GrailCostNiceJson,
+                    await resolvedClasses.AtlasAcademyClient.GetServantInfo(servantId.ToString()));
+
+                Dictionary<string, int> materials = resolvedClasses.MaterialCalculation.GroupItemParents(req.Items);
+                MaterialOutput(req, materials);
+
+                using (new AssertionScope())
+                {
+                    RequiredItemsShouldBe(req, 102800000, 7, 753, 627, 251, 209);
+                    materials.Should().Contain("Aurora Steel", 70);
+                    materials.Should().Contain("Gem of Lancer", 42);
+                    materials.Should().Contain("Ghost Lantern", 60);
+                    materials.Should().Contain("Lancer Monument", 14);
+                    materials.Should().Contain("Lancer Piece", 14);
+                    materials.Should().Contain("Magic Gem of Lancer", 42);
+                    materials.Should().Contain("Phoenix Feather", 11);
+                    materials.Should().Contain("Proof of Hero", 132);
+                    materials.Should().Contain("Secret Gem of Lancer", 42);
+                    materials.Should().Contain("Seed of Yggdrasil", 53);
                 }
             }
         }
