@@ -144,7 +144,7 @@ namespace FateGrandCalculator.Core.Management
 
             foreach (IGrouping<int, ItemParent> ids in itemParents.GroupBy(i => i.ItemObject.Id))
             {
-                friendlyList.Add(ids.First().ItemObject.Name, ids.Sum(i => i.Amount));
+                friendlyList.Add(ids.First().ItemObject.Name.Trim(), ids.Sum(i => i.Amount));
             }
 
             return friendlyList;
