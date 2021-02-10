@@ -144,6 +144,9 @@
     <None Update="Json\JP\ServantData\Lancer\303300-ValkyrieEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\JP\ServantData\Rider\401440-UshiwakamaruEN.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\JP\ServantData\Rider\400400-AstolfoEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -256,6 +259,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\NA\ServantData\Lancer\303300-Valkyrie.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\NA\ServantData\Rider\401400-Ushiwakamaru.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\NA\ServantData\Rider\400400-Astolfo.json">
