@@ -221,6 +221,131 @@ namespace FateGrandCalculator.Test.Management
             }
         }
 
+        [Fact]
+        public async Task FreshWilliamShakespeareSkilled100()
+        {
+            _wireMockFixture.CheckIfMockServerInUse();
+            _wireMockUtility.AddStubs(_wireMockFixture);
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
+                int servantId = 500700;
+                ServantBasicJson servantBasicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id == servantId);
+
+                /* Load servants as if they're already in a save file */
+                ChaldeaServant currentServant = new ChaldeaServant
+                {
+                    ServantBasicInfo = servantBasicJson,
+                    FouAttack = 1000,
+                    FouHealth = 1000,
+                    IsSupportServant = false,
+                    NpLevel = 1,
+                    ServantLevel = 1,
+                    SkillLevels = new int[] { 1, 1, 1 }
+                };
+
+                ChaldeaServant goalServant = new ChaldeaServant
+                {
+                    ServantBasicInfo = servantBasicJson,
+                    FouAttack = 1000,
+                    FouHealth = 1000,
+                    IsSupportServant = false,
+                    NpLevel = 1,
+                    ServantLevel = 100,
+                    SkillLevels = new int[] { 9, 9, 9 }
+                };
+
+                RequiredItemMaterials req = resolvedClasses.MaterialCalculation.HowMuchIsNeeded(
+                    currentServant,
+                    goalServant,
+                    constantExportJson.GrailCostNiceJson,
+                    await resolvedClasses.AtlasAcademyClient.GetServantInfo(servantId.ToString()));
+
+                Dictionary<string, int> materials = resolvedClasses.MaterialCalculation.GroupItemParents(req.Items);
+                MaterialOutput(req, materials);
+
+                using (new AssertionScope())
+                {
+                    RequiredItemsShouldBe(req, 48380000, 10, 753, 627, 251, 209);
+                    materials.Should().Contain("Caster Monument", 9);
+                    materials.Should().Contain("Caster Piece", 9);
+                    materials.Should().Contain("Forbidden Page", 29);
+                    materials.Should().Contain("Gem of Caster", 27);
+                    materials.Should().Contain("Ghost Lantern", 28);
+                    materials.Should().Contain("Homunculus Baby", 8);
+                    materials.Should().Contain("Magic Gem of Caster", 27);
+                    materials.Should().Contain("Secret Gem of Caster", 27);
+                    materials.Should().Contain("Serpent Jewel", 35);
+                    materials.Should().Contain("Void's Dust", 72);
+                }
+            }
+        }
+
+        [Fact]
+        public async Task FreshArashOneSkill100()
+        {
+            _wireMockFixture.CheckIfMockServerInUse();
+            _wireMockUtility.AddStubs(_wireMockFixture);
+
+            using (var scope = _container.BeginLifetimeScope())
+            {
+                ScopedClasses resolvedClasses = AutofacUtility.ResolveScope(scope);
+                ConstantExportJson constantExportJson = await FrequentlyUsed.GetConstantExportJsonAsync(resolvedClasses.AtlasAcademyClient);
+                int servantId = 201300;
+                ServantBasicJson servantBasicJson = constantExportJson.ListServantBasicJson.Find(s => s.Id == servantId);
+
+                /* Load servants as if they're already in a save file */
+                ChaldeaServant currentServant = new ChaldeaServant
+                {
+                    ServantBasicInfo = servantBasicJson,
+                    FouAttack = 1000,
+                    FouHealth = 1000,
+                    IsSupportServant = false,
+                    NpLevel = 1,
+                    ServantLevel = 1,
+                    SkillLevels = new int[] { 1, 1, 1 }
+                };
+
+                ChaldeaServant goalServant = new ChaldeaServant
+                {
+                    ServantBasicInfo = servantBasicJson,
+                    FouAttack = 1000,
+                    FouHealth = 1000,
+                    IsSupportServant = false,
+                    NpLevel = 1,
+                    ServantLevel = 100,
+                    SkillLevels = new int[] { 1, 1, 10 }
+                };
+
+                RequiredItemMaterials req = resolvedClasses.MaterialCalculation.HowMuchIsNeeded(
+                    currentServant,
+                    goalServant,
+                    constantExportJson.GrailCostNiceJson,
+                    await resolvedClasses.AtlasAcademyClient.GetServantInfo(servantId.ToString()));
+
+                Dictionary<string, int> materials = resolvedClasses.MaterialCalculation.GroupItemParents(req.Items);
+                MaterialOutput(req, materials);
+
+                using (new AssertionScope())
+                {
+                    RequiredItemsShouldBe(req, 32950000, 10, 753, 627, 251, 209);
+                    materials.Should().Contain("Archer Monument", 6);
+                    materials.Should().Contain("Archer Piece", 6);
+                    materials.Should().Contain("Crystallized Lore", 1);
+                    materials.Should().Contain("Gem of Archer", 6);
+                    materials.Should().Contain("Homunculus Baby", 8);
+                    materials.Should().Contain("Magic Gem of Archer", 6);
+                    materials.Should().Contain("Octuplet Crystals", 6);
+                    materials.Should().Contain("Proof of Hero", 25);
+                    materials.Should().Contain("Secret Gem of Archer", 6);
+                    materials.Should().Contain("Seed of Yggdrasil", 9);
+                    materials.Should().Contain("Void's Dust", 24);
+                }
+            }
+        }
+
         #region Private Methods
         private void RequiredItemsShouldBe(RequiredItemMaterials req, int qp, int grailCount, int fourStarEmber, 
             int fourStarEmberClassBonus, int fiveStarEmber, int fiveStarEmberClassBonus)

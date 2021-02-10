@@ -20,6 +20,7 @@ namespace FateGrandCalculator.Test.Utility
         public static readonly string VALKYRIE_LANCER = "303300";
         public static readonly string ASTOLFO_RIDER = "400400";
         public static readonly string USHI_RIDER = "401400";
+        public static readonly string SHAKESPEARE_CASTER = "500700";
         public static readonly string MERLIN_CASTER = "500800";
         public static readonly string NITOCRIS_CASTER = "501200";
         public static readonly string WAVER_CASTER = "501900";
@@ -126,6 +127,9 @@ namespace FateGrandCalculator.Test.Utility
 
             mockResponse = LoadTestData.DeserializeServantJson(_region, "Caster", $"{SKADI_CASTER}-ScathachSkadi{_langSuffix}.json");
             LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", SKADI_CASTER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Caster", $"{SHAKESPEARE_CASTER}-WilliamShakespeare{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", SHAKESPEARE_CASTER, mockResponse);
 
             mockResponse = LoadTestData.DeserializeServantJson(_region, "Caster", $"{WAVER_CASTER}-ZhugeLiang{_langSuffix}.json");
             LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", WAVER_CASTER, mockResponse);

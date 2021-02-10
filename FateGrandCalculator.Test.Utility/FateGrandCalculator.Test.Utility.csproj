@@ -144,7 +144,7 @@
     <None Update="Json\JP\ServantData\Lancer\303300-ValkyrieEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Json\JP\ServantData\Rider\401440-UshiwakamaruEN.json">
+    <None Update="Json\JP\ServantData\Rider\401400-UshiwakamaruEN.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Json\JP\ServantData\Rider\400400-AstolfoEN.json">
