@@ -19,14 +19,14 @@ using Xunit.Abstractions;
 
 namespace FateGrandCalculator.Test.Management
 {
-    public class MaterialCalculationTest : IClassFixture<WireMockFixture>
+    public class FreshServantMaterialCalcTest : IClassFixture<WireMockFixture>
     {
         private readonly WireMockFixture _wireMockFixture;
         private readonly WireMockUtility _wireMockUtility;
         private readonly IContainer _container;
         private readonly ITestOutputHelper _output;
 
-        public MaterialCalculationTest(WireMockFixture wireMockFixture, ITestOutputHelper output)
+        public FreshServantMaterialCalcTest(WireMockFixture wireMockFixture, ITestOutputHelper output)
         {
             _wireMockFixture = wireMockFixture;
             _output = output;
@@ -35,7 +35,7 @@ namespace FateGrandCalculator.Test.Management
         }
 
         [Fact]
-        public async Task FreshWaverLored100()
+        public async Task WaverLored100()
         {
             _wireMockFixture.CheckIfMockServerInUse();
             _wireMockUtility.AddStubs(_wireMockFixture);
@@ -98,7 +98,7 @@ namespace FateGrandCalculator.Test.Management
         }
 
         [Fact]
-        public async Task FreshValkyrieSkilled100()
+        public async Task ValkyrieSkilled100()
         {
             _wireMockFixture.CheckIfMockServerInUse();
             _wireMockUtility.AddStubs(_wireMockFixture);
@@ -160,7 +160,7 @@ namespace FateGrandCalculator.Test.Management
         }
 
         [Fact]
-        public async Task FreshUshiwakamaruRiderSkilled100()
+        public async Task UshiwakamaruRiderSkilled100()
         {
             _wireMockFixture.CheckIfMockServerInUse();
             _wireMockUtility.AddStubs(_wireMockFixture);
@@ -222,7 +222,7 @@ namespace FateGrandCalculator.Test.Management
         }
 
         [Fact]
-        public async Task FreshWilliamShakespeareSkilled100()
+        public async Task WilliamShakespeareSkilled100()
         {
             _wireMockFixture.CheckIfMockServerInUse();
             _wireMockUtility.AddStubs(_wireMockFixture);
@@ -284,7 +284,7 @@ namespace FateGrandCalculator.Test.Management
         }
 
         [Fact]
-        public async Task FreshArashOneSkill100()
+        public async Task ArashOneLore100()
         {
             _wireMockFixture.CheckIfMockServerInUse();
             _wireMockUtility.AddStubs(_wireMockFixture);
