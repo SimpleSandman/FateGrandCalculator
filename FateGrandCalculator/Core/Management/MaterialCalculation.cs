@@ -344,14 +344,7 @@ namespace FateGrandCalculator.Core.Management
                 };
             }
 
-            return new AscensionLevel[]
-            {
-                new AscensionLevel { LevelCap = 0, Ascension = AscensionEnum.Default },
-                new AscensionLevel { LevelCap = 0, Ascension = AscensionEnum.First },
-                new AscensionLevel { LevelCap = 0, Ascension = AscensionEnum.Second },
-                new AscensionLevel { LevelCap = 0, Ascension = AscensionEnum.Third },
-                new AscensionLevel { LevelCap = 0, Ascension = AscensionEnum.Fourth }
-            };
+            return null;
         }
         #endregion
     }
