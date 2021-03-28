@@ -11,6 +11,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/SimpleSandman/FateGrandCalculator</RepositoryUrl>
     <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/SimpleSandman/FateGrandCalculator</PackageProjectUrl>
+    <Description>This is a Fate/Grand Order library dedicated to calculations needed for simulating combat and keeping track of your personal Chaldea.</Description>
   </PropertyGroup>
 
   <ItemGroup>
