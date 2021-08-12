@@ -21,9 +21,10 @@ namespace FateGrandCalculator.Test.Utility
         /// <param name="npLevel">The Noble Phantasm level of a servant</param>
         /// <param name="isSupport">Declare if this is a support (friend) servant</param>
         /// <param name="craftEssence">The craft being used with the servant</param>
+        /// <param name="additionalDamageBonus">Damage bonus added manually for a party member. Example would be servant damage bonus for a specific event</param>
         /// <returns></returns>
         public static async Task<PartyMember> PartyMemberAsync(ServantBasicJson basicJson, List<PartyMember> party, ScopedClasses resolvedClasses,
-            int npLevel = 1, bool isSupport = false, CraftEssence craftEssence = null)
+            int npLevel = 1, bool isSupport = false, CraftEssence craftEssence = null, float additionalDamageBonus = 0.0f)
         {
             ServantNiceJson json = await resolvedClasses.AtlasAcademyClient.GetServantInfo(basicJson.Id.ToString());
 
@@ -38,7 +39,7 @@ namespace FateGrandCalculator.Test.Utility
                 ServantBasicInfo = basicJson
             };
 
-            return await resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaServant, craftEssence);
+            return await resolvedClasses.CombatFormula.AddPartyMember(party, chaldeaServant, craftEssence, additionalDamageBonus);
         }
 
         /// <summary>

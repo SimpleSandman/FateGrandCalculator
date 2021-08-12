@@ -77,7 +77,7 @@ namespace FateGrandCalculator.Core.Combat
                         Tuple<float, float, float, float> activePartyMemberEffects = SetStatusEffects(partyMember, cardNpTypeUp, attackUp, powerModifier, npGainUp);
                         cardNpTypeUp = activePartyMemberEffects.Item1;
                         attackUp = activePartyMemberEffects.Item2;
-                        powerModifier = activePartyMemberEffects.Item3;
+                        powerModifier = activePartyMemberEffects.Item3 + partyMember.AdditionalDamageBonus;
                         npGainUp = activePartyMemberEffects.Item4;
                         
                         if (partyMemberFunction.FuncTargetType == "enemy") // single target
@@ -156,8 +156,9 @@ namespace FateGrandCalculator.Core.Combat
         /// <param name="party"></param>
         /// <param name="chaldeaServant"></param>
         /// <param name="chaldeaCraftEssence"></param>
+        /// <param name="additionalDamageBonus"></param>
         /// <returns></returns>
-        public async Task<PartyMember> AddPartyMember(List<PartyMember> party, ChaldeaServant chaldeaServant, CraftEssence chaldeaCraftEssence)
+        public async Task<PartyMember> AddPartyMember(List<PartyMember> party, ChaldeaServant chaldeaServant, CraftEssence chaldeaCraftEssence, float additionalDamageBonus = 0.0f)
         {
             ServantNiceJson servantNiceJson = await _aaClient.GetServantInfo(chaldeaServant.ServantBasicInfo.Id.ToString());
 
@@ -174,7 +175,8 @@ namespace FateGrandCalculator.Core.Combat
                 NoblePhantasm = servantNiceJson  // Set NP for party member at start of fight
                     .NoblePhantasms              // (assume highest upgraded NP by priority)
                     .Aggregate((agg, next) =>
-                        next.Priority >= agg.Priority ? next : agg)
+                        next.Priority >= agg.Priority ? next : agg),
+                AdditionalDamageBonus = additionalDamageBonus
             };
 
             if (chaldeaCraftEssence != null)

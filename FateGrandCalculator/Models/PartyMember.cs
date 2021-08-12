@@ -22,5 +22,9 @@ namespace FateGrandCalculator.Models
         public NoblePhantasm NoblePhantasm { get; set; }
         public List<ActiveStatus> ActiveStatuses { get; set; } = new List<ActiveStatus>();
         public List<SkillCooldown> SkillCooldowns { get; set; } = new List<SkillCooldown>();
+        /// <summary>
+        /// Damage bonus added manually for a party member. Example would be servant damage bonus for a specific event
+        /// </summary>
+        public float AdditionalDamageBonus { get; set; }
     }
 }
