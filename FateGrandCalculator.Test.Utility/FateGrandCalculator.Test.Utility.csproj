@@ -267,6 +267,9 @@
     <None Update="Json\NA\ServantData\Rider\400400-Astolfo.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Json\NA\ServantData\Rider\403200-SimaYiReines.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Json\NA\ServantData\Saber\100600-NeroClaudiusBride.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
