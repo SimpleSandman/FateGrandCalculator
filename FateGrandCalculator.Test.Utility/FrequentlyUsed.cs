@@ -8,6 +8,8 @@ using FateGrandCalculator.Models;
 
 using FateGrandCalculator.Test.Utility.AutofacConfig;
 
+using Xunit.Abstractions;
+
 namespace FateGrandCalculator.Test.Utility
 {
     public static class FrequentlyUsed
@@ -57,6 +59,14 @@ namespace FateGrandCalculator.Test.Utility
                 Mlb = isMlb,
                 CraftEssenceInfo = craftEssenceJson
             };
+        }
+
+        public static void ShowSurvivingEnemyHealth(List<EnemyMob> waveSurvivors, ITestOutputHelper output)
+        {
+            foreach (EnemyMob enemy in waveSurvivors)
+            {
+                output.WriteLine($"{enemy.Name} has {enemy.Health} HP left");
+            }
         }
 
         public static async Task<ConstantExportJson> GetConstantExportJsonAsync(AtlasAcademyClient atlasAcademyClient)

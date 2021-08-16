@@ -103,7 +103,7 @@ namespace FateGrandCalculator.Test.Combat
                 _output.WriteLine($"{partyParvati.Servant.ServantBasicInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
 
                 List<EnemyMob> waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Second);
-                ShowSurvivingEnemyHealth(waveSurvivors);
+                FrequentlyUsed.ShowSurvivingEnemyHealth(waveSurvivors, _output);
 
                 waveSurvivors.Count.Should().Be(1);
                 waveSurvivors.Any(h => h.Health < 30000.0f).Should().BeTrue();
@@ -124,7 +124,7 @@ namespace FateGrandCalculator.Test.Combat
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third, constantExportJson);
 
                 waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Third);
-                ShowSurvivingEnemyHealth(waveSurvivors);
+                FrequentlyUsed.ShowSurvivingEnemyHealth(waveSurvivors, _output);
 
                 using (new AssertionScope())
                 {
@@ -288,7 +288,7 @@ namespace FateGrandCalculator.Test.Combat
                 _output.WriteLine($"{partyParvati.Servant.ServantBasicInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
 
                 List<EnemyMob> waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Second);
-                ShowSurvivingEnemyHealth(waveSurvivors);
+                FrequentlyUsed.ShowSurvivingEnemyHealth(waveSurvivors, _output);
 
                 // Fight 3/3
                 resolvedClasses.ServantSkillActivation.AdjustSkillCooldowns(party);
@@ -302,7 +302,7 @@ namespace FateGrandCalculator.Test.Combat
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third, constantExportJson);
 
                 waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Third);
-                ShowSurvivingEnemyHealth(waveSurvivors);
+                FrequentlyUsed.ShowSurvivingEnemyHealth(waveSurvivors, _output);
 
                 using (new AssertionScope())
                 {
@@ -381,7 +381,7 @@ namespace FateGrandCalculator.Test.Combat
                 _output.WriteLine($"{partyParvati.Servant.ServantBasicInfo.Name} has {partyParvati.NpCharge}% charge after the 2nd fight");
 
                 List<EnemyMob> waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Second);
-                ShowSurvivingEnemyHealth(waveSurvivors);
+                FrequentlyUsed.ShowSurvivingEnemyHealth(waveSurvivors, _output);
 
                 waveSurvivors.Count(h => h.Health.NearlyEqual(39286.863f)).Should().Be(1);
 
@@ -398,7 +398,7 @@ namespace FateGrandCalculator.Test.Combat
                 resolvedClasses.CombatFormula.NoblePhantasmChainSimulator(party, enemyMobs, WaveNumberEnum.Third, constantExportJson);
 
                 waveSurvivors = enemyMobs.FindAll(w => w.WaveNumber == WaveNumberEnum.Third);
-                ShowSurvivingEnemyHealth(waveSurvivors);
+                FrequentlyUsed.ShowSurvivingEnemyHealth(waveSurvivors, _output);
 
                 using (new AssertionScope())
                 {
@@ -493,15 +493,7 @@ namespace FateGrandCalculator.Test.Combat
             }
         }
 
-        #region Private Methods
-        private void ShowSurvivingEnemyHealth(List<EnemyMob> waveSurvivors)
-        {
-            foreach (EnemyMob enemy in waveSurvivors)
-            {
-                _output.WriteLine($"{enemy.Name} has {enemy.Health} HP left");
-            }
-        }
-
+        #region Private Method
         private List<EnemyMob> GetEnemyChristmas2018()
         {
             #region First Wave

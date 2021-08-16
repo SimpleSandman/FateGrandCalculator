@@ -8,13 +8,13 @@ namespace FateGrandCalculator.Test.Utility
     {
         public static readonly string IMAGINARY_ELEMENT_CE = "9400280";
         public static readonly string KSCOPE_CE = "9400340";
-        public static readonly string GOLDEN_SUMO_CE = "9401640";
         public static readonly string HOLY_NIGHT_SUPPER_CE = "9402090";
         public static readonly string AERIAL_DRIVE_CE = "9402750";
 
         public static readonly string TOMOE_GOZEN_SABER = "104500";
         public static readonly string NERO_CLAUDIUS_BRIDE = "100600";
         public static readonly string GILGAMESH_ARCHER = "200200";
+        public static readonly string ATALANTE_ARCHER = "200500";
         public static readonly string ARASH_ARCHER = "201300";
         public static readonly string PARVATI_LANCER = "303000";
         public static readonly string VALKYRIE_LANCER = "303300";
@@ -100,6 +100,9 @@ namespace FateGrandCalculator.Test.Utility
             // build mock servant responses
             ServantNiceJson mockResponse = LoadTestData.DeserializeServantJson(_region, "Archer", $"{ARASH_ARCHER}-Arash{_langSuffix}.json");
             LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", ARASH_ARCHER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Archer", $"{ATALANTE_ARCHER}-Atalante{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", ATALANTE_ARCHER, mockResponse);
 
             mockResponse = LoadTestData.DeserializeServantJson(_region, "Archer", $"{GILGAMESH_ARCHER}-Gilgamesh{_langSuffix}.json");
             LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", GILGAMESH_ARCHER, mockResponse);
