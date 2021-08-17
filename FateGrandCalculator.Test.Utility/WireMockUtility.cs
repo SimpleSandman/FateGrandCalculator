@@ -20,10 +20,12 @@ namespace FateGrandCalculator.Test.Utility
         public static readonly string VALKYRIE_LANCER = "303300";
         public static readonly string ASTOLFO_RIDER = "400400";
         public static readonly string USHI_RIDER = "401400";
+        public static readonly string SIMA_YI_RIDER = "403200";
         public static readonly string SHAKESPEARE_CASTER = "500700";
         public static readonly string MERLIN_CASTER = "500800";
         public static readonly string NITOCRIS_CASTER = "501200";
         public static readonly string WAVER_CASTER = "501900";
+        public static readonly string HELENA_CASTER = "502300";
         public static readonly string SKADI_CASTER = "503900";
         public static readonly string JACK_ASSASSIN = "600500";
         public static readonly string LANCELOT_BERSERKER = "700200";
@@ -122,6 +124,9 @@ namespace FateGrandCalculator.Test.Utility
             mockResponse = LoadTestData.DeserializeServantJson(_region, "Berserker", $"{SPARTACUS_BERSERKER}-Spartacus{_langSuffix}.json");
             LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", SPARTACUS_BERSERKER, mockResponse);
 
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Caster", $"{HELENA_CASTER}-HelenaBlavatsky{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", HELENA_CASTER, mockResponse);
+
             mockResponse = LoadTestData.DeserializeServantJson(_region, "Caster", $"{MERLIN_CASTER}-Merlin{_langSuffix}.json");
             LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", MERLIN_CASTER, mockResponse);
 
@@ -145,6 +150,9 @@ namespace FateGrandCalculator.Test.Utility
 
             mockResponse = LoadTestData.DeserializeServantJson(_region, "Rider", $"{ASTOLFO_RIDER}-Astolfo{_langSuffix}.json");
             LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", ASTOLFO_RIDER, mockResponse);
+
+            mockResponse = LoadTestData.DeserializeServantJson(_region, "Rider", $"{SIMA_YI_RIDER}-SimaYiReines{_langSuffix}.json");
+            LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", SIMA_YI_RIDER, mockResponse);
 
             mockResponse = LoadTestData.DeserializeServantJson(_region, "Rider", $"{USHI_RIDER}-Ushiwakamaru{_langSuffix}.json");
             LoadTestData.CreateNiceWireMockStub(wiremockFixture, _region, "servant", USHI_RIDER, mockResponse);
